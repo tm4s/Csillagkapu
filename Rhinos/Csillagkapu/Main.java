@@ -1,4 +1,4 @@
-package com.Rhinos.Csillagkapu;
+package Rhinos.Csillagkapu;
 
 
 public class Main {
