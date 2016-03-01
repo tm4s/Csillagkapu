@@ -1,12 +1,12 @@
 /*
-2D méret tárolására alkalmas osztály
+2D koordináták tárolására alkalmas osztály
  */
 
-public class Size {
+public class Coordinate {
     private int x;
     private int y;
 
-    public Size(int x, int y) {
+    public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }

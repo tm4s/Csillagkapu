@@ -10,7 +10,7 @@ public class Map {
 
     public Map(String fileName) {
 
-        Size size = getMapSize(fileName);
+        Coordinate size = getMapSize(fileName);
         width = size.getX();
         height = size.getY();
 
@@ -27,11 +27,11 @@ public class Map {
         return height;
     }
 
-    private Size getMapSize(String fileName) {
+    private Coordinate getMapSize(String fileName) {
 
         // kikene olvasni a palya meretet a fajlbol
 
-        Size size = new Size(20, 10);     // csakohogy legyen valami
+        Coordinate size = new Coordinate(20, 10);     // csakohogy legyen valami
 
         return size;
 
