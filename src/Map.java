@@ -42,4 +42,12 @@ public class Map {
         // data tabla feltoltese adatokkal
 
     }
+
+    public Field getFieldAt(Coordinate position) {
+        return data[position.getY()][position.getX()];
+    }
+
+    public void setFieldAt(Coordinate position, Field field) {
+        data[position.getY()][position.getX()] = field;
+    }
 }
