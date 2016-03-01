@@ -5,7 +5,16 @@ public class Map {
 
     private Field[][] data = new Field[height][width];
 
-    public Map () {
+    public Map (Size size, String fileName) {
+        width = size.getX();
+        height = size.getY();
+    }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
