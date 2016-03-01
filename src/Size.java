@@ -1,3 +1,6 @@
+/*
+2D méret tárolására alkalmas osztály
+ */
 
 public class Size {
     private int x;

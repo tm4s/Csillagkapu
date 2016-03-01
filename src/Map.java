@@ -1,3 +1,6 @@
+/*
+Pálya aktuális állásának tárolására való osztály
+ */
 
 public class Map {
     private int width;
