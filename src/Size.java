@@ -3,7 +3,7 @@ public class Size {
     private int x;
     private int y;
 
-    public void Size (int x, int y) {
+    public Size(int x, int y) {
         this.x = x;
         this.y = y;
     }
