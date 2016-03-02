@@ -1,0 +1,6 @@
+/**
+ * Játékmotor
+ */
+
+public class GameEngine {
+}
