@@ -30,7 +30,7 @@ public class Colonel{
      * @param direction ebbe az irányba mozogjon
      */
     public void goTo(Orientation.Type direction) {
-        Coordinate destination = new Coordinate(position.add(Orientation.getCoordinate(direction)));
+        Coordinate destination = new Coordinate(position.add(Orientation.getCoordinate(direction)));        // kezelni kell meg hogy elore menes eseten ne eszaknak menjen hanem az orientationnek megfeleloen
         map.getFieldAt(destination).collideWith(this);
     }
 
@@ -58,26 +58,34 @@ public class Colonel{
         this.ownedScale = scale;
     }
 
-    public void pickUpBox(Box box) {
-        if (tryBoxPicking) {
-            this.ownedBox = box;
-            tryBoxPicking = false;
+    /**
+     * doboz felvételére kísérlet,
+     * létrehozunk egy dobozt aminek a tulajdonosát beállítjuk magunkra és nem hagyjuk meg a default null-t
+     * (doboznak van egy parametere ami Colonel referencia)
+     * és ezt a dobozt ütköztetjük a mezővel ami előttünk van
+     * ha mezőn ha doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
+     * ha nem doboz van a mezon akkor az erzekeli hogy egy hozzank tartozo dobozzal
+     * (ezt nem akarjuk ratenni) utkozott es nem csinal semmit
+     */
+    // kicsit necces lehet ken meg jobb megoldas
+    public void tryBoxPicUp() {
+        if (ownedBox == null) {
+            Coordinate destiantion = new Coordinate(position.add(orientation));
+            map.getFieldAt(destiantion).collideWith(new Box(this));
         }
     }
 
-    public boolean pickUpBox(Field field){
-        if (this.ownedBox != null) {
-            return false;
-        }
-        tryBoxPicking = true;
-        field.collideWith(this);
-        if (!tryBoxPicking) {
-            return true;
-        }
-        tryBoxPicking = false;
-        return false;
-
+    /**
+     * doboz felvetele
+     * @param box ezt a dobozt vesszük fel
+     */
+    public void boxPickUp(Box box) {
+        ownedBox = box;
+        Coordinate destiantion = new Coordinate(position.add(orientation));
+        map.setFieldAt(destiantion, new EmptyField(destiantion));
     }
+
+
 
     public Coordinate getPosition() {
         return position;
