@@ -8,7 +8,7 @@ public class GameEngine {
 
     public  GameEngine() {
         map = new Map("mapName");
-        colonel = map.getColonelStart();
+        colonel = new Colonel(map.getColonelStart());
     }
 
     public void moveColonelTo(Coordinate vecDst) {
