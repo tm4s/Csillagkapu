@@ -1,5 +1,5 @@
 /**
- * Különböző mezők interakcióinak lejátszódását segító visitor osztály
+ * Különböző mezők interakcióinak lejaátszódását segító visitor osztály
  */
 
 public class FieldVisitor {
