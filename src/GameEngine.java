@@ -13,7 +13,7 @@ public class GameEngine {
 
     public void moveColonelTo(Orientation.Type orientation) {
         Coordinate destination = Orientation.getCoordinate(orientation).add(colonel.getPosition());
-        colonel.moveTo(map.getFieldAt(destination), destination);
+        colonel.collideWith(map.getFieldAt(destination));
     }
 
 }

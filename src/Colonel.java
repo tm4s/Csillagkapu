@@ -3,9 +3,6 @@
  */
 
 public class Colonel{
-    enum OrientationType {
-        NORTH, WEST, SOUTH, EAST
-    }
 
     private Coordinate position;
     private Coordinate orientation;
@@ -17,20 +14,12 @@ public class Colonel{
         orientation = Orientation.getCoordinate(Orientation.Type.NORTH);
     }
 
-    public void moveTo(Field field, Coordinate destination){
-        collideWith(field);
-    }
-
     public void collideWith(Field field) {
-        field.accept(this);
+        field.collideWith(this);
     }
 
-    public void collideWith(EmptyField emptyField) {
-        setPosition(emptyField.getPosition());
-    }
-
-    public void setPosition(Coordinate position) {
-        this.position = new Coordinate(position);
+    public void moveTo(EmptyField emptyField) {
+        position = new Coordinate(emptyField.getPosition());
     }
 
     public Coordinate getPosition() {

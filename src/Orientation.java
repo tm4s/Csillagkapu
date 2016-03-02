@@ -6,7 +6,7 @@
 
 
 public class Orientation {
-    enum Type {
+    public enum Type {
         NORTH, WEST, SOUTH, EAST
     }
 
