@@ -1,5 +1,3 @@
-import java.security.PublicKey;
-
 /**
  * Pálya aktuális állásának tárolására való osztály
  */
@@ -7,7 +5,8 @@ import java.security.PublicKey;
 public class Map {
     private int width;
     private int height;
-    private Coordinate colonelStart;
+    private Coordinate colonelPosition;
+    private Coordinate bulletPosition = new Coordinate(-1,-1);
 
     private Field[][] data;
 
@@ -25,7 +24,6 @@ public class Map {
     public int getWidth() {
         return width;
     }
-
     public int getHeight() {
         return height;
     }
@@ -58,12 +56,10 @@ public class Map {
     public Field getFieldAt(Coordinate position) {
         return data[position.getY()][position.getX()];
     }
-
     public void setFieldAt(Coordinate position, Field field) {
         data[position.getY()][position.getX()] = field;
     }
-
-    public Coordinate getColonelStart() {
-        return colonelStart;
+    public Coordinate getColonelPosition() {
+        return colonelPosition;
     }
 }
