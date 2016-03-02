@@ -17,6 +17,9 @@ public class Colonel{
         orientation = Orientation.getCoordinate(Orientation.Type.NORTH);
     }
 
+    public void moveTo(Field field, Coordinate destination){
+        collideWith(field);
+    }
 
     public void collideWith(Field field) {
         field.accept(this);
