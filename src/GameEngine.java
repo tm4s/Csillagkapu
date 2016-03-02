@@ -8,7 +8,7 @@ public class GameEngine {
 
     public  GameEngine() {
         map = new Map("mapName");
-        colonel = new Colonel(map.getColonelPosition());
+        colonel = new Colonel(map);
     }
 
     public void moveColonelTo(Orientation.Type orientation) {

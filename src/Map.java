@@ -5,7 +5,7 @@
 public class Map {
     private int width;
     private int height;
-    private Coordinate colonelPosition;
+    private Coordinate colonelStartingPosition;
     private Coordinate bulletPosition = new Coordinate(-1,-1);
 
     private Field[][] data;
@@ -59,7 +59,7 @@ public class Map {
     public void setFieldAt(Coordinate position, Field field) {
         data[position.getY()][position.getX()] = field;
     }
-    public Coordinate getColonelPosition() {
-        return colonelPosition;
+    public Coordinate getColonelStartingPosition() {
+        return colonelStartingPosition;
     }
 }
