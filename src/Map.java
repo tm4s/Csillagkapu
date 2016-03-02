@@ -1,5 +1,5 @@
-/*
-Pálya aktuális állásának tárolására való osztály
+/**
+ * Pálya aktuális állásának tárolására való osztály
  */
 
 public class Map {

@@ -1,5 +1,5 @@
-/*
-2D koordináták tárolására alkalmas osztály
+/**
+ * 2D koordináták tárolására alkalmas osztály
  */
 
 public class Coordinate {
