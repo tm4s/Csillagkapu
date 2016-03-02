@@ -1,6 +1,7 @@
 /**
  * Mérleg
  */
+
 public class Scale extends Field {
     private Door door = null;
 

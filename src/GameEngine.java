@@ -16,4 +16,11 @@ public class GameEngine {
         colonel.collideWith(map.getFieldAt(destination));
     }
 
+    public void tryPickUpBox() {
+        Coordinate destination = colonel.getFrontFieldPosition();
+        if (colonel.pickUpBox(map.getFieldAt(destination))) {
+            map.setFieldAt(destination, new EmptyField(destination));
+        }
+    }
+
 }
