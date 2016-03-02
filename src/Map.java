@@ -1,3 +1,5 @@
+import java.security.PublicKey;
+
 /**
  * Pálya aktuális állásának tárolására való osztály
  */
@@ -5,6 +7,7 @@
 public class Map {
     private int width;
     private int height;
+    private Coordinate colonelStart;
 
     private Field[][] data;
 
@@ -37,9 +40,18 @@ public class Map {
 
     }
 
+    private Coordinate getColonelStartPosition(String fileName) {
+
+        // kikene olvasni hol az ezredes
+
+        Coordinate pos = new Coordinate(1, 1);        // csakohogy legyen valami
+        return  pos;
+    }
+
     private void readMapData(String fileName) {
 
         // data tabla feltoltese adatokkal
+
 
     }
 
@@ -49,5 +61,9 @@ public class Map {
 
     public void setFieldAt(Coordinate position, Field field) {
         data[position.getY()][position.getX()] = field;
+    }
+
+    public Coordinate getColonelStart() {
+        return colonelStart;
     }
 }
