@@ -15,16 +15,16 @@ public class Orientation {
         Coordinate coordinate = new Coordinate(0,0);
         switch (type){
             case NORTH:
-                coordinate = new Coordinate(0, 1);
-                break;
-            case WEST:
                 coordinate = new Coordinate(-1, 0);
                 break;
-            case SOUTH:
+            case WEST:
                 coordinate = new Coordinate(0, -1);
                 break;
+            case SOUTH:
+                coordinate = new Coordinate(-1, 0);
+                break;
             case EAST:
-                coordinate = new Coordinate(1, 0);
+                coordinate = new Coordinate(0, 1);
                 break;
 
         }

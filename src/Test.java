@@ -12,21 +12,29 @@ public class Test {
 
         mapView.printMap();
 
-        colonel.rotateTo(Orientation.Type.EAST);
-        System.out.println("Az ezredes kelet fele fordul");
+
+        colonel.goTo(Orientation.Type.NORTH);
+        System.out.println("Az ezredes eszak fele megy");
         mapView.printMap();
 
+        colonel.goTo(Orientation.Type.NORTH);
+        System.out.println("Az ezredes eszak fele megy");
+        mapView.printMap();
 
         colonel.tryBoxPicUp();
         System.out.println("Az ezredes megprobalja felvenni a dobozt");
         mapView.printMap();
 
-        colonel.goTo(Orientation.Type.SOUTH);
-        System.out.println("Az ezredes delre fele megy. ");
+        colonel.goTo(Orientation.Type.EAST);
+        System.out.println("Az ezredes kelet fele megy. ");
         mapView.printMap();
 
-        colonel.rotateTo(Orientation.Type.NORTH);
-        System.out.println("Az ezredes eszak fele fordul");
+        colonel.goTo(Orientation.Type.EAST);
+        System.out.println("Az ezredes kelet fele megy. ");
+        mapView.printMap();
+
+        colonel.goTo(Orientation.Type.EAST);
+        System.out.println("Az ezredes kelet fele megy. ");
         mapView.printMap();
 
         System.out.println("Az ezredes letszi a dobozt.");
