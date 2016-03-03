@@ -40,8 +40,8 @@ public class Colonel{
      */
     // meg csak abszolut mozog orientaciot nem veszi figyelembe
     public void goTo(Orientation.Type direction) {
-        Coordinate destination = new Coordinate(position.add(Orientation.getCoordinate(direction)));
-        map.getFieldAt(destination).collideWith(this);
+        orientation = new Coordinate(Orientation.getCoordinate(direction));
+        map.getFieldAt(getFrontFieldPosition()).collideWith(this);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Colonel{
      * @param emptyField erre amezőre lép (ezzel ütközött)
      */
     public void moveTo(EmptyField emptyField) {
-        position = new Coordinate(emptyField.getPosition());
+        position = new Coordinate(getFrontFieldPosition());
         if (ownedScale != null) {
             ownedScale.removeWeight();
             ownedScale = null;
@@ -63,7 +63,7 @@ public class Colonel{
      * @param scale erre a mérlegre lép rá
      */
     public void moveTo(Scale scale) {
-        position = new Coordinate((scale.getPosition()));
+        position = new Coordinate(getFrontFieldPosition());
         scale.addWeight();
         this.ownedScale = scale;
     }

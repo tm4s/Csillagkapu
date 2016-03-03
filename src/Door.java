@@ -4,11 +4,6 @@
 
 public class Door extends Field {
 
-
-    public Door(Coordinate position) {
-        super(position);
-    }
-
     @Override
     public void collideWith(Colonel colonel) {
 
@@ -16,6 +11,11 @@ public class Door extends Field {
 
     @Override
     public void collideWith(Bullet bullet) {
+
+    }
+
+    @Override
+    public void collideWith(Box box) {
 
     }
 

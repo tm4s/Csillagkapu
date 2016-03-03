@@ -4,10 +4,6 @@
 
 public class EmptyField extends Field {
 
-    public EmptyField(Coordinate position) {
-        super(position);
-    }
-
     @Override
     public void collideWith(Colonel colonel) {
         colonel.moveTo(this);
@@ -16,5 +12,10 @@ public class EmptyField extends Field {
     @Override
     public void collideWith(Bullet bullet) {
 
+    }
+
+    @Override
+    public void collideWith(Box box) {
+        box.getOwner().boxPutDownToEmptyField(this);
     }
 }

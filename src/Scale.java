@@ -3,11 +3,8 @@
  */
 
 public class Scale extends Field {
-    private Door door = null;
+    private Door door = new Door();
 
-    public Scale(Coordinate position) {
-        super(position);
-    }
 
     @Override
     public void collideWith(Colonel colonel) {
@@ -16,6 +13,11 @@ public class Scale extends Field {
 
     @Override
     public void collideWith(Bullet bullet) {
+    }
+
+    @Override
+    public void collideWith(Box box) {
+        box.getOwner().boxPutDownToScale(this);
     }
 
     public void addWeight() {
