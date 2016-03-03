@@ -107,6 +107,9 @@ public class Map {
                         String scaleData[] = array[i].split("_");
                         scaleDatas.add(new PosAndIdData(Integer.parseInt(scaleData[1]), new Coordinate(j, i)));
                         break;
+                    case '+':
+                        mapDatas[j][i] = new SpecialWall();
+                        break;
                     default:
                         break;
                 }
@@ -152,8 +155,8 @@ public class Map {
                 orangeTeleporter.setOtherTeleporter(blueTeleporter);
         } else {
             setFieldAt(position, new Teleporter(type, blueTeleporter, position));
-            if (blueTeleporter != null)
-            setFieldAt(orangeTeleporter.getPosition(), new SpecialWall());
+            if (orangeTeleporter != null)
+                setFieldAt(orangeTeleporter.getPosition(), new SpecialWall());
             orangeTeleporter = (Teleporter) getFieldAt(position);
             if (blueTeleporter != null)
                 blueTeleporter.setOtherTeleporter(orangeTeleporter);

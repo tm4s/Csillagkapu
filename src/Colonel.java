@@ -141,6 +141,11 @@ public class Colonel{
         }
     }
 
+    public void shootTeleporter(Teleporter.Type type) {
+        Bullet bullet = new Bullet(type, position, orientation, map);
+        bullet.moveForward();
+    }
+
 
     public Coordinate getPosition() {
         return position;

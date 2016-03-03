@@ -10,10 +10,10 @@ public class Bullet {
     private Map map;
     private Teleporter.Type type;
 
-    public Bullet(Teleporter.Type type, Coordinate startPosition, Orientation.Type direction, Map map) {
+    public Bullet(Teleporter.Type type, Coordinate startPosition, Coordinate direction, Map map) {
         this.type = type;
         position = new Coordinate(startPosition);
-        this.direction = new Coordinate(Orientation.getCoordinate(direction));
+        this.direction = direction;
         this.map = map;
     }
 

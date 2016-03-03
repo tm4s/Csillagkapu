@@ -12,6 +12,13 @@ public class Test {
 
         mapView.printMap();
 
+        colonel.shootTeleporter(Teleporter.Type.BLUE);
+        colonel.rotateTo(Orientation.Type.SOUTH);
+        colonel.shootTeleporter(Teleporter.Type.ORANGE);
+        colonel.goTo(Orientation.Type.SOUTH);
+
+        mapView.printMap();
+
 
         colonel.goTo(Orientation.Type.NORTH);
         System.out.println("Az ezredes eszak fele megy");
