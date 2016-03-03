@@ -2,6 +2,7 @@ import com.sun.org.apache.xml.internal.serializer.utils.StringToIntTable;
 import com.sun.xml.internal.fastinfoset.util.CharArray;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -59,7 +60,7 @@ public class Map {
 
     private void readMapData(String fileName) throws IOException {
         BufferedReader br = null;
-        br = new BufferedReader(new FileReader(fileName));
+        br = new BufferedReader(new FileReader(new File(fileName)));
         String line = "";
 
         //A palya meretenek beolvasasa
@@ -98,10 +99,12 @@ public class Map {
                     case "S":
                         data[j][i] = new Scale();
                         break;
+                    default:
+                        break;
                 }
 
-                j++;
             }
+            j++;
         }
 
 
@@ -125,10 +128,10 @@ public class Map {
     }
 
     public Field getFieldAt(Coordinate position) {
-        return data[position.getY()][position.getX()];
+        return data[position.getX()][position.getY()];
     }
     public void setFieldAt(Coordinate position, Field field) {
-        data[position.getY()][position.getX()] = field;
+        data[position.getX()][position.getY()] = field;
     }
     public Coordinate getColonelStartingPosition() {
         return colonelStartingPosition;
