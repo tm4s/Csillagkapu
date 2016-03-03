@@ -10,7 +10,6 @@ public class Colonel{
 
     private Scale ownedScale = null;
     private Box ownedBox = null;
-    private boolean tryBoxPicking = false;
 
     /**
      * konstruktor
@@ -156,5 +155,9 @@ public class Colonel{
 
     public void TeleportTo(Coordinate position) {
         this.position = position;
+    }
+
+    public Coordinate getOrientation() {
+        return orientation;
     }
 }

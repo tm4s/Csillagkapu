@@ -21,7 +21,7 @@ public class Orientation {
                 coordinate = new Coordinate(0, -1);
                 break;
             case SOUTH:
-                coordinate = new Coordinate(-1, 0);
+                coordinate = new Coordinate(1, 0);
                 break;
             case EAST:
                 coordinate = new Coordinate(0, 1);
@@ -29,6 +29,19 @@ public class Orientation {
 
         }
         return coordinate;
+    }
+
+    public static Type getOrientationType(Coordinate postion) {
+        Type type = Type.NORTH;
+        if (postion.equals(new Coordinate(-1, 0)))
+            type = Type.NORTH;
+        else if (postion.equals(new Coordinate(0, -1)))
+            type = Type.WEST;
+        else if (postion.equals(new Coordinate(1, 0)))
+            type = Type.SOUTH;
+        else if (postion.equals(new Coordinate(0, 1)))
+            type = Type.EAST;
+        return type;
     }
 
 }
