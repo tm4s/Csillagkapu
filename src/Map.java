@@ -19,15 +19,6 @@ public class Map {
     private Field[][] data;
 
     public Map(String fileName) throws IOException {
-
-        //Coordinate size = getMapSize(fileName);
-        //colonelStartingPosition = new Coordinate(getColonelStartPosition(fileName));
-
-        //width = size.getX();
-        //height = size.getY();
-
-        //data = new Field[height][width];
-
         readMapData(fileName);
     }
 
@@ -49,14 +40,7 @@ public class Map {
 
     }
 
-    private Coordinate getColonelStartPosition(String fileName) {
 
-        // kikene olvasni hol az ezredes
-
-        //teszt adat
-        Coordinate pos = new Coordinate(2, 2);
-        return  pos;
-    }
 
     private void readMapData(String fileName) throws IOException {
         BufferedReader br = null;
@@ -111,20 +95,6 @@ public class Map {
         br.close();
 
 
-        /*
-        //teszt adat
-        for (int y = 0; y < height; ++y){
-            for (int x = 0; x < width; ++x){
-                data[y][x] = new Wall();
-            }
-        }
-        for (int y = 1; y < height-1; ++y){
-            for (int x = 1; x < width-1; ++x){
-                data[y][x] = new EmptyField();
-            }
-        }
-
-        data[3][2] = new Box(null); */
     }
 
     public Field getFieldAt(Coordinate position) {
