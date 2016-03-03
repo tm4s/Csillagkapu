@@ -63,34 +63,85 @@ public class Colonel{
      * létrehozunk egy dobozt aminek a tulajdonosát beállítjuk magunkra és nem hagyjuk meg a default null-t
      * (doboznak van egy parametere ami Colonel referencia)
      * és ezt a dobozt ütköztetjük a mezővel ami előttünk van
-     * ha mezőn ha doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
-     * ha nem doboz van a mezon akkor az erzekeli hogy egy hozzank tartozo dobozzal
-     * (ezt nem akarjuk ratenni) utkozott es nem csinal semmit
+     * ha mezőn doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
+     * ha nem doboz van a mezon akkor az erzekeli hogy egy hozzank tartozo dobozzal utkozott
+     * visszahivja a doboz lerakasa funkcionkat ezert ebben ellenorzini kell hogy van-e nalunk doboz es ha nincs
+     * akkor tudjuk hogy innen tortent a visszahivas
      */
-    // kicsit necces lehet ken meg jobb megoldas
+    // kicsit necces de talan jo
     public void tryBoxPicUp() {
         if (ownedBox == null) {
-            Coordinate destiantion = new Coordinate(position.add(orientation));
-            map.getFieldAt(destiantion).collideWith(new Box(this));
+            map.getFieldAt(getFrontFieldPosition()).collideWith(new Box(this));
         }
     }
 
     /**
      * doboz felvetele
+     * ha nincs nalunk doboz
+     * a helyen letrehoz egy ures mezot ha nem tartozott hozza lenyomott merleg
+     * ha tartozott akkor felengedjuk amerleget es azt tesszuk a helyere
      * @param box ezt a dobozt vesszük fel
      */
     public void boxPickUp(Box box) {
-        ownedBox = box;
-        Coordinate destiantion = new Coordinate(position.add(orientation));
-        map.setFieldAt(destiantion, new EmptyField(destiantion));
+        if (ownedBox == null) {
+            ownedBox = box;
+            ownedBox.setOwner(this);
+            Coordinate destination = new Coordinate(getFrontFieldPosition());
+            Scale boxScale = ownedBox.getOwnedScale();
+            if (boxScale == null) {
+                map.setFieldAt(destination, new EmptyField(destination));
+            } else {
+                map.setFieldAt(destination, boxScale);
+                boxScale.removeWeight();
+                ownedBox.setOwnedScale(null);
+            }
+        }
     }
 
+    /**
+     * doboz lerakasara kiserlet
+     */
+    public void tryBoxPutDown() {
+        if (ownedBox != null) {
+            map.getFieldAt(getFrontFieldPosition()).collideWith(ownedBox);
+        }
+    }
+
+    /**
+     * doboz lerakasa ures mezore ha van nalunk
+     * @param emptyField erre a mezore
+     */
+    public void boxPutDownToEmptyField(EmptyField emptyField) {
+        if (ownedBox != null) {
+            map.setFieldAt(emptyField.getPosition(), ownedBox);
+            ownedBox = null;
+        }
+    }
+
+    /**
+     * doboz lerakasa merlegre ha van nalunk
+     * merleg ertesitese a lenyomasrol
+     * dobozban eltarolunk ra egy referenciat a doboz felvetelnel valo ertesites miatt
+     * @param scale erre a merlegre
+     */
+    public void  boxPutDownToScale(Scale scale) {
+        if (ownedBox != null) {
+            ownedBox.setOwnedScale(scale);
+            scale.addWeight();
+            map.setFieldAt(getFrontFieldPosition(), ownedBox);
+            ownedBox = null;
+        }
+    }
 
 
     public Coordinate getPosition() {
         return position;
     }
-    public  Coordinate getFrontFieldPosition() {
+
+    /**
+     * @return ezredes elotti mezo koordniataja
+     */
+    private   Coordinate getFrontFieldPosition() {
         return position.add(orientation);
     }
 }
