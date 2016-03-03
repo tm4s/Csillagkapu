@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+
 /**
  * Pálya aktuális állásának tárolására való osztály
  */
@@ -52,8 +54,7 @@ public class Map {
 
     private void readMapData(String fileName) {
 
-        // data tabla feltoltese adatokkal
-
+        
 
         //teszt adat
         for (int y = 0; y < height; ++y){

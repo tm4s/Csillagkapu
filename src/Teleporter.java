@@ -1,7 +1,7 @@
 /**
  * Csillagkapu
  */
-public class Teleport extends Field {
+public class Teleporter extends Field {
     @Override
     public void collideWith(Colonel colonel) {
 
