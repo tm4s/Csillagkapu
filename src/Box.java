@@ -1,28 +1,19 @@
 /**
- * Ajtó
+ * Doboz
  */
 
-public class Door extends Field {
-
-
-    public Door(Coordinate position) {
+public class Box extends Field {
+    public Box(Coordinate position) {
         super(position);
     }
 
     @Override
     public void collideWith(Colonel colonel) {
-
+        colonel.pickUpBox(this);
     }
 
     @Override
     public void collideWith(Bullet bullet) {
 
     }
-
-    public void open() {
-    }
-
-    public void close() {
-    }
-
 }

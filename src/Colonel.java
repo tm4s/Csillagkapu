@@ -3,25 +3,63 @@
  */
 
 public class Colonel{
+
     private Coordinate position;
+    private Coordinate orientation;
+
+    private Scale ownedScale = null;
+    private Box ownedBox = null;
+    private boolean tryBoxPicking = false;
+
 
     public Colonel(Coordinate position) {
         position = new Coordinate(position);
+        orientation = Orientation.getCoordinate(Orientation.Type.NORTH);
     }
 
     public void collideWith(Field field) {
-        field.accept(this);
+        field.collideWith(this);
     }
 
-    public void collideWith(EmptyField emptyField) {
-        setPosition(emptyField.getPosition());
+    public void moveTo(EmptyField emptyField) {
+        position = new Coordinate(emptyField.getPosition());
+        if (ownedScale != null) {
+            ownedScale.removeWeight();
+            ownedScale = null;
+        }
     }
 
-    public void setPosition(Coordinate position) {
-        this.position = new Coordinate(position);
+    public void moveTo(Scale scale) {
+        position = new Coordinate((scale.getPosition()));
+        scale.addWeight();
+        this.ownedScale = scale;
+    }
+
+    public void pickUpBox(Box box) {
+        if (tryBoxPicking) {
+            this.ownedBox = box;
+            tryBoxPicking = false;
+        }
+    }
+
+    public boolean pickUpBox(Field field){
+        if (this.ownedBox != null) {
+            return false;
+        }
+        tryBoxPicking = true;
+        field.collideWith(this);
+        if (!tryBoxPicking) {
+            return true;
+        }
+        tryBoxPicking = false;
+        return false;
+
     }
 
     public Coordinate getPosition() {
         return position;
+    }
+    public  Coordinate getFrontFieldPosition() {
+        return position.add(orientation);
     }
 }

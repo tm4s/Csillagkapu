@@ -9,7 +9,12 @@ public class EmptyField extends Field {
     }
 
     @Override
-    public void accept(Colonel colonel) {
-        colonel.collideWith(this);
+    public void collideWith(Colonel colonel) {
+        colonel.moveTo(this);
+    }
+
+    @Override
+    public void collideWith(Bullet bullet) {
+
     }
 }

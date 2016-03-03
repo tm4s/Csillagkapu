@@ -11,9 +11,16 @@ public class GameEngine {
         colonel = new Colonel(map.getColonelPosition());
     }
 
-    public void moveColonelTo(Coordinate vecDst) {
-        Coordinate posDst = vecDst.add(colonel.getPosition());
-        colonel.collideWith(map.getFieldAt(posDst));
+    public void moveColonelTo(Orientation.Type orientation) {
+        Coordinate destination = Orientation.getCoordinate(orientation).add(colonel.getPosition());
+        colonel.collideWith(map.getFieldAt(destination));
+    }
+
+    public void tryPickUpBox() {
+        Coordinate destination = colonel.getFrontFieldPosition();
+        if (colonel.pickUpBox(map.getFieldAt(destination))) {
+            map.setFieldAt(destination, new EmptyField(destination));
+        }
     }
 
 }

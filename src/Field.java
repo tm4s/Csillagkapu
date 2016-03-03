@@ -18,6 +18,7 @@ public abstract class Field {
         this.position.setY(position.getY());
     }
 
-    public abstract void accept(Colonel colonel);
+    public abstract void collideWith(Colonel colonel);
+    public abstract void collideWith(Bullet bullet);
 
 }
