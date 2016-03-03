@@ -32,7 +32,7 @@ public class Box extends Field {
 
     @Override
     public void collideWith(Bullet bullet) {
-
+        bullet.moveForward();
     }
 
     /**

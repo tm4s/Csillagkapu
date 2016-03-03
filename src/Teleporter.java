@@ -26,6 +26,8 @@ public class Teleporter extends Field {
 
     @Override
     public void collideWith(Colonel colonel) {
+        if (otherTeleporter != null)
+            colonel.TeleportTo(otherTeleporter.getPosition());
 
     }
 

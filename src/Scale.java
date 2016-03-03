@@ -16,6 +16,7 @@ public class Scale extends Field {
 
     @Override
     public void collideWith(Bullet bullet) {
+        bullet.moveForward();
     }
 
     @Override

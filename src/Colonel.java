@@ -153,4 +153,8 @@ public class Colonel{
     private Coordinate getFrontFieldPosition() {
         return position.add(orientation);
     }
+
+    public void TeleportTo(Coordinate position) {
+        this.position = position;
+    }
 }
