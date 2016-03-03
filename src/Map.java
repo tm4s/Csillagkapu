@@ -1,4 +1,9 @@
+import com.sun.org.apache.xml.internal.serializer.utils.StringToIntTable;
+import com.sun.xml.internal.fastinfoset.util.CharArray;
+
 import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Pálya aktuális állásának tárolására való osztály
@@ -12,15 +17,15 @@ public class Map {
 
     private Field[][] data;
 
-    public Map(String fileName) {
+    public Map(String fileName) throws IOException {
 
-        Coordinate size = getMapSize(fileName);
+        //Coordinate size = getMapSize(fileName);
         colonelStartingPosition = new Coordinate(getColonelStartPosition(fileName));
 
-        width = size.getX();
-        height = size.getY();
+        //width = size.getX();
+        //height = size.getY();
 
-        data = new Field[height][width];
+        //data = new Field[height][width];
 
         readMapData(fileName);
     }
@@ -52,10 +57,57 @@ public class Map {
         return  pos;
     }
 
-    private void readMapData(String fileName) {
+    private void readMapData(String fileName) throws IOException {
+        BufferedReader br = null;
+        br = new BufferedReader(new FileReader(fileName));
+        String line = "";
 
-        
+        //A palya meretenek beolvasasa
+        line = br.readLine();
+        String mapSize[] = line.split(";");
+        width = Integer.parseInt(mapSize[0]);
+        height = Integer.parseInt(mapSize[1]);
 
+
+        //Uj palya letrehozasa
+        data = new Field[height][width];
+
+        int j = 0;
+
+        //Egyes elemek beolvasasa
+        while ((line = br.readLine()) != null) {
+            String array[] = line.split(";");
+            for (int i = 0; i < width; i++) {
+                switch (array[i]) {
+                    case "E":
+                        data[j][i] = new EmptyField();
+                        break;
+                    case "W":
+                        data[j][i] = new Wall();
+                        break;
+                    case "D":
+                        data[j][i] = new Door();
+                        break;
+                    case "B":
+                        data[j][i] = new Box(null);
+                        break;
+                    case "C":
+                        data[j][i] = new EmptyField();
+                        colonelStartingPosition = new Coordinate(j, i);
+                        break;
+                    case "S":
+                        data[j][i] = new Scale();
+                        break;
+                }
+
+                j++;
+            }
+        }
+
+
+        br.close();
+
+        /*
         //teszt adat
         for (int y = 0; y < height; ++y){
             for (int x = 0; x < width; ++x){
@@ -68,7 +120,7 @@ public class Map {
             }
         }
 
-        data[3][2] = new Box(null);
+        data[3][2] = new Box(null); */
     }
 
     public Field getFieldAt(Coordinate position) {
