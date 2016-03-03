@@ -63,4 +63,17 @@
       <option name="ENABLED" value="true" />
     </filter>
   </component>
+  <component name="SequencePlugin.Configuration">
+    <option name="CLASS_COLOR" value="cccc00" />
+    <option name="EXTERNAL_CLASS_COLOR" value="ff6666" />
+    <option name="METHOD_BAR_COLOR" value="9999ff" />
+    <option name="SELECTED_METHOD_BAR_COLOR" value="3399ff" />
+    <option name="USE_3D_VIEW" value="false" />
+    <option name="USE_ANTIALIASING" value="true" />
+    <option name="SHOW_RETURN_ARROWS" value="true" />
+    <option name="SHOW_CALL_NUMBERS" value="true" />
+    <option name="FONT_NAME" value="Dialog" />
+    <option name="FONT_SIZE" value="11" />
+    <excludeList />
+  </component>
 </application>
