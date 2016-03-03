@@ -1,10 +1,12 @@
+import java.io.IOException;
+
 /**
  * eddigi dolgok gyors tesztelesere
  */
 public class Test {
 
-    public static void main(String args[]) {
-        Map map = new Map("teszt");
+    public static void main(String args[]) throws IOException {
+        Map map = new Map("map01.csv");
         Colonel colonel = new Colonel(map);
         MapBasicView mapView = new MapBasicView(map, colonel);
 

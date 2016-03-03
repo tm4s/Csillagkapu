@@ -20,7 +20,7 @@ public class Map {
     public Map(String fileName) throws IOException {
 
         //Coordinate size = getMapSize(fileName);
-        colonelStartingPosition = new Coordinate(getColonelStartPosition(fileName));
+        //colonelStartingPosition = new Coordinate(getColonelStartPosition(fileName));
 
         //width = size.getX();
         //height = size.getY();
