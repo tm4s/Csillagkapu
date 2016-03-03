@@ -16,9 +16,13 @@ public class Map {
     private int width;
     private int height;
     private Coordinate colonelStartingPosition;
-    private Coordinate bulletPosition = new Coordinate(-1,-1);
+
+
 
     private Field[][] mapDatas;
+
+    private Teleporter blueTeleporter = null;
+    private Teleporter orangeTeleporter = null;
 
     public Map(String fileName) throws IOException {
         readMapData(fileName);
@@ -128,5 +132,31 @@ public class Map {
 
     }
 
-
+    /**
+     * Csillagkapu (teleporter) letrehozasa adott:
+     * @param type tipusu (sarga vagy kek)
+     * @param position ezen a helyen
+     * azonos szinu regi teleportert meg kell szuntetni ha letezik
+     * es a map-ben kulon eltarolt megfelelo tipusu teleportert frissiteni kell az ujra
+     * frissiteni kell meg a masik szinu teleporterben is a hivatkozast hogy az ujra mutasson
+     * ha letezik masik szinu teleporter
+     */
+    public void createTeleporter(Teleporter.Type type, Coordinate position) {
+        // lehetne szepiteni
+        if (type == Teleporter.Type.BLUE) {
+            setFieldAt(position, new Teleporter(type, orangeTeleporter, position));
+            if (blueTeleporter != null)
+                setFieldAt(blueTeleporter.getPosition(), new SpecialWall());
+            blueTeleporter = (Teleporter) getFieldAt(position);
+            if (orangeTeleporter != null)
+                orangeTeleporter.setOtherTeleporter(blueTeleporter);
+        } else {
+            setFieldAt(position, new Teleporter(type, blueTeleporter, position));
+            if (blueTeleporter != null)
+            setFieldAt(orangeTeleporter.getPosition(), new SpecialWall());
+            orangeTeleporter = (Teleporter) getFieldAt(position);
+            if (blueTeleporter != null)
+                blueTeleporter.setOtherTeleporter(orangeTeleporter);
+        }
+    }
 }
