@@ -54,7 +54,7 @@ public class Map {
 
     private void readMapData(String fileName) {
 
-        
+
 
         //teszt adat
         for (int y = 0; y < height; ++y){
