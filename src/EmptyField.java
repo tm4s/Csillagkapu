@@ -21,6 +21,6 @@ public class EmptyField extends Field {
 
     @Override
     public Character print() {
-        return 'E';
+        return ' ';
     }
 }

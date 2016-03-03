@@ -10,16 +10,25 @@ public class Test {
 
         mapView.printMap();
 
+        colonel.rotateTo(Orientation.Type.EAST);
+        System.out.println("Az ezredes kelet fele fordul");
+        mapView.printMap();
 
 
         colonel.tryBoxPicUp();
-        colonel.goTo(Orientation.Type.SOUTH);
+        System.out.println("Az ezredes megprobalja felvenni a dobozt");
+        mapView.printMap();
 
+        colonel.goTo(Orientation.Type.SOUTH);
+        System.out.println("Az ezredes delre fele megy. ");
         mapView.printMap();
 
         colonel.rotateTo(Orientation.Type.NORTH);
-        colonel.tryBoxPutDown();
+        System.out.println("Az ezredes eszak fele fordul");
+        mapView.printMap();
 
+        System.out.println("Az ezredes letszi a dobozt.");
+        colonel.tryBoxPutDown();
         mapView.printMap();
     }
 
