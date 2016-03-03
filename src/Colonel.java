@@ -47,9 +47,8 @@ public class Colonel{
     /**
      * üres mezőre lépés
      * ha eddig mérlegen állt akkor értesíti a mérleget hogy lelépett és törli a rá mutató referenciáját
-     * @param emptyField erre amezőre lép (ezzel ütközött)
      */
-    public void moveTo(EmptyField emptyField) {
+    public void moveTo() {
         position = new Coordinate(getFrontFieldPosition());
         if (ownedScale != null) {
             ownedScale.removeWeight();
