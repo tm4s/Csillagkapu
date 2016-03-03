@@ -107,6 +107,7 @@ public class Map {
 
         br.close();
 
+
         /*
         //teszt adat
         for (int y = 0; y < height; ++y){
