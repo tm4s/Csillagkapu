@@ -23,14 +23,24 @@ public class Colonel{
     }
 
     /**
+     * az ezredes a megadott iranyba fordul
+     * @param direction a fordulas iranya
+     */
+    // meg csak abszolut fordul a megadott iranyba
+    public void rotateTo(Orientation.Type direction) {
+        orientation = new Coordinate(Orientation.getCoordinate(direction));
+    }
+
+    /**
      * az ezredes utasítást kap hogy mozogjon,
      * saját pozíció + irány = mező koordinátája ahova lépni akarunk
      * ezt a mezőt le kell kérni a mapből és meg kell rá hívni az ütközés függvényt
      * (az ezredest magát átadva paraméternek)
      * @param direction ebbe az irányba mozogjon
      */
+    // meg csak abszolut mozog orientaciot nem veszi figyelembe
     public void goTo(Orientation.Type direction) {
-        Coordinate destination = new Coordinate(position.add(Orientation.getCoordinate(direction)));        // kezelni kell meg hogy elore menes eseten ne eszaknak menjen hanem az orientationnek megfeleloen
+        Coordinate destination = new Coordinate(position.add(Orientation.getCoordinate(direction)));
         map.getFieldAt(destination).collideWith(this);
     }
 
@@ -141,7 +151,7 @@ public class Colonel{
     /**
      * @return ezredes elotti mezo koordniataja
      */
-    private   Coordinate getFrontFieldPosition() {
+    private Coordinate getFrontFieldPosition() {
         return position.add(orientation);
     }
 }
