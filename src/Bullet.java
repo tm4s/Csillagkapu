@@ -1,5 +1,5 @@
 /**
  * Lövedék
  */
-public class Bullet extends Field{
+public class Bullet {
 }

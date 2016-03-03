@@ -46,4 +46,9 @@ public class Box extends Field {
             box.getOwner().boxPickUp(this);
         }
     }
+
+    @Override
+    public Character print() {
+        return 'B';
+    }
 }

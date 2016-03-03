@@ -13,6 +13,8 @@ public class Map {
     public Map(String fileName) {
 
         Coordinate size = getMapSize(fileName);
+        colonelStartingPosition = new Coordinate(getColonelStartPosition(fileName));
+
         width = size.getX();
         height = size.getY();
 
@@ -32,7 +34,8 @@ public class Map {
 
         // kikene olvasni a palya meretet a fajlbol
 
-        Coordinate size = new Coordinate(20, 10);     // csakohogy legyen valami
+        // teszt adat
+        Coordinate size = new Coordinate(5, 5);
 
         return size;
 
@@ -42,7 +45,8 @@ public class Map {
 
         // kikene olvasni hol az ezredes
 
-        Coordinate pos = new Coordinate(1, 1);        // csakohogy legyen valami
+        //teszt adat
+        Coordinate pos = new Coordinate(2, 2);
         return  pos;
     }
 
@@ -51,6 +55,19 @@ public class Map {
         // data tabla feltoltese adatokkal
 
 
+        //teszt adat
+        for (int y = 0; y < height; ++y){
+            for (int x = 0; x < width; ++x){
+                data[y][x] = new Wall();
+            }
+        }
+        for (int y = 1; y < height-1; ++y){
+            for (int x = 1; x < width-1; ++x){
+                data[y][x] = new EmptyField();
+            }
+        }
+
+        data[3][2] = new Box(null);
     }
 
     public Field getFieldAt(Coordinate position) {

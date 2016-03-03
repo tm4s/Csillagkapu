@@ -20,6 +20,11 @@ public class Scale extends Field {
         box.getOwner().boxPutDownToScale(this);
     }
 
+    @Override
+    public Character print() {
+        return 'S';
+    }
+
     public void addWeight() {
         door.open();
     }
@@ -27,5 +32,5 @@ public class Scale extends Field {
     public void removeWeight() {
         door.close();
     }
-}
+
 }

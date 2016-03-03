@@ -16,4 +16,9 @@ public class Wall extends Field {
     public void collideWith(Box box) {
 
     }
+
+    @Override
+    public Character print() {
+        return 'W';
+    }
 }

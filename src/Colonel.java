@@ -99,7 +99,7 @@ public class Colonel{
             Coordinate destination = new Coordinate(getFrontFieldPosition());
             Scale boxScale = ownedBox.getOwnedScale();
             if (boxScale == null) {
-                map.setFieldAt(destination, new EmptyField(destination));
+                map.setFieldAt(destination, new EmptyField());
             } else {
                 map.setFieldAt(destination, boxScale);
                 boxScale.removeWeight();
@@ -123,7 +123,7 @@ public class Colonel{
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
         if (ownedBox != null) {
-            map.setFieldAt(emptyField.getPosition(), ownedBox);
+            map.setFieldAt(getFrontFieldPosition(), ownedBox);
             ownedBox = null;
         }
     }

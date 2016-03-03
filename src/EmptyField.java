@@ -18,4 +18,9 @@ public class EmptyField extends Field {
     public void collideWith(Box box) {
         box.getOwner().boxPutDownToEmptyField(this);
     }
+
+    @Override
+    public Character print() {
+        return 'E';
+    }
 }

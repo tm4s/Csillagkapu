@@ -19,6 +19,11 @@ public class Door extends Field {
 
     }
 
+    @Override
+    public Character print() {
+        return 'D';
+    }
+
     public void open() {
     }
 
