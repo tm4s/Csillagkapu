@@ -1,8 +1,9 @@
 /**
  * Irány tárolására alkalmas osztály
- *
- * Debugnál figyelni kell az irányokra!!!!
  */
+
+// Debugnal itt a hiba!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// KURVABUGOS
 
 
 public class Orientation {
@@ -10,22 +11,37 @@ public class Orientation {
         NORTH, WEST, SOUTH, EAST
     }
 
-    public static Coordinate getCoordinate (Type type) {
+    public static Coordinate getCoordinate (Orientation.Type type) {
+        Coordinate coordinate = new Coordinate(0,0);
         switch (type){
             case NORTH:
-                return new Coordinate(0,1);
+                coordinate = new Coordinate(-1, 0);
                 break;
             case WEST:
-                return new Coordinate(-1,0);
+                coordinate = new Coordinate(0, -1);
                 break;
             case SOUTH:
-                return new Coordinate(0,-1);
+                coordinate = new Coordinate(1, 0);
                 break;
             case EAST:
-                return new Coordinate(1,0);
+                coordinate = new Coordinate(0, 1);
                 break;
 
         }
+        return coordinate;
+    }
+
+    public static Type getOrientationType(Coordinate postion) {
+        Type type = Type.NORTH;
+        if (postion.equals(new Coordinate(-1, 0)))
+            type = Type.NORTH;
+        else if (postion.equals(new Coordinate(0, -1)))
+            type = Type.WEST;
+        else if (postion.equals(new Coordinate(1, 0)))
+            type = Type.SOUTH;
+        else if (postion.equals(new Coordinate(0, 1)))
+            type = Type.EAST;
+        return type;
     }
 
 }

@@ -3,10 +3,10 @@
  */
 
 public class Scale extends Field {
-    private Door door = null;
+    private Door door = new Door();
 
-    public Scale(Coordinate position) {
-        super(position);
+    public Scale(Door door) {
+        this.door = door;
     }
 
     @Override
@@ -16,6 +16,17 @@ public class Scale extends Field {
 
     @Override
     public void collideWith(Bullet bullet) {
+        bullet.moveForward();
+    }
+
+    @Override
+    public void collideWith(Box box) {
+        box.getOwner().boxPutDownToScale(this);
+    }
+
+    @Override
+    public Character print() {
+        return 'S';
     }
 
     public void addWeight() {
@@ -25,5 +36,5 @@ public class Scale extends Field {
     public void removeWeight() {
         door.close();
     }
-}
+
 }
