@@ -12,6 +12,25 @@ public class Test {
         Colonel colonel = new Colonel(map);
         MapBasicView mapView = new MapBasicView(map, colonel);
 
+        System.out.println("Controls: ");
+        System.out.println("move: wasd");
+        System.out.println("rotate: tfgh");
+        System.out.println("shoot: qe");
+        System.out.println("boxPickUp: k");
+        System.out.println("boxPutDown: m");
+        System.out.println("quit: quit");
+        System.out.println("after one command hit ENTER");
+        System.out.println();
+        System.out.println("Map: ");
+        System.out.println("Wall: #");
+        System.out.println("SpecialWall: +");
+        System.out.println("Colonel: AV<>");
+        System.out.println("Box: B");
+        System.out.println("Scale: S");
+        System.out.println("Door: D");
+        System.out.println("Teleport: 0O");
+        System.out.println();
+
         mapView.printMap();
 
         boolean run = true;
