@@ -43,6 +43,8 @@ public class Teleporter extends Field {
 
     @Override
     public Character print() {
-        return 'X';
+        Character c = '0';
+        if (type == Type.ORANGE) c = 'O';
+        return c;
     }
 }
