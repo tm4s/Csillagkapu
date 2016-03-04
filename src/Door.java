@@ -23,6 +23,9 @@ public class Door extends Field {
 
     @Override
     public void collideWith(Bullet bullet) {
+        if (isOpened) {
+            bullet.moveForward();
+        }
 
     }
 
