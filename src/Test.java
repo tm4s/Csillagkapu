@@ -36,6 +36,10 @@ public class Test {
         boolean run = true;
 
         while (run) {
+            if (map.getAllZpms() == colonel.getCollectedZpms()) {
+                System.out.println("NO MORE ZPMS!!!!!");
+                break;
+            }
             Scanner scan = new Scanner(System.in);
             switch (scan.nextLine()) {
                 case "w":

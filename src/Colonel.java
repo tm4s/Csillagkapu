@@ -11,6 +11,8 @@ public class Colonel{
     private Scale ownedScale = null;
     private Box ownedBox = null;
 
+    private int collectedZpms = 0;
+
     /**
      * konstruktor
      * @param map szüksége van egy inicializált pályára
@@ -19,6 +21,10 @@ public class Colonel{
         this.map = map;
         position = new Coordinate(map.getColonelStartingPosition());
         orientation = Orientation.getCoordinate(Orientation.Type.NORTH);
+    }
+
+    public int getCollectedZpms() {
+        return collectedZpms;
     }
 
     /**
@@ -64,6 +70,19 @@ public class Colonel{
         position = new Coordinate(getFrontFieldPosition());
         scale.addWeight();
         this.ownedScale = scale;
+    }
+
+    /**
+     * ZPM modulok felvétele
+     *
+     * @param zpm
+     */
+
+    public void moveTo(Zpm zpm) {
+        Coordinate destination = new Coordinate(getFrontFieldPosition());
+        map.setFieldAt(destination, new EmptyField());
+        position = new Coordinate(getFrontFieldPosition());
+        this.collectedZpms++;
     }
 
     /**
