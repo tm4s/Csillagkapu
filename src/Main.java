@@ -44,7 +44,7 @@ public class Main {
                     colonel.rotateTo(Orientation.Type.EAST);
                     break;
                 case "k":
-                    colonel.tryBoxPicUp();
+                    colonel.tryBoxPickUp();
                     break;
                 case "m":
                     colonel.tryBoxPutDown();

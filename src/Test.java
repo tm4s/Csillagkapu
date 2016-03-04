@@ -63,7 +63,7 @@ public class Test {
                     colonel.rotateTo(Orientation.Type.EAST);
                     break;
                 case "k":
-                    colonel.tryBoxPicUp();
+                    colonel.tryBoxPickUp();
                     break;
                 case "m":
                     colonel.tryBoxPutDown();

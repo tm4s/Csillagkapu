@@ -62,6 +62,10 @@ public class Colonel{
      */
     public void moveTo(Scale scale) {
         position = new Coordinate(getFrontFieldPosition());
+        if (ownedScale != null) {
+            ownedScale.removeWeight();
+            ownedScale = null;
+        }
         scale.addWeight();
         this.ownedScale = scale;
     }
@@ -77,7 +81,7 @@ public class Colonel{
      * akkor tudjuk hogy innen tortent a visszahivas
      */
     // kicsit necces de talan jo
-    public void tryBoxPicUp() {
+    public void tryBoxPickUp() {
         if (ownedBox == null) {
             map.getFieldAt(getFrontFieldPosition()).collideWith(new Box(this));
         }
