@@ -94,7 +94,7 @@ public class Colonel{
 
     /**
      * Ha az ezredes szakadékba lép meghal.
-     * 
+     *
      * @param ravine ebbe a szakadekba lep bele
      */
     public void moveTo(Ravine ravine) {
@@ -173,6 +173,17 @@ public class Colonel{
             ownedBox.setOwnedScale(scale);
             scale.addWeight();
             map.setFieldAt(getFrontFieldPosition(), ownedBox);
+            ownedBox = null;
+        }
+    }
+
+    /**
+     * Doboz lerakása szakadékba
+     * Ennek hatására az ezredesnél lévő doboz megszűnik.
+     * @param ravine
+     */
+    public void boxPutDownToRavine(Ravine ravine) {
+        if (ownedBox != null) {
             ownedBox = null;
         }
     }
