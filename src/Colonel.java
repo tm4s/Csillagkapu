@@ -12,6 +12,7 @@ public class Colonel{
     private Box ownedBox = null;
 
     private int collectedZpms = 0;
+    private boolean dead = false;
 
     /**
      * konstruktor
@@ -26,6 +27,11 @@ public class Colonel{
     public int getCollectedZpms() {
         return collectedZpms;
     }
+
+    public boolean isDead() {
+        return dead;
+    }
+
 
     /**
      * az ezredes a megadott iranyba fordul
@@ -84,6 +90,16 @@ public class Colonel{
         map.setFieldAt(destination, new EmptyField());
         position = new Coordinate(getFrontFieldPosition());
         this.collectedZpms++;
+    }
+
+    /**
+     * Ha az ezredes szakadékba lép meghal.
+     * 
+     * @param ravine ebbe a szakadekba lep bele
+     */
+    public void moveTo(Ravine ravine) {
+        position = new Coordinate(getFrontFieldPosition());
+        this.dead = true;
     }
 
     /**

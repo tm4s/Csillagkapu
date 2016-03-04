@@ -41,6 +41,10 @@ public class Test {
                 System.out.println("NO MORE ZPMS!!!!!");
                 break;
             }
+            if (colonel.isDead()) {
+                System.out.println("RIP COLONEL :( ");
+                break;
+            }
             Scanner scan = new Scanner(System.in);
             switch (scan.nextLine()) {
                 case "w":

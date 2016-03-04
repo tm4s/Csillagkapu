@@ -4,7 +4,7 @@
 public class Ravine extends Field {
     @Override
     public void collideWith(Colonel colonel) {
-
+        colonel.moveTo(this);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class Ravine extends Field {
 
     @Override
     public Character print() {
-        return null;
+        return 'R';
     }
 }

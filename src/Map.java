@@ -116,6 +116,9 @@ public class Map {
                         mapDatas[j][i] = new Zpm();
                         allZpms++;
                         break;
+                    case 'R':
+                        mapDatas[j][i] = new Ravine();
+                        break;
                     default:
                         break;
                 }
