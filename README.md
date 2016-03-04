@@ -15,8 +15,8 @@ A Rhinos csapat Szoftver projekt laboratórium tárgyra (VIIIAB02) készített l
 ## Fejlesztési irányelvek
 
 1. A master-branch mindig működő verziót tartalmazzon egy új funkció vagy változtatás egy régin először egy új branch-en induljon el és ha készen van és jó lett akkor legyen merge-elve a master-re.
-
-2. Commit 5-10 soronkent, logikai egységekként
+2. Commit 5-10 soronkent, logikai egységekként, ertelmes commit message-dzsel.
 3. Hiba észlelése esetén vagy javítás és commit róla vagy bejegyzés _Issues_-ba
+4. Ctrl+Shift+F-et (AutoFormat) nyomogassuk szorgosan.
 <br><br>
 _Minden nagyon oo!_
