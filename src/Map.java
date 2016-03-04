@@ -94,7 +94,6 @@ public class Map {
                     case 'D':
                         mapDatas[j][i] = new Door();
                         String doorData[] = array[i].split("_");
-                        System.out.println(array[i]);
                         doorDatas.add(new PosAndIdData(doorData[1], new Coordinate(j, i)));
                         break;
                     case 'B':
@@ -106,7 +105,6 @@ public class Map {
                         break;
                     case 'S':
                         String scaleData[] = array[i].split("_");
-                        System.out.println(array[i]);
                         scaleDatas.add(new PosAndIdData(scaleData[1], new Coordinate(j, i)));
                         break;
                     case '+':
@@ -126,7 +124,6 @@ public class Map {
 
         for (PosAndIdData d: scaleDatas) {
             int i = 0;
-            System.out.println(doorDatas.get(i).id + "   " + d.id);
             while (!doorDatas.get(i).id.equals(d.id)) {
                 ++i;
             }
