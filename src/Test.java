@@ -14,7 +14,9 @@ public class Test {
 
         mapView.printMap();
 
-        while (true) {
+        boolean run = true;
+
+        while (run) {
             Scanner scan = new Scanner(System.in);
             switch (scan.nextLine()) {
                 case "w":
@@ -52,6 +54,9 @@ public class Test {
                     break;
                 case "e":
                     colonel.shootTeleporter(Teleporter.Type.ORANGE);
+                    break;
+                case "quit":
+                    run = false;
                     break;
                 default:
                     break;
