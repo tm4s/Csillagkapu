@@ -74,8 +74,9 @@ public class Colonel{
 
     /**
      * ZPM modulok felvétele
-     *
-     * @param zpm
+     * Amikor az ezredes rálépne egy zpm modulra akkor a modul mező üres mezővé alakul,
+     * eközben az ezredes is rálép, valamint az eddig összegyűjtött zpmek számát megnöveljük eggyel.
+     * @param zpm ezt a zpm modult veszi fel
      */
 
     public void moveTo(Zpm zpm) {
