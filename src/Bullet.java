@@ -5,24 +5,22 @@
 public class Bullet {
 
 
-    private Coordinate position;
-    private Coordinate direction;
-    private Map map;
+    private Field ownedField;
+    private Orientation.Type direction;
     private Teleporter.Type type;
 
-    public Bullet(Teleporter.Type type, Coordinate startPosition, Coordinate direction, Map map) {
+    public Bullet(Teleporter.Type type, Field startField, Orientation.Type direction) {
         this.type = type;
-        position = new Coordinate(startPosition);
+        ownedField = startField;
         this.direction = direction;
-        this.map = map;
     }
 
     public void moveForward(){
-        position = new Coordinate(position.add(direction));
-        map.getFieldAt(position).collideWith(this);
+        ownedField.getNextField(direction).collideWith(this);
+        ownedField = ownedField.getNextField(direction);
     }
 
     public void transformToTeleporter(){
-        map.createTeleporter(type, position);
+        ownedField.getNextField(direction).setField(new Teleporter(type));
     }
 }

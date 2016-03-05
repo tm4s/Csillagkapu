@@ -4,7 +4,6 @@
 public class SpecialWall extends Wall {
     @Override
     public void collideWith(Colonel colonel) {
-        colonel.moveTo();
     }
 
     @Override

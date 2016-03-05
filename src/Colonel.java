@@ -3,22 +3,20 @@
  */
 
 public class Colonel{
-    private Map map;
 
-    private Coordinate position;
-    private Coordinate orientation;
+    private Field ownedField;
+    private Orientation.Type orientation;
 
     private Scale ownedScale = null;
     private Box ownedBox = null;
 
     /**
      * konstruktor
-     * @param map szüksége van egy inicializált pályára
+     * @param field szüksége van egy kezdo mezore
      */
-    public Colonel(Map map) {
-        this.map = map;
-        position = new Coordinate(map.getColonelStartingPosition());
-        orientation = Orientation.getCoordinate(Orientation.Type.NORTH);
+    public Colonel(Field field) {
+        ownedField = field;
+        orientation = Orientation.Type.NORTH;
     }
 
     /**
@@ -27,7 +25,7 @@ public class Colonel{
      */
     // meg csak abszolut fordul a megadott iranyba
     public void rotateTo(Orientation.Type direction) {
-        orientation = new Coordinate(Orientation.getCoordinate(direction));
+        orientation = direction;
     }
 
     /**
@@ -39,16 +37,16 @@ public class Colonel{
      */
     // meg csak abszolut mozog orientaciot nem veszi figyelembe
     public void goTo(Orientation.Type direction) {
-        orientation = new Coordinate(Orientation.getCoordinate(direction));
-        map.getFieldAt(getFrontFieldPosition()).collideWith(this);
+        orientation = direction;
+        ownedField.getNextField(orientation).collideWith(this);
     }
 
     /**
      * üres mezőre lépés
      * ha eddig mérlegen állt akkor értesíti a mérleget hogy lelépett és törli a rá mutató referenciáját
      */
-    public void moveTo() {
-        position = new Coordinate(getFrontFieldPosition());
+    public void moveTo(Field field) {
+        ownedField = field;
         if (ownedScale != null) {
             ownedScale.removeWeight();
             ownedScale = null;
@@ -61,7 +59,7 @@ public class Colonel{
      * @param scale erre a mérlegre lép rá
      */
     public void moveTo(Scale scale) {
-        position = new Coordinate(getFrontFieldPosition());
+        ownedField = scale;
         if (ownedScale != null) {
             ownedScale.removeWeight();
             ownedScale = null;
@@ -83,7 +81,7 @@ public class Colonel{
     // kicsit necces de talan jo
     public void tryBoxPickUp() {
         if (ownedBox == null) {
-            map.getFieldAt(getFrontFieldPosition()).collideWith(new Box(this));
+            ownedField.getNextField(orientation).collideWith(new Box(this));
         }
     }
 
@@ -98,12 +96,11 @@ public class Colonel{
         if (ownedBox == null) {
             ownedBox = box;
             ownedBox.setOwner(this);
-            Coordinate destination = new Coordinate(getFrontFieldPosition());
             Scale boxScale = ownedBox.getOwnedScale();
             if (boxScale == null) {
-                map.setFieldAt(destination, new EmptyField());
+                ownedField.getNextField(orientation).setField(new EmptyField());
             } else {
-                map.setFieldAt(destination, boxScale);
+                ownedField.getNextField(orientation).setField(boxScale);
                 boxScale.removeWeight();
                 ownedBox.setOwnedScale(null);
             }
@@ -115,7 +112,7 @@ public class Colonel{
      */
     public void tryBoxPutDown() {
         if (ownedBox != null) {
-            map.getFieldAt(getFrontFieldPosition()).collideWith(ownedBox);
+            ownedField.getNextField(orientation).collideWith(ownedBox);
         }
     }
 
@@ -125,7 +122,7 @@ public class Colonel{
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
         if (ownedBox != null) {
-            map.setFieldAt(getFrontFieldPosition(), ownedBox);
+            ownedField.getNextField(orientation).setField(ownedBox);
             ownedBox = null;
         }
     }
@@ -140,33 +137,29 @@ public class Colonel{
         if (ownedBox != null) {
             ownedBox.setOwnedScale(scale);
             scale.addWeight();
-            map.setFieldAt(getFrontFieldPosition(), ownedBox);
+            ownedField.getNextField(orientation).setField(ownedBox);
             ownedBox = null;
         }
     }
 
     public void shootTeleporter(Teleporter.Type type) {
-        Bullet bullet = new Bullet(type, position, orientation, map);
+        Bullet bullet = new Bullet(type, ownedField, orientation);
         bullet.moveForward();
     }
 
 
-    public Coordinate getPosition() {
-        return position;
+
+
+    public void TeleportTo(Field field) {
+        ownedField = field;
     }
 
-    /**
-     * @return ezredes elotti mezo koordniataja
-     */
-    private Coordinate getFrontFieldPosition() {
-        return position.add(orientation);
-    }
 
-    public void TeleportTo(Coordinate position) {
-        this.position = position;
+    //csak teszteleshez
+    public Field getOwnedField(){
+        return ownedField;
     }
-
-    public Coordinate getOrientation() {
+    public Orientation.Type getOrientation(){
         return orientation;
     }
 }

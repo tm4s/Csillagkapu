@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String args[]) throws IOException {
         Map map = new Map("map01.csv");
-        Colonel colonel = new Colonel(map);
+        Colonel colonel = new Colonel(map.getColonelStartingField());
         MapBasicView mapView = new MapBasicView(map, colonel);
 
         mapView.printMap();

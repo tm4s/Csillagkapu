@@ -5,29 +5,28 @@ public class Teleporter extends Field {
     enum Type {
         ORANGE, BLUE
     }
+
+    private static Teleporter[] Teleporters = new Teleporter[2];
+
+
     private Type type;
-    private Teleporter otherTeleporter;
-    private Coordinate position;
 
-    public Teleporter(Type type, Teleporter otherTeleporter, Coordinate position) {
+    public Teleporter(Type type) {
         this.type = type;
-        this.otherTeleporter = otherTeleporter;
-        this.position = position;
+        if (Teleporters[type.ordinal()] != null) {
+            Teleporters[type.ordinal()].setField(new SpecialWall());
+        }
+        Teleporters[type.ordinal()] = this;
     }
 
-    public void setOtherTeleporter(Teleporter otherTeleporter) {
-        this.otherTeleporter = otherTeleporter;
+    private Teleporter getOtherTeleporter() {
+        return Teleporters[(type.ordinal()+1)%2];
     }
-
-    public Coordinate getPosition() {
-        return position;
-    }
-
 
     @Override
     public void collideWith(Colonel colonel) {
-        if (otherTeleporter != null)
-            colonel.TeleportTo(otherTeleporter.getPosition());
+        if (getOtherTeleporter() != null)
+            colonel.TeleportTo(getOtherTeleporter());
 
     }
 

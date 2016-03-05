@@ -6,7 +6,7 @@ public class EmptyField extends Field {
 
     @Override
     public void collideWith(Colonel colonel) {
-        colonel.moveTo();
+        colonel.moveTo(this);
     }
 
     @Override
