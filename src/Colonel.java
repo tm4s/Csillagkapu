@@ -4,6 +4,12 @@
 
 public class Colonel{
 
+    /**
+     * mezo amin all az ezredes
+     * irany amibe nez
+     * merleg amin all
+     * doboz ami nala van
+     */
     private Field ownedField;
     private Orientation.Type orientation;
 
@@ -12,11 +18,20 @@ public class Colonel{
 
     /**
      * konstruktor
-     * @param field szüksége van egy kezdo mezore
+     * @param field szuksege van egy mezore amin all majd
      */
     public Colonel(Field field) {
         ownedField = field;
         orientation = Orientation.Type.NORTH;
+    }
+
+    /**
+     * elkeri a mezotol amin az ezredes all azt a mezot ami abba az iranyba van tole amibe az ezreds nez
+     * @return megfelelo mezot
+     * csak a kod olvashatosaga miatt lett letrehozva
+     */
+    private Field getFrontField() {
+        return ownedField.getNextField(orientation);
     }
 
     /**
@@ -29,21 +44,21 @@ public class Colonel{
     }
 
     /**
-     * az ezredes utasítást kap hogy mozogjon,
-     * saját pozíció + irány = mező koordinátája ahova lépni akarunk
-     * ezt a mezőt le kell kérni a mapből és meg kell rá hívni az ütközés függvényt
-     * (az ezredest magát átadva paraméternek)
-     * @param direction ebbe az irányba mozogjon
+     * az ezredes uatsitast kap hogy mozogjon,
+     * mostani mezorol milyen iranyba probaljon lepni egy masik mezore
+     * attol a mezotol amin all ell kell kerni a tole megadott iranyban levo szomszedjat
+     * es meg kell ra hivni az utkozes fuggvenyt (az ezredest magát átadva paraméternek)
+     * @param direction ebbe az iranyba mozogjon
      */
     // meg csak abszolut mozog orientaciot nem veszi figyelembe
     public void goTo(Orientation.Type direction) {
         orientation = direction;
-        ownedField.getNextField(orientation).collideWith(this);
+        getFrontField().collideWith(this);
     }
 
     /**
-     * üres mezőre lépés
-     * ha eddig mérlegen állt akkor értesíti a mérleget hogy lelépett és törli a rá mutató referenciáját
+     * ures mezore lepes
+     * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
      */
     public void moveTo(Field field) {
         ownedField = field;
@@ -69,7 +84,7 @@ public class Colonel{
     }
 
     /**
-     * doboz felvételére kísérlet,
+     * doboz felvételére kísérlet az ezredes elotti mezorol
      * létrehozunk egy dobozt aminek a tulajdonosát beállítjuk magunkra és nem hagyjuk meg a default null-t
      * (doboznak van egy parametere ami Colonel referencia)
      * és ezt a dobozt ütköztetjük a mezővel ami előttünk van
@@ -81,12 +96,12 @@ public class Colonel{
     // kicsit necces de talan jo
     public void tryBoxPickUp() {
         if (ownedBox == null) {
-            ownedField.getNextField(orientation).collideWith(new Box(this));
+            getFrontField().collideWith(new Box(this));
         }
     }
 
     /**
-     * doboz felvetele
+     * doboz felvetele az ezredes elotti mezorol
      * ha nincs nalunk doboz
      * a helyen letrehoz egy ures mezot ha nem tartozott hozza lenyomott merleg
      * ha tartozott akkor felengedjuk amerleget es azt tesszuk a helyere
@@ -98,9 +113,9 @@ public class Colonel{
             ownedBox.setOwner(this);
             Scale boxScale = ownedBox.getOwnedScale();
             if (boxScale == null) {
-                ownedField.getNextField(orientation).setField(new EmptyField());
+                getFrontField().setField(new EmptyField());
             } else {
-                ownedField.getNextField(orientation).setField(boxScale);
+                getFrontField().setField(boxScale);
                 boxScale.removeWeight();
                 ownedBox.setOwnedScale(null);
             }
@@ -112,7 +127,7 @@ public class Colonel{
      */
     public void tryBoxPutDown() {
         if (ownedBox != null) {
-            ownedField.getNextField(orientation).collideWith(ownedBox);
+            getFrontField().collideWith(ownedBox);
         }
     }
 
@@ -122,7 +137,7 @@ public class Colonel{
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
         if (ownedBox != null) {
-            ownedField.getNextField(orientation).setField(ownedBox);
+            getFrontField().setField(ownedBox);
             ownedBox = null;
         }
     }
@@ -137,19 +152,28 @@ public class Colonel{
         if (ownedBox != null) {
             ownedBox.setOwnedScale(scale);
             scale.addWeight();
-            ownedField.getNextField(orientation).setField(ownedBox);
+            getFrontField().setField(ownedBox);
             ownedBox = null;
         }
     }
 
+    /**
+     * Teleporter kilovese (csak akkor lesz a kilott lovedekbol teleporter ha sepcialis falnak utkozik
+     * a kilott lovedeknek megadjuk a mezot amin allunk es az iranyt
+     * valamint elinditjuk a lovedeket (ezutan addig fog haladni ameddig bele nem utkozik
+     * valamilyen objektumba ami nem engedi tovabb vagy specialis falba ahol letrehoz egy teleportert
+     * @param type ilyen tipusu (szinu) teleportert akarunk letrehozni
+     */
     public void shootTeleporter(Teleporter.Type type) {
         Bullet bullet = new Bullet(type, ownedField, orientation);
         bullet.moveForward();
     }
 
-
-
-
+    /**
+     * teleportalas
+     * ezredes athelyezese a megadott mezore
+     * @param field erre a mezore teleportalunk
+     */
     public void TeleportTo(Field field) {
         ownedField = field;
     }
