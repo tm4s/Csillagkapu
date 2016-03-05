@@ -16,11 +16,12 @@ public class Bullet {
     }
 
     public void moveForward(){
-        ownedField.getNextField(direction).collideWith(this);
         ownedField = ownedField.getNextField(direction);
+        ownedField.collideWith(this);
+
     }
 
     public void transformToTeleporter(){
-        ownedField.getNextField(direction).setField(new Teleporter(type));
+        ownedField.setField(new Teleporter(type));
     }
 }

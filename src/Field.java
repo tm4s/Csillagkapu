@@ -19,7 +19,8 @@ public abstract class Field {
         field.setNextFields(nextFields);
 
         // csak teszteleshez kell
-        field.position = position;
+        field.position = new Coordinate(position);
+        field.map = map;
         field.setOnMap();
     }
 
@@ -53,6 +54,7 @@ public abstract class Field {
     }
     public void setOnMap(){
         map.setFieldAt(position, this);
+
     }
 
     public void setMap(Map map) {
