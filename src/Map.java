@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Pálya aktuális állásának tárolására való osztály
+ * Pálya beovasasara, kapcsolatok letrehozasara, kiirasra valo
+ * inicializalas utan nem kell belole peldany
  */
 
 public class Map {

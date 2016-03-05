@@ -4,7 +4,7 @@
 
 // Debugnal itt a hiba!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // KURVABUGOS
-
+// elm most csak a Type kell belole mas nem de nembiztos :DD
 
 public class Orientation {
     public enum Type {

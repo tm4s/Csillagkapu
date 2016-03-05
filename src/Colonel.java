@@ -12,7 +12,6 @@ public class Colonel{
      */
     private Field ownedField;
     private Orientation.Type orientation;
-
     private Scale ownedScale = null;
     private Box ownedBox = null;
 
