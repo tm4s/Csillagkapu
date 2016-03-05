@@ -3,26 +3,44 @@
  */
 
 public class Door extends Field {
+    private boolean isOpened = false;
 
+    public void open() {
+        isOpened = true;
+    }
 
-    public Door(Coordinate position) {
-        super(position);
+    public void close() {
+        isOpened = false;
     }
 
     @Override
     public void collideWith(Colonel colonel) {
+        if (isOpened) {
+            colonel.moveTo();
+        }
 
     }
 
     @Override
     public void collideWith(Bullet bullet) {
+        if (isOpened) {
+            bullet.moveForward();
+        }
 
     }
 
-    public void open() {
+    @Override
+    public void collideWith(Box box) {
+
     }
 
-    public void close() {
+    @Override
+    public Character print() {
+        Character c = 'D';
+        if (isOpened) c = ' ';
+        return c;
     }
+
+
 
 }
