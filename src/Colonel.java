@@ -152,7 +152,6 @@ public class Colonel{
         if (ownedBox == null) {
             ownedBox = box;
             hand.setHasBox(true);
-            ownedBox.setOwner(this);
             Scale boxScale = ownedBox.getOwnedScale();
             if (boxScale == null) {
                 getFrontField().setField(new EmptyField());

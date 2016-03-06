@@ -104,7 +104,7 @@ public class Map {
 					doorDatas.add(new PosAndIdData(doorData[1], new Coordinate(j, i)));
 					break;
 				case 'B':
-					mapDatas[j][i] = new Box(null);
+					mapDatas[j][i] = new Box();
 					break;
 				case 'C':
 					mapDatas[j][i] = new EmptyField();
