@@ -223,7 +223,7 @@ public class Colonel{
      * ezredes athelyezese a megadott mezore
      * @param field erre a mezore teleportalunk
      */
-    public void TeleportTo(Field field) {
+    public void teleportTo(Field field) {
         ownedField = field;
     }
 

@@ -59,9 +59,9 @@ public abstract class Field {
     /**
      * visitor pattern fuggvenyei
      */
-    public abstract void collideWith(Colonel colonel);
-    public abstract void collideWith(Bullet bullet);
-    public abstract void collideWith(Box box);
+    public void collideWith(Colonel colonel) {}
+    public void collideWith(Bullet bullet) {}
+    public void collideWith(Box box) {}
 
     //teszteleshez kell
     public abstract Character print();

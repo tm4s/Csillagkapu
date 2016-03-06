@@ -30,9 +30,6 @@ public class Box extends Field {
         return ownedScale;
     }
 
-    @Override
-    public void collideWith(Colonel colonel) {
-    }
 
     @Override
     public void collideWith(Bullet bullet) {

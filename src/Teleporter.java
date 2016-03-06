@@ -46,17 +46,7 @@ public class Teleporter extends Field {
     @Override
     public void collideWith(Colonel colonel) {
         if (getOtherTeleporter() != null)
-            colonel.TeleportTo(getOtherTeleporter());
-
-    }
-
-    @Override
-    public void collideWith(Bullet bullet) {
-
-    }
-
-    @Override
-    public void collideWith(Box box) {
+            colonel.teleportTo(getOtherTeleporter());
 
     }
 

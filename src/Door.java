@@ -29,10 +29,6 @@ public class Door extends Field {
 
     }
 
-    @Override
-    public void collideWith(Box box) {
-
-    }
 
     @Override
     public Character print() {
