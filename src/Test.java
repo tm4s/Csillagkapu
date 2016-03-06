@@ -48,16 +48,16 @@ public class Test {
             Scanner scan = new Scanner(System.in);
             switch (scan.nextLine()) {
                 case "w":
-                    colonel.goTo(Orientation.Type.NORTH);
+                    colonel.tryMoveTo(Orientation.Type.NORTH);
                     break;
                 case "s":
-                    colonel.goTo(Orientation.Type.SOUTH);
+                    colonel.tryMoveTo(Orientation.Type.SOUTH);
                     break;
                 case "a":
-                    colonel.goTo(Orientation.Type.WEST);
+                    colonel.tryMoveTo(Orientation.Type.WEST);
                     break;
                 case "d":
-                    colonel.goTo(Orientation.Type.EAST);
+                    colonel.tryMoveTo(Orientation.Type.EAST);
                     break;
                 case "t":
                     colonel.rotateTo(Orientation.Type.NORTH);
