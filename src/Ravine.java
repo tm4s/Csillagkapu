@@ -13,8 +13,11 @@ public class Ravine extends Field {
     }
 
     @Override
-    public void collideWith(Box box) {
-        box.getOwner().boxPutDownToRavine(this);
+    public void collideWith(ColonelsHand hand) {
+        if (hand.hasBox())
+            hand.getColonel().boxPutDownToRavine(this);
     }
+
+
 
 }
