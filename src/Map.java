@@ -9,13 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Pálya aktuális állásának tárolására való osztály
+ * Pálya beovasasara, kapcsolatok letrehozasara, kiirasra valo
+ * inicializalas utan nem kell belole peldany
  */
 
 public class Map {
     private int width;
     private int height;
-    private Coordinate colonelStartingPosition;
+    private Field colonelStartingField;
 
     private int allZpms = 0;
 
@@ -44,8 +45,8 @@ public class Map {
     public void setFieldAt(Coordinate position, Field field) {
         mapDatas[position.getX()][position.getY()] = field;
     }
-    public Coordinate getColonelStartingPosition() {
-        return colonelStartingPosition;
+    public Field getColonelStartingField() {
+        return colonelStartingField;
     }
 
     private void readMapData(String fileName) throws IOException {
@@ -103,7 +104,7 @@ public class Map {
                         break;
                     case 'C':
                         mapDatas[j][i] = new EmptyField();
-                        colonelStartingPosition = new Coordinate(j, i);
+                        colonelStartingField = mapDatas[j][i];
                         break;
                     case 'S':
                         String scaleData[] = array[i].split("_");
@@ -141,34 +142,33 @@ public class Map {
             setFieldAt(d.getPosition(), new Scale((Door) getFieldAt(doorPosition)));
         }
 
-
+        setDatas();
     }
 
-    /**
-     * Csillagkapu (teleporter) letrehozasa adott:
-     * @param type tipusu (sarga vagy kek)
-     * @param position ezen a helyen
-     * azonos szinu regi teleportert meg kell szuntetni ha letezik
-     * es a map-ben kulon eltarolt megfelelo tipusu teleportert frissiteni kell az ujra
-     * frissiteni kell meg a masik szinu teleporterben is a hivatkozast hogy az ujra mutasson
-     * ha letezik masik szinu teleporter
-     */
-    public void createTeleporter(Teleporter.Type type, Coordinate position) {
-        // lehetne szepiteni
-        if (type == Teleporter.Type.BLUE) {
-            setFieldAt(position, new Teleporter(type, orangeTeleporter, position));
-            if (blueTeleporter != null)
-                setFieldAt(blueTeleporter.getPosition(), new SpecialWall());
-            blueTeleporter = (Teleporter) getFieldAt(position);
-            if (orangeTeleporter != null)
-                orangeTeleporter.setOtherTeleporter(blueTeleporter);
-        } else {
-            setFieldAt(position, new Teleporter(type, blueTeleporter, position));
-            if (orangeTeleporter != null)
-                setFieldAt(orangeTeleporter.getPosition(), new SpecialWall());
-            orangeTeleporter = (Teleporter) getFieldAt(position);
-            if (blueTeleporter != null)
-                blueTeleporter.setOtherTeleporter(orangeTeleporter);
+    private void setDatas(){
+        for (int j = 0; j < height; ++j) {
+            for (int i = 1; i < width-1; ++i){
+                mapDatas[j][i].setNextField(Orientation.Type.WEST, mapDatas[j][i-1]);
+                mapDatas[j][i].setNextField(Orientation.Type.EAST, mapDatas[j][i+1]);
+            }
+            mapDatas[j][0].setNextField(Orientation.Type.EAST, mapDatas[j][1]);
+            mapDatas[j][width-1].setNextField(Orientation.Type.WEST, mapDatas[j][width-2]);
+        }
+        for (int i = 0; i < width; ++i) {
+            for (int j = 1; j < height-1; ++j){
+                mapDatas[j][i].setNextField(Orientation.Type.NORTH, mapDatas[j-1][i]);
+                mapDatas[j][i].setNextField(Orientation.Type.SOUTH, mapDatas[j+1][i]);
+            }
+            mapDatas[0][i].setNextField(Orientation.Type.SOUTH, mapDatas[1][i]);
+            mapDatas[height-1][i].setNextField(Orientation.Type.NORTH, mapDatas[height-2][i]);
+        }
+        for (int j = 0; j < height; ++j) {
+            for (int i = 1; i < width; ++i) {
+                mapDatas[j][i].setPosition(new Coordinate(j, i));
+                mapDatas[j][i].setMap(this);
+            }
         }
     }
+
+
 }

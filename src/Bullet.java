@@ -4,25 +4,43 @@
 
 public class Bullet {
 
-
-    private Coordinate position;
-    private Coordinate direction;
-    private Map map;
+    /**
+     * aktualis pozocio,
+     * irany
+     * tipusa a teleporternek ami letrejohet belole
+     */
+    private Field ownedField;
+    private Orientation.Type direction;
     private Teleporter.Type type;
 
-    public Bullet(Teleporter.Type type, Coordinate startPosition, Coordinate direction, Map map) {
+    /**
+     * konstruktor
+     * @param type telepotrter tipusa
+     * @param startField kezdo mezo
+     * @param direction haladasi irany
+     */
+    public Bullet(Teleporter.Type type, Field startField, Orientation.Type direction) {
         this.type = type;
-        position = new Coordinate(startPosition);
+        ownedField = startField;
         this.direction = direction;
-        this.map = map;
     }
 
+    /**
+     * tovabb halad a kovetkezo mezore
+     * mezotol amin all elkeri a megfelelo iranyu szomszedjat
+     * es utkozik vele
+     */
     public void moveForward(){
-        position = new Coordinate(position.add(direction));
-        map.getFieldAt(position).collideWith(this);
+        ownedField = ownedField.getNextField(direction);
+        ownedField.collideWith(this);
+
     }
 
+    /**
+     * atalkulas teleporterre
+     * a mezon amin all ott letrehoz egy teleportert (regi mezo eltunik)
+     */
     public void transformToTeleporter(){
-        map.createTeleporter(type, position);
+        ownedField.setField(new Teleporter(type));
     }
 }
