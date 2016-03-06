@@ -133,7 +133,7 @@ public class Colonel{
     // kicsit necces de talan jo
     public void tryBoxPickUp() {
         if (ownedBox == null) {
-            getFrontField().collideWith(new Box(this));
+            getFrontField().collideWith(new ColonelsHand(this));
         }
     }
 

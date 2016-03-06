@@ -37,21 +37,13 @@ public class Box extends Field {
         bullet.moveForward();
     }
 
-    /**
-     * ha a box amivel utkozott az ezredes tulajdona akkor meghivja az ezredes doboz felvevo fuggvenyet
-     * (csak az ezredes tulajdona lehet maskent nem utkozhetne vele)
-     * @param box ezzel utkozott
-     */
-    @Override
-    public void collideWith(Box box) {
-        if (box.getOwner() != null) {
-            box.getOwner().boxPickUp(this);
-        }
-    }
-
     @Override
     public Character print() {
         return 'B';
     }
 
+    @Override
+    public  void collideWith(ColonelsHand hand) {
+        hand.getColonel().boxPickUp(this);
+    }
 }

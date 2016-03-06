@@ -62,6 +62,7 @@ public abstract class Field {
     public void collideWith(Colonel colonel) {}
     public void collideWith(Bullet bullet) {}
     public void collideWith(Box box) {}
+    public void collideWith(ColonelsHand hand) {}
 
     //teszteleshez kell
     public abstract Character print();
