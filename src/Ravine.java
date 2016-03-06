@@ -17,8 +17,4 @@ public class Ravine extends Field {
         box.getOwner().boxPutDownToRavine(this);
     }
 
-    @Override
-    public Character print() {
-        return 'R';
-    }
 }

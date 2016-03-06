@@ -11,8 +11,4 @@ public class SpecialWall extends Wall {
         bullet.transformToTeleporter();
     }
 
-    @Override
-    public Character print() {
-        return '+';
-    }
 }

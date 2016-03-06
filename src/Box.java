@@ -51,8 +51,4 @@ public class Box extends Field {
         }
     }
 
-    @Override
-    public Character print() {
-        return 'B';
-    }
 }

@@ -59,11 +59,4 @@ public class Teleporter extends Field {
     public void collideWith(Box box) {
 
     }
-
-    @Override
-    public Character print() {
-        Character c = '0';
-        if (type == Type.ORANGE) c = 'O';
-        return c;
-    }
 }

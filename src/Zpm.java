@@ -16,9 +16,4 @@ public class Zpm extends Field{
     public void collideWith(Box box) {
 
     }
-
-    @Override
-    public Character print() {
-        return 'Z';
-    }
 }
