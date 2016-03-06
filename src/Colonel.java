@@ -3,31 +3,46 @@
  */
 
 public class Colonel{
-    private Map map;
 
-    private Coordinate position;
-    private Coordinate orientation;
-
+    /**
+     * mezo amin all az ezredes
+     * irany amibe nez
+     * merleg amin all
+     * doboz ami nala van
+     * begyujtott ZPM modulok szama
+     * meghalt-e az ezredes szakadektol
+     */
+    private Field ownedField;
+    private Orientation.Type orientation;
     private Scale ownedScale = null;
     private Box ownedBox = null;
-
     private int collectedZpms = 0;
-    private boolean dead = false;
+    private boolean dead = false;       //lehet kesobb nem fog kelleni
 
     /**
      * konstruktor
-     * @param map szüksége van egy inicializált pályára
+     * @param field szuksege van egy mezore amin all majd
      */
-    public Colonel(Map map) {
-        this.map = map;
-        position = new Coordinate(map.getColonelStartingPosition());
-        orientation = Orientation.getCoordinate(Orientation.Type.NORTH);
+    public Colonel(Field field) {
+        ownedField = field;
+        orientation = Orientation.Type.NORTH;
     }
 
+    /**
+     * elkeri a mezotol amin az ezredes all azt a mezot ami abba az iranyba van tole amibe az ezreds nez
+     * @return megfelelo mezot
+     * csak a kod olvashatosaga miatt lett letrehozva
+     */
+    private Field getFrontField() {
+        return ownedField.getNextField(orientation);
+    }
+
+    //valamit meg ezzel lehet kell majd csinalni
     public int getCollectedZpms() {
         return collectedZpms;
     }
 
+    //valamit meg ezzel lehet kell majd csinalni
     public boolean isDead() {
         return dead;
     }
@@ -39,28 +54,28 @@ public class Colonel{
      */
     // meg csak abszolut fordul a megadott iranyba
     public void rotateTo(Orientation.Type direction) {
-        orientation = new Coordinate(Orientation.getCoordinate(direction));
+        orientation = direction;
     }
 
     /**
-     * az ezredes utasítást kap hogy mozogjon,
-     * saját pozíció + irány = mező koordinátája ahova lépni akarunk
-     * ezt a mezőt le kell kérni a mapből és meg kell rá hívni az ütközés függvényt
-     * (az ezredest magát átadva paraméternek)
-     * @param direction ebbe az irányba mozogjon
+     * az ezredes uatsitast kap hogy mozogjon,
+     * mostani mezorol milyen iranyba probaljon lepni egy masik mezore
+     * attol a mezotol amin all ell kell kerni a tole megadott iranyban levo szomszedjat
+     * es meg kell ra hivni az utkozes fuggvenyt (az ezredest magát átadva paraméternek)
+     * @param direction ebbe az iranyba mozogjon
      */
     // meg csak abszolut mozog orientaciot nem veszi figyelembe
     public void goTo(Orientation.Type direction) {
-        orientation = new Coordinate(Orientation.getCoordinate(direction));
-        map.getFieldAt(getFrontFieldPosition()).collideWith(this);
+        orientation = direction;
+        getFrontField().collideWith(this);
     }
 
     /**
-     * üres mezőre lépés
-     * ha eddig mérlegen állt akkor értesíti a mérleget hogy lelépett és törli a rá mutató referenciáját
+     * ures mezore lepes
+     * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
      */
-    public void moveTo() {
-        position = new Coordinate(getFrontFieldPosition());
+    public void moveTo(Field field) {
+        ownedField = field;
         if (ownedScale != null) {
             ownedScale.removeWeight();
             ownedScale = null;
@@ -73,7 +88,11 @@ public class Colonel{
      * @param scale erre a mérlegre lép rá
      */
     public void moveTo(Scale scale) {
-        position = new Coordinate(getFrontFieldPosition());
+        ownedField = scale;
+        if (ownedScale != null) {
+            ownedScale.removeWeight();
+            ownedScale = null;
+        }
         scale.addWeight();
         this.ownedScale = scale;
     }
@@ -86,9 +105,8 @@ public class Colonel{
      */
 
     public void moveTo(Zpm zpm) {
-        Coordinate destination = new Coordinate(getFrontFieldPosition());
-        map.setFieldAt(destination, new EmptyField());
-        position = new Coordinate(getFrontFieldPosition());
+        ownedField = new EmptyField();
+        zpm.setField(ownedField);
         this.collectedZpms++;
     }
 
@@ -98,12 +116,12 @@ public class Colonel{
      * @param ravine ebbe a szakadekba lep bele
      */
     public void moveTo(Ravine ravine) {
-        position = new Coordinate(getFrontFieldPosition());
+        ownedField = ravine;
         this.dead = true;
     }
 
     /**
-     * doboz felvételére kísérlet,
+     * doboz felvételére kísérlet az ezredes elotti mezorol
      * létrehozunk egy dobozt aminek a tulajdonosát beállítjuk magunkra és nem hagyjuk meg a default null-t
      * (doboznak van egy parametere ami Colonel referencia)
      * és ezt a dobozt ütköztetjük a mezővel ami előttünk van
@@ -113,14 +131,14 @@ public class Colonel{
      * akkor tudjuk hogy innen tortent a visszahivas
      */
     // kicsit necces de talan jo
-    public void tryBoxPicUp() {
+    public void tryBoxPickUp() {
         if (ownedBox == null) {
-            map.getFieldAt(getFrontFieldPosition()).collideWith(new Box(this));
+            getFrontField().collideWith(new Box(this));
         }
     }
 
     /**
-     * doboz felvetele
+     * doboz felvetele az ezredes elotti mezorol
      * ha nincs nalunk doboz
      * a helyen letrehoz egy ures mezot ha nem tartozott hozza lenyomott merleg
      * ha tartozott akkor felengedjuk amerleget es azt tesszuk a helyere
@@ -130,12 +148,11 @@ public class Colonel{
         if (ownedBox == null) {
             ownedBox = box;
             ownedBox.setOwner(this);
-            Coordinate destination = new Coordinate(getFrontFieldPosition());
             Scale boxScale = ownedBox.getOwnedScale();
             if (boxScale == null) {
-                map.setFieldAt(destination, new EmptyField());
+                getFrontField().setField(new EmptyField());
             } else {
-                map.setFieldAt(destination, boxScale);
+                getFrontField().setField(boxScale);
                 boxScale.removeWeight();
                 ownedBox.setOwnedScale(null);
             }
@@ -147,7 +164,7 @@ public class Colonel{
      */
     public void tryBoxPutDown() {
         if (ownedBox != null) {
-            map.getFieldAt(getFrontFieldPosition()).collideWith(ownedBox);
+            getFrontField().collideWith(ownedBox);
         }
     }
 
@@ -157,7 +174,7 @@ public class Colonel{
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
         if (ownedBox != null) {
-            map.setFieldAt(getFrontFieldPosition(), ownedBox);
+            getFrontField().setField(ownedBox);
             ownedBox = null;
         }
     }
@@ -172,15 +189,16 @@ public class Colonel{
         if (ownedBox != null) {
             ownedBox.setOwnedScale(scale);
             scale.addWeight();
-            map.setFieldAt(getFrontFieldPosition(), ownedBox);
+            getFrontField().setField(ownedBox);
             ownedBox = null;
         }
     }
 
+
     /**
      * Doboz lerakása szakadékba
      * Ennek hatására az ezredesnél lévő doboz megszűnik.
-     * @param ravine
+     * @param ravine ebbe a szakadekba tesszuk (nem kell igazabol)
      */
     public void boxPutDownToRavine(Ravine ravine) {
         if (ownedBox != null) {
@@ -188,28 +206,33 @@ public class Colonel{
         }
     }
 
+    /**
+     * Teleporter kilovese (csak akkor lesz a kilott lovedekbol teleporter ha sepcialis falnak utkozik
+     * a kilott lovedeknek megadjuk a mezot amin allunk es az iranyt
+     * valamint elinditjuk a lovedeket (ezutan addig fog haladni ameddig bele nem utkozik
+     * valamilyen objektumba ami nem engedi tovabb vagy specialis falba ahol letrehoz egy teleportert
+     * @param type ilyen tipusu (szinu) teleportert akarunk letrehozni
+     */
     public void shootTeleporter(Teleporter.Type type) {
-        Bullet bullet = new Bullet(type, position, orientation, map);
+        Bullet bullet = new Bullet(type, ownedField, orientation);
         bullet.moveForward();
     }
 
-
-    public Coordinate getPosition() {
-        return position;
-    }
-
     /**
-     * @return ezredes elotti mezo koordniataja
+     * teleportalas
+     * ezredes athelyezese a megadott mezore
+     * @param field erre a mezore teleportalunk
      */
-    private Coordinate getFrontFieldPosition() {
-        return position.add(orientation);
+    public void TeleportTo(Field field) {
+        ownedField = field;
     }
 
-    public void TeleportTo(Coordinate position) {
-        this.position = position;
-    }
 
-    public Coordinate getOrientation() {
+    //csak teszteleshez
+    public Field getOwnedField(){
+        return ownedField;
+    }
+    public Orientation.Type getOrientation(){
         return orientation;
     }
 }

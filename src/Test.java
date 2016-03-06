@@ -9,7 +9,7 @@ public class Test {
 
     public static void main(String args[]) throws IOException {
         Map map = new Map("map01.csv");
-        Colonel colonel = new Colonel(map);
+        Colonel colonel = new Colonel(map.getColonelStartingField());
         MapBasicView mapView = new MapBasicView(map, colonel);
 
         System.out.println("Controls: ");
@@ -72,7 +72,7 @@ public class Test {
                     colonel.rotateTo(Orientation.Type.EAST);
                     break;
                 case "k":
-                    colonel.tryBoxPicUp();
+                    colonel.tryBoxPickUp();
                     break;
                 case "m":
                     colonel.tryBoxPutDown();

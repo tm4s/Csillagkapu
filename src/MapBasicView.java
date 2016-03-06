@@ -14,7 +14,7 @@ public class MapBasicView {
     public void printMap() {
         for (int y = 0; y < map.getHeight(); ++y){
             for (int x = 0; x < map.getWidth(); ++x){
-                if (colonel.getPosition().equals(new Coordinate(y,x))){
+                if (colonel.getOwnedField().getPosition().equals(new Coordinate(y,x))){
                     System.out.print(printColonel());
                 } else {
                     System.out.print(map.getFieldAt(new Coordinate(y, x)).print());
@@ -31,7 +31,7 @@ public class MapBasicView {
 
     private Character printColonel(){
         Character c = 'A';
-        switch (Orientation.getOrientationType(colonel.getOrientation())) {
+        switch (colonel.getOrientation()) {
             case NORTH:
                 c = 'A';
                 break;

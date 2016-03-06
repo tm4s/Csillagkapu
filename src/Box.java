@@ -3,6 +3,10 @@
  */
 
 public class Box extends Field {
+    /**
+     * hozza tartozo ezredes
+     * es merleg akit ertesitenie kell ha felveszik rola
+     */
     private Colonel owner = null;
     private Scale ownedScale = null;
 

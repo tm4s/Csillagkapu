@@ -16,7 +16,7 @@ public class Door extends Field {
     @Override
     public void collideWith(Colonel colonel) {
         if (isOpened) {
-            colonel.moveTo();
+            colonel.moveTo(this);
         }
 
     }
