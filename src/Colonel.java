@@ -235,4 +235,5 @@ public class Colonel{
     public Orientation.Type getOrientation(){
         return orientation;
     }
+
 }

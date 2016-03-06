@@ -81,4 +81,6 @@ public abstract class Field {
     public void setMap(Map map) {
         this.map = map;
     }
+	// csak teszteleshez kell
+
 }

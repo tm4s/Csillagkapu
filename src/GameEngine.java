@@ -4,13 +4,8 @@
 
 public class GameEngine {
 
+	public GameEngine() {
 
-
-
-    public  GameEngine() {
-
-    }
-
-
+	}
 
 }

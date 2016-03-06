@@ -3,6 +3,7 @@
  */
 
 public class Box extends Field {
+
     /**
      * hozza tartozo ezredes
      * es merleg akit ertesitenie kell ha felveszik rola
@@ -52,4 +53,5 @@ public class Box extends Field {
     public Character print() {
         return 'B';
     }
+
 }

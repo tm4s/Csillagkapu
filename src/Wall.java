@@ -4,8 +4,8 @@
 public class Wall extends Field {
 
 
-    @Override
-    public Character print() {
-        return '#';
-    }
+	@Override
+	public Character print() {
+		return '#';
+	}
 }
