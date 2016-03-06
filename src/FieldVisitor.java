@@ -3,7 +3,7 @@
  */
 
 public class FieldVisitor {
-    public void visit(Field field) {
-        //do something
-    }
+	public void visit(Field field) {
+		// do something
+	}
 }
