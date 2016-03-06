@@ -9,11 +9,15 @@ public class Colonel{
      * irany amibe nez
      * merleg amin all
      * doboz ami nala van
+     * begyujtott ZPM modulok szama
+     * meghalt-e az ezredes szakadektol
      */
     private Field ownedField;
     private Orientation.Type orientation;
     private Scale ownedScale = null;
     private Box ownedBox = null;
+    private int collectedZpms = 0;
+    private boolean dead = false;       //lehet kesobb nem fog kelleni
 
     /**
      * konstruktor
@@ -32,6 +36,17 @@ public class Colonel{
     private Field getFrontField() {
         return ownedField.getNextField(orientation);
     }
+
+    //valamit meg ezzel lehet kell majd csinalni
+    public int getCollectedZpms() {
+        return collectedZpms;
+    }
+
+    //valamit meg ezzel lehet kell majd csinalni
+    public boolean isDead() {
+        return dead;
+    }
+
 
     /**
      * az ezredes a megadott iranyba fordul
@@ -80,6 +95,29 @@ public class Colonel{
         }
         scale.addWeight();
         this.ownedScale = scale;
+    }
+
+    /**
+     * ZPM modulok felvétele
+     * Amikor az ezredes rálépne egy zpm modulra akkor a modul mező üres mezővé alakul,
+     * eközben az ezredes is rálép, valamint az eddig összegyűjtött zpmek számát megnöveljük eggyel.
+     * @param zpm ezt a zpm modult veszi fel
+     */
+
+    public void moveTo(Zpm zpm) {
+        ownedField = new EmptyField();
+        zpm.setField(ownedField);
+        this.collectedZpms++;
+    }
+
+    /**
+     * Ha az ezredes szakadékba lép meghal.
+     *
+     * @param ravine ebbe a szakadekba lep bele
+     */
+    public void moveTo(Ravine ravine) {
+        ownedField = ravine;
+        this.dead = true;
     }
 
     /**
@@ -152,6 +190,18 @@ public class Colonel{
             ownedBox.setOwnedScale(scale);
             scale.addWeight();
             getFrontField().setField(ownedBox);
+            ownedBox = null;
+        }
+    }
+
+
+    /**
+     * Doboz lerakása szakadékba
+     * Ennek hatására az ezredesnél lévő doboz megszűnik.
+     * @param ravine ebbe a szakadekba tesszuk (nem kell igazabol)
+     */
+    public void boxPutDownToRavine(Ravine ravine) {
+        if (ownedBox != null) {
             ownedBox = null;
         }
     }

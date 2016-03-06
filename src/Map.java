@@ -18,6 +18,7 @@ public class Map {
     private int height;
     private Field colonelStartingField;
 
+    private int allZpms = 0;
 
 
     private Field[][] mapDatas;
@@ -36,6 +37,7 @@ public class Map {
         return height;
     }
 
+    public int getAllZpms() {return allZpms; }
 
     public Field getFieldAt(Coordinate position) {
         return mapDatas[position.getX()][position.getY()];
@@ -110,6 +112,13 @@ public class Map {
                         break;
                     case '+':
                         mapDatas[j][i] = new SpecialWall();
+                        break;
+                    case 'Z':
+                        mapDatas[j][i] = new Zpm();
+                        allZpms++;
+                        break;
+                    case 'R':
+                        mapDatas[j][i] = new Ravine();
                         break;
                     default:
                         break;
