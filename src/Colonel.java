@@ -65,7 +65,7 @@ public class Colonel{
      * @param direction ebbe az iranyba mozogjon
      */
     // meg csak abszolut mozog orientaciot nem veszi figyelembe
-    public void goTo(Orientation.Type direction) {
+    public void tryMoveTo(Orientation.Type direction) {
         orientation = direction;
         getFrontField().collideWith(this);
     }
