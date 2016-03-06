@@ -15,8 +15,9 @@ public class EmptyField extends Field {
 	}
 
 	@Override
-	public void collideWith(Box box) {
-		box.getOwner().boxPutDownToEmptyField(this);
+	public void collideWith(ColonelsHand hand) {
+		if (hand.hasBox())
+			hand.getColonel().boxPutDownToEmptyField(this);
 	}
 
 	@Override

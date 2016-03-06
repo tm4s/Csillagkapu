@@ -16,14 +16,18 @@ public class Colonel{
     private Orientation.Type orientation;
     private Scale ownedScale = null;
     private Box ownedBox = null;
+    private ColonelsHand hand;
     private int collectedZpms = 0;
     private boolean dead = false;       //lehet kesobb nem fog kelleni
+
+
 
     /**
      * konstruktor
      * @param field szuksege van egy mezore amin all majd
      */
     public Colonel(Field field) {
+        hand = new ColonelsHand(this);
         ownedField = field;
         orientation = Orientation.Type.NORTH;
     }
@@ -133,7 +137,7 @@ public class Colonel{
     // kicsit necces de talan jo
     public void tryBoxPickUp() {
         if (ownedBox == null) {
-            getFrontField().collideWith(new ColonelsHand(this));
+            getFrontField().collideWith(hand);
         }
     }
 
@@ -147,6 +151,7 @@ public class Colonel{
     public void boxPickUp(Box box) {
         if (ownedBox == null) {
             ownedBox = box;
+            hand.setHasBox(true);
             ownedBox.setOwner(this);
             Scale boxScale = ownedBox.getOwnedScale();
             if (boxScale == null) {
@@ -164,7 +169,7 @@ public class Colonel{
      */
     public void tryBoxPutDown() {
         if (ownedBox != null) {
-            getFrontField().collideWith(ownedBox);
+            getFrontField().collideWith(hand);
         }
     }
 
@@ -176,6 +181,7 @@ public class Colonel{
         if (ownedBox != null) {
             getFrontField().setField(ownedBox);
             ownedBox = null;
+            hand.setHasBox(false);
         }
     }
 
@@ -191,6 +197,7 @@ public class Colonel{
             scale.addWeight();
             getFrontField().setField(ownedBox);
             ownedBox = null;
+            hand.setHasBox(false);
         }
     }
 
@@ -203,6 +210,7 @@ public class Colonel{
     public void boxPutDownToRavine(Ravine ravine) {
         if (ownedBox != null) {
             ownedBox = null;
+            hand.setHasBox(false);
         }
     }
 

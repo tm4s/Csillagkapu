@@ -44,6 +44,7 @@ public class Box extends Field {
 
     @Override
     public  void collideWith(ColonelsHand hand) {
-        hand.getColonel().boxPickUp(this);
+        if (!hand.hasBox())
+            hand.getColonel().boxPickUp(this);
     }
 }

@@ -4,6 +4,7 @@
 
 public class ColonelsHand {
     private Colonel colonel;
+    private boolean hasBox;
 
     public ColonelsHand(Colonel colonel) {
         this.colonel = colonel;
@@ -11,5 +12,13 @@ public class ColonelsHand {
 
     public Colonel getColonel() {
         return colonel;
+    }
+
+    public boolean hasBox() {
+        return hasBox;
+    }
+
+    public void setHasBox(boolean hasBox) {
+        this.hasBox = hasBox;
     }
 }
