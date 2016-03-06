@@ -3,8 +3,6 @@
  */
 
 public abstract class Field {
-    // csak teszteleshez kell
-    private Coordinate position = new Coordinate(-1, -1);
     private Map map = null;
 
     /**
@@ -62,21 +60,7 @@ public abstract class Field {
     public abstract void collideWith(Colonel colonel);
     public abstract void collideWith(Bullet bullet);
     public abstract void collideWith(Box box);
-
-    //teszteleshez kell
-    public abstract Character print();
-
-    //csak teszteleshez kell
-    public Coordinate getPosition() {
-        return position;
-    }
-    public void setPosition(Coordinate position) {
-        this.position = new Coordinate(position);
-    }
-    public void setOnMap(){
-        map.setFieldAt(position, this);
-
-    }
+    
 
     public void setMap(Map map) {
         this.map = map;

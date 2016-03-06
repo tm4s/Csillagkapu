@@ -34,12 +34,7 @@ public class Door extends Field {
 
     }
 
-    @Override
-    public Character print() {
-        Character c = 'D';
-        if (isOpened) c = ' ';
-        return c;
-    }
+
 
 
 

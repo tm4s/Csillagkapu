@@ -227,12 +227,4 @@ public class Colonel{
         ownedField = field;
     }
 
-
-    //csak teszteleshez
-    public Field getOwnedField(){
-        return ownedField;
-    }
-    public Orientation.Type getOrientation(){
-        return orientation;
-    }
 }
