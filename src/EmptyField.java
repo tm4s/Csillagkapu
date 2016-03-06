@@ -17,6 +17,6 @@ public class EmptyField extends Field {
     @Override
     public void collideWith(ColonelsHand hand) {
         if (hand.hasBox())
-            hand.getColonel().boxPutDownToRavine(this);
+            hand.getColonel().boxPutDownToEmptyField(this);
     }
 }

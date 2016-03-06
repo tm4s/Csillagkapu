@@ -49,14 +49,4 @@ public class Teleporter extends Field {
             colonel.TeleportTo(getOtherTeleporter());
 
     }
-
-    @Override
-    public void collideWith(Bullet bullet) {
-
-    }
-
-    @Override
-    public void collideWith(Box box) {
-
-    }
 }

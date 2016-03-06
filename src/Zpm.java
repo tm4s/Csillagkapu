@@ -12,8 +12,5 @@ public class Zpm extends Field{
         bullet.moveForward();
     }
 
-    @Override
-    public void collideWith(Box box) {
-
     }
 }
