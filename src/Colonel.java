@@ -16,14 +16,18 @@ public class Colonel{
     private Orientation.Type orientation;
     private Scale ownedScale = null;
     private Box ownedBox = null;
+    private ColonelsHand hand;
     private int collectedZpms = 0;
     private boolean dead = false;       //lehet kesobb nem fog kelleni
+
+
 
     /**
      * konstruktor
      * @param field szuksege van egy mezore amin all majd
      */
     public Colonel(Field field) {
+        hand = new ColonelsHand(this);
         ownedField = field;
         orientation = Orientation.Type.NORTH;
     }
@@ -65,7 +69,7 @@ public class Colonel{
      * @param direction ebbe az iranyba mozogjon
      */
     // meg csak abszolut mozog orientaciot nem veszi figyelembe
-    public void goTo(Orientation.Type direction) {
+    public void tryMoveTo(Orientation.Type direction) {
         orientation = direction;
         getFrontField().collideWith(this);
     }
@@ -133,7 +137,7 @@ public class Colonel{
     // kicsit necces de talan jo
     public void tryBoxPickUp() {
         if (ownedBox == null) {
-            getFrontField().collideWith(new Box(this));
+            getFrontField().collideWith(hand);
         }
     }
 
@@ -147,7 +151,7 @@ public class Colonel{
     public void boxPickUp(Box box) {
         if (ownedBox == null) {
             ownedBox = box;
-            ownedBox.setOwner(this);
+            hand.setHasBox(true);
             Scale boxScale = ownedBox.getOwnedScale();
             if (boxScale == null) {
                 getFrontField().setField(new EmptyField());
@@ -164,7 +168,7 @@ public class Colonel{
      */
     public void tryBoxPutDown() {
         if (ownedBox != null) {
-            getFrontField().collideWith(ownedBox);
+            getFrontField().collideWith(hand);
         }
     }
 
@@ -176,6 +180,7 @@ public class Colonel{
         if (ownedBox != null) {
             getFrontField().setField(ownedBox);
             ownedBox = null;
+            hand.setHasBox(false);
         }
     }
 
@@ -191,6 +196,7 @@ public class Colonel{
             scale.addWeight();
             getFrontField().setField(ownedBox);
             ownedBox = null;
+            hand.setHasBox(false);
         }
     }
 
@@ -203,6 +209,7 @@ public class Colonel{
     public void boxPutDownToRavine(Ravine ravine) {
         if (ownedBox != null) {
             ownedBox = null;
+            hand.setHasBox(false);
         }
     }
 
@@ -223,7 +230,7 @@ public class Colonel{
      * ezredes athelyezese a megadott mezore
      * @param field erre a mezore teleportalunk
      */
-    public void TeleportTo(Field field) {
+    public void teleportTo(Field field) {
         ownedField = field;
     }
 
@@ -235,4 +242,5 @@ public class Colonel{
     public Orientation.Type getOrientation(){
         return orientation;
     }
+
 }

@@ -59,9 +59,9 @@ public abstract class Field {
     /**
      * visitor pattern fuggvenyei
      */
-    public abstract void collideWith(Colonel colonel);
-    public abstract void collideWith(Bullet bullet);
-    public abstract void collideWith(Box box);
+    public void collideWith(Colonel colonel) {}
+    public void collideWith(Bullet bullet) {}
+    public void collideWith(ColonelsHand hand) {}
 
     //teszteleshez kell
     public abstract Character print();
@@ -81,4 +81,6 @@ public abstract class Field {
     public void setMap(Map map) {
         this.map = map;
     }
+	// csak teszteleshez kell
+
 }
