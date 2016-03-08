@@ -27,7 +27,9 @@ public class Test {
 		System.out.println("Box: B");
 		System.out.println("Scale: S");
 		System.out.println("Door: D");
-		System.out.println("Teleport: 0O");
+		System.out.println("Portal: 0O");
+		System.out.println("Ravine: R");
+		System.out.println("ZPM: Z");
 		System.out.println();
 
 		mapView.printMap();
