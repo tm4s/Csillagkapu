@@ -1,7 +1,7 @@
 
 ## Run
 
-**java -jar Csillagkapu.jar**
+**java -jar Csillagkapu.jar _[mapName.csv]_**
 
 <br>
 _(Windows PowerShell kell CMD nem jó)_

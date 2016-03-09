@@ -7,7 +7,10 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String args[]) throws IOException {
-		Map map = new Map("map01.csv");
+		String fileName = "map01.csv";
+		if (args.length == 1)
+			fileName = args[0];
+		Map map = new Map(fileName);
 		Colonel colonel = new Colonel(map.getColonelStartingField());
 		MapBasicView mapView = new MapBasicView(map, colonel);
 
@@ -27,7 +30,9 @@ public class Test {
 		System.out.println("Box: B");
 		System.out.println("Scale: S");
 		System.out.println("Door: D");
-		System.out.println("Teleport: 0O");
+		System.out.println("Portal: 0O");
+		System.out.println("Ravine: R");
+		System.out.println("ZPM: Z");
 		System.out.println();
 
 		mapView.printMap();
