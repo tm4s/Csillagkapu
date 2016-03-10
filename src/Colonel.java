@@ -80,10 +80,7 @@ public class Colonel{
      */
     public void moveTo(Field field) {
         ownedField = field;
-        if (ownedScale != null) {
-            ownedScale.removeWeight();
-            ownedScale = null;
-        }
+        notifyOwnedScale();
     }
 
     /**
@@ -93,10 +90,7 @@ public class Colonel{
      */
     public void moveTo(Scale scale) {
         ownedField = scale;
-        if (ownedScale != null) {
-            ownedScale.removeWeight();
-            ownedScale = null;
-        }
+        notifyOwnedScale();
         scale.addWeight();
         this.ownedScale = scale;
     }
@@ -110,6 +104,7 @@ public class Colonel{
 
     public void moveTo(Zpm zpm) {
         ownedField = new EmptyField();
+        notifyOwnedScale();
         zpm.setField(ownedField);
         this.collectedZpms++;
     }
@@ -121,7 +116,18 @@ public class Colonel{
      */
     public void moveTo(Ravine ravine) {
         ownedField = ravine;
+        notifyOwnedScale();
         this.dead = true;
+    }
+
+    /**
+     * ha merlegen all az ezredes ertesiti azt hogy lelepett rola
+     */
+    private void notifyOwnedScale() {
+        if (ownedScale != null) {
+            ownedScale.removeWeight();
+            ownedScale = null;
+        }
     }
 
     /**
