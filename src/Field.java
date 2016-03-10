@@ -60,5 +60,4 @@ public abstract class Field {
     public void collideWith(Colonel colonel) {}
     public void collideWith(Bullet bullet) {}
     public void collideWith(ColonelsHand hand) {}
-
 }

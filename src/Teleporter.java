@@ -4,10 +4,7 @@
 public class Teleporter extends Field {
     /**
      * csillagkapuk tipusai
-     */
-    enum Type {
-        ORANGE, BLUE
-    }
+     **/
 
     /**
      * palyan levo lerakott csillagkapuk
