@@ -155,17 +155,15 @@ public class Colonel{
      * @param box ezt a dobozt vesszük fel
      */
     public void boxPickUp(Box box) {
-        if (ownedBox == null) {
-            ownedBox = box;
-            hand.setHasBox(true);
-            Scale boxScale = ownedBox.getOwnedScale();
-            if (boxScale == null) {
-                getFrontField().setField(new EmptyField());
-            } else {
-                getFrontField().setField(boxScale);
-                boxScale.removeWeight();
-                ownedBox.setOwnedScale(null);
-            }
+        ownedBox = box;
+        hand.setHasBox(true);
+        Scale boxScale = ownedBox.getOwnedScale();
+        if (boxScale == null) {
+            getFrontField().setField(new EmptyField());
+        } else {
+            getFrontField().setField(boxScale);
+            boxScale.removeWeight();
+            ownedBox.setOwnedScale(null);
         }
     }
 
@@ -183,11 +181,9 @@ public class Colonel{
      * @param emptyField erre a mezore
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
-        if (ownedBox != null) {
-            getFrontField().setField(ownedBox);
-            ownedBox = null;
-            hand.setHasBox(false);
-        }
+        getFrontField().setField(ownedBox);
+        ownedBox = null;
+        hand.setHasBox(false);
     }
 
     /**
@@ -197,13 +193,11 @@ public class Colonel{
      * @param scale erre a merlegre
      */
     public void  boxPutDownToScale(Scale scale) {
-        if (ownedBox != null) {
-            ownedBox.setOwnedScale(scale);
-            scale.addWeight();
-            getFrontField().setField(ownedBox);
-            ownedBox = null;
-            hand.setHasBox(false);
-        }
+        ownedBox.setOwnedScale(scale);
+        scale.addWeight();
+        getFrontField().setField(ownedBox);
+        ownedBox = null;
+        hand.setHasBox(false);
     }
 
 
