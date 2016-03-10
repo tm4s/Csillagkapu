@@ -42,6 +42,6 @@ public class Bullet {
 	 * (regi mezo eltunik)
 	 */
 	public void transformToTeleporter() {
-		ownedField.setField(new Teleporter(type));
+		ownedField.setField(new Teleporter(type, direction));
 	}
 }

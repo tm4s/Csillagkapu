@@ -16,6 +16,7 @@ public class Teleporter extends Field {
 	private static Teleporter[] Teleporters = new Teleporter[2];
 
 	private Type type;
+	private Orientation.Type orientation;
 
 	/**
 	 * konstruktor ha ugyanolyan tipusu csillagkapu mar van a palyan akkor annak
@@ -26,8 +27,9 @@ public class Teleporter extends Field {
 	 * @param type
 	 *            csillagkapu tipusa (szine)
 	 */
-	public Teleporter(Type type) {
+	public Teleporter(Type type, Orientation.Type orientation) {
 		this.type = type;
+		this.orientation = Orientation.getOpposite(orientation.ordinal());
 		if (Teleporters[type.ordinal()] != null) {
 			Teleporters[type.ordinal()].setField(new SpecialWall());
 		}
@@ -44,8 +46,9 @@ public class Teleporter extends Field {
 		return Teleporters[(type.ordinal() + 1) % 2];
 	}
 
-
-
+	public Orientation.Type getOrientation() {
+		return orientation;
+	}
 
     @Override
     public void collideWith(Colonel colonel) {

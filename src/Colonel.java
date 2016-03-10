@@ -228,10 +228,11 @@ public class Colonel{
     /**
      * teleportalas
      * ezredes athelyezese a megadott mezore
-     * @param field erre a mezore teleportalunk
+     * @param teleporter erre a mezore teleportalunk
      */
-    public void teleportTo(Field field) {
-        ownedField = field;
+    public void teleportTo(Teleporter teleporter) {
+        ownedField = teleporter;
+        tryMoveTo(teleporter.getOrientation());
     }
 
 
