@@ -2,6 +2,9 @@
  * Szakadék
  */
 public class Ravine extends Field {
+
+    public Ravine() {}
+
     @Override
     public void collideWith(Colonel colonel) {
         colonel.moveTo(this);
