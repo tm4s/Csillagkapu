@@ -7,7 +7,11 @@ public class Box extends Field {
     /**
      * es merleg akit ertesitenie kell ha felveszik rola
      */
-    private Scale ownedScale = null;
+    private Scale ownedScale;
+
+    public Box() {
+        this.ownedScale = null;
+    }
 
     public void setOwnedScale(Scale ownedScale) {
         this.ownedScale = ownedScale;

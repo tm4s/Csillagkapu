@@ -21,7 +21,7 @@ public class Bullet {
      */
     public Bullet(Teleporter.Type type, Field startField, Orientation.Type direction) {
         this.type = type;
-        ownedField = startField;
+        this.ownedField = startField;
         this.direction = direction;
     }
 

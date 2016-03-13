@@ -3,7 +3,11 @@
  */
 
 public class Door extends Field {
-    private boolean isOpened = false;
+    private boolean isOpened;
+
+    public Door() {
+        this.isOpened = false;
+    }
 
     public void open() {
         isOpened = true;

@@ -8,7 +8,12 @@ public abstract class Field {
     /**
      * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
      */
-    private Field[] nextFields = new Field[4];
+    private Field[] nextFields;
+
+    public Field() {
+        this.map = null;
+        nextFields = new Field[4];
+    }
 
     /**
      * mezo adott iranyu szomszedjanak beallitasa
