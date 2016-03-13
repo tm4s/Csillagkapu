@@ -31,6 +31,11 @@ public class Teleporter extends Field {
         Teleporters[type.ordinal()] = this;
     }
 
+
+    public Orientation.Type getOrientation() {
+        return orientation;
+    }
+
     /**
      * masik teleporter lekrese
      * @return ellenkezo tipusu csillagkapu lehet null
