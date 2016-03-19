@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Pálya beovasasara, kapcsolatok letrehozasara, kiirasra valo inicializalas
+ * Pálya beolvasasara, kapcsolatok letrehozasara, kiirasra valo inicializalas
  * utan nem kell belole peldany
  */
 
@@ -92,40 +92,40 @@ public class Map {
 			String array[] = line.split(";");
 			for (int i = 0; i < width; i++) {
 				switch (array[i].charAt(0)) {
-				case 'E':
-					mapDatas[j][i] = new EmptyField();
-					break;
-				case 'W':
-					mapDatas[j][i] = new Wall();
-					break;
-				case 'D':
-					mapDatas[j][i] = new Door();
-					String doorData[] = array[i].split("_");
-					doorDatas.add(new PosAndIdData(doorData[1], new Coordinate(j, i)));
-					break;
-				case 'B':
-					mapDatas[j][i] = new Box();
-					break;
-				case 'C':
-					mapDatas[j][i] = new EmptyField();
-					colonelStartingField = mapDatas[j][i];
-					break;
-				case 'S':
-					String scaleData[] = array[i].split("_");
-					scaleDatas.add(new PosAndIdData(scaleData[1], new Coordinate(j, i)));
-					break;
-				case '+':
-					mapDatas[j][i] = new SpecialWall();
-					break;
-				case 'Z':
-					mapDatas[j][i] = new Zpm();
-					allZpms++;
-					break;
-				case 'R':
-					mapDatas[j][i] = new Ravine();
-					break;
-				default:
-					break;
+					case 'E':
+						mapDatas[j][i] = new EmptyField();
+						break;
+					case 'W':
+						mapDatas[j][i] = new Wall();
+						break;
+					case 'D':
+						mapDatas[j][i] = new Door();
+						String doorData[] = array[i].split("_");
+						doorDatas.add(new PosAndIdData(doorData[1], new Coordinate(j, i)));
+						break;
+					case 'B':
+						mapDatas[j][i] = new Box();
+						break;
+					case 'C':
+						mapDatas[j][i] = new EmptyField();
+						colonelStartingField = mapDatas[j][i];
+						break;
+					case 'S':
+						String scaleData[] = array[i].split("_");
+						scaleDatas.add(new PosAndIdData(scaleData[1], new Coordinate(j, i)));
+						break;
+					case '+':
+						mapDatas[j][i] = new SpecialWall();
+						break;
+					case 'Z':
+						mapDatas[j][i] = new Zpm();
+						allZpms++;
+						break;
+					case 'R':
+						mapDatas[j][i] = new Ravine();
+						break;
+					default:
+						break;
 				}
 
 			}

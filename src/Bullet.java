@@ -13,15 +13,13 @@ public class Bullet {
 
 	/**
 	 * konstruktor
-	 * 
-	 * @param type
-	 *            telepotrter tipusa
-	 * @param startField
-	 *            kezdo mezo
-	 * @param direction
-	 *            haladasi irany
+	 *
+	 * @param type       telepotrter tipusa
+	 * @param startField kezdo mezo
+	 * @param direction  haladasi irany
 	 */
 	public Bullet(Teleporter.Type type, Field startField, Orientation.Type direction) {
+		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Teleporter.Type, Field, Orientation.Type)");
 		this.type = type;
 		ownedField = startField;
 		this.direction = direction;
@@ -32,9 +30,9 @@ public class Bullet {
 	 * iranyu szomszedjat es utkozik vele
 	 */
 	public void moveForward() {
+		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): void");
 		ownedField = ownedField.getNextField(direction);
 		ownedField.collideWith(this);
-
 	}
 
 	/**
@@ -42,6 +40,7 @@ public class Bullet {
 	 * (regi mezo eltunik)
 	 */
 	public void transformToTeleporter() {
+		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): void");
 		ownedField.setField(new Teleporter(type, direction));
 	}
 }
