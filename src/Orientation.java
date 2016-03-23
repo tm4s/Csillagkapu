@@ -12,7 +12,7 @@ public class Orientation {
     }
 
     public static Coordinate getCoordinate(Orientation.Type type) {
-        System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Type)");
+        //System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Type)");
         Coordinate coordinate = new Coordinate(0, 0);
         switch (type) {
             case NORTH:
@@ -33,7 +33,7 @@ public class Orientation {
     }
 
     public static Type getOrientationType(Coordinate position) {
-        System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Coordinate): Type");
+        //System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Coordinate): Type");
         Type type = Type.NORTH;
         if (position.equals(new Coordinate(-1, 0)))
             type = Type.NORTH;
@@ -47,7 +47,7 @@ public class Orientation {
     }
 
     public static Type getOpposite(int i) {
-        System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(int): Type");
+        //System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(int): Type");
         Type direction = Type.NORTH;
         switch (i) {
             case 0:
