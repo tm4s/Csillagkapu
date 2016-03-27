@@ -35,11 +35,4 @@ public class Box extends Field {
 			hand.getColonel().boxPickUp(this);
 		Logger.log("<Box.collideWith(ColonelsHand hand)");
 	}
-
-	@Override
-	public Character print() {
-		Logger.log(">Box.print()");
-		Logger.log("<Box.print()");
-		return 'B';
-	}
 }

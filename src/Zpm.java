@@ -15,9 +15,9 @@ public class Zpm extends Field {
 		bullet.moveForward();
 		Logger.log("<Zpm.collideWith(Bullet bullet");
 	}
-
-    @Override
-    public Character print() {
-		return 'Z';
-    }
+	
+	public Zpm(){
+		Logger.log(">Zpm.collideWith(Bullet bullet");
+		Logger.log("<Zpm.collideWith(Bullet bullet");
+	}
 }

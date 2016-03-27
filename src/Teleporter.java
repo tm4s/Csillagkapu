@@ -28,12 +28,14 @@ public class Teleporter extends Field {
 	 *            csillagkapu tipusa (szine)
 	 */
 	public Teleporter(Type type, Orientation.Type orientation) {
+		Logger.log(">Teleporter(Type type, Orientation.Type orientation)");
 		this.type = type;
 		this.orientation = Orientation.getOpposite(orientation.ordinal());
 		if (Teleporters[type.ordinal()] != null) {
 			Teleporters[type.ordinal()].setField(new SpecialWall());
 		}
 		Teleporters[type.ordinal()] = this;
+		Logger.log("<Teleportel(Type type, Orientation.Type orientation)");
 	}
 
 	/**
@@ -43,25 +45,22 @@ public class Teleporter extends Field {
 	 *         kedveert van
 	 */
 	private Teleporter getOtherTeleporter() {
+		Logger.log(">getOtherTeleporter()");
+		Logger.log("<getOtherTeleporter()");
 		return Teleporters[(type.ordinal() + 1) % 2];
 	}
 
 	public Orientation.Type getOrientation() {
+		Logger.log(">getOrientation()");
+		Logger.log("<getOrientation()");
 		return orientation;
 	}
 
     @Override
     public void collideWith(Colonel colonel) {
+    	Logger.log(">collideWith(Colonel colonel)");
 		if (getOtherTeleporter() != null)
 			colonel.teleportTo(getOtherTeleporter());
-	}
-
-
-	@Override
-	public Character print() {
-		Character c = '0';
-		if (type == Type.ORANGE)
-			c = 'O';
-		return c;
+		Logger.log("<collideWith(Colonel colonel)");
 	}
 }
