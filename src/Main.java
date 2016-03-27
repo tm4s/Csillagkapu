@@ -16,6 +16,7 @@ public class Main {
 		case4();
 		case5();
 		case6();
+		case11();
 	}
 
 	private static void case1() {
@@ -115,6 +116,18 @@ public class Main {
 		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 	
+	private static void case11() {
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Field box = new Box();
+		box.setNextField(Orientation.Type.WEST, field);
+		field.setNextField(Orientation.Type.EAST, box);
+		Colonel colonel = new Colonel(field);
+		colonel.rotateTo(Orientation.Type.EAST);
+		colonel.boxPickUp((Box)box);
+		Logger.setIsOn(true);
+		colonel.tryBoxPutDown();
+	}
 
 /*
 	public static void main	(String args[]) {
