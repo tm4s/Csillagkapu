@@ -72,9 +72,6 @@ public abstract class Field {
 	public void collideWith(ColonelsHand hand) {
 	}
 
-	//teszteleshez kell
-	public abstract Character print();
-
 	//csak teszteleshez kell
 	public Coordinate getPosition() {
 		return position;
