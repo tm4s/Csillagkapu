@@ -6,7 +6,7 @@
 /Door.class
 /EmptyField.class
 /Field.class
-/KurvaProjektLab.class
+/Logger.class
 /Main.class
 /Map$1PosAndIdData.class
 /Map.class
@@ -22,4 +22,3 @@
 /Wall.class
 /Zpm.class
 /map01.csv
-/Logger.class
