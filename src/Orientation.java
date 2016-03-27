@@ -12,6 +12,7 @@ public class Orientation {
     }
 
     public static Coordinate getCoordinate(Orientation.Type type) {
+    	Logger.log(">Orientation.getCoordinate(Orientation.Type type)");
         Coordinate coordinate = new Coordinate(0, 0);
         switch (type) {
             case NORTH:
@@ -28,10 +29,12 @@ public class Orientation {
                 break;
 
         }
+        Logger.log("<Orientation.getCoordinate(Orientation.Type type)");
         return coordinate;
     }
 
     public static Type getOrientationType(Coordinate position) {
+    	Logger.log(">Orientation.getOrientationType(Coordinate position)");
         Type type = Type.NORTH;
         if (position.equals(new Coordinate(-1, 0)))
             type = Type.NORTH;
@@ -41,10 +44,12 @@ public class Orientation {
             type = Type.SOUTH;
         else if (position.equals(new Coordinate(0, 1)))
             type = Type.EAST;
+        Logger.log("<Orientation.getOrientationType(Coordinate position)");
         return type;
     }
 
     public static Type getOpposite(int i) {
+    	Logger.log(">Orientation.getOpposite(int i)");
         Type direction = Type.NORTH;
         switch (i) {
             case 0:
@@ -62,6 +67,7 @@ public class Orientation {
             default:
                 break;
         }
+        Logger.log("<Orientation.getOpposite(int i)");
         return direction;
     }
 
