@@ -3,8 +3,7 @@
  */
 
 public abstract class Field {
-	// csak teszteleshez kell
-	private Coordinate position = new Coordinate(-1, -1);
+
 
 	/**
 	 * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
@@ -33,8 +32,6 @@ public abstract class Field {
 		Logger.log(">Field.setField(Field Field)");
 		field.setNextFields(nextFields);
 
-		// csak teszteleshez kell
-		field.position = new Coordinate(position);
 		Logger.log("<Field.setField(Field Field)");
 	}
 
@@ -60,7 +57,8 @@ public abstract class Field {
 		Logger.log(">Field.setNextFields(Field[] nextFields)");
 		for (int i = 0; i < nextFields.length; ++i) {
 			this.nextFields[i] = nextFields[i];
-			this.nextFields[i].setNextField(Orientation.getOpposite(i), this);
+			if (this.nextFields[i] != null)
+				this.nextFields[i].setNextField(Orientation.getOpposite(i), this);
 		}
 		Logger.log("<Field.setNextFields(Field[] nextFields)");
 	}
