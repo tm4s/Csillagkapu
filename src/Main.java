@@ -12,16 +12,17 @@ public class Main {
 			System.out.println();
 			case2(i);
 		}
+		case11();
 	}
 
 	private static void case1() {
 		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
 		Field field2 = new EmptyField();
-		field2.setNextField(Orientation.Type.NORTH, field1);
+		field2.setNextField(Orientation.Type.EAST, field1);
 		Colonel colonel = new Colonel(field2);
 		Logger.setIsOn(true);
-		colonel.tryMoveTo(Orientation.Type.NORTH);
+		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 
 	private static void case2(int n) {
@@ -44,10 +45,23 @@ public class Main {
 				break;
 		}
 		Field field2 = new EmptyField();
-		field2.setNextField(Orientation.Type.NORTH, field1);
+		field2.setNextField(Orientation.Type.EAST, field1);
 		Colonel colonel = new Colonel(field2);
 		Logger.setIsOn(true);
-		colonel.tryMoveTo(Orientation.Type.NORTH);
+		colonel.tryMoveTo(Orientation.Type.EAST);
+	}
+
+	private static void case11() {
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Field box = new Box();
+		box.setNextField(Orientation.Type.WEST, field);
+		field.setNextField(Orientation.Type.EAST, box);
+		Colonel colonel = new Colonel(field);
+		colonel.rotateTo(Orientation.Type.EAST);
+		colonel.boxPickUp((Box)box);
+		Logger.setIsOn(true);
+		colonel.tryBoxPutDown();
 	}
 
 
