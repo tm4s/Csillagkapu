@@ -140,38 +140,36 @@ public class Main {
 		colonel.shootTeleporter(Teleporter.Type.BLUE);
 	}
 	
-	private static void case8(int n) {
+	private static void case8() {
 		System.out.println("\n8. Tolteny utkozese");
-		Logger.setIsOn(false);
-		Field field1 = new EmptyField();
-		Field field2 = null;
 		for (int i = 1; i <= 3; ++i) {
-			System.out.println();
-			case8(i);
+			Logger.setIsOn(false);
+			Field field1 = new EmptyField();
+			Field field2 = null;
+			switch(i) {
+				case 1:
+					System.out.println("\n8.1. Tolteny utkozese fallal [CW]\n");
+					field2 = new Wall();
+					break;
+				case 2:
+					System.out.println("\n8.2. Tolteny utkozese ajtoval [CD]\n");
+					field2 = new Door();
+					break;
+				case 3:
+					System.out.println("\n8.3. Tolteny utkozese csillagkapuval [CO vagy C0]\n");
+					field2 = new Teleporter(Teleporter.Type.BLUE, Orientation.Type.WEST);
+					break;
+				default:
+					break;
+			}
+			
+			field1.setNextField(Orientation.Type.EAST, field2);
+			field2.setNextField(Orientation.Type.WEST, field1);
+			Colonel colonel = new Colonel(field1);
+			colonel.rotateTo(Orientation.Type.EAST);
+			Logger.setIsOn(true);
+			colonel.shootTeleporter(Teleporter.Type.BLUE);
 		}
-		switch(n) {
-			case 1:
-				System.out.println("\n8.1. Tolteny utkozese fallal [CW]\n");
-				field2 = new Wall();
-				break;
-			case 2:
-				System.out.println("\n8.2. Tolteny utkozese ajtoval [CD]\n");
-				field2 = new Door();
-				break;
-			case 3:
-				System.out.println("\n8.3. Tolteny utkozese csillagkapuval [CO vagy C0]\n");
-				field2 = new Teleporter(Teleporter.Type.BLUE, Orientation.Type.WEST);
-				break;
-			default:
-				break;
-		}
-		
-		field1.setNextField(Orientation.Type.EAST, field2);
-		field2.setNextField(Orientation.Type.WEST, field1);
-		Colonel colonel = new Colonel(field1);
-		colonel.rotateTo(Orientation.Type.EAST);
-		Logger.setIsOn(true);
-		colonel.shootTeleporter(Teleporter.Type.BLUE);
 	}
 	
 	private static void case9() {
@@ -263,7 +261,7 @@ public class Main {
 	}
 
 	private static void case16() {
-		System.out.println("\n16. Doboz felvétele mérlegről [CBD]\n");
+		System.out.println("\n16. Doboz felvetele merlegrol [CBD]\n");
 		Logger.setIsOn(false);
 		Field field = new EmptyField();
 		Box box = new Box();
