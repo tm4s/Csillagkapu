@@ -5,7 +5,6 @@
 public abstract class Field {
 	// csak teszteleshez kell
 	private Coordinate position = new Coordinate(-1, -1);
-	private Map map = null;
 
 	/**
 	 * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
@@ -36,8 +35,6 @@ public abstract class Field {
 
 		// csak teszteleshez kell
 		field.position = new Coordinate(position);
-		field.map = map;
-		field.setOnMap();
 		Logger.log("<Field.setField(Field Field");
 	}
 
@@ -84,30 +81,7 @@ public abstract class Field {
 		Logger.log("<Field.collideWith(ColonelsHand hand)");
 	}
 
-	//csak teszteleshez kell
-	public Coordinate getPosition() {
-		Logger.log(">Field.getPosition(");
-		Logger.log("<Field.getPosition(");
-		return position;
-	}
 
-	public void setPosition(Coordinate position) {
-		Logger.log(">Field.setPosition(Coordinate position)");
-		this.position = new Coordinate(position);
-		Logger.log("<Field.setPosition(Coordinate position)");
-	}
 
-	public void setOnMap() {
-		Logger.log(">Field.setOnMap()");
-		map.setFieldAt(position, this);
-		Logger.log("<Field.setOnMap()");
-	}
-
-	public void setMap(Map map) {
-		Logger.log(">Field.setMap()");
-		this.map = map;
-		Logger.log("<Field.setMap()");
-	}
-	// csak teszteleshez kell
 
 }

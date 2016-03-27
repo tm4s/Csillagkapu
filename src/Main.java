@@ -8,7 +8,10 @@ public class Main {
 
 	public static void main(String args[]) {
 		case1();
-
+		for (int i = 1; i < 5; ++i) {
+			System.out.println();
+			case2(i);
+		}
 	}
 
 	private static void case1() {
