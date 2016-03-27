@@ -15,10 +15,7 @@ public class Main {
 		case5();
 		case6();
 		case7();
-		for (int i = 1; i <= 3; ++i) {
-			System.out.println();
-			case8(i);
-		}
+		case8();
 		case9();
 		case10();
 		case11();
@@ -148,6 +145,10 @@ public class Main {
 		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
 		Field field2 = null;
+		for (int i = 1; i <= 3; ++i) {
+			System.out.println();
+			case8(i);
+		}
 		switch(n) {
 			case 1:
 				System.out.println("\n8.1. Tolteny utkozese fallal [CW]\n");
@@ -182,6 +183,7 @@ public class Main {
 		field2.setNextField(Orientation.Type.WEST, field1);
 		Colonel colonel = new Colonel(field1);
 		colonel.rotateTo(Orientation.Type.EAST);
+		Teleporter.teleporterReset();
 		Logger.setIsOn(true);
 		colonel.shootTeleporter(Teleporter.Type.BLUE);
 	}
