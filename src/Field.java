@@ -29,10 +29,10 @@ public abstract class Field {
 	 * @param field ez a mezo lep a helyebe
 	 */
 	public void setField(Field field) {
-		Logger.log(">Field.setField(Field Field)");
+		Logger.log(">Field.setField(Field field)");
 		field.setNextFields(nextFields);
 
-		Logger.log("<Field.setField(Field Field)");
+		Logger.log("<Field.setField(Field field)");
 	}
 
 	/**

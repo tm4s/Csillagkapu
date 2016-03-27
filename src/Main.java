@@ -21,6 +21,7 @@ public class Main {
 			System.out.println();
 			case8(i);
 		}
+		case9();
 		case10();
 		case11();
 
@@ -124,6 +125,7 @@ public class Main {
 	}
 	
 	private static void case7() {
+		System.out.println("\n7. Tolteny kilovese [C]\n");
 		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
 		Field field2 = new EmptyField();
@@ -136,17 +138,21 @@ public class Main {
 	}
 	
 	private static void case8(int n) {
+		System.out.println("\n8. Tolteny utkozese");
 		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
 		Field field2 = null;
 		switch(n) {
 			case 1:
+				System.out.println("\n8.1. Tolteny utkozese fallal [CW]\n");
 				field2 = new Wall();
 				break;
 			case 2:
+				System.out.println("\n8.2. Tolteny utkozese ajtoval [CD]\n");
 				field2 = new Door();
 				break;
 			case 3:
+				System.out.println("\n8.3. Tolteny utkozese csillagkapuval [CO vagy C0]\n");
 				field2 = new Teleporter(Teleporter.Type.BLUE, Orientation.Type.WEST);
 				break;
 			default:
@@ -161,7 +167,22 @@ public class Main {
 		colonel.shootTeleporter(Teleporter.Type.BLUE);
 	}
 	
+	private static void case9() {
+		System.out.println("\n9. Tolteny utkozese specialis fallal[C0]\n");
+		Logger.setIsOn(false);
+		Field field1 = new EmptyField();
+		Field field2 = new SpecialWall();
+		field1.setNextField(Orientation.Type.EAST, field2);
+		field2.setNextField(Orientation.Type.WEST, field1);
+		Colonel colonel = new Colonel(field1);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.shootTeleporter(Teleporter.Type.BLUE);
+	}
+	
 	private static void case10() {
+		System.out.println("\n10. Tolteny utkozese ures mezovel, dobozzal, szakadekkal, merleggel, ZPM modullal [C_BRSZ]\n");
+		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
 		Field field2 = new EmptyField();
 		Field field3 = new Box();
