@@ -8,10 +8,8 @@ public class Main {
 
 	public static void main(String args[]) {
 		case1();
-		for (int i = 1; i < 5; ++i) {
-			System.out.println();
-			case2(i);
-		}
+		case2();
+
 		case3();
 		case4();
 		case5();
@@ -24,7 +22,7 @@ public class Main {
 		case9();
 		case10();
 		case11();
-
+		case12();
 	}
 
 	private static void case1() {
@@ -38,35 +36,38 @@ public class Main {
 		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 
-	private static void case2(int n) {
+	private static void case2() {
 		System.out.println("\n2. Ezredes utkozese");
-		Logger.setIsOn(false);
-		Field field1 = null;
-		switch (n) {
-			case 1:
-				System.out.println("\n2.1. Ezredes utkozese fallal [C#]\n");
-				field1 = new Wall();
-				break;
-			case 2:
-				System.out.println("\n2.2. Ezredes utkozese specialis fallal [C+]\n");
-				field1 = new SpecialWall();
-				break;
-			case 3:
-				System.out.println("\n2.3. Ezredes utkozese dobozzal [CB]\n");
-				field1 = new Box();
-				break;
-			case 4:
-				System.out.println("\n2.4. Ezredes utkozese ajtoval [CD]\n");
-				field1 = new Door();
-				break;
-			default:
-				break;
+		for (int n = 1; n < 5; ++n) {
+			System.out.println();
+			Logger.setIsOn(false);
+			Field field1 = null;
+			switch (n) {
+				case 1:
+					System.out.println("\n2.1. Ezredes utkozese fallal [C#]\n");
+					field1 = new Wall();
+					break;
+				case 2:
+					System.out.println("\n2.2. Ezredes utkozese specialis fallal [C+]\n");
+					field1 = new SpecialWall();
+					break;
+				case 3:
+					System.out.println("\n2.3. Ezredes utkozese dobozzal [CB]\n");
+					field1 = new Box();
+					break;
+				case 4:
+					System.out.println("\n2.4. Ezredes utkozese ajtoval [CD]\n");
+					field1 = new Door();
+					break;
+				default:
+					break;
+			}
+			Field field2 = new EmptyField();
+			field2.setNextField(Orientation.Type.EAST, field1);
+			Colonel colonel = new Colonel(field2);
+			Logger.setIsOn(true);
+			colonel.tryMoveTo(Orientation.Type.EAST);
 		}
-		Field field2 = new EmptyField();
-		field2.setNextField(Orientation.Type.EAST, field1);
-		Colonel colonel = new Colonel(field2);
-		Logger.setIsOn(true);
-		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 	
 	private static void case3(){
@@ -209,6 +210,7 @@ public class Main {
 	}
 	
 	private static void case11() {
+		System.out.println("\n11. Doboz lerakasa ures mezore [C_]\n");
 		Logger.setIsOn(false);
 		Field field = new EmptyField();
 		Field box = new Box();
@@ -217,6 +219,22 @@ public class Main {
 		Colonel colonel = new Colonel(field);
 		colonel.rotateTo(Orientation.Type.EAST);
 		colonel.boxPickUp((Box)box);
+		Logger.setIsOn(true);
+		colonel.tryBoxPutDown();
+	}
+
+	private static void case12() {
+		System.out.println("\n12. Doboz lerakasa merlegre [CS]\n");
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Field box = new Box();
+		box.setNextField(Orientation.Type.WEST, field);
+		field.setNextField(Orientation.Type.EAST, box);
+		Colonel colonel = new Colonel(field);
+		colonel.rotateTo(Orientation.Type.EAST);
+		colonel.boxPickUp((Box)box);
+		Field scale = new Scale(new Door());
+		field.setNextField(Orientation.Type.EAST, scale);
 		Logger.setIsOn(true);
 		colonel.tryBoxPutDown();
 	}
