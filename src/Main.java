@@ -63,6 +63,23 @@ public class Main {
 		Logger.setIsOn(true);
 		colonel.tryBoxPutDown();
 	}
+	
+	//Mérlegre fel-és lelépés
+	private static void case3(){
+		Logger.setIsOn(false);
+		Field door = new Door();
+		Field field = new EmptyField();
+		Field scale = new Scale((Door)door);
+		field.setNextField(Orientation.Type.EAST, door);
+		field.setNextField(Orientation.Type.WEST, scale);
+		scale.setNextField(Orientation.Type.EAST, field);
+		door.setNextField(Orientation.Type.WEST, field);
+		Colonel colonel = new Colonel(field);
+		Logger.setIsOn(true);
+		colonel.tryMoveTo(Orientation.Type.WEST);
+		colonel.tryMoveTo(Orientation.Type.EAST);
+	}
+	
 
 
 /*
