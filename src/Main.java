@@ -21,7 +21,7 @@ public class Main {
 		case11();
 
 		case12();
-
+		case14();
 		case15();
 		case16();
 
@@ -242,6 +242,47 @@ public class Main {
 		field.setNextField(Orientation.Type.EAST, scale);
 		Logger.setIsOn(true);
 		colonel.tryBoxPutDown();
+	}
+
+	private static void case14() {
+		System.out.println("\n14. Sikertelen doboz lerakas");
+		for (int i = 1; i < 6; ++i) {
+			Logger.setIsOn(false);
+			Field field = new EmptyField();
+			Field box = new Box();
+			box.setNextField(Orientation.Type.WEST, field);
+			field.setNextField(Orientation.Type.EAST, box);
+			Colonel colonel = new Colonel(field);
+			colonel.rotateTo(Orientation.Type.EAST);
+			colonel.boxPickUp((Box) box);
+			switch (i) {
+				case 1:
+					System.out.println("\n14.1. Sikertelen doboz lerakas ajtora  [CD]\n");
+					field = new Door();
+					break;
+				case 2:
+					System.out.println("\n14.2. Sikertelen doboz lerakas dobozra [CB]\n");
+					field = new Box();
+					break;
+				case 3:
+					System.out.println("\n14.3. Sikertelen doboz lerakas falra [C#]\n");
+					field = new Wall();
+					break;
+				case 4:
+					System.out.println("\n14.4. Sikertelen doboz lerakas specialis [C+]\n");
+					field = new SpecialWall();
+					break;
+				case 5:
+					System.out.println("\n14.5. Sikertelen doboz lerakas ZPM modulra [CZ]\n");
+					field = new Zpm();
+					break;
+				default:
+					break;
+			}
+			field.setNextField(Orientation.Type.EAST, field);
+			Logger.setIsOn(true);
+			colonel.tryBoxPutDown();
+		}
 	}
 
 
