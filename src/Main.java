@@ -21,6 +21,7 @@ public class Main {
 			System.out.println();
 			case8(i);
 		}
+		case10();
 		case11();
 
 	}
@@ -154,6 +155,32 @@ public class Main {
 		
 		field1.setNextField(Orientation.Type.EAST, field2);
 		field2.setNextField(Orientation.Type.WEST, field1);
+		Colonel colonel = new Colonel(field1);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.shootTeleporter(Teleporter.Type.BLUE);
+	}
+	
+	private static void case10() {
+		Field field1 = new EmptyField();
+		Field field2 = new EmptyField();
+		Field field3 = new Box();
+		Field field4 = new Ravine();
+		Door door = new Door();
+		Field field5 = new Scale(door);
+		Field field6 = new Zpm();
+		
+		field1.setNextField(Orientation.Type.EAST, field2);
+		field2.setNextField(Orientation.Type.WEST, field1);
+		field2.setNextField(Orientation.Type.EAST, field3);
+		field3.setNextField(Orientation.Type.WEST, field2);
+		field3.setNextField(Orientation.Type.EAST, field4);
+		field4.setNextField(Orientation.Type.WEST, field3);
+		field4.setNextField(Orientation.Type.EAST, field5);
+		field5.setNextField(Orientation.Type.WEST, field4);
+		field5.setNextField(Orientation.Type.EAST, field6);
+		field6.setNextField(Orientation.Type.WEST, field5);
+		
 		Colonel colonel = new Colonel(field1);
 		colonel.rotateTo(Orientation.Type.EAST);
 		Logger.setIsOn(true);
