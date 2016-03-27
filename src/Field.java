@@ -19,7 +19,9 @@ public abstract class Field {
 	 * @param field     a szomszed mezo referenciaja
 	 */
 	public void setNextField(Orientation.Type direction, Field field) {
+		Logger.log(">Field.setNextField(Orientation.Type direction, Field field");
 		nextFields[direction.ordinal()] = field;
+		Logger.log("<Field.setNextField(Orientation.Type direction, Field field");
 	}
 
 	/**
@@ -29,12 +31,14 @@ public abstract class Field {
 	 * @param field ez a mezo lep a helyebe
 	 */
 	public void setField(Field field) {
+		Logger.log(">Field.setField(Field Field");
 		field.setNextFields(nextFields);
 
 		// csak teszteleshez kell
 		field.position = new Coordinate(position);
 		field.map = map;
 		field.setOnMap();
+		Logger.log("<Field.setField(Field Field");
 	}
 
 	/**
@@ -54,39 +58,55 @@ public abstract class Field {
 	 * @param nextFields szomszed mezok tombje
 	 */
 	public void setNextFields(Field[] nextFields) {
+		Logger.log(">Field.setNextFields(Field[] nextFields)");
 		for (int i = 0; i < nextFields.length; ++i) {
 			this.nextFields[i] = nextFields[i];
 			this.nextFields[i].setNextField(Orientation.getOpposite(i), this);
 		}
+		Logger.log("<Field.setNextFields(Field[] nextFields)");
 	}
 
 	/**
 	 * visitor pattern fuggvenyei
 	 */
 	public void collideWith(Colonel colonel) {
+		Logger.log(">Field.collideWith(Colonel colonel)");
+		Logger.log("<Field.collideWith(Colonel colonel)");
 	}
 
 	public void collideWith(Bullet bullet) {
+		Logger.log(">Field.collideWith(Bullet bullet)");
+		Logger.log("<Field.collideWith(Bullet bullet)");
 	}
 
 	public void collideWith(ColonelsHand hand) {
+		Logger.log(">Field.collideWith(ColonelsHand hand)");
+		Logger.log("<Field.collideWith(ColonelsHand hand)");
 	}
 
 	//csak teszteleshez kell
 	public Coordinate getPosition() {
+		Logger.log(">Field.getPosition(");
+		Logger.log("<Field.getPosition(");
 		return position;
 	}
 
 	public void setPosition(Coordinate position) {
+		Logger.log(">Field.setPosition(Coordinate position)");
 		this.position = new Coordinate(position);
+		Logger.log("<Field.setPosition(Coordinate position)");
 	}
 
 	public void setOnMap() {
+		Logger.log(">Field.setOnMap()");
 		map.setFieldAt(position, this);
+		Logger.log("<Field.setOnMap()");
 	}
 
 	public void setMap(Map map) {
+		Logger.log(">Field.setMap()");
 		this.map = map;
+		Logger.log("<Field.setMap()");
 	}
 	// csak teszteleshez kell
 
