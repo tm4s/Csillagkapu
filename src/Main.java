@@ -24,7 +24,8 @@ public class Main {
 		case9();
 		case10();
 		case11();
-
+		case15();
+		case16();
 	}
 
 	private static void case1() {
@@ -219,6 +220,43 @@ public class Main {
 		colonel.boxPickUp((Box)box);
 		Logger.setIsOn(true);
 		colonel.tryBoxPutDown();
+	}
+
+	private static void case15() {
+		System.out.println("15. Doboz felvetel ures");
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Field box = new Box();
+
+		field.setNextField(Orientation.Type.EAST, box);
+
+		Colonel colonel = new Colonel(field);
+		ColonelsHand hand = new ColonelsHand(colonel);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.tryBoxPickUp();
+
+	}
+
+	private static void case16() {
+		System.out.println("16. Doboz felvétele mérlegről");
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Box box = new Box();
+		Door door = new Door();
+		Scale scale = new Scale(door);
+
+		field.setNextField(Orientation.Type.EAST, box);
+		scale.setNextField(Orientation.Type.EAST, door);
+		scale.setNextField(Orientation.Type.WEST, field);
+		door.setNextField(Orientation.Type.WEST, scale);
+		box.setOwnedScale(scale);
+
+		Colonel colonel = new Colonel(field);
+		ColonelsHand hand = new ColonelsHand(colonel);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.tryBoxPickUp();
 	}
 
 /*
