@@ -12,46 +12,56 @@ public class Main {
 			System.out.println();
 			case2(i);
 		}
+		case3();
+		case4();
+		case5();
+		case6();
 	}
 
 	private static void case1() {
+		System.out.println("\n1. Ures mezore lepes [C_]\n");
 		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
 		Field field2 = new EmptyField();
-		field2.setNextField(Orientation.Type.NORTH, field1);
+		field2.setNextField(Orientation.Type.EAST, field1);
 		Colonel colonel = new Colonel(field2);
 		Logger.setIsOn(true);
-		colonel.tryMoveTo(Orientation.Type.NORTH);
+		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 
 	private static void case2(int n) {
+		System.out.println("\n2. Ezredes utkozese");
 		Logger.setIsOn(false);
 		Field field1 = null;
 		switch (n) {
 			case 1:
+				System.out.println("\n2.1. Ezredes utkozese fallal [C#]\n");
 				field1 = new Wall();
 				break;
 			case 2:
+				System.out.println("\n2.2. Ezredes utkozese specialis fallal [C+]\n");
 				field1 = new SpecialWall();
 				break;
 			case 3:
+				System.out.println("\n2.3. Ezredes utkozese dobozzal [CB]\n");
 				field1 = new Box();
 				break;
 			case 4:
+				System.out.println("\n2.4. Ezredes utkozese ajtoval [CD]\n");
 				field1 = new Door();
 				break;
 			default:
 				break;
 		}
 		Field field2 = new EmptyField();
-		field2.setNextField(Orientation.Type.NORTH, field1);
+		field2.setNextField(Orientation.Type.EAST, field1);
 		Colonel colonel = new Colonel(field2);
 		Logger.setIsOn(true);
-		colonel.tryMoveTo(Orientation.Type.NORTH);
+		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 	
-	//Mérlegre fel-és lelépés
 	private static void case3(){
+		System.out.println("\n3. Merlegre fel- es lelepes [DCS]\n");
 		Logger.setIsOn(false);
 		Field door = new Door();
 		Field field = new EmptyField();
@@ -65,8 +75,46 @@ public class Main {
 		colonel.tryMoveTo(Orientation.Type.WEST);
 		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
-	
 
+	private static void case4(){
+		System.out.println("\n4. Szakadekba lepes [CR]\n");
+		Logger.setIsOn(false);
+		Field field1 = new Ravine();
+		Field field2 = new EmptyField();
+		field2.setNextField(Orientation.Type.EAST, field1);
+		Colonel colonel = new Colonel(field2);
+		Logger.setIsOn(true);
+		colonel.tryMoveTo(Orientation.Type.EAST);
+		colonel.isDead();
+	}
+	
+	private static void case5(){
+		System.out.println("\n5. Csillagkapuba lepes [0C0]\n");
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Teleporter teleporter2 = new Teleporter(Teleporter.Type.ORANGE, Orientation.Type.WEST);
+		Teleporter teleporter1 = new Teleporter(Teleporter.Type.BLUE, Orientation.Type.EAST);
+		field.setNextField(Orientation.Type.EAST, teleporter1);
+		field.setNextField(Orientation.Type.WEST, teleporter2);
+		Colonel colonel = new Colonel(field);
+		teleporter2.setNextField(Orientation.Type.EAST, field);
+		teleporter1.setNextField(Orientation.Type.WEST, field);
+		Logger.setIsOn(true);
+		colonel.tryMoveTo(Orientation.Type.EAST);
+	}
+	
+	private static void case6(){
+		System.out.println("\n6. ZPM begyujtese [CZ]\n");
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Field zpm = new Zpm();
+		field.setNextField(Orientation.Type.EAST, zpm);
+		Colonel colonel = new Colonel(field);
+		zpm.setNextField(Orientation.Type.WEST, field);
+		Logger.setIsOn(true);
+		colonel.tryMoveTo(Orientation.Type.EAST);
+	}
+	
 
 /*
 	public static void main	(String args[]) {
