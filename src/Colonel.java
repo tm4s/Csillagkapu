@@ -42,8 +42,9 @@ public class Colonel {
 	 */
 	private Field getFrontField() {
 		Logger.log(">Colonel.getFrontField()");
+		Field field = ownedField.getNextField(orientation);
 		Logger.log("<Colonel.getFrontField()");
-		return ownedField.getNextField(orientation);
+		return field;
 	}
 
 	//valamit meg ezzel lehet kell majd csinalni
