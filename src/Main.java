@@ -16,8 +16,13 @@ public class Main {
 		case4();
 		case5();
 		case6();
-		case11();
 		case7();
+		for (int i = 1; i <= 3; ++i) {
+			System.out.println();
+			case8(i);
+		}
+		case11();
+
 	}
 
 	private static void case1() {
@@ -77,30 +82,6 @@ public class Main {
 		colonel.tryMoveTo(Orientation.Type.WEST);
 		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
-	
-	private static void case7() {
-		Logger.setIsOn(false);
-		Field field1 = new EmptyField();
-		Field field2 = new EmptyField();
-		field1.setNextField(Orientation.Type.EAST, field2);
-		field2.setNextField(Orientation.Type.WEST, field1);
-		Colonel colonel = new Colonel(field1);
-		colonel.rotateTo(Orientation.Type.EAST);
-		Logger.setIsOn(true);
-		colonel.shootTeleporter(Teleporter.Type.BLUE);
-	}
-	
-	private static void case8() {
-		Logger.setIsOn(false);
-		Field field1 = new EmptyField();
-		Field field2 = new EmptyField();
-		field1.setNextField(Orientation.Type.EAST, field2);
-		field2.setNextField(Orientation.Type.WEST, field1);
-		Colonel colonel = new Colonel(field1);
-		colonel.rotateTo(Orientation.Type.EAST);
-		Logger.setIsOn(true);
-		colonel.shootTeleporter(Teleporter.Type.BLUE);
-	}
 
 	private static void case4(){
 		System.out.println("\n4. Szakadekba lepes [CR]\n");
@@ -139,6 +120,44 @@ public class Main {
 		zpm.setNextField(Orientation.Type.WEST, field);
 		Logger.setIsOn(true);
 		colonel.tryMoveTo(Orientation.Type.EAST);
+	}
+	
+	private static void case7() {
+		Logger.setIsOn(false);
+		Field field1 = new EmptyField();
+		Field field2 = new EmptyField();
+		field1.setNextField(Orientation.Type.EAST, field2);
+		field2.setNextField(Orientation.Type.WEST, field1);
+		Colonel colonel = new Colonel(field1);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.shootTeleporter(Teleporter.Type.BLUE);
+	}
+	
+	private static void case8(int n) {
+		Logger.setIsOn(false);
+		Field field1 = new EmptyField();
+		Field field2 = null;
+		switch(n) {
+			case 1:
+				field2 = new Wall();
+				break;
+			case 2:
+				field2 = new Door();
+				break;
+			case 3:
+				field2 = new Teleporter(Teleporter.Type.BLUE, Orientation.Type.WEST);
+				break;
+			default:
+				break;
+		}
+		
+		field1.setNextField(Orientation.Type.EAST, field2);
+		field2.setNextField(Orientation.Type.WEST, field1);
+		Colonel colonel = new Colonel(field1);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.shootTeleporter(Teleporter.Type.BLUE);
 	}
 	
 	private static void case11() {
