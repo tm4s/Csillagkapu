@@ -21,6 +21,32 @@ public class Main {
 		colonel.tryMoveTo(Orientation.Type.NORTH);
 	}
 
+	private static void case2(int n) {
+		Logger.setIsOn(false);
+		Field field1 = null;
+		switch (n) {
+			case 1:
+				field1 = new Wall();
+				break;
+			case 2:
+				field1 = new SpecialWall();
+				break;
+			case 3:
+				field1 = new Box();
+				break;
+			case 4:
+				field1 = new Door();
+				break;
+			default:
+				break;
+		}
+		Field field2 = new EmptyField();
+		field2.setNextField(Orientation.Type.NORTH, field1);
+		Colonel colonel = new Colonel(field2);
+		Logger.setIsOn(true);
+		colonel.tryMoveTo(Orientation.Type.NORTH);
+	}
+
 
 /*
 	public static void main	(String args[]) {
