@@ -27,9 +27,11 @@ public class Colonel {
 	 * @param field szuksege van egy mezore amin all majd
 	 */
 	public Colonel(Field field) {
+		Logger.log(">Colonel.Colonel(Field field)");
 		hand = new ColonelsHand(this);
 		ownedField = field;
 		orientation = Orientation.Type.NORTH;
+		Logger.log("<Colonel.Colonel(Field field)");
 	}
 
 	/**
@@ -39,16 +41,22 @@ public class Colonel {
 	 * csak a kod olvashatosaga miatt lett letrehozva
 	 */
 	private Field getFrontField() {
+		Logger.log(">Colonel.getFrontField()");
+		Logger.log("<Colonel.getFrontField()");
 		return ownedField.getNextField(orientation);
 	}
 
 	//valamit meg ezzel lehet kell majd csinalni
 	public int getCollectedZpms() {
+		Logger.log(">Colonel.getCollectedZpms()");
+		Logger.log("<Colonel.getCollectedZpms()");
 		return collectedZpms;
 	}
 
 	//valamit meg ezzel lehet kell majd csinalni
 	public boolean isDead() {
+		Logger.log(">Colonel.isDead()");
+		Logger.log("<Colonel.isDead()");
 		return dead;
 	}
 
@@ -60,7 +68,10 @@ public class Colonel {
 	 */
 	// meg csak abszolut fordul a megadott iranyba
 	public void rotateTo(Orientation.Type direction) {
+		Logger.log(">Colonel.rotateTo(Orientation.Type direction)");
 		orientation = direction;
+		Logger.log("<Colonel.rotateTo(Orientation.Type direction)");
+		
 	}
 
 	/**
@@ -73,8 +84,10 @@ public class Colonel {
 	 */
 	// meg csak abszolut mozog orientaciot nem veszi figyelembe
 	public void tryMoveTo(Orientation.Type direction) {
+		Logger.log(">Colonel.tryMoveTo(Orientation.Type direction)");
 		orientation = direction;
 		getFrontField().collideWith(this);
+		Logger.log("<Colonel.tryMoveTo(Orientation.Type direction)");
 	}
 
 	/**
@@ -82,8 +95,10 @@ public class Colonel {
 	 * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
 	 */
 	public void moveTo(Field field) {
+		Logger.log(">Colonel.moveTo(Field field)");
 		ownedField = field;
 		notifyOwnedScale();
+		Logger.log("<Colonel.moveTo(Field field)");
 	}
 
 	/**
@@ -93,10 +108,12 @@ public class Colonel {
 	 * @param scale erre a mérlegre lép rá
 	 */
 	public void moveTo(Scale scale) {
+		Logger.log(">Colonel.moveTo(Scale scale)");
 		ownedField = scale;
 		notifyOwnedScale();
 		scale.addWeight();
 		this.ownedScale = scale;
+		Logger.log("<Colonel.moveTo(Scale scale)");
 	}
 
 	/**
@@ -108,10 +125,12 @@ public class Colonel {
 	 */
 
 	public void moveTo(Zpm zpm) {
+		Logger.log(">Colonel.moveTo(Zpm zpm)");
 		ownedField = new EmptyField();
 		notifyOwnedScale();
 		zpm.setField(ownedField);
 		this.collectedZpms++;
+		Logger.log("<Colonel.moveTo(Zpm zpm)");
 	}
 
 	/**
@@ -120,19 +139,23 @@ public class Colonel {
 	 * @param ravine ebbe a szakadekba lep bele
 	 */
 	public void moveTo(Ravine ravine) {
+		Logger.log(">Colonel.moveTo(Ravine ravine)");
 		ownedField = ravine;
 		notifyOwnedScale();
 		this.dead = true;
+		Logger.log("<Colonel.moveTo(Ravine ravine)");
 	}
 
 	/**
 	 * ha merlegen all az ezredes ertesiti azt hogy lelepett rola
 	 */
 	private void notifyOwnedScale() {
+		Logger.log(">Colonel.notifyOwnedScale()");
 		if (ownedScale != null) {
 			ownedScale.removeWeight();
 			ownedScale = null;
 		}
+		Logger.log("<Colonel.notifyOwnedScale()");
 	}
 
 	/**
@@ -147,9 +170,11 @@ public class Colonel {
 	 */
 	// kicsit necces de talan jo
 	public void tryBoxPickUp() {
+		Logger.log(">Colonel.tryBoxPickUp()");
 		if (ownedBox == null) {
 			getFrontField().collideWith(hand);
 		}
+		Logger.log("<Colonel.tryBoxPickUp()");
 	}
 
 	/**
@@ -161,6 +186,7 @@ public class Colonel {
 	 * @param box ezt a dobozt vesszük fel
 	 */
 	public void boxPickUp(Box box) {
+		Logger.log(">Colonel.boxPickUp(Box box)");
 		ownedBox = box;
 		hand.setHasBox(true);
 		Scale boxScale = ownedBox.getOwnedScale();
@@ -171,15 +197,18 @@ public class Colonel {
 			boxScale.removeWeight();
 			ownedBox.setOwnedScale(null);
 		}
+		Logger.log("<Colonel.boxPickUp(Box box)");
 	}
 
 	/**
 	 * doboz lerakasara kiserlet
 	 */
 	public void tryBoxPutDown() {
+		Logger.log(">Colonel.tryBoxPutDown()");
 		if (ownedBox != null) {
 			getFrontField().collideWith(hand);
 		}
+		Logger.log("<Colonel.tryBoxPutDown()");
 	}
 
 	/**
@@ -188,9 +217,11 @@ public class Colonel {
 	 * @param emptyField erre a mezore
 	 */
 	public void boxPutDownToEmptyField(EmptyField emptyField) {
+		Logger.log(">Colonel.boxPutDownToEmptyField(EmptyField emptyField)");
 		getFrontField().setField(ownedBox);
 		ownedBox = null;
 		hand.setHasBox(false);
+		Logger.log("<Colonel.boxPutDownToEmptyField(EmptyField emptyField)");
 	}
 
 	/**
@@ -201,11 +232,13 @@ public class Colonel {
 	 * @param scale erre a merlegre
 	 */
 	public void boxPutDownToScale(Scale scale) {
+		Logger.log(">Colonel.boxPutDownToScale(Scale scale)");
 		ownedBox.setOwnedScale(scale);
 		scale.addWeight();
 		getFrontField().setField(ownedBox);
 		ownedBox = null;
 		hand.setHasBox(false);
+		Logger.log("<Colonel.boxPutDownToScale(Scale scale)");
 	}
 
 
@@ -216,10 +249,12 @@ public class Colonel {
 	 * @param ravine ebbe a szakadekba tesszuk (nem kell igazabol)
 	 */
 	public void boxPutDownToRavine(Ravine ravine) {
+		Logger.log(">Colonel.boxPutDownToRavine(Ravine ravine)");
 		if (ownedBox != null) {
 			ownedBox = null;
 			hand.setHasBox(false);
 		}
+		Logger.log("<Colonel.boxPutDownToRavine(Ravine ravine)");
 	}
 
 	/**
@@ -231,8 +266,10 @@ public class Colonel {
 	 * @param type ilyen tipusu (szinu) teleportert akarunk letrehozni
 	 */
 	public void shootTeleporter(Teleporter.Type type) {
+		Logger.log(">Colonel.shootTeleporter(Teleporter.Type type)");
 		Bullet bullet = new Bullet(type, ownedField, orientation);
 		bullet.moveForward();
+		Logger.log("<Colonel.shootTeleporter(Teleporter.Type type)");
 	}
 
 	/**
@@ -242,17 +279,23 @@ public class Colonel {
 	 * @param teleporter erre a mezore teleportalunk
 	 */
 	public void teleportTo(Teleporter teleporter) {
+		Logger.log(">Colonel.teleportTo(Teleporter teleporter)");
 		ownedField = teleporter;
 		tryMoveTo(teleporter.getOrientation());
+		Logger.log("<Colonel.teleportTo(Teleporter teleporter)");
 	}
 
 
 	//csak teszteleshez
 	public Field getOwnedField() {
+		Logger.log(">getOwnedField()");
+		Logger.log("<getOwnedField()");
 		return ownedField;
 	}
 
 	public Orientation.Type getOrientation() {
+		Logger.log(">getOrientation()");
+		Logger.log("<getOrientation()");
 		return orientation;
 	}
 }
