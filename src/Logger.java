@@ -4,7 +4,7 @@
 public class Logger {
 	public static int numberOfTabs = -1;
 	
-    public static void Log(String parameter) {
+    public static void log(String parameter) {
     	if(parameter.charAt(0) == '>') {
     		++numberOfTabs;
     	}
