@@ -12,10 +12,12 @@ public class Main {
 	}
 
 	private static void case1() {
+		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
 		Field field2 = new EmptyField();
 		field2.setNextField(Orientation.Type.NORTH, field1);
 		Colonel colonel = new Colonel(field2);
+		Logger.setIsOn(true);
 		colonel.tryMoveTo(Orientation.Type.NORTH);
 	}
 

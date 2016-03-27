@@ -1,15 +1,15 @@
 /**
- * Logger osztály. A függvényhívások követésére használható.
+ * Logger osztï¿½ly. A fï¿½ggvï¿½nyhï¿½vï¿½sok kï¿½vetï¿½sï¿½re hasznï¿½lhatï¿½.
  */
 public class Logger {
 	private static int numberOfTabs = -1;
 	private static boolean isOn = true;
 	
-	public boolean getIsOn() {
+	public static boolean getIsOn() {
 		return isOn;
 	}
 	
-	public void setIsOn(boolean value) {
+	public static void setIsOn(boolean value) {
 		isOn = value;
 	}
 	
