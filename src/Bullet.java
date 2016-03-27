@@ -33,7 +33,8 @@ public class Bullet {
 	public void moveForward() {
 		Logger.log(">Bullet.moveForward()");
 		ownedField = ownedField.getNextField(direction);
-		ownedField.collideWith(this);
+		if(ownedField != null)
+			ownedField.collideWith(this);
 		Logger.log("<Bullet.moveForward()");
 	}
 

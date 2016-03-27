@@ -13,6 +13,7 @@ public class Main {
 			case2(i);
 		}
 		case11();
+		case7();
 	}
 
 	private static void case1() {
@@ -78,6 +79,30 @@ public class Main {
 		Logger.setIsOn(true);
 		colonel.tryMoveTo(Orientation.Type.WEST);
 		colonel.tryMoveTo(Orientation.Type.EAST);
+	}
+	
+	private static void case7() {
+		Logger.setIsOn(false);
+		Field field1 = new EmptyField();
+		Field field2 = new EmptyField();
+		field1.setNextField(Orientation.Type.EAST, field2);
+		field2.setNextField(Orientation.Type.WEST, field1);
+		Colonel colonel = new Colonel(field1);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.shootTeleporter(Teleporter.Type.BLUE);
+	}
+	
+	private static void case8() {
+		Logger.setIsOn(false);
+		Field field1 = new EmptyField();
+		Field field2 = new EmptyField();
+		field1.setNextField(Orientation.Type.EAST, field2);
+		field2.setNextField(Orientation.Type.WEST, field1);
+		Colonel colonel = new Colonel(field1);
+		colonel.rotateTo(Orientation.Type.EAST);
+		Logger.setIsOn(true);
+		colonel.shootTeleporter(Teleporter.Type.BLUE);
 	}
 	
 
