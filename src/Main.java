@@ -244,6 +244,8 @@ public class Main {
 		colonel.tryBoxPutDown();
 	}
 
+
+
 	private static void case15() {
 		System.out.println("\n15. Doboz felvetel ures mezorol [CB]\n");
 		Logger.setIsOn(false);
@@ -280,6 +282,56 @@ public class Main {
 		Logger.setIsOn(true);
 		colonel.tryBoxPickUp();
 	}
+
+	String initText = "Az objektumokat a karakteres kepernyon a kovetkezok jelolik:\n" +
+			"\tC: Colonel\n" +
+			"\t_: EmptyField\n"+
+			"\tB: Box\n"+
+			"\tD: Door\n"+
+			"\tS: Scale\n"+
+			"\tR: Ravine\n"+
+			"\t#: Wall\n"+
+			"\t+: SpecialWall\n" +
+			"\tZ: Zpm\n"+
+			"\t0/O: Teleporter\n\n";
+
+	String useCases =  "Adja meg a kert use-case szamat: \n" +
+			"1. Ures mezore lepes [C_]\n" +
+			"2. Ezredes utkozese\n" +
+			"\t2.1.fallal [C#]\n" +
+			"\t2.2 specialis fallal[C+]\n" +
+			"\t2.3 dobozzal[CB]\n" +
+			"\t2.4 ajtoval [CD]\n" +
+			"3. Merlegre fel- es lelepes [DCS]\n" +
+			"4. Szakadekba lepes [CR]\n" +
+			"5. Csillagkapuba lepes [0CO]\n" +
+			"6. ZPM begyujtese [CZ]\n" +
+			"7. Tolteny kilovese [C]\n" +
+			"8. Tolteny utkozese\n" +
+			"\t8.1. fallal [C#]\n"+
+			"\t8.2. ajtoval [CD]\n"+
+			"\t8.3. csillagkapuval [C0]\n"+
+			"9. Tolteny utkozese specialis fallal [C+]\n" +
+			"10. Tolteny utkozese ures mezovel, dobozzal, szakadekkal, merleggel, ZPM modullal\n" +
+			"11. Doboz lerakasa ures mezore [C_]\n" +
+			"12. Doboz lerakasa merlegre [CS]\n" +
+			"13. Doboz lerakasa szakadekba [CR]\n" +
+			"14. Sikertelen doboz lerakasa\n" +
+			"\t14.1 ajtora [CD]\n" +
+			"\t14.2 dobozra [CB]\n" +
+			"\t14.3 falra [C#]\n" +
+			"\t14.4 specialis falra [C+]\n" +
+			"\t14.5 ZPM modulra\n" +
+			"15. Doboz felvetele ures mezorol [CB]\n" +
+			"16. Doboz felvetele merlegrol [CBD]\n" +
+			"17. Sikertelen doboz felvetel\n" +
+			"\t17.1. ajtorol [CD]\n" +
+			"\t17.2. dobozrol [CB]\n" +
+			"\t17.3. falrol [C#]\n" +
+			"\t17.4. specialis falrol [C+]\n" +
+			"\t17.5. ures mezorol [C_]\n" +
+			"\t17.6. szakadekrol [CR]\n" +
+			"\t17.7. ZPM modulrol [CZ]\n";
 
 /*
 	public static void main	(String args[]) {
