@@ -35,7 +35,7 @@ public class Teleporter extends Field {
 			Teleporters[type.ordinal()].setField(new SpecialWall());
 		}
 		Teleporters[type.ordinal()] = this;
-		Logger.log("<Teleportel(Type type, Orientation.Type orientation)");
+		Logger.log("<Teleporter(Type type, Orientation.Type orientation)");
 	}
 
 	/**
@@ -63,4 +63,9 @@ public class Teleporter extends Field {
 			colonel.teleportTo(getOtherTeleporter());
 		Logger.log("<collideWith(Colonel colonel)");
 	}
+    
+    public static void teleporterReset() {
+    	Teleporters[0] = null;
+    	Teleporters[1] = null;
+    }
 }
