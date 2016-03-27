@@ -45,6 +45,8 @@ public abstract class Field {
 	 * @return adott iranyu szomszed mezo
 	 */
 	public Field getNextField(Orientation.Type direction) {
+		Logger.log(">Field.getNextField(Orientation.Type direction");
+		Logger.log("<Field.getNextField(Orientation.Type direction");
 		return nextFields[direction.ordinal()];
 	}
 
