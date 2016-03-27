@@ -2,8 +2,8 @@
  * Sima fal
  */
 public class Wall extends Field {
-	@Override
-	public Character print() {
-		return '#';
+	public Wall(){
+		Logger.log(">Wall.Wall()");
+		Logger.log("<Wall.Wall()");
 	}
 }
