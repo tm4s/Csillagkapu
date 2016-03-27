@@ -18,9 +18,9 @@ public abstract class Field {
 	 * @param field     a szomszed mezo referenciaja
 	 */
 	public void setNextField(Orientation.Type direction, Field field) {
-		Logger.log(">Field.setNextField(Orientation.Type direction, Field field");
+		Logger.log(">Field.setNextField(Orientation.Type direction, Field field)");
 		nextFields[direction.ordinal()] = field;
-		Logger.log("<Field.setNextField(Orientation.Type direction, Field field");
+		Logger.log("<Field.setNextField(Orientation.Type direction, Field field)");
 	}
 
 	/**
@@ -30,12 +30,12 @@ public abstract class Field {
 	 * @param field ez a mezo lep a helyebe
 	 */
 	public void setField(Field field) {
-		Logger.log(">Field.setField(Field Field");
+		Logger.log(">Field.setField(Field Field)");
 		field.setNextFields(nextFields);
 
 		// csak teszteleshez kell
 		field.position = new Coordinate(position);
-		Logger.log("<Field.setField(Field Field");
+		Logger.log("<Field.setField(Field Field)");
 	}
 
 	/**
@@ -45,8 +45,8 @@ public abstract class Field {
 	 * @return adott iranyu szomszed mezo
 	 */
 	public Field getNextField(Orientation.Type direction) {
-		Logger.log(">Field.getNextField(Orientation.Type direction");
-		Logger.log("<Field.getNextField(Orientation.Type direction");
+		Logger.log(">Field.getNextField(Orientation.Type direction)");
+		Logger.log("<Field.getNextField(Orientation.Type direction)");
 		return nextFields[direction.ordinal()];
 	}
 
