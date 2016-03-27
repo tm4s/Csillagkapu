@@ -27,7 +27,6 @@ public class Colonel {
 	 * @param field szuksege van egy mezore amin all majd
 	 */
 	public Colonel(Field field) {
-		System.out.println("Colonel.Colonel(Field field)");
 		hand = new ColonelsHand(this);
 		ownedField = field;
 		orientation = Orientation.Type.NORTH;
@@ -40,19 +39,16 @@ public class Colonel {
 	 * csak a kod olvashatosaga miatt lett letrehozva
 	 */
 	private Field getFrontField() {
-		System.out.println("Colonel.getFrontField(): Field");
 		return ownedField.getNextField(orientation);
 	}
 
 	//valamit meg ezzel lehet kell majd csinalni
 	public int getCollectedZpms() {
-		System.out.println("Colonel. : ");
 		return collectedZpms;
 	}
 
 	//valamit meg ezzel lehet kell majd csinalni
 	public boolean isDead() {
-		System.out.println("Colonel.isDead(): boolean");
 		return dead;
 	}
 
@@ -64,7 +60,6 @@ public class Colonel {
 	 */
 	// meg csak abszolut fordul a megadott iranyba
 	public void rotateTo(Orientation.Type direction) {
-		System.out.println("Colonel.rotateTo(Orientation.Type direction): void");
 		orientation = direction;
 	}
 
@@ -78,7 +73,6 @@ public class Colonel {
 	 */
 	// meg csak abszolut mozog orientaciot nem veszi figyelembe
 	public void tryMoveTo(Orientation.Type direction) {
-		System.out.println("Colonel.tryMoveTo(Orientation.Type direction): void");
 		orientation = direction;
 		getFrontField().collideWith(this);
 	}
@@ -88,7 +82,6 @@ public class Colonel {
 	 * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
 	 */
 	public void moveTo(Field field) {
-		System.out.println("Colonel.moveTo(Field field): void");
 		ownedField = field;
 		notifyOwnedScale();
 	}
@@ -100,7 +93,6 @@ public class Colonel {
 	 * @param scale erre a mérlegre lép rá
 	 */
 	public void moveTo(Scale scale) {
-		System.out.println("Colonel.moveTo(Scale scale): void");
 		ownedField = scale;
 		notifyOwnedScale();
 		scale.addWeight();
@@ -116,7 +108,6 @@ public class Colonel {
 	 */
 
 	public void moveTo(Zpm zpm) {
-		System.out.println("Colonel.moveTo(Zpm zpm): void");
 		ownedField = new EmptyField();
 		notifyOwnedScale();
 		zpm.setField(ownedField);
@@ -129,7 +120,6 @@ public class Colonel {
 	 * @param ravine ebbe a szakadekba lep bele
 	 */
 	public void moveTo(Ravine ravine) {
-		System.out.println("Colonel.moveTo(Ravine ravine): void");
 		ownedField = ravine;
 		notifyOwnedScale();
 		this.dead = true;
@@ -139,7 +129,6 @@ public class Colonel {
 	 * ha merlegen all az ezredes ertesiti azt hogy lelepett rola
 	 */
 	private void notifyOwnedScale() {
-		System.out.println("Colonel.notifyOwnedScale(): void");
 		if (ownedScale != null) {
 			ownedScale.removeWeight();
 			ownedScale = null;
@@ -158,7 +147,6 @@ public class Colonel {
 	 */
 	// kicsit necces de talan jo
 	public void tryBoxPickUp() {
-		System.out.println("Colonel.tryBoxPickUp(): void");
 		if (ownedBox == null) {
 			getFrontField().collideWith(hand);
 		}
@@ -173,7 +161,6 @@ public class Colonel {
 	 * @param box ezt a dobozt vesszük fel
 	 */
 	public void boxPickUp(Box box) {
-		System.out.println("Colonel.boxPickUp(Box box): void");
 		ownedBox = box;
 		hand.setHasBox(true);
 		Scale boxScale = ownedBox.getOwnedScale();
@@ -190,7 +177,6 @@ public class Colonel {
 	 * doboz lerakasara kiserlet
 	 */
 	public void tryBoxPutDown() {
-		System.out.println("Colonel.tryBoxPutDown(): void");
 		if (ownedBox != null) {
 			getFrontField().collideWith(hand);
 		}
@@ -202,7 +188,6 @@ public class Colonel {
 	 * @param emptyField erre a mezore
 	 */
 	public void boxPutDownToEmptyField(EmptyField emptyField) {
-		System.out.println("Colonel.boxPutDownToEmptyField(EmptyField emptyField): void");
 		getFrontField().setField(ownedBox);
 		ownedBox = null;
 		hand.setHasBox(false);
@@ -216,7 +201,6 @@ public class Colonel {
 	 * @param scale erre a merlegre
 	 */
 	public void boxPutDownToScale(Scale scale) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Scale): void");
 		ownedBox.setOwnedScale(scale);
 		scale.addWeight();
 		getFrontField().setField(ownedBox);
@@ -232,7 +216,6 @@ public class Colonel {
 	 * @param ravine ebbe a szakadekba tesszuk (nem kell igazabol)
 	 */
 	public void boxPutDownToRavine(Ravine ravine) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Ravine): void");
 		if (ownedBox != null) {
 			ownedBox = null;
 			hand.setHasBox(false);
@@ -248,7 +231,6 @@ public class Colonel {
 	 * @param type ilyen tipusu (szinu) teleportert akarunk letrehozni
 	 */
 	public void shootTeleporter(Teleporter.Type type) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Teleporter.Type): void");
 		Bullet bullet = new Bullet(type, ownedField, orientation);
 		bullet.moveForward();
 	}
@@ -260,7 +242,6 @@ public class Colonel {
 	 * @param teleporter erre a mezore teleportalunk
 	 */
 	public void teleportTo(Teleporter teleporter) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Teleporter): void");
 		ownedField = teleporter;
 		tryMoveTo(teleporter.getOrientation());
 	}
@@ -268,12 +249,10 @@ public class Colonel {
 
 	//csak teszteleshez
 	public Field getOwnedField() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Field");
 		return ownedField;
 	}
 
 	public Orientation.Type getOrientation() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Orientation.Type");
 		return orientation;
 	}
 }

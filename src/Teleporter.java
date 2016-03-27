@@ -28,7 +28,6 @@ public class Teleporter extends Field {
 	 *            csillagkapu tipusa (szine)
 	 */
 	public Teleporter(Type type, Orientation.Type orientation) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Type, Orientation.Type)");
 		this.type = type;
 		this.orientation = Orientation.getOpposite(orientation.ordinal());
 		if (Teleporters[type.ordinal()] != null) {
@@ -44,18 +43,15 @@ public class Teleporter extends Field {
 	 *         kedveert van
 	 */
 	private Teleporter getOtherTeleporter() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Teleporter");
 		return Teleporters[(type.ordinal() + 1) % 2];
 	}
 
 	public Orientation.Type getOrientation() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Orientation.Type");
 		return orientation;
 	}
 
     @Override
     public void collideWith(Colonel colonel) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Colonel): void");
 		if (getOtherTeleporter() != null)
 			colonel.teleportTo(getOtherTeleporter());
 	}
@@ -63,7 +59,6 @@ public class Teleporter extends Field {
 
 	@Override
 	public Character print() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Character");
 		Character c = '0';
 		if (type == Type.ORANGE)
 			c = 'O';

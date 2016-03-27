@@ -10,33 +10,36 @@ public class Box extends Field {
 	private Scale ownedScale = null;
 
 	public void setOwnedScale(Scale ownedScale) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Scale): void");
+		Logger.Log(">Box.setOwnedScale(Scale ownedScale)");
 		this.ownedScale = ownedScale;
+		Logger.Log("<Box.setOwnedScale(Scale ownedScale)");
 	}
 
 	public Scale getOwnedScale() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Scale");
+		Logger.Log(">Box.getOwnedScale()");
+		Logger.Log("<Box.getOwnedScale()");
 		return ownedScale;
 	}
 
-
 	@Override
 	public void collideWith(Bullet bullet) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Bullet): void");
+		Logger.Log(">Box.collideWith(Bullet bullet)");
 		bullet.moveForward();
+		Logger.Log("<Box.collideWith(Bullet bullet)");
 	}
-
 
 	@Override
 	public void collideWith(ColonelsHand hand) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(ColonelsHand): void");
+		Logger.Log(">Box.collideWith(ColonelsHand hand)");
 		if (!hand.hasBox())
 			hand.getColonel().boxPickUp(this);
+		Logger.Log("<Box.collideWith(ColonelsHand hand)");
 	}
 
 	@Override
 	public Character print() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Character");
+		Logger.Log(">Box.print()");
+		Logger.Log("<Box.print()");
 		return 'B';
 	}
 }

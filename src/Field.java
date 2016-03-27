@@ -11,7 +11,7 @@ public abstract class Field {
 	 * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
 	 */
 	private Field[] nextFields = new Field[4];
-
+ 
 	/**
 	 * mezo adott iranyu szomszedjanak beallitasa
 	 *
@@ -19,7 +19,6 @@ public abstract class Field {
 	 * @param field     a szomszed mezo referenciaja
 	 */
 	public void setNextField(Orientation.Type direction, Field field) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Type, Field): void");
 		nextFields[direction.ordinal()] = field;
 	}
 
@@ -30,7 +29,6 @@ public abstract class Field {
 	 * @param field ez a mezo lep a helyebe
 	 */
 	public void setField(Field field) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Field): void");
 		field.setNextFields(nextFields);
 
 		// csak teszteleshez kell
@@ -46,7 +44,6 @@ public abstract class Field {
 	 * @return adott iranyu szomszed mezo
 	 */
 	public Field getNextField(Orientation.Type direction) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Type): Field");
 		return nextFields[direction.ordinal()];
 	}
 
@@ -57,7 +54,6 @@ public abstract class Field {
 	 * @param nextFields szomszed mezok tombje
 	 */
 	public void setNextFields(Field[] nextFields) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Field[]): void");
 		for (int i = 0; i < nextFields.length; ++i) {
 			this.nextFields[i] = nextFields[i];
 			this.nextFields[i].setNextField(Orientation.getOpposite(i), this);
@@ -68,15 +64,12 @@ public abstract class Field {
 	 * visitor pattern fuggvenyei
 	 */
 	public void collideWith(Colonel colonel) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Colonel): void");
 	}
 
 	public void collideWith(Bullet bullet) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Bullet): void");
 	}
 
 	public void collideWith(ColonelsHand hand) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(ColonelsHand): void");
 	}
 
 	//teszteleshez kell
@@ -84,22 +77,18 @@ public abstract class Field {
 
 	//csak teszteleshez kell
 	public Coordinate getPosition() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Coordinate");
 		return position;
 	}
 
 	public void setPosition(Coordinate position) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Coordinate): void");
 		this.position = new Coordinate(position);
 	}
 
 	public void setOnMap() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): void");
 		map.setFieldAt(position, this);
 	}
 
 	public void setMap(Map map) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Map): void");
 		this.map = map;
 	}
 	// csak teszteleshez kell

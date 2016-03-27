@@ -16,7 +16,6 @@ public class ColonelsHand {
 	 * @param colonel ennek az ezredesnek a keze
 	 */
 	public ColonelsHand(Colonel colonel) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(Colonel)");
 		this.colonel = colonel;
 	}
 
@@ -24,7 +23,6 @@ public class ColonelsHand {
 	 * @return hozza tartozo ezredes
 	 */
 	public Colonel getColonel() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): Colonel");
 		return colonel;
 	}
 
@@ -32,7 +30,6 @@ public class ColonelsHand {
 	 * @return van-e nala doboz (true van)
 	 */
 	public boolean hasBox() {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(): boolean");
 		return hasBox;
 	}
 
@@ -42,7 +39,6 @@ public class ColonelsHand {
 	 * @param hasBox true van false nincs
 	 */
 	public void setHasBox(boolean hasBox) {
-		System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(boolean): void");
 		this.hasBox = hasBox;
 	}
 }

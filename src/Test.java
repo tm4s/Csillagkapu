@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String args[]) throws IOException {
-		//System.out.println(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "(String[]): void");
 		String fileName = "map02.csv";
 		if (args.length == 1)
 			fileName = args[0];
