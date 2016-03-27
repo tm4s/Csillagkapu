@@ -223,7 +223,7 @@ public class Main {
 	}
 
 	private static void case15() {
-		System.out.println("15. Doboz felvetel ures");
+		System.out.println("\n15. Doboz felvetel ures mezorol [CB]\n");
 		Logger.setIsOn(false);
 		Field field = new EmptyField();
 		Field box = new Box();
@@ -239,7 +239,7 @@ public class Main {
 	}
 
 	private static void case16() {
-		System.out.println("16. Doboz felvétele mérlegről");
+		System.out.println("\n16. Doboz felvétele mérlegről [CBD]\n");
 		Logger.setIsOn(false);
 		Field field = new EmptyField();
 		Box box = new Box();
