@@ -1,25 +1,7 @@
 import java.io.*;
 
 public class Main {
-
-	/*public static void main(String args[]) {
-		case1();
-		case2();
-		case3();
-		case4();
-		case5();
-		case6();
-		case7();
-		case8();
-		case9();
-		case10();
-		case11();
-		case12();
-		case13();
-		case14();
-		case15();
-		case16();
-	}*/
+    
 	public static void main(String args[]) throws IOException {
 
 		String[] initText = {"Az objektumokat a karakteres kepernyon a kovetkezok jelolik:\n" +
@@ -82,7 +64,7 @@ public class Main {
 		for (int i = 0; i < useCases.length; i++) {
 			System.out.println(useCases[i]);
 		}
-
+        
 
 		BufferedReader br = null;
 		br = new BufferedReader(new InputStreamReader(System.in));
@@ -146,6 +128,7 @@ public class Main {
 			}
 
 		}
+        
 		br.close();
 	}
 
@@ -463,4 +446,54 @@ public class Main {
 		Logger.setIsOn(true);
 		colonel.tryBoxPickUp();
 	}
+
+	
+    private static void case17(){
+        System.out.println("\n17. Sikertelen doboz felvetel  [CDB#+_RZ]\n");
+        for (int i = 1; i <= 7; ++i) {
+            Logger.setIsOn(false);
+            Field field1 = null;
+            switch (i) {
+                case 1:
+                    System.out.println("\n2.1. Sikertelen doboz felvetel ajtorol [CD]\n");
+                    field1 = new Door();
+                    break;
+                case 2:
+                    System.out.println("\n2.2. Sikertelen doboz felvetel doobozrol [CB]\n");
+                    field1 = new Box();
+                    break;
+                case 3:
+                    System.out.println("\n2.3. Sikertelen doboz felvetel falrol [C#]\n");
+                    field1 = new Wall();
+                    break;
+                case 4:
+                    System.out.println("\n2.4. Sikertelen doboz felvetel specialis falról [C+]\n");
+                    field1 = new SpecialWall();
+                    break;
+                case 5:
+                    System.out.println("\n2.4. Sikertelen doboz felvetel üres mezorol [C_]\n");
+                    field1 = new EmptyField();
+                    break;
+                case 6:
+                    System.out.println("\n2.4. Sikertelen doboz felvetel szakadekrol [CR]\n");
+                    field1 = new Ravine();
+                    break;
+                case 7:
+                    System.out.println("\n2.4. Sikertelen doboz felvétel ZPM modulrol [CZ]\n");
+                    field1 = new Zpm();
+                    break;				
+                default:
+                    break;
+            }
+            Field field2 = new EmptyField();
+            field2.setNextField(Orientation.Type.EAST, field1);
+            field1.setNextField(Orientation.Type.WEST, field2);
+            Colonel colonel = new Colonel(field2);
+            ColonelsHand hand = new ColonelsHand(colonel);
+            colonel.rotateTo(Orientation.Type.EAST);
+            Logger.setIsOn(true);
+            colonel.tryBoxPickUp();
+        }
+        
+    }
 }
