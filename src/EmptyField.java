@@ -13,7 +13,7 @@ public class EmptyField extends Field {
 	}
 
 	/**
-	 * Az ezredes tovabb halad a mezon
+	 * Az ezredes tovabbhalad a mezon
 	 * @param colonel
      */
 	@Override
@@ -24,7 +24,7 @@ public class EmptyField extends Field {
 	}
 
 	/**
-	 * A lovedek tovabb halad a mezon
+	 * A lovedek tovabbhalad a mezon
 	 * @param bullet
      */
 	@Override

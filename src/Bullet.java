@@ -5,14 +5,14 @@
 public class Bullet {
 
 	/**
-	 * aktualis pozocio, irany tipusa a teleporternek ami letrejohet belole
+	 * Aktualis pozocio, irany tipusa a teleporternek ami letrejohet belole
 	 */
 	private Field ownedField;
 	private Orientation.Type direction;
 	private Teleporter.Type type;
 
 	/**
-	 * konstruktor
+	 * Konstruktor
 	 *
 	 * @param type       telepotrter tipusa
 	 * @param startField kezdo mezo
@@ -27,7 +27,7 @@ public class Bullet {
 	}
 
 	/**
-	 * tovabb halad a kovetkezo mezore mezotol amin all elkeri a megfelelo
+	 * Tovabbhalad a kovetkezo mezore mezotol amin all elkeri a megfelelo
 	 * iranyu szomszedjat es utkozik vele
 	 */
 	public void moveForward() {
@@ -39,7 +39,7 @@ public class Bullet {
 	}
 
 	/**
-	 * atalkulas teleporterre a mezon amin all ott letrehoz egy teleportert
+	 * Atalkulas teleporterre a mezon amin all ott letrehoz egy teleportert
 	 * (regi mezo eltunik)
 	 */
 	public void transformToTeleporter() {

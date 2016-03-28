@@ -47,7 +47,7 @@ public class Door extends Field {
 	}
 
 	/**
-	 * Ha nyitva van az ajto a lovedek tovabb halad rajta
+	 * Ha nyitva van az ajto a lovedek tovabbhalad rajta
 	 * @param bullet
      */
 	@Override

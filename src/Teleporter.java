@@ -50,12 +50,20 @@ public class Teleporter extends Field {
 		return Teleporters[(type.ordinal() + 1) % 2];
 	}
 
+	/**
+	 * Visszaadja a csillagkapu iranyat
+	 * @return csillagkapu iranya
+     */
 	public Orientation.Type getOrientation() {
 		Logger.log(">getOrientation()");
 		Logger.log("<getOrientation()");
 		return orientation;
 	}
 
+	/**
+	 * Az ezredes belepve az egyik csillagkapun a masikon jon ki, amennyiben az nyitva van
+	 * @param colonel
+     */
     @Override
     public void collideWith(Colonel colonel) {
     	Logger.log(">collideWith(Colonel colonel)");
@@ -63,7 +71,10 @@ public class Teleporter extends Field {
 			colonel.teleportTo(getOtherTeleporter());
 		Logger.log("<collideWith(Colonel colonel)");
 	}
-    
+
+    /**
+	 * Csillagkapuk alapallasba allitasa
+	 */
     public static void teleporterReset() {
     	Teleporters[0] = null;
     	Teleporters[1] = null;

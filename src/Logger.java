@@ -1,18 +1,27 @@
 /**
- * Logger oszt�ly. A f�ggv�nyh�v�sok k�vet�s�re haszn�lhat�.
+ * Logger osztaly. A fuggvenyhivasok kovetesere hasznalhato.
  */
 public class Logger {
 	private static int numberOfTabs = -1;
 	private static boolean isOn = true;
-	
+
+
 	public static boolean getIsOn() {
 		return isOn;
 	}
-	
+
+	/**
+	 * Logger ki-be kapcsolasa
+	 * @param value
+     */
 	public static void setIsOn(boolean value) {
 		isOn = value;
 	}
-	
+
+	/**
+	 * A log kiirasa
+	 * @param parameter Kiirando szoveg
+     */
     public static void log(String parameter) {
     	if(isOn){
 	    	if(parameter.charAt(0) == '>') {
