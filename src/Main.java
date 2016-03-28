@@ -73,12 +73,9 @@ public class Main {
 					quit();
 					break;
 				default:
-					System.out.println("Adjon meg egy ervenyes esetet!");
+					System.out.println("Ervenyes esetet adjon meg!");
 					break;
 			}
-
-			System.out.println(Assets.LZ());
-
 		}
         
 		br.close();
