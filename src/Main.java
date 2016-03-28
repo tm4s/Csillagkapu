@@ -331,28 +331,27 @@ public class Main {
 			switch (i) {
 				case 1:
 					System.out.println("\n14.1. Sikertelen doboz lerakas ajtora  [CD]\n");
-					field = new Door();
+					field.setNextField(Orientation.Type.EAST, new Door());
 					break;
 				case 2:
 					System.out.println("\n14.2. Sikertelen doboz lerakas dobozra [CB]\n");
-					field = new Box();
+					field.setNextField(Orientation.Type.EAST, new Box());
 					break;
 				case 3:
 					System.out.println("\n14.3. Sikertelen doboz lerakas falra [C#]\n");
-					field = new Wall();
+					field.setNextField(Orientation.Type.EAST, new Wall());
 					break;
 				case 4:
 					System.out.println("\n14.4. Sikertelen doboz lerakas specialis [C+]\n");
-					field = new SpecialWall();
+					field.setNextField(Orientation.Type.EAST, new SpecialWall());
 					break;
 				case 5:
 					System.out.println("\n14.5. Sikertelen doboz lerakas ZPM modulra [CZ]\n");
-					field = new Zpm();
+					field.setNextField(Orientation.Type.EAST, new Zpm());
 					break;
 				default:
 					break;
 			}
-			field.setNextField(Orientation.Type.EAST, field);
 			Logger.setIsOn(true);
 			colonel.tryBoxPutDown();
 		}
