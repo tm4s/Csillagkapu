@@ -14,8 +14,9 @@ public class EmptyField extends Field {
 
 	/**
 	 * Az ezredes tovabbhalad a mezon
+	 *
 	 * @param colonel
-     */
+	 */
 	@Override
 	public void collideWith(Colonel colonel) {
 		Logger.log(">EmptyField.collideWith(Colonel colonel)");
@@ -25,8 +26,9 @@ public class EmptyField extends Field {
 
 	/**
 	 * A lovedek tovabbhalad a mezon
+	 *
 	 * @param bullet
-     */
+	 */
 	@Override
 	public void collideWith(Bullet bullet) {
 		Logger.log(">EmptyField.collideWith(Bullet bullet)");
@@ -36,8 +38,9 @@ public class EmptyField extends Field {
 
 	/**
 	 * Ures mezorol tortene doboz felvetel, illetve arra tortene lerakas
+	 *
 	 * @param hand
-     */
+	 */
 	@Override
 	public void collideWith(ColonelsHand hand) {
 		Logger.log(">EmptyField.collideWith(ColonelsHand hand)");

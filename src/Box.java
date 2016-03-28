@@ -11,8 +11,9 @@ public class Box extends Field {
 
 	/**
 	 * Beallitja, hogy a doboz melyik merleghez tartozzon
+	 *
 	 * @param ownedScale
-     */
+	 */
 	public void setOwnedScale(Scale ownedScale) {
 		Logger.log(">Box.setOwnedScale(Scale ownedScale)");
 		this.ownedScale = ownedScale;
@@ -21,8 +22,9 @@ public class Box extends Field {
 
 	/**
 	 * Lekeri a merleget ami a dobozhoz tartozik
+	 *
 	 * @return
-     */
+	 */
 	public Scale getOwnedScale() {
 		Logger.log(">Box.getOwnedScale()");
 		Logger.log("<Box.getOwnedScale()");
@@ -32,8 +34,9 @@ public class Box extends Field {
 
 	/**
 	 * A lovedek talalkzoasa a dobozzal
+	 *
 	 * @param bullet
-     */
+	 */
 	@Override
 	public void collideWith(Bullet bullet) {
 		Logger.log(">Box.collideWith(Bullet bullet)");
@@ -44,8 +47,9 @@ public class Box extends Field {
 
 	/**
 	 * Az ezeredes kezenek a dobozzal valo talalkzoasa
+	 *
 	 * @param hand
-     */
+	 */
 
 	@Override
 	public void collideWith(ColonelsHand hand) {

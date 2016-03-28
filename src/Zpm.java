@@ -5,7 +5,7 @@ public class Zpm extends Field {
 	/**
 	 * Konstruktor
 	 */
-	public Zpm(){
+	public Zpm() {
 		Logger.log(">Zpm.collideWith(Bullet bullet");
 		Logger.log("<Zpm.collideWith(Bullet bullet");
 	}
@@ -13,8 +13,9 @@ public class Zpm extends Field {
 	/**
 	 * Az ezredes a ZPM modullal talalkozva begyujti azt
 	 * A modul helyen egy ures mezo keletkezik
+	 *
 	 * @param colonel a ZPM modullal talalkozo ezredes
-     */
+	 */
 	@Override
 	public void collideWith(Colonel colonel) {
 		Logger.log(">Zpm.collideWith(Colonel colonel");
@@ -24,8 +25,9 @@ public class Zpm extends Field {
 
 	/**
 	 * Egy lovedek ZPM modullal valo talalkozasakor a lovedek athalad a modulon
+	 *
 	 * @param bullet a ZPM modullal tallakozo lovedek
-     */
+	 */
 	@Override
 	public void collideWith(Bullet bullet) {
 		Logger.log(">Zpm.collideWith(Bullet bullet");

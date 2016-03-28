@@ -23,9 +23,8 @@ public class Teleporter extends Field {
 	 * a helyen letrehoz egy specialis falat (mivel a csillagkapu elott ennek
 	 * kellett a helyen lennie) majd magara allitja a statikus vele megegyezo
 	 * csillagkapu referenciat
-	 * 
-	 * @param type
-	 *            csillagkapu tipusa (szine)
+	 *
+	 * @param type csillagkapu tipusa (szine)
 	 */
 	public Teleporter(Type type, Orientation.Type orientation) {
 		Logger.log(">Teleporter.Teleporter(Type type, Orientation.Type orientation)");
@@ -40,9 +39,9 @@ public class Teleporter extends Field {
 
 	/**
 	 * masik teleporter lekrese
-	 * 
+	 *
 	 * @return ellenkezo tipusu csillagkapu lehet null csak olvashatosag
-	 *         kedveert van
+	 * kedveert van
 	 */
 	private Teleporter getOtherTeleporter() {
 		Logger.log(">Teleporter.getOtherTeleporter()");
@@ -52,8 +51,9 @@ public class Teleporter extends Field {
 
 	/**
 	 * Visszaadja a csillagkapu iranyat
+	 *
 	 * @return csillagkapu iranya
-     */
+	 */
 	public Orientation.Type getOrientation() {
 		Logger.log(">Teleporter.getOrientation()");
 		Logger.log("<Teleporter.getOrientation()");
@@ -62,21 +62,22 @@ public class Teleporter extends Field {
 
 	/**
 	 * Az ezredes belepve az egyik csillagkapun a masikon jon ki, amennyiben az nyitva van
+	 *
 	 * @param colonel
-     */
-    @Override
-    public void collideWith(Colonel colonel) {
-    	Logger.log(">Teleporter.collideWith(Colonel colonel)");
+	 */
+	@Override
+	public void collideWith(Colonel colonel) {
+		Logger.log(">Teleporter.collideWith(Colonel colonel)");
 		if (getOtherTeleporter() != null)
 			colonel.teleportTo(getOtherTeleporter());
 		Logger.log("<Teleporter.collideWith(Colonel colonel)");
 	}
 
-    /**
+	/**
 	 * Csillagkapuk alapallasba allitasa
 	 */
-    public static void teleporterReset() {
-    	Teleporters[0] = null;
-    	Teleporters[1] = null;
-    }
+	public static void teleporterReset() {
+		Teleporters[0] = null;
+		Teleporters[1] = null;
+	}
 }

@@ -5,7 +5,7 @@ public class Wall extends Field {
 	/**
 	 * Konstruktor
 	 */
-	public Wall(){
+	public Wall() {
 		Logger.log(">Wall.Wall()");
 		Logger.log("<Wall.Wall()");
 	}

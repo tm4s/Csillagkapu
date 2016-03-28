@@ -72,7 +72,7 @@ public class Colonel {
 		Logger.log(">Colonel.rotateTo(Orientation.Type direction)");
 		orientation = direction;
 		Logger.log("<Colonel.rotateTo(Orientation.Type direction)");
-		
+
 	}
 
 	/**

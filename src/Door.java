@@ -35,8 +35,9 @@ public class Door extends Field {
 
 	/**
 	 * Ha nyitva van az ajto az ezredes athalad rajta
+	 *
 	 * @param colonel
-     */
+	 */
 	@Override
 	public void collideWith(Colonel colonel) {
 		Logger.log(">Door.collideWith(Colonel colonel)");
@@ -48,8 +49,9 @@ public class Door extends Field {
 
 	/**
 	 * Ha nyitva van az ajto a lovedek tovabbhalad rajta
+	 *
 	 * @param bullet
-     */
+	 */
 	@Override
 	public void collideWith(Bullet bullet) {
 		Logger.log(">Door.collideWith(Bullet bullet)");

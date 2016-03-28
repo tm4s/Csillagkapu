@@ -9,7 +9,7 @@ public abstract class Field {
 	 * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
 	 */
 	private Field[] nextFields = new Field[4];
- 
+
 	/**
 	 * mezo adott iranyu szomszedjanak beallitasa
 	 *
@@ -80,8 +80,6 @@ public abstract class Field {
 		Logger.log(">Field.collideWith(ColonelsHand hand)");
 		Logger.log("<Field.collideWith(ColonelsHand hand)");
 	}
-
-
 
 
 }
