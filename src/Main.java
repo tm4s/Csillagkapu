@@ -19,9 +19,13 @@ public class Main {
 		case9();
 		case10();
 		case11();
+<<<<<<< Updated upstream
 
 		case12();
 		case14();
+=======
+		case13();
+>>>>>>> Stashed changes
 		case15();
 		case16();
 
@@ -244,6 +248,7 @@ public class Main {
 		colonel.tryBoxPutDown();
 	}
 
+<<<<<<< Updated upstream
 	private static void case14() {
 		System.out.println("\n14. Sikertelen doboz lerakas");
 		for (int i = 1; i < 6; ++i) {
@@ -287,6 +292,25 @@ public class Main {
 
 
 
+=======
+	private static void case13() {
+		System.out.println("\n13. Doboz lerakása szakadékba [CR]\n");
+		Logger.setIsOn(false);
+		Field field = new EmptyField();
+		Field box = new Box();
+		Field ravine = new Ravine();
+		field.setNextField(Orientation.Type.EAST, box);
+		box.setNextField(Orientation.Type.WEST, field);
+		Colonel colonel = new Colonel(field);
+		colonel.rotateTo(Orientation.Type.EAST);
+		colonel.tryBoxPickUp();
+		field.setNextField(Orientation.Type.EAST, ravine);
+		ravine.setNextField(Orientation.Type.WEST, field);
+		Logger.setIsOn(true);
+		colonel.tryBoxPutDown();
+	}
+
+>>>>>>> Stashed changes
 	private static void case15() {
 		System.out.println("\n15. Doboz felvetel ures mezorol [CB]\n");
 		Logger.setIsOn(false);
