@@ -79,7 +79,7 @@ public class Colonel {
 	 * az ezredes uatsitast kap hogy mozogjon,
 	 * mostani mezorol milyen iranyba probaljon lepni egy masik mezore
 	 * attol a mezotol amin all ell kell kerni a tole megadott iranyban levo szomszedjat
-	 * es meg kell ra hivni az utkozes fuggvenyt (az ezredest magÃ¡t Ã¡tadva paramÃ©ternek)
+	 * es meg kell ra hivni az utkozes fuggvenyt (az ezredest magat atadva parameternek)
 	 *
 	 * @param direction ebbe az iranyba mozogjon
 	 */
@@ -93,7 +93,7 @@ public class Colonel {
 
 	/**
 	 * ures mezore lepes
-	 * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett Ã©s torli a ra mutato referenciajat
+	 * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett es torli a ra mutato referenciajat
 	 */
 	public void moveTo(Field field) {
 		Logger.log(">Colonel.moveTo(Field field)");
@@ -104,10 +104,10 @@ public class Colonel {
 	}
 
 	/**
-	 * mÃ©rlegre valÃ³ rÃ¡lÃ©pÃ©s
-	 * Ã©rtesÃ­ti a mÃ©rleget hogy sÃºly kerÃ¼lt rÃ¡, eltÃ¡rol rÃ¡ egy referenciÃ¡t (a lelÃ©pÃ©s miatt)
+	 * merlegre valo ralepes
+	 * Ertesiti a merleget hogy suly kerult ra, eltarol egy referenciat (a lelepes miatt)
 	 *
-	 * @param scale erre a mÃ©rlegre lÃ©p rÃ¡
+	 * @param scale erre a merlegre lep ra
 	 */
 	public void moveTo(Scale scale) {
 		Logger.log(">Colonel.moveTo(Scale scale)");
@@ -120,9 +120,9 @@ public class Colonel {
 	}
 
 	/**
-	 * ZPM modulok felvÃ©tele
-	 * Amikor az ezredes rÃ¡lÃ©pne egy zpm modulra akkor a modul mezÅ‘ Ã¼res mezÅ‘vÃ© alakul,
-	 * ekÃ¶zben az ezredes is rÃ¡lÃ©p, valamint az eddig Ã¶sszegyÅ±jtÃ¶tt zpmek szÃ¡mÃ¡t megnÃ¶veljÃ¼k eggyel.
+	 * ZPM modulok felvetele
+	 * Amikor az ezredes ralepne egy ZPM modulra, akkor a modul mezo ures mezove alakul,
+	 * ekozben az ezredes is ralep, valamint az eddig osszegyujtott ZPM-ek szamat is megnoveljuk eggyel.
 	 *
 	 * @param zpm ezt a zpm modult veszi fel
 	 */
@@ -138,7 +138,7 @@ public class Colonel {
 	}
 
 	/**
-	 * Ha az ezredes szakadÃ©kba lÃ©p meghal.
+	 * Ha az ezredes szakadekba lep meghal.
 	 *
 	 * @param ravine ebbe a szakadekba lep bele
 	 */
@@ -164,11 +164,11 @@ public class Colonel {
 	}
 
 	/**
-	 * doboz felvÃ©telÃ©re kÃ­sÃ©rlet az ezredes elotti mezorol
-	 * lÃ©trehozunk egy dobozt aminek a tulajdonosÃ¡t beÃ¡llÃ­tjuk magunkra Ã©s nem hagyjuk meg a default null-t
+	 * doboz felvetelere kiserlet az ezredes elotti mezorol
+	 * letrehozunk egy dobozt aminek a tulajdonosat beallitjuk magunkra es nem hagyjuk meg a default null-t
 	 * (doboznak van egy parametere ami Colonel referencia)
-	 * Ã©s ezt a dobozt Ã¼tkÃ¶ztetjÃ¼k a mezÅ‘vel ami elÅ‘ttÃ¼nk van
-	 * ha mezÅ‘n doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
+	 * es ezt a dobozt Ã¼tkÃ¶ztetjÃ¼k a mezovel ami elottÃ¼nk van
+	 * ha mezon doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
 	 * ha nem doboz van a mezon akkor az erzekeli hogy egy hozzank tartozo dobozzal utkozott
 	 * visszahivja a doboz lerakasa funkcionkat ezert ebben ellenorzini kell hogy van-e nalunk doboz es ha nincs
 	 * akkor tudjuk hogy innen tortent a visszahivas
@@ -248,8 +248,8 @@ public class Colonel {
 
 
 	/**
-	 * Doboz lerakÃ¡sa szakadÃ©kba
-	 * Ennek hatÃ¡sÃ¡ra az ezredesnÃ©l lÃ©vÅ‘ doboz megszÅ±nik.
+	 * Doboz lerakasa szakadekba
+	 * Ennek hatasara az ezredesnel levo doboz megszunik.
 	 *
 	 * @param ravine ebbe a szakadekba tesszuk (nem kell igazabol)
 	 */
