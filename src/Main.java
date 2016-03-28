@@ -472,7 +472,7 @@ public class Main {
 				"\t8.2. ajtoval [CD]\n" +
 				"\t8.3. csillagkapuval [C0]\n" +
 				"9. Tolteny utkozese specialis fallal [C+]\n" +
-				"10. Tolteny utkozese ures mezovel, dobozzal, szakadekkal, merleggel, ZPM modullal\n" +
+				"10. Tolteny utkozese ures mezovel, dobozzal, szakadekkal, merleggel, ZPM modullal [C_BRSZ]\n" +
 				"11. Doboz lerakasa ures mezore [C_]\n" +
 				"12. Doboz lerakasa merlegre [CS]\n" +
 				"13. Doboz lerakasa szakadekba [CR]\n" +
