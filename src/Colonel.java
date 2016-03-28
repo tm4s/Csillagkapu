@@ -79,7 +79,7 @@ public class Colonel {
 	 * az ezredes uatsitast kap hogy mozogjon,
 	 * mostani mezorol milyen iranyba probaljon lepni egy masik mezore
 	 * attol a mezotol amin all ell kell kerni a tole megadott iranyban levo szomszedjat
-	 * es meg kell ra hivni az utkozes fuggvenyt (az ezredest magát átadva paraméternek)
+	 * es meg kell ra hivni az utkozes fuggvenyt (az ezredest magÃ¡t Ã¡tadva paramÃ©ternek)
 	 *
 	 * @param direction ebbe az iranyba mozogjon
 	 */
@@ -93,34 +93,36 @@ public class Colonel {
 
 	/**
 	 * ures mezore lepes
-	 * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
+	 * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett Ã©s torli a ra mutato referenciajat
 	 */
 	public void moveTo(Field field) {
 		Logger.log(">Colonel.moveTo(Field field)");
 		ownedField = field;
-		notifyOwnedScale();
+		if (ownedScale != null)
+			notifyOwnedScale();
 		Logger.log("<Colonel.moveTo(Field field)");
 	}
 
 	/**
-	 * mérlegre való rálépés
-	 * értesíti a mérleget hogy súly került rá, eltárol rá egy referenciát (a lelépés miatt)
+	 * mÃ©rlegre valÃ³ rÃ¡lÃ©pÃ©s
+	 * Ã©rtesÃ­ti a mÃ©rleget hogy sÃºly kerÃ¼lt rÃ¡, eltÃ¡rol rÃ¡ egy referenciÃ¡t (a lelÃ©pÃ©s miatt)
 	 *
-	 * @param scale erre a mérlegre lép rá
+	 * @param scale erre a mÃ©rlegre lÃ©p rÃ¡
 	 */
 	public void moveTo(Scale scale) {
 		Logger.log(">Colonel.moveTo(Scale scale)");
 		ownedField = scale;
-		notifyOwnedScale();
+		if (ownedScale != null)
+			notifyOwnedScale();
 		scale.addWeight();
 		this.ownedScale = scale;
 		Logger.log("<Colonel.moveTo(Scale scale)");
 	}
 
 	/**
-	 * ZPM modulok felvétele
-	 * Amikor az ezredes rálépne egy zpm modulra akkor a modul mező üres mezővé alakul,
-	 * eközben az ezredes is rálép, valamint az eddig összegyűjtött zpmek számát megnöveljük eggyel.
+	 * ZPM modulok felvÃ©tele
+	 * Amikor az ezredes rÃ¡lÃ©pne egy zpm modulra akkor a modul mezÅ‘ Ã¼res mezÅ‘vÃ© alakul,
+	 * ekÃ¶zben az ezredes is rÃ¡lÃ©p, valamint az eddig Ã¶sszegyÅ±jtÃ¶tt zpmek szÃ¡mÃ¡t megnÃ¶veljÃ¼k eggyel.
 	 *
 	 * @param zpm ezt a zpm modult veszi fel
 	 */
@@ -128,21 +130,23 @@ public class Colonel {
 	public void moveTo(Zpm zpm) {
 		Logger.log(">Colonel.moveTo(Zpm zpm)");
 		ownedField = new EmptyField();
-		notifyOwnedScale();
+		if (ownedScale != null)
+			notifyOwnedScale();
 		zpm.setField(ownedField);
 		this.collectedZpms++;
 		Logger.log("<Colonel.moveTo(Zpm zpm)");
 	}
 
 	/**
-	 * Ha az ezredes szakadékba lép meghal.
+	 * Ha az ezredes szakadÃ©kba lÃ©p meghal.
 	 *
 	 * @param ravine ebbe a szakadekba lep bele
 	 */
 	public void moveTo(Ravine ravine) {
 		Logger.log(">Colonel.moveTo(Ravine ravine)");
 		ownedField = ravine;
-		notifyOwnedScale();
+		if (ownedScale != null)
+			notifyOwnedScale();
 		this.dead = true;
 		Logger.log("<Colonel.moveTo(Ravine ravine)");
 	}
@@ -160,11 +164,11 @@ public class Colonel {
 	}
 
 	/**
-	 * doboz felvételére kísérlet az ezredes elotti mezorol
-	 * létrehozunk egy dobozt aminek a tulajdonosát beállítjuk magunkra és nem hagyjuk meg a default null-t
+	 * doboz felvÃ©telÃ©re kÃ­sÃ©rlet az ezredes elotti mezorol
+	 * lÃ©trehozunk egy dobozt aminek a tulajdonosÃ¡t beÃ¡llÃ­tjuk magunkra Ã©s nem hagyjuk meg a default null-t
 	 * (doboznak van egy parametere ami Colonel referencia)
-	 * és ezt a dobozt ütköztetjük a mezővel ami előttünk van
-	 * ha mezőn doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
+	 * Ã©s ezt a dobozt Ã¼tkÃ¶ztetjÃ¼k a mezÅ‘vel ami elÅ‘ttÃ¼nk van
+	 * ha mezÅ‘n doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
 	 * ha nem doboz van a mezon akkor az erzekeli hogy egy hozzank tartozo dobozzal utkozott
 	 * visszahivja a doboz lerakasa funkcionkat ezert ebben ellenorzini kell hogy van-e nalunk doboz es ha nincs
 	 * akkor tudjuk hogy innen tortent a visszahivas
@@ -184,7 +188,7 @@ public class Colonel {
 	 * a helyen letrehoz egy ures mezot ha nem tartozott hozza lenyomott merleg
 	 * ha tartozott akkor felengedjuk amerleget es azt tesszuk a helyere
 	 *
-	 * @param box ezt a dobozt vesszük fel
+	 * @param box ezt a dobozt vesszÃ¼k fel
 	 */
 	public void boxPickUp(Box box) {
 		Logger.log(">Colonel.boxPickUp(Box box)");
@@ -244,8 +248,8 @@ public class Colonel {
 
 
 	/**
-	 * Doboz lerakása szakadékba
-	 * Ennek hatására az ezredesnél lévő doboz megszűnik.
+	 * Doboz lerakÃ¡sa szakadÃ©kba
+	 * Ennek hatÃ¡sÃ¡ra az ezredesnÃ©l lÃ©vÅ‘ doboz megszÅ±nik.
 	 *
 	 * @param ravine ebbe a szakadekba tesszuk (nem kell igazabol)
 	 */
