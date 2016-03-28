@@ -1,10 +1,8 @@
 /**
- * Irány tárolására alkalmas osztály
+ * Irany tarolasara alkalmas osztaly
  */
 
-// Debugnal itt a hiba!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// KURVABUGOS
-// elm most csak a Type kell belole mas nem de nembiztos :DD
+// A grafikus interface keszitesenel majd figyelni kell ra
 
 public class Orientation {
 	public enum Type {
@@ -13,7 +11,6 @@ public class Orientation {
 
 
 	public static Type getOpposite(int i) {
-		//Logger.log(">Orientation.getOpposite(int i)");
 		Type direction = Type.NORTH;
 		switch (i) {
 			case 0:
@@ -31,7 +28,6 @@ public class Orientation {
 			default:
 				break;
 		}
-		//Logger.log("<Orientation.getOpposite(int i)");
 		return direction;
 	}
 

@@ -1,5 +1,5 @@
 /**
- * Üres mező
+ * Ures mezo
  */
 
 public class EmptyField extends Field {
@@ -37,7 +37,7 @@ public class EmptyField extends Field {
 	}
 
 	/**
-	 * Ures mezorol tortene doboz felvetel, illetve arra tortene lerakas
+	 * Ures mezorol torteno doboz felvetel, illetve arra tortene lerakas
 	 *
 	 * @param hand
 	 */

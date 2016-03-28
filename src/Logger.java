@@ -5,13 +5,8 @@ public class Logger {
 	private static int numberOfTabs = -1;
 	private static boolean isOn = true;
 
-
-	public static boolean getIsOn() {
-		return isOn;
-	}
-
 	/**
-	 * Logger ki-be kapcsolasa
+	 * Logger ki- es bekapcsolasa
 	 *
 	 * @param value
 	 */
@@ -22,7 +17,7 @@ public class Logger {
 	/**
 	 * A log kiirasa
 	 *
-	 * @param parameter Kiirando szoveg
+	 * @param parameter kiirando szoveg
 	 */
 	public static void log(String parameter) {
 		if (isOn) {

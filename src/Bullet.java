@@ -1,11 +1,11 @@
 /**
- * Lövedék
+ * Lovedek
  */
 
 public class Bullet {
 
 	/**
-	 * Aktualis pozocio, irany tipusa a teleporternek ami letrejohet belole
+	 * Aktualis pozicioja, iranya, tipusa a teleporternek, ami letrejohet belole
 	 */
 	private Field ownedField;
 	private Orientation.Type direction;
@@ -14,7 +14,7 @@ public class Bullet {
 	/**
 	 * Konstruktor
 	 *
-	 * @param type       telepotrter tipusa
+	 * @param type       teleporter tipusa
 	 * @param startField kezdo mezo
 	 * @param direction  haladasi irany
 	 */
@@ -27,8 +27,8 @@ public class Bullet {
 	}
 
 	/**
-	 * Tovabbhalad a kovetkezo mezore mezotol amin all elkeri a megfelelo
-	 * iranyu szomszedjat es utkozik vele
+	 * Tovabbhalad a kovetkezo mezore, a mezotol, amin all, elkeri a megfelelo
+	 * iranyu szomszedjat, es utkozik vele
 	 */
 	public void moveForward() {
 		Logger.log(">Bullet.moveForward()");
@@ -39,7 +39,7 @@ public class Bullet {
 	}
 
 	/**
-	 * Atalkulas teleporterre a mezon amin all ott letrehoz egy teleportert
+	 * Atalkulas teleporterre, a mezon, amin all, letrehoz egy teleportert
 	 * (regi mezo eltunik)
 	 */
 	public void transformToTeleporter() {

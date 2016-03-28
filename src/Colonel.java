@@ -5,10 +5,10 @@
 public class Colonel {
 
 	/**
-	 * mezo amin all az ezredes
-	 * irany amibe nez
-	 * merleg amin all
-	 * doboz ami nala van
+	 * mezo, amin all az ezredes
+	 * irany, amerre nez
+	 * merleg, amin all
+	 * doboz, ami nala van
 	 * begyujtott ZPM modulok szama
 	 * meghalt-e az ezredes szakadektol
 	 */
@@ -24,7 +24,7 @@ public class Colonel {
 	/**
 	 * konstruktor
 	 *
-	 * @param field szuksege van egy mezore amin all majd
+	 * @param field szuksege van egy mezore, amin all majd
 	 */
 	public Colonel(Field field) {
 		Logger.log(">Colonel.Colonel(Field field)");
@@ -35,7 +35,7 @@ public class Colonel {
 	}
 
 	/**
-	 * elkeri a mezotol amin az ezredes all azt a mezot ami abba az iranyba van tole amibe az ezreds nez
+	 * elkeri a mezotol, amin az ezredes all azt a mezot, ami abba az iranyba van tole, amerre az ezreds nez
 	 *
 	 * @return megfelelo mezot
 	 * csak a kod olvashatosaga miatt lett letrehozva
@@ -76,9 +76,9 @@ public class Colonel {
 	}
 
 	/**
-	 * az ezredes uatsitast kap hogy mozogjon,
+	 * az ezredes utasitast kap, hogy mozogjon,
 	 * mostani mezorol milyen iranyba probaljon lepni egy masik mezore
-	 * attol a mezotol amin all ell kell kerni a tole megadott iranyban levo szomszedjat
+	 * attol a mezotol, amin all, el kell kerni a tole megadott iranyban levo szomszedjat,
 	 * es meg kell ra hivni az utkozes fuggvenyt (az ezredest magat atadva parameternek)
 	 *
 	 * @param direction ebbe az iranyba mozogjon
@@ -93,7 +93,7 @@ public class Colonel {
 
 	/**
 	 * ures mezore lepes
-	 * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett es torli a ra mutato referenciajat
+	 * ha eddig merlegen allt, akkor ertesiti a merleget, hogy lelepett, es torli a ra mutato referenciajat
 	 */
 	public void moveTo(Field field) {
 		Logger.log(">Colonel.moveTo(Field field)");
@@ -105,7 +105,7 @@ public class Colonel {
 
 	/**
 	 * merlegre valo ralepes
-	 * Ertesiti a merleget hogy suly kerult ra, eltarol egy referenciat (a lelepes miatt)
+	 * ertesiti a merleget, hogy suly kerult ra, eltarol egy referenciat (a lelepes miatt)
 	 *
 	 * @param scale erre a merlegre lep ra
 	 */
@@ -122,7 +122,7 @@ public class Colonel {
 	/**
 	 * ZPM modulok felvetele
 	 * Amikor az ezredes ralepne egy ZPM modulra, akkor a modul mezo ures mezove alakul,
-	 * ekozben az ezredes is ralep, valamint az eddig osszegyujtott ZPM-ek szamat is megnoveljuk eggyel.
+	 * ekozben az ezredes is ralep, valamint az eddig osszegyujtott ZPM-ek szamat is megnoveljuk 1-gyel
 	 *
 	 * @param zpm ezt a zpm modult veszi fel
 	 */
@@ -138,7 +138,7 @@ public class Colonel {
 	}
 
 	/**
-	 * Ha az ezredes szakadekba lep meghal.
+	 * Ha az ezredes szakadekba lep, meghal.
 	 *
 	 * @param ravine ebbe a szakadekba lep bele
 	 */
@@ -152,7 +152,7 @@ public class Colonel {
 	}
 
 	/**
-	 * ha merlegen all az ezredes ertesiti azt hogy lelepett rola
+	 * ha merlegen all az ezredes, ertesiti azt, hogy lelepett rola
 	 */
 	private void notifyOwnedScale() {
 		Logger.log(">Colonel.notifyOwnedScale()");
@@ -165,15 +165,15 @@ public class Colonel {
 
 	/**
 	 * doboz felvetelere kiserlet az ezredes elotti mezorol
-	 * letrehozunk egy dobozt aminek a tulajdonosat beallitjuk magunkra es nem hagyjuk meg a default null-t
-	 * (doboznak van egy parametere ami Colonel referencia)
-	 * es ezt a dobozt Ã¼tkÃ¶ztetjÃ¼k a mezovel ami elottÃ¼nk van
-	 * ha mezon doboz van akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
-	 * ha nem doboz van a mezon akkor az erzekeli hogy egy hozzank tartozo dobozzal utkozott
-	 * visszahivja a doboz lerakasa funkcionkat ezert ebben ellenorzini kell hogy van-e nalunk doboz es ha nincs
-	 * akkor tudjuk hogy innen tortent a visszahivas
+	 * letrehozunk egy dobozt, aminek a tulajdonosat beallitjuk magunkra, es nem hagyjuk meg a default null-t
+	 * (doboznak van egy parametere, ami Colonel referencia),
+	 * es ezt a dobozt utkoztetjuk a mezovel, ami elottunk van
+	 * ha mezon doboz van, akkor az visszahivja a mi boxPickUp fuggvenyunket magaval
+	 * ha nem doboz van a mezon, akkor az erzekeli, hogy egy hozzank tartozo dobozzal utkozott
+	 * visszahivja a doboz lerakasa funkcionkat, ezert ebben ellenorzini kell, hogy van-e nalunk doboz, es ha nincs,
+	 * akkor tudjuk, hogy innen tortent a visszahivas
 	 */
-	// kicsit necces de talan jo
+	// kicsit necces, de talan jo
 	public void tryBoxPickUp() {
 		Logger.log(">Colonel.tryBoxPickUp()");
 		if (ownedBox == null) {
@@ -183,12 +183,12 @@ public class Colonel {
 	}
 
 	/**
-	 * doboz felvetele az ezredes elotti mezorol
+	 * doboz felvetele az ezredes elotti mezorol,
 	 * ha nincs nalunk doboz
-	 * a helyen letrehoz egy ures mezot ha nem tartozott hozza lenyomott merleg
-	 * ha tartozott akkor felengedjuk amerleget es azt tesszuk a helyere
+	 * a helyen letrehoz egy ures mezot, ha nem tartozott hozza lenyomott merleg
+	 * ha tartozott, akkor felengedjuk a merleget, es azt tesszuk a helyere
 	 *
-	 * @param box ezt a dobozt vesszÃ¼k fel
+	 * @param box ezt a dobozt vesszuk fel
 	 */
 	public void boxPickUp(Box box) {
 		Logger.log(">Colonel.boxPickUp(Box box)");
@@ -217,7 +217,7 @@ public class Colonel {
 	}
 
 	/**
-	 * doboz lerakasa ures mezore ha van nalunk
+	 * doboz lerakasa ures mezore, ha van nalunk
 	 *
 	 * @param emptyField erre a mezore
 	 */
@@ -230,9 +230,9 @@ public class Colonel {
 	}
 
 	/**
-	 * doboz lerakasa merlegre ha van nalunk
+	 * doboz lerakasa merlegre, ha van nalunk
 	 * merleg ertesitese a lenyomasrol
-	 * dobozban eltarolunk ra egy referenciat a doboz felvetelnel valo ertesites miatt
+	 * dobozban eltarolunk ra egy referenciat a doboz felvetelenel valo ertesites miatt
 	 *
 	 * @param scale erre a merlegre
 	 */
@@ -249,7 +249,7 @@ public class Colonel {
 
 	/**
 	 * Doboz lerakasa szakadekba
-	 * Ennek hatasara az ezredesnel levo doboz megszunik.
+	 * Ennek hatasara az ezredesnel levo doboz megszunik
 	 *
 	 * @param ravine ebbe a szakadekba tesszuk (nem kell igazabol)
 	 */
@@ -263,10 +263,10 @@ public class Colonel {
 	}
 
 	/**
-	 * Teleporter kilovese (csak akkor lesz a kilott lovedekbol teleporter ha sepcialis falnak utkozik
-	 * a kilott lovedeknek megadjuk a mezot amin allunk es az iranyt
-	 * valamint elinditjuk a lovedeket (ezutan addig fog haladni ameddig bele nem utkozik
-	 * valamilyen objektumba ami nem engedi tovabb vagy specialis falba ahol letrehoz egy teleportert
+	 * Teleporter kilovese (csak akkor lesz a kilott lovedekbol teleporter, ha sepcialis falnak utkozik
+	 * a kilott lovedeknek megadjuk a mezot, amin allunk es az iranyt,
+	 * valamint elinditjuk a lovedeket (ezutan addig fog haladni, ameddig bele nem utkozik
+	 * valamilyen objektumba, ami nem engedi tovabb vagy specialis falba, ahol letrehoz egy teleportert)
 	 *
 	 * @param type ilyen tipusu (szinu) teleportert akarunk letrehozni
 	 */

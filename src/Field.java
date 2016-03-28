@@ -1,12 +1,12 @@
 /**
- * Ilyen mező típusokból áll a pálya
+ * Ilyen mezo tipusokbol all a palya
  */
 
 public abstract class Field {
 
 
 	/**
-	 * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
+	 * mezo szomszedai, az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
 	 */
 	private Field[] nextFields = new Field[4];
 
@@ -49,7 +49,7 @@ public abstract class Field {
 
 	/**
 	 * szomszed mezok ertesitese magarol es sajat szomszed mezoinek inicializalasa
-	 * szomszed mezok megfelleo iranyu szomszed mezo referenciajat magara allitja
+	 * szomszed mezok megfelelo iranyu szomszed mezo referenciajat magara allitja
 	 *
 	 * @param nextFields szomszed mezok tombje
 	 */

@@ -37,7 +37,7 @@ public class Ravine extends Field {
 	}
 
 	/**
-	 * Amennyiben az ezerdes kezeben doboz volt, az beleesik a szakadekba es megszunik
+	 * Amennyiben az ezerdes kezeben doboz volt, az beleesik a szakadekba, es megszunik
 	 *
 	 * @param hand
 	 */

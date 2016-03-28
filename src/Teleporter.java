@@ -10,8 +10,7 @@ public class Teleporter extends Field {
 	}
 
 	/**
-	 * palyan levo lerakott csillagkapuk static mivel csak 2 lehet es mivel
-	 * tudniuk kell egymasrol palyan letrehozott csillagkapura tarol referenciat
+	 * palyan levo lerakott csillagkapukat tarolo statikus tomb
 	 */
 	private static Teleporter[] Teleporters = new Teleporter[2];
 
@@ -19,9 +18,9 @@ public class Teleporter extends Field {
 	private Orientation.Type orientation;
 
 	/**
-	 * konstruktor ha ugyanolyan tipusu csillagkapu mar van a palyan akkor annak
+	 * konstruktor, ha ugyanolyan tipusu csillagkapu mar van a palyan, akkor annak
 	 * a helyen letrehoz egy specialis falat (mivel a csillagkapu elott ennek
-	 * kellett a helyen lennie) majd magara allitja a statikus vele megegyezo
+	 * kellett a helyen lennie), majd magara allitja a statikus vele megegyezo
 	 * csillagkapu referenciat
 	 *
 	 * @param type csillagkapu tipusa (szine)
@@ -38,9 +37,9 @@ public class Teleporter extends Field {
 	}
 
 	/**
-	 * masik teleporter lekrese
+	 * masik teleporter lekerese
 	 *
-	 * @return ellenkezo tipusu csillagkapu lehet null csak olvashatosag
+	 * @return ellenkezo tipusu csillagkapu lehet null, csak az olvashatosag
 	 * kedveert van
 	 */
 	private Teleporter getOtherTeleporter() {
@@ -74,7 +73,7 @@ public class Teleporter extends Field {
 	}
 
 	/**
-	 * Csillagkapuk alapallasba allitasa
+	 * Csillagkapuk alaphelyzetbe allitasa
 	 */
 	public static void teleporterReset() {
 		Teleporters[0] = null;

@@ -34,7 +34,7 @@ public class Door extends Field {
 	}
 
 	/**
-	 * Ha nyitva van az ajto az ezredes athalad rajta
+	 * Ha nyitva van az ajto, az ezredes athalad rajta
 	 *
 	 * @param colonel
 	 */
@@ -48,7 +48,7 @@ public class Door extends Field {
 	}
 
 	/**
-	 * Ha nyitva van az ajto a lovedek tovabbhalad rajta
+	 * Ha nyitva van az ajto, a lovedek tovabbhalad rajta
 	 *
 	 * @param bullet
 	 */

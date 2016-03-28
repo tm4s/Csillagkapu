@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 /**
  * A kulonbozo use-case-ek kozotti valasztasi lehetoseget felkinalo
- * es ezeket futtato menuk
+ * es ezeket futtato menu
  */
 public class Main {
 

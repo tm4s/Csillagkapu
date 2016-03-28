@@ -6,7 +6,7 @@ public class Scale extends Field {
 	private Door door = new Door();
 
 	/**
-	 * Konstruktor, a paramterkent atadott ajto objektumot
+	 * Konstruktor, a parameterkent atadott ajto objektumot
 	 * beallitja az adott merleghez tartozo ajtokent
 	 *
 	 * @param door adott merleghez tartozo ajto

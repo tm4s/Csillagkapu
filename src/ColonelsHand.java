@@ -40,7 +40,7 @@ public class ColonelsHand {
 	}
 
 	/**
-	 * beallitja megfelelore hogy van-e nala doboz
+	 * beallitja megfelelore, hogy van-e nala doboz
 	 *
 	 * @param hasBox true van false nincs
 	 */

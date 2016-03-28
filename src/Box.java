@@ -5,7 +5,7 @@
 public class Box extends Field {
 
 	/**
-	 * merleg akit ertesitenie kell ha felveszik rola
+	 * Merleg, amit ertesitenie kell ha felveszik rola
 	 */
 	private Scale ownedScale = null;
 
@@ -21,7 +21,7 @@ public class Box extends Field {
 	}
 
 	/**
-	 * Lekeri a merleget ami a dobozhoz tartozik
+	 * Lekeri a merleget, ami a dobozhoz tartozik
 	 *
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public class Box extends Field {
 
 
 	/**
-	 * Az ezeredes kezenek a dobozzal valo talalkzoasa
+	 * Az ezeredes kezenek a dobozzal valo talalkozasa
 	 *
 	 * @param hand
 	 */
