@@ -14,55 +14,55 @@ public class Main {
 
 		while (run && (line = br.readLine()) != null) {
 			switch (line) {
-				case "1.":
+				case "1":
 					case1();
 					break;
-				case "2.":
+				case "2":
 					case2();
 					break;
-				case "3.":
+				case "3":
 					case3();
 					break;
-				case "4.":
+				case "4":
 					case4();
 					break;
-				case "5.":
+				case "5":
 					case5();
 					break;
-				case "6.":
+				case "6":
 					case6();
 					break;
-				case "7.":
+				case "7":
 					case7();
 					break;
-				case "8.":
+				case "8":
 					case8();
 					break;
-				case "9.":
+				case "9":
 					case9();
 					break;
-				case "10.":
+				case "10":
 					case10();
 					break;
-				case "11.":
+				case "11":
 					case11();
 					break;
-				case "12.":
+				case "12":
 					case12();
 					break;
-				case "13.":
+				case "13":
 					case13();
 					break;
-				case "14.":
+				case "14":
 					case14();
 					break;
-				case "15.":
+				case "15":
 					case15();
 					break;
-				case "16.":
+				case "16":
 					case16();
 					break;
-				case "17.":
+				case "17":
 					case17();
 					break;
 				case "h":
