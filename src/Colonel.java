@@ -290,14 +290,6 @@ public class Colonel {
 		Logger.log("<Colonel.teleportTo(Teleporter teleporter)");
 	}
 
-
-	//csak teszteleshez
-	public Field getOwnedField() {
-		Logger.log(">Colonel.getOwnedField()");
-		Logger.log("<Colonel.getOwnedField()");
-		return ownedField;
-	}
-
 	public Orientation.Type getOrientation() {
 		Logger.log(">Colonel.getOrientation()");
 		Logger.log("<Colonel.getOrientation()");
