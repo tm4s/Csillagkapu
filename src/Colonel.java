@@ -293,14 +293,14 @@ public class Colonel {
 
 	//csak teszteleshez
 	public Field getOwnedField() {
-		Logger.log(">getOwnedField()");
-		Logger.log("<getOwnedField()");
+		Logger.log(">Colonel.getOwnedField()");
+		Logger.log("<Colonel.getOwnedField()");
 		return ownedField;
 	}
 
 	public Orientation.Type getOrientation() {
-		Logger.log(">getOrientation()");
-		Logger.log("<getOrientation()");
+		Logger.log(">Colonel.getOrientation()");
+		Logger.log("<Colonel.getOrientation()");
 		return orientation;
 	}
 }
