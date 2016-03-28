@@ -187,11 +187,7 @@ public class Main {
 		System.out.println("\n7. Tolteny kilovese [C]\n");
 		Logger.setIsOn(false);
 		Field field1 = new EmptyField();
-		Field field2 = new EmptyField();
-		field1.setNextField(Orientation.Type.EAST, field2);
-		field2.setNextField(Orientation.Type.WEST, field1);
 		Colonel colonel = new Colonel(field1);
-		colonel.rotateTo(Orientation.Type.EAST);
 		Logger.setIsOn(true);
 		colonel.shootTeleporter(Teleporter.Type.BLUE);
 	}
