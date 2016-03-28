@@ -1,12 +1,8 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
 
-
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		case1();
 		case2();
 		case3();
@@ -23,7 +19,137 @@ public class Main {
 		case14();
 		case15();
 		case16();
+	}*/
+	public static void main(String args[]) throws IOException {
+
+		String[] initText = {"Az objektumokat a karakteres kepernyon a kovetkezok jelolik:\n" +
+				"\tC: Colonel\n" +
+				"\t_: EmptyField\n" +
+				"\tB: Box\n" +
+				"\tD: Door\n" +
+				"\tS: Scale\n" +
+				"\tR: Ravine\n" +
+				"\t#: Wall\n" +
+				"\t+: SpecialWall\n" +
+				"\tZ: Zpm\n" +
+				"\t0/O: Teleporter\n\n"
+		};
+
+		String[] useCases = {"Adja meg a kert use-case szamat: \n" +
+				"1. Ures mezore lepes [C_]\n" +
+				"2. Ezredes utkozese\n" +
+				"\t2.1.fallal [C#]\n" +
+				"\t2.2 specialis fallal[C+]\n" +
+				"\t2.3 dobozzal[CB]\n" +
+				"\t2.4 ajtoval [CD]\n" +
+				"3. Merlegre fel- es lelepes [DCS]\n" +
+				"4. Szakadekba lepes [CR]\n" +
+				"5. Csillagkapuba lepes [0CO]\n" +
+				"6. ZPM begyujtese [CZ]\n" +
+				"7. Tolteny kilovese [C]\n" +
+				"8. Tolteny utkozese\n" +
+				"\t8.1. fallal [C#]\n" +
+				"\t8.2. ajtoval [CD]\n" +
+				"\t8.3. csillagkapuval [C0]\n" +
+				"9. Tolteny utkozese specialis fallal [C+]\n" +
+				"10. Tolteny utkozese ures mezovel, dobozzal, szakadekkal, merleggel, ZPM modullal\n" +
+				"11. Doboz lerakasa ures mezore [C_]\n" +
+				"12. Doboz lerakasa merlegre [CS]\n" +
+				"13. Doboz lerakasa szakadekba [CR]\n" +
+				"14. Sikertelen doboz lerakasa\n" +
+				"\t14.1 ajtora [CD]\n" +
+				"\t14.2 dobozra [CB]\n" +
+				"\t14.3 falra [C#]\n" +
+				"\t14.4 specialis falra [C+]\n" +
+				"\t14.5 ZPM modulra\n" +
+				"15. Doboz felvetele ures mezorol [CB]\n" +
+				"16. Doboz felvetele merlegrol [CBD]\n" +
+				"17. Sikertelen doboz felvetel\n" +
+				"\t17.1. ajtorol [CD]\n" +
+				"\t17.2. dobozrol [CB]\n" +
+				"\t17.3. falrol [C#]\n" +
+				"\t17.4. specialis falrol [C+]\n" +
+				"\t17.5. ures mezorol [C_]\n" +
+				"\t17.6. szakadekrol [CR]\n" +
+				"\t17.7. ZPM modulrol [CZ]\n"
+		};
+
+
+		for (int i = 0; i < initText.length; i++) {
+			System.out.println(initText[i]);
+		}
+
+		for (int i = 0; i < useCases.length; i++) {
+			System.out.println(useCases[i]);
+		}
+
+
+		BufferedReader br = null;
+		br = new BufferedReader(new InputStreamReader(System.in));
+		String line = "";
+
+		while ((line = br.readLine()) != null) {
+			switch (line) {
+				case "1.":
+					case1();
+					break;
+				case "2.":
+					case2();
+					break;
+				case "3.":
+					case3();
+					break;
+				case "4.":
+					case4();
+					break;
+				case "5.":
+					case5();
+					break;
+				case "6.":
+					case6();
+					break;
+				case "7.":
+					case7();
+					break;
+				case "8.":
+					case8();
+					break;
+				case "9.":
+					case9();
+					break;
+				case "10.":
+					case10();
+					break;
+				case "11.":
+					case11();
+					break;
+				case "12.":
+					case12();
+					break;
+				case "13.":
+					case13();
+					break;
+				case "14.":
+					case14();
+					break;
+				case "15.":
+					case15();
+					break;
+				case "16.":
+					case16();
+					break;
+				case "17.":
+					break;
+				default:
+					System.out.println("Adjon meg egy ervenyes esetet!");
+					break;
+			}
+
+		}
+		br.close();
 	}
+
+
 
 	private static void case1() {
 		System.out.println("\n1. Ures mezore lepes [C_]\n");
@@ -70,7 +196,7 @@ public class Main {
 		}
 	}
 	
-	private static void case3(){
+	private static void case3() {
 		System.out.println("\n3. Merlegre fel- es lelepes [DCS]\n");
 		Logger.setIsOn(false);
 		Field door = new Door();
@@ -86,7 +212,7 @@ public class Main {
 		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 
-	private static void case4(){
+	private static void case4() {
 		System.out.println("\n4. Szakadekba lepes [CR]\n");
 		Logger.setIsOn(false);
 		Field field1 = new Ravine();
@@ -98,7 +224,7 @@ public class Main {
 		colonel.isDead();
 	}
 	
-	private static void case5(){
+	private static void case5() {
 		System.out.println("\n5. Csillagkapuba lepes [0C0]\n");
 		Logger.setIsOn(false);
 		Field field = new EmptyField();
@@ -113,7 +239,7 @@ public class Main {
 		colonel.tryMoveTo(Orientation.Type.EAST);
 	}
 	
-	private static void case6(){
+	private static void case6() {
 		System.out.println("\n6. ZPM begyujtese [CZ]\n");
 		Logger.setIsOn(false);
 		Field field = new EmptyField();
@@ -242,7 +368,6 @@ public class Main {
 		colonel.tryBoxPutDown();
 	}
 
-
 	private static void case13() {
 		System.out.println("\n13. Doboz lerakása szakadékba [CR]\n");
 		Logger.setIsOn(false);
@@ -302,7 +427,6 @@ public class Main {
 	}
 
 
-
 	private static void case15() {
 		System.out.println("\n15. Doboz felvetel ures mezorol [CB]\n");
 		Logger.setIsOn(false);
@@ -339,147 +463,4 @@ public class Main {
 		Logger.setIsOn(true);
 		colonel.tryBoxPickUp();
 	}
-
-	String initText = "Az objektumokat a karakteres kepernyon a kovetkezok jelolik:\n" +
-			"\tC: Colonel\n" +
-			"\t_: EmptyField\n"+
-			"\tB: Box\n"+
-			"\tD: Door\n"+
-			"\tS: Scale\n"+
-			"\tR: Ravine\n"+
-			"\t#: Wall\n"+
-			"\t+: SpecialWall\n" +
-			"\tZ: Zpm\n"+
-			"\t0/O: Teleporter\n\n";
-
-	String useCases =  "Adja meg a kert use-case szamat: \n" +
-			"1. Ures mezore lepes [C_]\n" +
-			"2. Ezredes utkozese\n" +
-			"\t2.1.fallal [C#]\n" +
-			"\t2.2 specialis fallal[C+]\n" +
-			"\t2.3 dobozzal[CB]\n" +
-			"\t2.4 ajtoval [CD]\n" +
-			"3. Merlegre fel- es lelepes [DCS]\n" +
-			"4. Szakadekba lepes [CR]\n" +
-			"5. Csillagkapuba lepes [0CO]\n" +
-			"6. ZPM begyujtese [CZ]\n" +
-			"7. Tolteny kilovese [C]\n" +
-			"8. Tolteny utkozese\n" +
-			"\t8.1. fallal [C#]\n"+
-			"\t8.2. ajtoval [CD]\n"+
-			"\t8.3. csillagkapuval [C0]\n"+
-			"9. Tolteny utkozese specialis fallal [C+]\n" +
-			"10. Tolteny utkozese ures mezovel, dobozzal, szakadekkal, merleggel, ZPM modullal\n" +
-			"11. Doboz lerakasa ures mezore [C_]\n" +
-			"12. Doboz lerakasa merlegre [CS]\n" +
-			"13. Doboz lerakasa szakadekba [CR]\n" +
-			"14. Sikertelen doboz lerakasa\n" +
-			"\t14.1 ajtora [CD]\n" +
-			"\t14.2 dobozra [CB]\n" +
-			"\t14.3 falra [C#]\n" +
-			"\t14.4 specialis falra [C+]\n" +
-			"\t14.5 ZPM modulra\n" +
-			"15. Doboz felvetele ures mezorol [CB]\n" +
-			"16. Doboz felvetele merlegrol [CBD]\n" +
-			"17. Sikertelen doboz felvetel\n" +
-			"\t17.1. ajtorol [CD]\n" +
-			"\t17.2. dobozrol [CB]\n" +
-			"\t17.3. falrol [C#]\n" +
-			"\t17.4. specialis falrol [C+]\n" +
-			"\t17.5. ures mezorol [C_]\n" +
-			"\t17.6. szakadekrol [CR]\n" +
-			"\t17.7. ZPM modulrol [CZ]\n";
-
-/*
-	public static void main	(String args[]) {
-		string Output = { " Adja meg a kért use-case számát: \n" +
-				"Üres mezőre lépés [C_]\n" +
-				"Ezredes ütközése \n" +
-				"fallal [C#]\n" +
-				"speciális fallal[C+]\n" +
-				"dobozzal[CB]\n" +
-				"ajtóval [CD]\n" +
-				"Mérlegre fel- és lelépés [DCS]\n" +
-				"Szakadékba lépés [CR]\n" +
-				"Csillagkapuba lépés [0CO]\n" +
-				"ZPM begyűjtése [CZ]\n" +
-				"Töltény kilövése [C]\n" +
-				"Töltény ütközése fallal, ajtóval, csillagkapuval [C#]\n" +
-				"Töltény ütközése speciális fallal [C0]\n" +
-				"Töltény ütközése\n" +
-				"üres mezővel [C_]\n" +
-				"dobozzal [CB]\n" +
-				"szakadékkal [CR]\n" +
-				"mérleggel [CS]\n" +
-				"ZPM modullal [CZ]\n" +
-				"Doboz lerakása üres mezőre [C_]\n" +
-				"Doboz lerakása mérlegre [CS]\n" +
-				"Doboz lerakása szakadékba [CR]\n" +
-				"Sikertelen doboz lerakás\n" +
-				"ajtóra [CD]\n" +
-				"dobozra [CB]\n" +
-				"falra [C#]\n" +
-				"speciális falra [C+]\n" +
-				"ZPM modulra [CZ]\n" +
-				"Doboz felvétele üres mezőről [CB]\n" +
-				"Doboz felvétele mérlegről[CBD]\n" +
-				"Sikertelen doboz felvétel\n" +
-				"ajtóról [CD]\n" +
-				"dobozról [CB]\n" +
-				"falról [C#]\n" +
-				"speciális falról [C+]\n" +
-				"üres mezőről [C_]\n" +
-				"szakadékról [CR]\n" +
-				"ZPM modulról [CZ]\n"
-		}
-
-		BufferedReader br = null;
-		br = new BufferedReader(new InputStreamReader(System.in));
-		String line = "";
-
-		while((line = br.readLine()) != null) {
-			switch(line) {
-				case: "1.":
-				System.out.println("Ures mezore lepes [C_]");
-				Log("C_");
-				break;
-				case: "2.":
-				System.out.println("Ezredes utkozese: ");
-				System.out.println("fallal[C#]");
-				Log("C#");
-				System.out.println("Specialis fallal[C+]");
-				Log("C+");
-				System.out.println("dobozzal[CB]");
-				Log("CB")
-				System.out.println("ajtoval[CD]");
-				Log("CD");
-				break;
-				case: "3.":
-
-				break;
-				case: "4.":
-				break;
-				case: "5.":
-				case: "6.":
-				case: "7.":
-				case: "8.":
-				case: "9.":
-				case: "10.":
-				case: "11.":
-				case: "12.":
-				case: "13.":
-				case: "14.":
-				case: "15.":
-				case: "16.":
-				case: "17.":
-
-			}
-
-
-		}
-
-	}
-*/
-
-
 }
