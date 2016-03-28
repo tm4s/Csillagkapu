@@ -9,7 +9,6 @@ public class Main {
 	public static void main(String args[]) {
 		case1();
 		case2();
-
 		case3();
 		case4();
 		case5();
@@ -19,16 +18,11 @@ public class Main {
 		case9();
 		case10();
 		case11();
-
 		case12();
 		case13();
 		case14();
-
-		case13();
-
 		case15();
 		case16();
-
 	}
 
 	private static void case1() {
