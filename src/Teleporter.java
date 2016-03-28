@@ -28,14 +28,14 @@ public class Teleporter extends Field {
 	 *            csillagkapu tipusa (szine)
 	 */
 	public Teleporter(Type type, Orientation.Type orientation) {
-		Logger.log(">Teleporter(Type type, Orientation.Type orientation)");
+		Logger.log(">Teleporter.Teleporter(Type type, Orientation.Type orientation)");
 		this.type = type;
 		this.orientation = Orientation.getOpposite(orientation.ordinal());
 		if (Teleporters[type.ordinal()] != null) {
 			Teleporters[type.ordinal()].setField(new SpecialWall());
 		}
 		Teleporters[type.ordinal()] = this;
-		Logger.log("<Teleporter(Type type, Orientation.Type orientation)");
+		Logger.log("<Teleporter.Teleporter(Type type, Orientation.Type orientation)");
 	}
 
 	/**
@@ -45,8 +45,8 @@ public class Teleporter extends Field {
 	 *         kedveert van
 	 */
 	private Teleporter getOtherTeleporter() {
-		Logger.log(">getOtherTeleporter()");
-		Logger.log("<getOtherTeleporter()");
+		Logger.log(">Teleporter.getOtherTeleporter()");
+		Logger.log("<Teleporter.getOtherTeleporter()");
 		return Teleporters[(type.ordinal() + 1) % 2];
 	}
 
@@ -55,8 +55,8 @@ public class Teleporter extends Field {
 	 * @return csillagkapu iranya
      */
 	public Orientation.Type getOrientation() {
-		Logger.log(">getOrientation()");
-		Logger.log("<getOrientation()");
+		Logger.log(">Teleporter.getOrientation()");
+		Logger.log("<Teleporter.getOrientation()");
 		return orientation;
 	}
 
@@ -66,10 +66,10 @@ public class Teleporter extends Field {
      */
     @Override
     public void collideWith(Colonel colonel) {
-    	Logger.log(">collideWith(Colonel colonel)");
+    	Logger.log(">Teleporter.collideWith(Colonel colonel)");
 		if (getOtherTeleporter() != null)
 			colonel.teleportTo(getOtherTeleporter());
-		Logger.log("<collideWith(Colonel colonel)");
+		Logger.log("<Teleporter.collideWith(Colonel colonel)");
 	}
 
     /**
