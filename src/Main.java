@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 /**
  * A kulonbozo use-case-ek kozotti valasztasi lehetoseget felkinalo
- * es ezeket futtato menu
+ * es ezeket futtato menuk
  */
 public class Main {
 
@@ -396,7 +396,6 @@ public class Main {
 		colonel.tryBoxPickUp();
 	}
 
-
 	private static void case17() {
 		System.out.println("\n17. Sikertelen doboz felvetel  [CDB#+_RZ]\n");
 		for (int i = 1; i <= 7; ++i) {
@@ -460,6 +459,9 @@ public class Main {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+		for (int i = 0; i < 1000; i++) {
+			System.out.println("\n");
 		}
 	}
 }
