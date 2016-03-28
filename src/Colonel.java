@@ -223,7 +223,7 @@ public class Colonel {
 	 */
 	public void boxPutDownToEmptyField(EmptyField emptyField) {
 		Logger.log(">Colonel.boxPutDownToEmptyField(EmptyField emptyField)");
-		getFrontField().setField(ownedBox);
+		emptyField.setField(ownedBox);
 		ownedBox = null;
 		hand.setHasBox(false);
 		Logger.log("<Colonel.boxPutDownToEmptyField(EmptyField emptyField)");
@@ -240,7 +240,7 @@ public class Colonel {
 		Logger.log(">Colonel.boxPutDownToScale(Scale scale)");
 		ownedBox.setOwnedScale(scale);
 		scale.addWeight();
-		getFrontField().setField(ownedBox);
+		scale.setField(ownedBox);
 		ownedBox = null;
 		hand.setHasBox(false);
 		Logger.log("<Colonel.boxPutDownToScale(Scale scale)");
