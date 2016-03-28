@@ -77,6 +77,8 @@ public class Main {
 					break;
 			}
 
+			System.out.println(Assets.LZ());
+
 		}
         
 		br.close();
