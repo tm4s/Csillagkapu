@@ -63,6 +63,7 @@ public class Main {
 					case16();
 					break;
 				case "17.":
+					case17();
 					break;
 				case "h":
 					printMenu();
@@ -404,31 +405,31 @@ public class Main {
             Field field1 = null;
             switch (i) {
                 case 1:
-                    System.out.println("\n2.1. Sikertelen doboz felvetel ajtorol [CD]\n");
+                    System.out.println("\n17.1. Sikertelen doboz felvetel ajtorol [CD]\n");
                     field1 = new Door();
                     break;
                 case 2:
-                    System.out.println("\n2.2. Sikertelen doboz felvetel doobozrol [CB]\n");
+                    System.out.println("\n17.2. Sikertelen doboz felvetel doobozrol [CB]\n");
                     field1 = new Box();
                     break;
                 case 3:
-                    System.out.println("\n2.3. Sikertelen doboz felvetel falrol [C#]\n");
+                    System.out.println("\n17.3. Sikertelen doboz felvetel falrol [C#]\n");
                     field1 = new Wall();
                     break;
                 case 4:
-                    System.out.println("\n2.4. Sikertelen doboz felvetel specialis falról [C+]\n");
+                    System.out.println("\n17.4. Sikertelen doboz felvetel specialis falról [C+]\n");
                     field1 = new SpecialWall();
                     break;
                 case 5:
-                    System.out.println("\n2.4. Sikertelen doboz felvetel üres mezorol [C_]\n");
+                    System.out.println("\n17.5. Sikertelen doboz felvetel üres mezorol [C_]\n");
                     field1 = new EmptyField();
                     break;
                 case 6:
-                    System.out.println("\n2.4. Sikertelen doboz felvetel szakadekrol [CR]\n");
+                    System.out.println("\n17.6. Sikertelen doboz felvetel szakadekrol [CR]\n");
                     field1 = new Ravine();
                     break;
                 case 7:
-                    System.out.println("\n2.4. Sikertelen doboz felvétel ZPM modulrol [CZ]\n");
+                    System.out.println("\n17.7. Sikertelen doboz felvétel ZPM modulrol [CZ]\n");
                     field1 = new Zpm();
                     break;				
                 default:
