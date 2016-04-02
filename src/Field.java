@@ -58,10 +58,9 @@ public abstract class Field {
      */
     public void setNextFields(Field[] nextFields) {
         for (int i = 0; i < nextFields.length; ++i) {
-            if (this.nextFields[i] != null) {
-                this.nextFields[i] = nextFields[i];
+            this.nextFields[i] = nextFields[i];
+            if (this.nextFields[i] != null)
                 this.nextFields[i].setNextField(Orientation.getOpposite(i), this);
-            }
         }
     }
 
