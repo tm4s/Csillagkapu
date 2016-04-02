@@ -51,7 +51,7 @@ public class Test {
 				break;
 			}
 			Scanner scan = new Scanner(System.in);
-			switch (scan.nextLine()) {
+			switch (scan.nextLine().toLowerCase()) {
 			case "w":
 				colonel.tryMoveTo(Orientation.Type.NORTH);
 				break;
