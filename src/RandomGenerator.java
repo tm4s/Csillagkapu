@@ -14,8 +14,7 @@ public class RandomGenerator {
         if (!isTest) {
             if (index>testCases.length)
                 index = 0;
-            return testCases[index]*10;
-            ++index;
+            return testCases[index++]*10;
         }
 
         Random rand = new Random();
