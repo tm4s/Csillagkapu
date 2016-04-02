@@ -106,6 +106,7 @@ public class Colonel{
         ownedField = new EmptyField();
         notifyOwnedScale();
         zpm.setField(ownedField);
+
         this.collectedZpms++;
     }
 

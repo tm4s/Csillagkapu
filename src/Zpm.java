@@ -12,6 +12,10 @@ public class Zpm extends Field {
 		bullet.moveForward();
 	}
 
+	public void setNewPosition() {
+
+	}
+
 
     @Override
     public Character print() {
