@@ -8,14 +8,14 @@ import java.util.Random;
 public class RandomGenerator {
     static boolean isTest = false;
     static int testCases[] = {0, 1, 2, 3};
-    static int index = 0;
+    private static int index = 0;
 
     static int generateDistance() {
         if (!isTest) {
             if (index>testCases.length)
                 index = 0;
             return testCases[index]*10;
-            index++;
+            ++index;
         }
 
         Random rand = new Random();
@@ -35,6 +35,6 @@ public class RandomGenerator {
             return orient;
             index++;
         }
-        return orient;
+        return Orientation.Type.values()[value];
     }
 }
