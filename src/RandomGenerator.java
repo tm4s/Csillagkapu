@@ -18,8 +18,8 @@ public class RandomGenerator {
         }
 
         Random rand = new Random();
-        int value = rand.nextInt(99);
-        value = value + 11;
+        int value = rand.nextInt(3);
+        value = value;
         return value;
     }
 
@@ -29,8 +29,8 @@ public class RandomGenerator {
         if (isTest) {
             if (index>testCases.length)
                 index = 0;
-            return Orientation.Type.values()[testCases[index++]];
+            return Orientation.Type.values()[testCases[index++]+1];
         }
-        return Orientation.Type.values()[value];
+        return Orientation.Type.values()[value+1];
     }
 }
