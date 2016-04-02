@@ -22,8 +22,9 @@ public class RandomGenerator {
     static Orientation.Type generateOrientation() {
         Random rand = new Random();
         int value = rand.nextInt(3);
-        Orientation.Type orient = Orientation.Type.NORTH;
-        orient.ordinal() = value;
-        return orient;
+        //Orientation.Type orient = Orientation.Type.NORTH;
+        //orient.ordinal() = value;
+        //return orient;
+        return Orientation.Type.values()[value];
     }
 }
