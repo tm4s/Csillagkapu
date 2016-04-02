@@ -7,12 +7,17 @@ import java.util.Random;
 
 public class RandomGenerator {
     static boolean isTest = false;
-    static int alma[] = {0, 1, 2, 3};
+    static int testCases[] = {0, 1, 2, 3};
+    static int index = 0;
 
     static int generateDistance() {
         if (!isTest) {
-            
+            if (index>testCases.length)
+                index = 0;
+            return testCases[index]*10;
+            index++;
         }
+
         Random rand = new Random();
         int value = rand.nextInt(99);
         value = value + 11;
@@ -23,7 +28,13 @@ public class RandomGenerator {
         Random rand = new Random();
         int value = rand.nextInt(3);
         Orientation.Type orient = Orientation.Type.NORTH;
-        orient.ordinal() = value;
+        orient = value;
+        if (!isTest) {
+            if (index>testCases.length)
+                index = 0;
+            return orient;
+            index++;
+        }
         return orient;
     }
 }
