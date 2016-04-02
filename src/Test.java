@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String args[]) throws IOException {
-		String fileName = "map02.csv";
+		String fileName = "map01.csv";
 		if (args.length == 1)
 			fileName = args[0];
 		Map map = new Map(fileName);

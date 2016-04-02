@@ -159,9 +159,9 @@ public class Colonel{
         hand.setHasBox(true);
         Scale boxScale = ownedBox.getOwnedScale();
         if (boxScale == null) {
-            getFrontField().setField(new EmptyField());
+            box.setField(new EmptyField());
         } else {
-            getFrontField().setField(boxScale);
+            box.setField(boxScale);
             boxScale.removeWeight();
             ownedBox.setOwnedScale(null);
         }
@@ -181,7 +181,7 @@ public class Colonel{
      * @param emptyField erre a mezore
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
-        getFrontField().setField(ownedBox);
+        emptyField.setField(ownedBox);
         ownedBox = null;
         hand.setHasBox(false);
     }
@@ -195,7 +195,7 @@ public class Colonel{
     public void  boxPutDownToScale(Scale scale) {
         ownedBox.setOwnedScale(scale);
         scale.addWeight();
-        getFrontField().setField(ownedBox);
+        scale.setField(ownedBox);
         ownedBox = null;
         hand.setHasBox(false);
     }
