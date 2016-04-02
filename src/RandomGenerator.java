@@ -26,13 +26,10 @@ public class RandomGenerator {
     static Orientation.Type generateOrientation() {
         Random rand = new Random();
         int value = rand.nextInt(3);
-        Orientation.Type orient = Orientation.Type.NORTH;
-        orient = value;
         if (!isTest) {
             if (index>testCases.length)
                 index = 0;
-            return orient;
-            index++;
+            return Orientation.Type.values()[testCases[index++]];
         }
         return Orientation.Type.values()[value];
     }

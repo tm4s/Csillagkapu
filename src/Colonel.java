@@ -108,6 +108,9 @@ public class Colonel{
         zpm.setField(ownedField);
 
         this.collectedZpms++;
+        if (collectedZpms%2 == 0) {
+            zpm.setNewPosition(ownedField);
+        }
     }
 
     /**
