@@ -11,7 +11,7 @@ public class RandomGenerator {
     private static int index = 0;
 
     static int generateDistance() {
-        if (!isTest) {
+        if (isTest) {
             if (index>testCases.length)
                 index = 0;
             return testCases[index++]*10;
@@ -26,7 +26,7 @@ public class RandomGenerator {
     static Orientation.Type generateOrientation() {
         Random rand = new Random();
         int value = rand.nextInt(3);
-        if (!isTest) {
+        if (isTest) {
             if (index>testCases.length)
                 index = 0;
             return Orientation.Type.values()[testCases[index++]];
