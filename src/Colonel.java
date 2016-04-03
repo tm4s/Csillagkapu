@@ -170,7 +170,7 @@ public class Colonel{
         }
     }
 
-    public void boxPickUpFromScale() {
+    public void boxPickUpFromScale(Scale scale) {
 
     }
 

@@ -7,7 +7,6 @@ public class ColonelsHand {
      * hozza tatozo ezredesre referencia
      * van-e nala box parameter
      **/
-    private Colonel colonel;
     private boolean hasBox;
 
     /**

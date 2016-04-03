@@ -14,10 +14,6 @@ public class Scale extends Field {
         colonel.moveTo(this);
     }
 
-    public int getWeight() {
-
-    }
-
     public void addBox(Box box) {
 
     }
@@ -37,11 +33,11 @@ public class Scale extends Field {
             hand.getColonel().boxPutDownToScale(this);
     }
 
-    public void addWeight() {
+    public void addWeight(int weight) {
         door.open();
     }
 
-    public void removeWeight() {
+    public void removeWeight(int weight) {
         door.close();
     }
 

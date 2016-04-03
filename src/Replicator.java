@@ -9,4 +9,5 @@ public class Replicator extends Colonel {
     public void move() {
         tryMoveTo(RandomGenerator.generateOrientation());
     }
+
 }
