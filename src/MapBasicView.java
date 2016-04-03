@@ -65,16 +65,16 @@ public class MapBasicView {
 		Character c = '↑';
 		switch (jaffa.getOrientation()) {
 			case NORTH:
-				c = '⥣';
+				c = '↑';
 				break;
 			case WEST:
-				c = '⥢';
+				c = '←';
 				break;
 			case SOUTH:
-				c = '⥥';
+				c = '↓';
 				break;
 			case EAST:
-				c = '⥤';
+				c = '→';
 				break;
 		}
 		return c;

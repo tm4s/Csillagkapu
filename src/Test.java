@@ -16,13 +16,21 @@ public class Test {
 		Replicator replicator = new Replicator(map.getFieldAt(new Coordinate(3, 10)));
 		MapBasicView mapView = new MapBasicView(map, colonel, replicator, jaffa);
 
-		System.out.println("Controls: ");
+		System.out.println("Colonel controls: ");
 		System.out.println("move/rotate: wasd");
 		System.out.println("shoot: qe");
-		System.out.println("boxPickUp: k");
-		System.out.println("boxPutDown: m");
+		System.out.println("boxPickUp: 2");
+		System.out.println("boxPutDown: 3");
 		System.out.println("quit: quit");
-		System.out.println("after one command hit ENTER");
+		System.out.println("after commands hit ENTER");
+		System.out.println();
+		System.out.println("Jaffa controls: ");
+		System.out.println("move/rotate: ijkl");
+		System.out.println("shoot: uo");
+		System.out.println("boxPickUp: 8");
+		System.out.println("boxPutDown: 9");
+		System.out.println("quit: quit");
+		System.out.println("after commands hit ENTER");
 		System.out.println();
 		System.out.println("Map: ");
 		System.out.println("Wall: #");
