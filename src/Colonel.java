@@ -170,6 +170,10 @@ public class Colonel{
         }
     }
 
+    public void boxPickUpFromScale() {
+
+    }
+
     /**
      * doboz lerakasara kiserlet
      */
