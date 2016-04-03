@@ -16,8 +16,7 @@ public class Test {
 		MapBasicView mapView = new MapBasicView(map, colonel, replicator);
 
 		System.out.println("Controls: ");
-		System.out.println("move: wasd");
-		System.out.println("rotate: tfgh");
+		System.out.println("move/rotate: wasd");
 		System.out.println("shoot: qe");
 		System.out.println("boxPickUp: k");
 		System.out.println("boxPutDown: m");
