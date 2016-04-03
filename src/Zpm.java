@@ -2,6 +2,16 @@
  * ZPM modul
  */
 public class Zpm extends Field {
+	static int allZPMs = 0;
+
+	Zpm() {
+		allZPMs++;
+	}
+
+	public static int getAllZpms() {
+		return allZPMs;
+	}
+
 	@Override
 	public void collideWith(Colonel colonel) {
 		colonel.moveTo(this);

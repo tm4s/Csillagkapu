@@ -110,7 +110,8 @@ public class Colonel{
         this.collectedZpms++;
 
         if ((collectedZpms % 2) == 0) {
-            zpm.setNewPosition(ownedField);
+            Zpm newZpm = new Zpm();
+            newZpm.setNewPosition(ownedField);
         }
     }
 
