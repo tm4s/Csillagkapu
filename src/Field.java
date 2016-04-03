@@ -44,6 +44,10 @@ public abstract class Field {
         return nextFields[direction.ordinal()];
     }
 
+    /**
+     * veletlenszeruen kivalasztja az egyik szomszedjat es visszaadja azt
+     * @returne random szomszed mezo
+     */
     public Field getNextRandomField() {
         Field nextField = getNextField(RandomGenerator.generateOrientation());
         while (nextField == null)
