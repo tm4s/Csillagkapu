@@ -5,7 +5,8 @@ public class Replicator extends Colonel {
     Replicator(Field field) {
         super(field);
     }
-    void Move() {
+
+    public void move() {
         tryMoveTo(RandomGenerator.generateOrientation());
     }
 }
