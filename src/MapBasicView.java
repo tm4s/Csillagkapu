@@ -36,7 +36,9 @@ public class MapBasicView {
 			// System.out.println();
 		}
 		System.out.println();
-		System.out.println("ZPM = " + colonel.getCollectedZpms() + " / " + Zpm.getAllZpms());
+		System.out.println("ZPMs left on the map: " + (Zpm.getAllZpms() - colonel.getCollectedZpms() - jaffa.getCollectedZpms()));
+		System.out.println("ZPMs collected by the colonel: " + colonel.getCollectedZpms());
+		System.out.println("ZPMs collected by Jaffa: " + jaffa.getCollectedZpms());
 		System.out.println();
 	}
 
