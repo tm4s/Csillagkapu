@@ -14,6 +14,18 @@ public class Scale extends Field {
         colonel.moveTo(this);
     }
 
+    public int getWeight() {
+
+    }
+
+    public void addBox(Box box) {
+
+    }
+
+    public Box popBox() {
+
+    }
+
     @Override
     public void collideWith(Bullet bullet) {
         bullet.moveForward();
