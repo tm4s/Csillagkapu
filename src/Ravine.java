@@ -21,6 +21,10 @@ public class Ravine extends Field {
             hand.getColonel().boxPutDownToRavine(this);
     }
 
-
+    @Override
+    public void setReplicator(Replicator replicator) {
+        setField(new EmptyField());
+        replicator.die();
+    }
 
 }
