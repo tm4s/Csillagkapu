@@ -4,6 +4,8 @@
 
 public abstract class Field {
     private Map map = null;
+    private boolean hasColonel;
+    private Replicator replicator;
 
     /**
      * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
@@ -13,6 +15,20 @@ public abstract class Field {
     public Field() {
         this.map = null;
         nextFields = new Field[4];
+        hasColonel = false;
+        replicator = null;
+    }
+
+    public boolean hasColonel() {
+        return hasColonel;
+    }
+
+    public void setHasColonel() {
+        hasColonel = !hasColonel;
+    }
+
+    public void setReplicator(Replicator replicator) {
+        this.replicator = replicatorl;
     }
 
     /**
