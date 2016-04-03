@@ -12,6 +12,7 @@ public class Test {
 			fileName = args[0];
 		Map map = new Map(fileName);
 		Colonel colonel = new Colonel(map.getColonelStartingField());
+		Replicator replicator = new Replicator(map.getFieldAt((10, 3)));
 		MapBasicView mapView = new MapBasicView(map, colonel);
 
 		System.out.println("Controls: ");
