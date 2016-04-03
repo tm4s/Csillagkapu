@@ -6,7 +6,6 @@ public abstract class Field {
     // csak teszteleshez kell
     private Coordinate position = new Coordinate(-1, -1);
     private Map map = null;
-
     /**
      * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
      */
@@ -45,14 +44,25 @@ public abstract class Field {
     }
 
     /**
+     * veletlenszeruen kivalasztja az egyik szomszedjat es visszaadja azt
+     * @returne random szomszed mezo
+     */
+    public Field getNextRandomField() {
+        Field nextField = getNextField(RandomGenerator.generateOrientation());
+        while (nextField == null)
+            nextField = getNextField(RandomGenerator.generateOrientation());
+        return nextField;
+    }
+
+    /**
      * szomszed mezok ertesitese magarol es sajat szomszed mezoinek inicializalasa
      * szomszed mezok megfelleo iranyu szomszed mezo referenciajat magara allitja
      * @param nextFields szomszed mezok tombje
      */
     public void setNextFields(Field[] nextFields) {
         for (int i = 0; i < nextFields.length; ++i) {
+            this.nextFields[i] = nextFields[i];
             if (this.nextFields[i] != null) {
-                this.nextFields[i] = nextFields[i];
                 this.nextFields[i].setNextField(Orientation.getOpposite(i), this);
             }
         }
@@ -64,6 +74,9 @@ public abstract class Field {
     public void collideWith(Colonel colonel) {}
     public void collideWith(Bullet bullet) {}
     public void collideWith(ColonelsHand hand) {}
+    public void collideWith(Zpm zpm) {
+        getNextRandomField().collideWith(zpm);
+    }
 
     //teszteleshez kell
     public abstract Character print();
