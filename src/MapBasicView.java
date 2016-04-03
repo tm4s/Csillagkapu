@@ -20,9 +20,9 @@ public class MapBasicView {
 		for (int y = 0; y < map.getHeight(); ++y) {
 			for (int x = 0; x < map.getWidth(); ++x) {
 				if (colonel.getOwnedField().getPosition().equals(new Coordinate(y, x))) {
-					System.out.print(printColonel());
+					System.out.print(printColonel(colonel));
 				} else if (replicator.getOwnedField().getPosition().equals(new Coordinate(y, x))) {
-					System.out.print(printColonel());
+					System.out.print(printColonel(replicator));
 				} else {
 					System.out.print(map.getFieldAt(new Coordinate(y, x)).print());
 				}
@@ -36,7 +36,7 @@ public class MapBasicView {
 		System.out.println();
 	}
 
-	private Character printColonel() {
+	private Character printColonel(Colonel colonel) {
 		Character c = 'A';
 		switch (colonel.getOrientation()) {
 		case NORTH:
