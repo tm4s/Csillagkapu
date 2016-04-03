@@ -83,10 +83,10 @@ public class Test {
 						}
 						else colonel.tryMoveTo(Orientation.Type.EAST);
 						break;
-					case 'k':
+					case '2':
 						colonel.tryBoxPickUp();
 						break;
-					case 'm':
+					case '3':
 						colonel.tryBoxPutDown();
 						break;
 					case 'q':
@@ -95,40 +95,40 @@ public class Test {
 					case 'e':
 						colonel.shootTeleporter(Teleporter.Type.ORANGE);
 						break;
-					case 't':
+					case 'i':
 						if (jaffa.getOrientation() != Orientation.Type.NORTH) {
 							jaffa.rotateTo(Orientation.Type.NORTH);
 						}
 						else jaffa.tryMoveTo(Orientation.Type.NORTH);
 						break;
-					case 'g':
+					case 'k':
 						if (jaffa.getOrientation() != Orientation.Type.SOUTH) {
 							jaffa.rotateTo(Orientation.Type.SOUTH);
 						}
 						else jaffa.tryMoveTo(Orientation.Type.SOUTH);
 						break;
-					case 'f':
+					case 'j':
 						if (jaffa.getOrientation() != Orientation.Type.WEST) {
 							jaffa.rotateTo(Orientation.Type.WEST);
 						}
 						else jaffa.tryMoveTo(Orientation.Type.WEST);
 						break;
-					case 'h':
+					case 'l':
 						if (jaffa.getOrientation() != Orientation.Type.EAST) {
 							jaffa.rotateTo(Orientation.Type.EAST);
 						}
 						else jaffa.tryMoveTo(Orientation.Type.EAST);
 						break;
-					case '[':
+					case '8':
 						jaffa.tryBoxPickUp();
 						break;
-					case ']':
+					case '9':
 						jaffa.tryBoxPutDown();
 						break;
-					case '0':
+					case 'u':
 						jaffa.shootTeleporter(Teleporter.Type.GREEN);
 						break;
-					case '1':
+					case 'o':
 						jaffa.shootTeleporter(Teleporter.Type.RED);
 						break;
 					default:
