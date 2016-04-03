@@ -18,19 +18,19 @@ public class RandomGenerator {
         }
 
         Random rand = new Random();
-        int value = rand.nextInt(3);
-        value = value;
+        int value = rand.nextInt(200);
+        value = value + 11;
         return value;
     }
 
     static Orientation.Type generateOrientation() {
         Random rand = new Random();
-        int value = rand.nextInt(3);
+        int value = rand.nextInt(4);
         if (isTest) {
             if (index>testCases.length)
                 index = 0;
-            return Orientation.Type.values()[testCases[index++]+1];
+            return Orientation.Type.values()[testCases[index++]];
         }
-        return Orientation.Type.values()[value+1];
+        return Orientation.Type.values()[value];
     }
 }

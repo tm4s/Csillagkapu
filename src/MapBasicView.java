@@ -25,7 +25,7 @@ public class MapBasicView {
 			// System.out.println();
 		}
 		System.out.println();
-		System.out.println("ZPM = " + Zpm.getAllZpms() + " / " + map.getAllZpms());
+		System.out.println("ZPM = " + colonel.getCollectedZpms() + " / " + Zpm.getAllZpms());
 		System.out.println();
 	}
 
