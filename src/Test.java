@@ -12,8 +12,9 @@ public class Test {
 			fileName = args[0];
 		Map map = new Map(fileName);
 		Colonel colonel = new Colonel(map.getColonelStartingField());
+		Colonel jaffa = new Colonel(map.getJaffaStartingField());
 		Replicator replicator = new Replicator(map.getFieldAt(new Coordinate(3, 10)));
-		MapBasicView mapView = new MapBasicView(map, colonel, replicator);
+		MapBasicView mapView = new MapBasicView(map, colonel, replicator, jaffa);
 
 		System.out.println("Controls: ");
 		System.out.println("move/rotate: wasd");
@@ -82,9 +83,6 @@ public class Test {
 						}
 						else colonel.tryMoveTo(Orientation.Type.EAST);
 						break;
-					case 't':
-						colonel.rotateTo(Orientation.Type.NORTH);
-						break;
 					case 'k':
 						colonel.tryBoxPickUp();
 						break;
@@ -96,6 +94,42 @@ public class Test {
 						break;
 					case 'e':
 						colonel.shootTeleporter(Teleporter.Type.ORANGE);
+						break;
+					case 't':
+						if (jaffa.getOrientation() != Orientation.Type.NORTH) {
+							jaffa.rotateTo(Orientation.Type.NORTH);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.NORTH);
+						break;
+					case 'g':
+						if (jaffa.getOrientation() != Orientation.Type.SOUTH) {
+							jaffa.rotateTo(Orientation.Type.SOUTH);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.SOUTH);
+						break;
+					case 'f':
+						if (jaffa.getOrientation() != Orientation.Type.WEST) {
+							jaffa.rotateTo(Orientation.Type.WEST);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.WEST);
+						break;
+					case 'h':
+						if (jaffa.getOrientation() != Orientation.Type.EAST) {
+							jaffa.rotateTo(Orientation.Type.EAST);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.EAST);
+						break;
+					case '[':
+						jaffa.tryBoxPickUp();
+						break;
+					case ']':
+						jaffa.tryBoxPutDown();
+						break;
+					case '0':
+						jaffa.shootTeleporter(Teleporter.Type.GREEN);
+						break;
+					case '1':
+						jaffa.shootTeleporter(Teleporter.Type.RED);
 						break;
 					default:
 						break;
