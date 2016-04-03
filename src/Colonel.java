@@ -106,7 +106,13 @@ public class Colonel{
         ownedField = new EmptyField();
         notifyOwnedScale();
         zpm.setField(ownedField);
+
         this.collectedZpms++;
+
+        if ((collectedZpms % 2) == 0) {
+            Zpm newZpm = new Zpm();
+            newZpm.setNewPosition(ownedField);
+        }
     }
 
     /**
