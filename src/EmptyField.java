@@ -21,6 +21,11 @@ public class EmptyField extends Field {
 	}
 
 	@Override
+	public void collideWith(Zpm zpm) {
+		setField(zpm);
+	}
+
+	@Override
 	public Character print() {
 		return ' ';
 	}

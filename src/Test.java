@@ -42,7 +42,7 @@ public class Test {
 		while (run) {
 			// Ha az összegyűjtött zpmek száma megegyezik a pályán eredetileg
 			// lévő zpmek számával a játék véget ér
-			if (map.getAllZpms() == colonel.getCollectedZpms()) {
+			if (Zpm.getAllZpms() == colonel.getCollectedZpms()) {
 				System.out.println("NO MORE ZPMS!!!!!");
 				break;
 			}
