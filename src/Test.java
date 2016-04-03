@@ -60,28 +60,31 @@ public class Test {
 			for (int i = 0; i < line.length(); i++) {
 				switch (line.charAt(i)) {
 					case 'w':
-						colonel.tryMoveTo(Orientation.Type.NORTH);
+						if (colonel.getOrientation() != Orientation.Type.NORTH) {
+							colonel.rotateTo(Orientation.Type.NORTH);
+						}
+						else colonel.tryMoveTo(Orientation.Type.NORTH);
 						break;
 					case 's':
-						colonel.tryMoveTo(Orientation.Type.SOUTH);
+						if (colonel.getOrientation() != Orientation.Type.SOUTH) {
+							colonel.rotateTo(Orientation.Type.SOUTH);
+						}
+						else colonel.tryMoveTo(Orientation.Type.SOUTH);
 						break;
 					case 'a':
-						colonel.tryMoveTo(Orientation.Type.WEST);
+						if (colonel.getOrientation() != Orientation.Type.WEST) {
+							colonel.rotateTo(Orientation.Type.WEST);
+						}
+						else colonel.tryMoveTo(Orientation.Type.WEST);
 						break;
 					case 'd':
-						colonel.tryMoveTo(Orientation.Type.EAST);
+						if (colonel.getOrientation() != Orientation.Type.EAST) {
+							colonel.rotateTo(Orientation.Type.EAST);
+						}
+						else colonel.tryMoveTo(Orientation.Type.EAST);
 						break;
 					case 't':
 						colonel.rotateTo(Orientation.Type.NORTH);
-						break;
-					case 'g':
-						colonel.rotateTo(Orientation.Type.SOUTH);
-						break;
-					case 'f':
-						colonel.rotateTo(Orientation.Type.WEST);
-						break;
-					case 'h':
-						colonel.rotateTo(Orientation.Type.EAST);
 						break;
 					case 'k':
 						colonel.tryBoxPickUp();
