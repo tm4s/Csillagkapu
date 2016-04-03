@@ -6,7 +6,6 @@ public abstract class Field {
     // csak teszteleshez kell
     private Coordinate position = new Coordinate(-1, -1);
     private Map map = null;
-
     /**
      * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
      */

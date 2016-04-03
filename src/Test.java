@@ -52,51 +52,55 @@ public class Test {
 				break;
 			}
 			Scanner scan = new Scanner(System.in);
-			switch (scan.nextLine().toLowerCase()) {
-			case "w":
-				colonel.tryMoveTo(Orientation.Type.NORTH);
-				break;
-			case "s":
-				colonel.tryMoveTo(Orientation.Type.SOUTH);
-				break;
-			case "a":
-				colonel.tryMoveTo(Orientation.Type.WEST);
-				break;
-			case "d":
-				colonel.tryMoveTo(Orientation.Type.EAST);
-				break;
-			case "t":
-				colonel.rotateTo(Orientation.Type.NORTH);
-				break;
-			case "g":
-				colonel.rotateTo(Orientation.Type.SOUTH);
-				break;
-			case "f":
-				colonel.rotateTo(Orientation.Type.WEST);
-				break;
-			case "h":
-				colonel.rotateTo(Orientation.Type.EAST);
-				break;
-			case "k":
-				colonel.tryBoxPickUp();
-				break;
-			case "m":
-				colonel.tryBoxPutDown();
-				break;
-			case "q":
-				colonel.shootTeleporter(Teleporter.Type.BLUE);
-				break;
-			case "e":
-				colonel.shootTeleporter(Teleporter.Type.ORANGE);
-				break;
-			case "quit":
+			String line = scan.nextLine().toLowerCase();
+			if  (line.contains("quit")) {
 				run = false;
 				break;
-			default:
-				break;
-
 			}
-			mapView.printMap();
+			for (int i = 0; i < line.length(); i++) {
+				switch (line.charAt(i)) {
+					case 'w':
+						colonel.tryMoveTo(Orientation.Type.NORTH);
+						break;
+					case 's':
+						colonel.tryMoveTo(Orientation.Type.SOUTH);
+						break;
+					case 'a':
+						colonel.tryMoveTo(Orientation.Type.WEST);
+						break;
+					case 'd':
+						colonel.tryMoveTo(Orientation.Type.EAST);
+						break;
+					case 't':
+						colonel.rotateTo(Orientation.Type.NORTH);
+						break;
+					case 'g':
+						colonel.rotateTo(Orientation.Type.SOUTH);
+						break;
+					case 'f':
+						colonel.rotateTo(Orientation.Type.WEST);
+						break;
+					case 'h':
+						colonel.rotateTo(Orientation.Type.EAST);
+						break;
+					case 'k':
+						colonel.tryBoxPickUp();
+						break;
+					case 'm':
+						colonel.tryBoxPutDown();
+						break;
+					case 'q':
+						colonel.shootTeleporter(Teleporter.Type.BLUE);
+						break;
+					case 'e':
+						colonel.shootTeleporter(Teleporter.Type.ORANGE);
+						break;
+					default:
+						break;
+				}
+				mapView.printMap();
+			}
+
 		}
 
 		/*
