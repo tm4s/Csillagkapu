@@ -12,13 +12,8 @@ public class Test {
 			fileName = args[0];
 		Map map = new Map(fileName);
 		Colonel colonel = new Colonel(map.getColonelStartingField());
-<<<<<<< HEAD
-		Replicator replicator = new Replicator(map.getFieldAt(new Coordinate(10, 3)));
-		MapBasicView mapView = new MapBasicView(map, colonel);
-=======
 		Replicator replicator = new Replicator(map.getFieldAt(new Coordinate(3, 10)));
 		MapBasicView mapView = new MapBasicView(map, colonel, replicator);
->>>>>>> origin/mod_2
 
 		System.out.println("Controls: ");
 		System.out.println("move: wasd");
