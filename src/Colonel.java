@@ -108,9 +108,17 @@ public class Colonel{
 
     public void moveTo(Zpm zpm) {
         ownedField = new EmptyField();
+        notifyOwnedScale();
         zpm.setField(ownedField);
+
         this.collectedZpms++;
+
+        if ((collectedZpms % 2) == 0) {
+            Zpm newZpm = new Zpm();
+            newZpm.setNewPosition(ownedField);
+        }
     }
+
 
     /**
      * Ha az ezredes szakadékba lép meghal.

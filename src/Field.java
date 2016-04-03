@@ -47,6 +47,14 @@ public abstract class Field {
         return nextFields[direction.ordinal()];
     }
 
+    public Field getNextRandomField() {
+        Field nextField = getNextField(RandomGenerator.generateOrientation());
+        while (nextField == null)
+            nextField = getNextField(RandomGenerator.generateOrientation());
+        return nextField;
+    }
+
+
     /**
      * szomszed mezok ertesitese magarol es sajat szomszed mezoinek inicializalasa
      * szomszed mezok megfelleo iranyu szomszed mezo referenciajat magara allitja
@@ -65,4 +73,8 @@ public abstract class Field {
     public void collideWith(Colonel colonel) {}
     public void collideWith(Bullet bullet) {}
     public void collideWith(ColonelsHand hand) {}
+    public void collideWith(Zpm zpm) {
+        getNextRandomField().collideWith(zpm);
+    }
+
 }
