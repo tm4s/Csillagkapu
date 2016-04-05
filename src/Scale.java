@@ -11,12 +11,13 @@ public class Scale extends Field {
 
 	@Override
 	public void collideWith(Colonel colonel) {
-		colonel.moveTo(this);
+		if (!isThereAColonel)
+			colonel.moveTo(this);
 	}
 
 	@Override
 	public void collideWith(Bullet bullet) {
-		bullet.moveForward();
+		bulletMoveForward(bullet);
 	}
 
 	@Override
