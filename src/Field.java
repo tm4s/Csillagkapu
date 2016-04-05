@@ -12,9 +12,11 @@ public abstract class Field {
     private Field[] nextFields = new Field[4];
 
     private Replicator replicator;
+    protected boolean isThereAColonel;
 
     public Field() {
         replicator = null;
+        isThereAColonel = false;
     }
 
     public void setReplicator(Replicator replicator) {
@@ -27,6 +29,11 @@ public abstract class Field {
         else
             replicator.die();
     }
+
+    public void setThereAColonel(boolean isThereAColonel) {
+        this.isThereAColonel = isThereAColonel;
+    }
+
 
     /**
      * mezo adott iranyu szomszedjanak beallitasa
