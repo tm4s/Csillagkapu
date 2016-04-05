@@ -11,6 +11,20 @@ public abstract class Field {
      */
     private Field[] nextFields = new Field[4];
 
+    private boolean isThereReplicator;
+
+    public Field() {
+        isThereReplicator = false;
+    }
+
+    public boolean isThereReplicator() {
+        return isThereReplicator;
+    }
+
+    public void setIsThereReplicator(boolean isThereReplicator) {
+        isThereReplicator = isThereReplicator;
+    }
+
     /**
      * mezo adott iranyu szomszedjanak beallitasa
      * @param direction ilyen iranyban helyezkedik el a szomszed

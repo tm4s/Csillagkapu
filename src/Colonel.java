@@ -12,13 +12,13 @@ public class Colonel{
      * begyujtott ZPM modulok szama
      * meghalt-e az ezredes szakadektol
      */
-    private Field ownedField;
+    protected Field ownedField;
     private Orientation.Type orientation;
     private Scale ownedScale = null;
     private Box ownedBox = null;
     private ColonelsHand hand;
     private int collectedZpms = 0;
-    private boolean dead = false;       //lehet kesobb nem fog kelleni
+    protected boolean dead = false;       //lehet kesobb nem fog kelleni
 
 
 
