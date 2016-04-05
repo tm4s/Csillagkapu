@@ -55,8 +55,8 @@ public class Test {
 				System.out.println("NO MORE ZPMS!!!!!");
 				break;
 			}
-			if (colonel.isDead()) {
-				System.out.println("RIP COLONEL :( ");
+			if (colonel.isDead() && jaffa.isDead()) {
+				System.out.println("RIP COLONEL & JAFFA :( ");
 				break;
 			}
 			Scanner scan = new Scanner(System.in);
