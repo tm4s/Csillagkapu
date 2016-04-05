@@ -37,4 +37,10 @@ public class Replicator extends Colonel {
         ravine.setField(new EmptyField());
         dead = true;
     }
+
+    @Override
+    public void teleportTo(Teleporter teleporter) {
+        replicatorMoveTo(teleporter);
+        tryMoveTo(teleporter.getOrientation());
+    }
 }
