@@ -6,11 +6,34 @@ public abstract class Field {
     // csak teszteleshez kell
     private Coordinate position = new Coordinate(-1, -1);
     private Map map = null;
-
     /**
      * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
      */
     private Field[] nextFields = new Field[4];
+
+    private Replicator replicator;
+    protected boolean isThereAColonel;
+
+    public Field() {
+        replicator = null;
+        isThereAColonel = false;
+    }
+
+    public void setReplicator(Replicator replicator) {
+        this.replicator = replicator;
+    }
+
+    protected void bulletMoveForward(Bullet bullet) {
+        if (replicator == null)
+            bullet.moveForward();
+        else
+            replicator.die();
+    }
+
+    public void setThereAColonel(boolean isThereAColonel) {
+        this.isThereAColonel = isThereAColonel;
+    }
+
 
     /**
      * mezo adott iranyu szomszedjanak beallitasa
