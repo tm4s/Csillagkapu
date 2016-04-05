@@ -79,7 +79,9 @@ public class Colonel{
      * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
      */
     public void moveTo(Field field) {
+        ownedField.setThereAColonel(false);
         ownedField = field;
+        ownedField.setThereAColonel(true);
         notifyOwnedScale();
     }
 
@@ -89,7 +91,9 @@ public class Colonel{
      * @param scale erre a mérlegre lép rá
      */
     public void moveTo(Scale scale) {
+        ownedField.setThereAColonel(false);
         ownedField = scale;
+        ownedField.setThereAColonel(true);
         notifyOwnedScale();
         scale.addWeight();
         this.ownedScale = scale;
@@ -103,7 +107,9 @@ public class Colonel{
      */
 
     public void moveTo(Zpm zpm) {
+        ownedField.setThereAColonel(false);
         ownedField = new EmptyField();
+        ownedField.setThereAColonel(true);
         notifyOwnedScale();
         zpm.setField(ownedField);
 
@@ -121,6 +127,7 @@ public class Colonel{
      * @param ravine ebbe a szakadekba lep bele
      */
     public void moveTo(Ravine ravine) {
+        ownedField.setThereAColonel(false);
         ownedField = ravine;
         notifyOwnedScale();
         this.dead = true;
