@@ -11,18 +11,21 @@ public abstract class Field {
      */
     private Field[] nextFields = new Field[4];
 
-    private boolean isThereReplicator;
+    private Replicator replicator;
 
     public Field() {
-        isThereReplicator = false;
+        replicator = null;
     }
 
-    public boolean isThereReplicator() {
-        return isThereReplicator;
+    public void setReplicator(Replicator replicator) {
+        this.replicator = replicator;
     }
 
-    public void setIsThereReplicator(boolean isThereReplicator) {
-        isThereReplicator = isThereReplicator;
+    protected void bulletMoveForward(Bullet bullet) {
+        if (replicator == null)
+            bullet.moveForward();
+        else
+            replicator.die();
     }
 
     /**
