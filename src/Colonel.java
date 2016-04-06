@@ -114,7 +114,7 @@ public class Colonel{
      */
 
     public void moveTo(Zpm zpm) {
-        setOwnedField(zpm);
+        setOwnedField(new EmptyField());
         notifyOwnedScale();
         zpm.setField(ownedField);
 
