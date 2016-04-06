@@ -18,18 +18,26 @@ public class Colonel{
     private Box ownedBox = null;
     private ColonelsHand hand;
     private int collectedZpms = 0;
+    private int colonelsWeight = 0;
     protected boolean dead = false;       //lehet kesobb nem fog kelleni
 
 
+
+    private void setOwnedField(Field field) {
+        ownedField.setThereAColonel(false);
+        ownedField = field;
+        ownedField.setThereAColonel(true);
+    }
 
     /**
      * konstruktor
      * @param field szuksege van egy mezore amin all majd
      */
-    public Colonel(Field field) {
+    public Colonel(Field field, int weight) {
         hand = new ColonelsHand(this);
         ownedField = field;
         orientation = Orientation.Type.NORTH;
+        colonelsWeight = weight;
     }
 
     /**
@@ -79,9 +87,7 @@ public class Colonel{
      * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
      */
     public void moveTo(Field field) {
-        ownedField.setThereAColonel(false);
-        ownedField = field;
-        ownedField.setThereAColonel(true);
+        setOwnedField(field);
         notifyOwnedScale();
     }
 
@@ -91,12 +97,13 @@ public class Colonel{
      * @param scale erre a mérlegre lép rá
      */
     public void moveTo(Scale scale) {
-        ownedField.setThereAColonel(false);
-        ownedField = scale;
-        ownedField.setThereAColonel(true);
         notifyOwnedScale();
-        scale.addWeight();
+        setOwnedField(scale);
         this.ownedScale = scale;
+        if (ownedBox != null)
+            ownedScale.addWeight(colonelsWeight + ownedBox.getWeight());
+        else
+            ownedScale.addWeight(colonelsWeight);
     }
 
     /**
@@ -107,9 +114,7 @@ public class Colonel{
      */
 
     public void moveTo(Zpm zpm) {
-        ownedField.setThereAColonel(false);
-        ownedField = new EmptyField();
-        ownedField.setThereAColonel(true);
+        setOwnedField(new EmptyField());
         notifyOwnedScale();
         zpm.setField(ownedField);
 
@@ -138,7 +143,10 @@ public class Colonel{
      */
     private void notifyOwnedScale() {
         if (ownedScale != null) {
-            ownedScale.removeWeight();
+            if (ownedBox != null)
+                ownedScale.removeWeight(colonelsWeight + ownedBox.getWeight());
+            else
+                ownedScale.removeWeight(colonelsWeight);
             ownedScale = null;
         }
     }
@@ -169,15 +177,8 @@ public class Colonel{
      */
     public void boxPickUp(Box box) {
         ownedBox = box;
+        box.setField(new EmptyField());
         hand.setHasBox(true);
-        Scale boxScale = ownedBox.getOwnedScale();
-        if (boxScale == null) {
-            box.setField(new EmptyField());
-        } else {
-            box.setField(boxScale);
-            boxScale.removeWeight();
-            ownedBox.setOwnedScale(null);
-        }
     }
 
     /**
@@ -195,6 +196,8 @@ public class Colonel{
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
         emptyField.setField(ownedBox);
+        if (ownedScale != null)
+            ownedScale.removeWeight(ownedBox.getWeight());
         ownedBox = null;
         hand.setHasBox(false);
     }
@@ -206,9 +209,9 @@ public class Colonel{
      * @param scale erre a merlegre
      */
     public void  boxPutDownToScale(Scale scale) {
-        ownedBox.setOwnedScale(scale);
-        scale.addWeight();
-        scale.setField(ownedBox);
+        scale.addBox(ownedBox);
+        if (ownedScale != null)
+            ownedScale.removeWeight(ownedBox.getWeight());
         ownedBox = null;
         hand.setHasBox(false);
     }
@@ -221,6 +224,8 @@ public class Colonel{
      */
     public void boxPutDownToRavine(Ravine ravine) {
         if (ownedBox != null) {
+            if (ownedScale != null)
+                ownedScale.removeWeight(ownedBox.getWeight());
             ownedBox = null;
             hand.setHasBox(false);
         }

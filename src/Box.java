@@ -4,19 +4,16 @@
 
 public class Box extends Field {
 
-    /**
-     * es merleg akit ertesitenie kell ha felveszik rola
-     */
-    private Scale ownedScale = null;
+    private int boxesWeight;
 
-    public void setOwnedScale(Scale ownedScale) {
-        this.ownedScale = ownedScale;
+    public Box(int weight) {
+        boxesWeight = weight;
     }
 
-    public Scale getOwnedScale() {
-        return ownedScale;
-    }
 
+    public int getWeight() {
+        return boxesWeight;
+    }
 
     @Override
     public void collideWith(Bullet bullet) {

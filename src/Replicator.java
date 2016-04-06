@@ -3,7 +3,7 @@
  */
 public class Replicator extends Colonel {
     Replicator(Field field) {
-        super(field);
+        super(field, 0);
     }
 
     public void move() {

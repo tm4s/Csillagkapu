@@ -21,9 +21,9 @@ public class MapBasicView {
 		replicator.move();
 		for (int y = 0; y < map.getHeight(); ++y) {
 			for (int x = 0; x < map.getWidth(); ++x) {
-				if (colonel.getOwnedField().getPosition().equals(new Coordinate(y, x))) {
+				if (colonel.getOwnedField().getPosition().equals(new Coordinate(y, x)) && !colonel.isDead()) {
 					System.out.print(printColonel(colonel));
-				} else if (jaffa.getOwnedField().getPosition().equals(new Coordinate(y, x))) {
+				} else if (jaffa.getOwnedField().getPosition().equals(new Coordinate(y, x)) && !jaffa.isDead()) {
 					System.out.print(printJaffa(jaffa));
 				} else if (replicator.getOwnedField().getPosition().equals(new Coordinate(y, x))) {
 					System.out.print(printColonel(replicator));

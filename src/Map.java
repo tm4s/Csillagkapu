@@ -18,6 +18,8 @@ public class Map {
 	private int height;
 	private Field colonelStartingField;
 	private Field jaffaStartingField;
+	private int colonelWeight;
+	private int jaffaWeight;
 
 	private int allZpms = 0;
 
@@ -54,6 +56,12 @@ public class Map {
 		return colonelStartingField;
 	}
 	public Field getJaffaStartingField() { return jaffaStartingField; }
+	public int getColonelWeight() {
+		return colonelWeight;
+	}
+	public int getJaffaWeight() {
+		return jaffaWeight;
+	}
 
 	private void readMapData(String fileName) throws IOException {
 		BufferedReader br = null;
@@ -71,22 +79,26 @@ public class Map {
 
 		// merlegek es ajtok osszekapcsolasahoz szukseges ideiglenes adatok
 		// tarolasa
-		class PosAndIdData {
+		class PosAndIdDataAndWeight {
 			public String id;
 			private Coordinate position;
+			private int weight;
 
-			public PosAndIdData(String id, Coordinate pos) {
+			public PosAndIdDataAndWeight(String id, Coordinate pos, int w) {
 				this.id = id;
 				position = new Coordinate(pos);
+				weight = w;
 			}
 
 			public Coordinate getPosition() {
 				return position;
 			}
+			public int getWeight() { return weight; }
+
 		}
 
-		ArrayList<PosAndIdData> scaleDatas = new ArrayList<PosAndIdData>();
-		ArrayList<PosAndIdData> doorDatas = new ArrayList<PosAndIdData>();
+		ArrayList<PosAndIdDataAndWeight> scaleDatas = new ArrayList<PosAndIdDataAndWeight>();
+		ArrayList<PosAndIdDataAndWeight> doorDatas = new ArrayList<PosAndIdDataAndWeight>();
 
 		// Egyes elemek beolvasasa
 		int j = 0;
@@ -103,22 +115,24 @@ public class Map {
 				case 'D':
 					mapDatas[j][i] = new Door();
 					String doorData[] = array[i].split("_");
-					doorDatas.add(new PosAndIdData(doorData[1], new Coordinate(j, i)));
+					doorDatas.add(new PosAndIdDataAndWeight(doorData[1], new Coordinate(j, i), 0));
 					break;
 				case 'B':
-					mapDatas[j][i] = new Box();
+					mapDatas[j][i] = new Box(Integer.parseInt(array[i].split("_")[1]));
 					break;
 				case 'C':
+					colonelWeight = Integer.parseInt(array[i].split("_")[1]);
 					mapDatas[j][i] = new EmptyField();
 					colonelStartingField = mapDatas[j][i];
 					break;
 				case 'J':
+					jaffaWeight = Integer.parseInt(array[i].split("_")[1]);
 					mapDatas[j][i] = new EmptyField();
 					jaffaStartingField = mapDatas[j][i];
 					break;
 				case 'S':
 					String scaleData[] = array[i].split("_");
-					scaleDatas.add(new PosAndIdData(scaleData[1], new Coordinate(j, i)));
+					scaleDatas.add(new PosAndIdDataAndWeight(scaleData[1], new Coordinate(j, i), Integer.parseInt(scaleData[2])));
 					break;
 				case '+':
 					mapDatas[j][i] = new SpecialWall();
@@ -142,14 +156,14 @@ public class Map {
 
 		// merlegek letrehozasa
 
-		for (PosAndIdData d : scaleDatas) {
+		for (PosAndIdDataAndWeight d : scaleDatas) {
 			int i = 0;
 			while (!doorDatas.get(i).id.equals(d.id)) {
 				++i;
 			}
 			Coordinate doorPosition = new Coordinate(doorDatas.get(i).getPosition());
 			doorDatas.remove(i);
-			setFieldAt(d.getPosition(), new Scale((Door) getFieldAt(doorPosition)));
+			setFieldAt(d.getPosition(), new Scale((Door) getFieldAt(doorPosition), d.getWeight()));
 		}
 
 		setDatas();
