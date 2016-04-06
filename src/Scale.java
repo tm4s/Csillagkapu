@@ -62,9 +62,12 @@ public class Scale extends Field {
 
 	@Override
 	public Character print() {
-		if (!boxes.isEmpty())
-			return 'B';
-		return 'S';
+		if (boxes.isEmpty())
+			return 'S';
+		else if (boxes.size()<=9)
+			return Integer.toString(boxes.size()).charAt(0);
+		else
+			return '*';
 	}
 
 }
