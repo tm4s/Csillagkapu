@@ -142,7 +142,7 @@ public class Colonel{
      */
     private void notifyOwnedScale() {
         if (ownedScale != null) {
-            ownedScale.removeWeight();
+            ownedScale.removeWeight(colonelsWeight + ownedBox.getWeight());
             ownedScale = null;
         }
     }
