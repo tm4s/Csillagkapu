@@ -23,7 +23,7 @@ public class MapBasicView {
 			for (int x = 0; x < map.getWidth(); ++x) {
 				if (colonel.getOwnedField().getPosition().equals(new Coordinate(y, x)) && !colonel.isDead()) {
 					System.out.print(printColonel(colonel));
-				} else if (jaffa.getOwnedField().getPosition().equals(new Coordinate(y, x)) && !colonel.isDead()) {
+				} else if (jaffa.getOwnedField().getPosition().equals(new Coordinate(y, x)) && !jaffa.isDead()) {
 					System.out.print(printJaffa(jaffa));
 				} else if (replicator.getOwnedField().getPosition().equals(new Coordinate(y, x))) {
 					System.out.print(printColonel(replicator));
