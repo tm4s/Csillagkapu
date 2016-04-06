@@ -197,6 +197,8 @@ public class Colonel{
      */
     public void boxPutDownToEmptyField(EmptyField emptyField) {
         emptyField.setField(ownedBox);
+        if (ownedScale != null)
+            ownedScale.removeWeight(ownedBox.getWeight());
         ownedBox = null;
         hand.setHasBox(false);
     }
@@ -209,6 +211,8 @@ public class Colonel{
      */
     public void  boxPutDownToScale(Scale scale) {
         scale.addBox(ownedBox);
+        if (ownedScale != null)
+            ownedScale.removeWeight(ownedBox.getWeight());
         ownedBox = null;
         hand.setHasBox(false);
     }
@@ -221,6 +225,8 @@ public class Colonel{
      */
     public void boxPutDownToRavine(Ravine ravine) {
         if (ownedBox != null) {
+            if (ownedScale != null)
+                ownedScale.removeWeight(ownedBox.getWeight());
             ownedBox = null;
             hand.setHasBox(false);
         }
