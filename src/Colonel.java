@@ -89,7 +89,6 @@ public class Colonel{
     public void moveTo(Field field) {
         setOwnedField(field);
         notifyOwnedScale();
-        this.ownedScale.removeWeight(colonelsWeight+ownedBox.getWeight());
     }
 
     /**
@@ -142,7 +141,10 @@ public class Colonel{
      */
     private void notifyOwnedScale() {
         if (ownedScale != null) {
-            ownedScale.removeWeight(colonelsWeight + ownedBox.getWeight());
+            if (ownedBox != null)
+                ownedScale.removeWeight(colonelsWeight + ownedBox.getWeight());
+            else
+                ownedScale.removeWeight(colonelsWeight);
             ownedScale = null;
         }
     }
