@@ -11,8 +11,8 @@ public class Test {
 		if (args.length == 1)
 			fileName = args[0];
 		Map map = new Map(fileName);
-		Colonel colonel = new Colonel(map.getColonelStartingField());
-		Colonel jaffa = new Colonel(map.getJaffaStartingField());
+		Colonel colonel = new Colonel(map.getColonelStartingField(), map.getColonelWeight());
+		Colonel jaffa = new Colonel(map.getJaffaStartingField(), map.getJaffaWeight());
 		Replicator replicator = new Replicator(map.getFieldAt(new Coordinate(3, 10)));
 		MapBasicView mapView = new MapBasicView(map, colonel, replicator, jaffa);
 

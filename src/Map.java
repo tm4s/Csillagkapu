@@ -18,6 +18,8 @@ public class Map {
 	private int height;
 	private Field colonelStartingField;
 	private Field jaffaStartingField;
+	private int colonelWeight;
+	private int jaffaWeight;
 
 	private int allZpms = 0;
 
@@ -54,6 +56,12 @@ public class Map {
 		return colonelStartingField;
 	}
 	public Field getJaffaStartingField() { return jaffaStartingField; }
+	public int getColonelWeight() {
+		return colonelWeight;
+	}
+	public int getJaffaWeight() {
+		return jaffaWeight;
+	}
 
 	private void readMapData(String fileName) throws IOException {
 		BufferedReader br = null;
@@ -109,10 +117,12 @@ public class Map {
 					mapDatas[j][i] = new Box();
 					break;
 				case 'C':
+					colonelWeight = Integer.parseInt(array[i].split("_")[1]);
 					mapDatas[j][i] = new EmptyField();
 					colonelStartingField = mapDatas[j][i];
 					break;
 				case 'J':
+					jaffaWeight = Integer.parseInt(array[i].split("_")[1]);
 					mapDatas[j][i] = new EmptyField();
 					jaffaStartingField = mapDatas[j][i];
 					break;
