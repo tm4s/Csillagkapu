@@ -12,16 +12,25 @@ public class Test {
 			fileName = args[0];
 		Map map = new Map(fileName);
 		Colonel colonel = new Colonel(map.getColonelStartingField());
-		MapBasicView mapView = new MapBasicView(map, colonel);
+		Colonel jaffa = new Colonel(map.getJaffaStartingField());
+		Replicator replicator = new Replicator(map.getFieldAt(new Coordinate(3, 10)));
+		MapBasicView mapView = new MapBasicView(map, colonel, replicator, jaffa);
 
-		System.out.println("Controls: ");
-		System.out.println("move: wasd");
-		System.out.println("rotate: tfgh");
+		System.out.println("Colonel controls: ");
+		System.out.println("move/rotate: wasd");
 		System.out.println("shoot: qe");
-		System.out.println("boxPickUp: k");
-		System.out.println("boxPutDown: m");
+		System.out.println("boxPickUp: 2");
+		System.out.println("boxPutDown: 3");
 		System.out.println("quit: quit");
-		System.out.println("after one command hit ENTER");
+		System.out.println("after commands hit ENTER");
+		System.out.println();
+		System.out.println("Jaffa controls: ");
+		System.out.println("move/rotate: ijkl");
+		System.out.println("shoot: uo");
+		System.out.println("boxPickUp: 8");
+		System.out.println("boxPutDown: 9");
+		System.out.println("quit: quit");
+		System.out.println("after commands hit ENTER");
 		System.out.println();
 		System.out.println("Map: ");
 		System.out.println("Wall: #");
@@ -42,60 +51,104 @@ public class Test {
 		while (run) {
 			// Ha az összegyűjtött zpmek száma megegyezik a pályán eredetileg
 			// lévő zpmek számával a játék véget ér
-			if (map.getAllZpms() == colonel.getCollectedZpms()) {
+			if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
 				System.out.println("NO MORE ZPMS!!!!!");
 				break;
 			}
 			if (colonel.isDead()) {
+				colonel = null;
 				System.out.println("RIP COLONEL :( ");
-				break;
+			}
+			if (jaffa.isDead()) {
+				colonel = null;
+				System.out.println("RIP JAFFA :( ");
 			}
 			Scanner scan = new Scanner(System.in);
-			switch (scan.nextLine().toLowerCase()) {
-			case "w":
-				colonel.tryMoveTo(Orientation.Type.NORTH);
-				break;
-			case "s":
-				colonel.tryMoveTo(Orientation.Type.SOUTH);
-				break;
-			case "a":
-				colonel.tryMoveTo(Orientation.Type.WEST);
-				break;
-			case "d":
-				colonel.tryMoveTo(Orientation.Type.EAST);
-				break;
-			case "t":
-				colonel.rotateTo(Orientation.Type.NORTH);
-				break;
-			case "g":
-				colonel.rotateTo(Orientation.Type.SOUTH);
-				break;
-			case "f":
-				colonel.rotateTo(Orientation.Type.WEST);
-				break;
-			case "h":
-				colonel.rotateTo(Orientation.Type.EAST);
-				break;
-			case "k":
-				colonel.tryBoxPickUp();
-				break;
-			case "m":
-				colonel.tryBoxPutDown();
-				break;
-			case "q":
-				colonel.shootTeleporter(Teleporter.Type.BLUE);
-				break;
-			case "e":
-				colonel.shootTeleporter(Teleporter.Type.ORANGE);
-				break;
-			case "quit":
+			String line = scan.nextLine().toLowerCase();
+			if  (line.contains("quit")) {
 				run = false;
 				break;
-			default:
-				break;
-
 			}
-			mapView.printMap();
+			for (int i = 0; i < line.length(); i++) {
+				switch (line.charAt(i)) {
+					case 'w':
+						if (colonel.getOrientation() != Orientation.Type.NORTH) {
+							colonel.rotateTo(Orientation.Type.NORTH);
+						}
+						else colonel.tryMoveTo(Orientation.Type.NORTH);
+						break;
+					case 's':
+						if (colonel.getOrientation() != Orientation.Type.SOUTH) {
+							colonel.rotateTo(Orientation.Type.SOUTH);
+						}
+						else colonel.tryMoveTo(Orientation.Type.SOUTH);
+						break;
+					case 'a':
+						if (colonel.getOrientation() != Orientation.Type.WEST) {
+							colonel.rotateTo(Orientation.Type.WEST);
+						}
+						else colonel.tryMoveTo(Orientation.Type.WEST);
+						break;
+					case 'd':
+						if (colonel.getOrientation() != Orientation.Type.EAST) {
+							colonel.rotateTo(Orientation.Type.EAST);
+						}
+						else colonel.tryMoveTo(Orientation.Type.EAST);
+						break;
+					case '2':
+						colonel.tryBoxPickUp();
+						break;
+					case '3':
+						colonel.tryBoxPutDown();
+						break;
+					case 'q':
+						colonel.shootTeleporter(Teleporter.Type.BLUE);
+						break;
+					case 'e':
+						colonel.shootTeleporter(Teleporter.Type.ORANGE);
+						break;
+					case 'i':
+						if (jaffa.getOrientation() != Orientation.Type.NORTH) {
+							jaffa.rotateTo(Orientation.Type.NORTH);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.NORTH);
+						break;
+					case 'k':
+						if (jaffa.getOrientation() != Orientation.Type.SOUTH) {
+							jaffa.rotateTo(Orientation.Type.SOUTH);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.SOUTH);
+						break;
+					case 'j':
+						if (jaffa.getOrientation() != Orientation.Type.WEST) {
+							jaffa.rotateTo(Orientation.Type.WEST);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.WEST);
+						break;
+					case 'l':
+						if (jaffa.getOrientation() != Orientation.Type.EAST) {
+							jaffa.rotateTo(Orientation.Type.EAST);
+						}
+						else jaffa.tryMoveTo(Orientation.Type.EAST);
+						break;
+					case '8':
+						jaffa.tryBoxPickUp();
+						break;
+					case '9':
+						jaffa.tryBoxPutDown();
+						break;
+					case 'u':
+						jaffa.shootTeleporter(Teleporter.Type.GREEN);
+						break;
+					case 'o':
+						jaffa.shootTeleporter(Teleporter.Type.RED);
+						break;
+					default:
+						break;
+				}
+				mapView.printMap();
+			}
+
 		}
 
 		/*

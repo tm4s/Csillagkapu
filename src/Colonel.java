@@ -12,24 +12,32 @@ public class Colonel{
      * begyujtott ZPM modulok szama
      * meghalt-e az ezredes szakadektol
      */
-    private Field ownedField;
+    protected Field ownedField;
     private Orientation.Type orientation;
     private Scale ownedScale = null;
     private Box ownedBox = null;
     private ColonelsHand hand;
     private int collectedZpms = 0;
-    private boolean dead = false;       //lehet kesobb nem fog kelleni
+    private int colonelsWeight = 10;
+    protected boolean dead = false;       //lehet kesobb nem fog kelleni
 
 
+
+    private void setOwnedField(Field field) {
+        ownedField.setThereAColonel(false);
+        ownedField = field;
+        ownedField.setThereAColonel(true);
+    }
 
     /**
      * konstruktor
      * @param field szuksege van egy mezore amin all majd
      */
-    public Colonel(Field field) {
+    public Colonel(Field field, int weight) {
         hand = new ColonelsHand(this);
         ownedField = field;
         orientation = Orientation.Type.NORTH;
+        colonelsWeight = weight;
     }
 
     /**
@@ -79,8 +87,9 @@ public class Colonel{
      * ha eddig merlegen allt akkor ertesiti a merleget hogy lelepett és torli a ra mutato referenciajat
      */
     public void moveTo(Field field) {
-        ownedField = field;
+        setOwnedField(field);
         notifyOwnedScale();
+        this.ownedScale.removeWeight(colonelsWeight+ownedBox.getWeight());
     }
 
     /**
@@ -89,9 +98,9 @@ public class Colonel{
      * @param scale erre a mérlegre lép rá
      */
     public void moveTo(Scale scale) {
-        ownedField = scale;
+        setOwnedField(scale);
         notifyOwnedScale();
-        scale.addWeight();
+        scale.addWeight(colonelsWeight+ownedBox.getWeight());
         this.ownedScale = scale;
     }
 
@@ -103,10 +112,16 @@ public class Colonel{
      */
 
     public void moveTo(Zpm zpm) {
-        ownedField = new EmptyField();
+        setOwnedField(zpm);
         notifyOwnedScale();
         zpm.setField(ownedField);
+
         this.collectedZpms++;
+
+        if ((collectedZpms % 2) == 0) {
+            Zpm newZpm = new Zpm();
+            newZpm.setNewPosition(ownedField);
+        }
     }
 
     /**
@@ -115,9 +130,11 @@ public class Colonel{
      * @param ravine ebbe a szakadekba lep bele
      */
     public void moveTo(Ravine ravine) {
+        ownedField.setThereAColonel(false);
         ownedField = ravine;
         notifyOwnedScale();
         this.dead = true;
+
     }
 
     /**
@@ -157,14 +174,6 @@ public class Colonel{
     public void boxPickUp(Box box) {
         ownedBox = box;
         hand.setHasBox(true);
-        Scale boxScale = ownedBox.getOwnedScale();
-        if (boxScale == null) {
-            box.setField(new EmptyField());
-        } else {
-            box.setField(boxScale);
-            boxScale.removeWeight();
-            ownedBox.setOwnedScale(null);
-        }
     }
 
     /**
@@ -193,9 +202,7 @@ public class Colonel{
      * @param scale erre a merlegre
      */
     public void  boxPutDownToScale(Scale scale) {
-        ownedBox.setOwnedScale(scale);
-        scale.addWeight();
-        scale.setField(ownedBox);
+        scale.addBox(ownedBox);
         ownedBox = null;
         hand.setHasBox(false);
     }
