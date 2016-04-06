@@ -97,10 +97,13 @@ public class Colonel{
      * @param scale erre a mérlegre lép rá
      */
     public void moveTo(Scale scale) {
-        setOwnedField(scale);
         notifyOwnedScale();
-        scale.addWeight(colonelsWeight+ownedBox.getWeight());
+        setOwnedField(scale);
         this.ownedScale = scale;
+        if (ownedBox != null)
+            ownedScale.addWeight(colonelsWeight + ownedBox.getWeight());
+        else
+            ownedScale.addWeight(colonelsWeight);
     }
 
     /**
