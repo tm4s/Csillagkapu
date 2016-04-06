@@ -178,6 +178,7 @@ public class Colonel{
      */
     public void boxPickUp(Box box) {
         ownedBox = box;
+        box.setField(new EmptyField());
         hand.setHasBox(true);
     }
 
