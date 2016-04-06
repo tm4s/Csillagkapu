@@ -163,7 +163,7 @@ public class Map {
 			}
 			Coordinate doorPosition = new Coordinate(doorDatas.get(i).getPosition());
 			doorDatas.remove(i);
-			setFieldAt(d.getPosition(), new Scale((Door, d.getWeight(), getFieldAt(doorPosition));
+			setFieldAt(d.getPosition(), new Scale((Door) getFieldAt(doorPosition), d.getWeight()));
 		}
 
 		setDatas();
