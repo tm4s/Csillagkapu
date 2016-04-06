@@ -16,9 +16,10 @@ public class Replicator extends Colonel {
         ownedField.setReplicator(this);
     }
 
+    @Override
     public void die() {
         ownedField.setReplicator(null);
-        dead = true;
+        isDead = true;
     }
 
     @Override
@@ -38,9 +39,8 @@ public class Replicator extends Colonel {
 
     @Override
     public void moveTo(Ravine ravine) {
-        ownedField.setReplicator(null);
         ravine.setField(new EmptyField());
-        dead = true;
+        die();
     }
 
     @Override
