@@ -118,7 +118,7 @@ public class Map {
 					doorDatas.add(new PosAndIdDataAndWeight(doorData[1], new Coordinate(j, i), 0));
 					break;
 				case 'B':
-					mapDatas[j][i] = new Box();
+					mapDatas[j][i] = new Box(Integer.parseInt(array[i].split("_")[1]));
 					break;
 				case 'C':
 					colonelWeight = Integer.parseInt(array[i].split("_")[1]);
