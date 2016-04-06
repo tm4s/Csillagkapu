@@ -60,7 +60,7 @@ public class Test {
 				System.out.println("RIP COLONEL :( ");
 			}
 			if (jaffa.isDead()) {
-				colonel = null;
+				jaffa = null;
 				System.out.println("RIP JAFFA :( ");
 			}
 			Scanner scan = new Scanner(System.in);

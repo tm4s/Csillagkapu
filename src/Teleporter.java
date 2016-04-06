@@ -6,14 +6,14 @@ public class Teleporter extends Field {
 	 * csillagkapuk tipusai
 	 */
 	enum Type {
-		ORANGE, BLUE
+		ORANGE, BLUE, RED, GREEN
 	}
 
 	/**
 	 * palyan levo lerakott csillagkapuk static mivel csak 2 lehet es mivel
 	 * tudniuk kell egymasrol palyan letrehozott csillagkapura tarol referenciat
 	 */
-	private static Teleporter[] Teleporters = new Teleporter[2];
+	private static Teleporter[] Teleporters = new Teleporter[4];
 
 	private Type type;
 	private Orientation.Type orientation;
@@ -43,7 +43,16 @@ public class Teleporter extends Field {
 	 *         kedveert van
 	 */
 	private Teleporter getOtherTeleporter() {
-		return Teleporters[(type.ordinal() + 1) % 2];
+		if (this.type == Type.ORANGE)  {
+			return Teleporters[type.ordinal() + 1];
+		}
+		else if (this.type == Type.BLUE) {
+			return Teleporters[type.ordinal() -1];
+		} else if (this.type == Type.RED)  {
+			return Teleporters[type.ordinal() + 1];
+		}
+		else {return Teleporters[type.ordinal() -1];
+		}
 	}
 
 	public Orientation.Type getOrientation() {
@@ -62,6 +71,10 @@ public class Teleporter extends Field {
 		Character c = '0';
 		if (type == Type.ORANGE)
 			c = 'O';
+		else if (type == Type.GREEN)
+			c = '◎';
+		else if (type == Type.RED)
+			c = '◉';
 		return c;
 	}
 }
