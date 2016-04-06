@@ -136,7 +136,6 @@ public class Colonel{
         ownedField = ravine;
         notifyOwnedScale();
         this.dead = true;
-
     }
 
     /**
