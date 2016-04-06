@@ -179,6 +179,8 @@ public class Colonel{
         ownedBox = box;
         box.setField(new EmptyField());
         hand.setHasBox(true);
+        if (ownedScale != null)
+            ownedScale.addWeight(ownedBox.getWeight());
     }
 
     /**
