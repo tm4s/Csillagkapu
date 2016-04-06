@@ -3,6 +3,8 @@
  */
 
 public abstract class Field {
+    private static int nextId = 0;
+
     // csak teszteleshez kell
     private Coordinate position = new Coordinate(-1, -1);
     private Map map = null;
@@ -13,10 +15,16 @@ public abstract class Field {
 
     private Replicator replicator;
     protected boolean isThereAColonel;
+    private int id;
 
     public Field() {
         replicator = null;
         isThereAColonel = false;
+        id = nextId++;
+    }
+
+    public boolean equals(Field otherField) {
+        return id == otherField.id;
     }
 
     public void setReplicator(Replicator replicator) {
