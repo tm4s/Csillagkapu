@@ -183,6 +183,13 @@ public class Colonel{
             ownedScale.addWeight(ownedBox.getWeight());
     }
 
+    public void boxPickUpFromScale(Box box) {
+        ownedBox = box;
+        hand.setHasBox(true);
+        if (ownedScale != null)
+            ownedScale.addWeight(ownedBox.getWeight());
+    }
+
     /**
      * doboz lerakasara kiserlet
      */
