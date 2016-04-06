@@ -6,6 +6,10 @@ public class Box extends Field {
 
     private int boxesWeight;
 
+    public Box(int weight) {
+        boxesWeight = weight;
+    }
+
 
     public int getWeight() {
         return boxesWeight;

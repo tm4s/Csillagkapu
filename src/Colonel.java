@@ -18,7 +18,7 @@ public class Colonel{
     private Box ownedBox = null;
     private ColonelsHand hand;
     private int collectedZpms = 0;
-    private int colonelsWeight = 10;
+    private int colonelsWeight = 0;
     protected boolean dead = false;       //lehet kesobb nem fog kelleni
 
 
