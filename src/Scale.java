@@ -41,7 +41,7 @@ public class Scale extends Field {
 
 	@Override
 	public void collideWith(Colonel colonel) {
-		if (!isThereAColonel)
+		if (!isThereAColonel && boxes.isEmpty())
 			colonel.moveTo(this);
 	}
 
