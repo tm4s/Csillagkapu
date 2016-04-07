@@ -11,18 +11,28 @@ public class Validator {
     private static String goToLine(Scanner scanner, char c) {
         String res = "";
         res = scanner.nextLine();
-        while (scanner.hasNextLine() && res.toCharArray()[0] != c)
+        while (scanner.hasNextLine() && res.toCharArray()[0] != c) {
             res = scanner.nextLine();
+            while (scanner.hasNextLine() && res.equals(""))
+                res = scanner.nextLine();
+        }
         return res;
     }
 
-    private static String readUntilChar(Scanner scanner, String data, char c) {
+    private static String readUntilChar(Scanner scanner, char c) {
+        String data = "";
         String res = scanner.nextLine();
         while (scanner.hasNextLine() && res.toCharArray()[0] != c) {
             data += res;
+            data += "\n";
             res = scanner.nextLine();
+            while (scanner.hasNextLine() && res.equals("")) {
+                data+=res;
+                data += "\n";
+                res = scanner.nextLine();
+            }
         }
-        return res;
+        return data;
     }
 
     public static void main(String args[]) {
@@ -38,19 +48,22 @@ public class Validator {
             Scanner realFile = new Scanner(new File(realFileName));
 
             String lastTitel = goToLine(expectedFile, '/');
+            goToLine(realFile, '-');
             while (realFile.hasNextLine() && expectedFile.hasNextLine()) {
                 String actualTitle = lastTitel;
-                goToLine(realFile, '-');
-                String expectedMap = "";
-                lastTitel = readUntilChar(expectedFile, expectedMap, '/');
-                String realMap = "";
-                readUntilChar(realFile, realMap, '-');
+                String expectedMap= readUntilChar(expectedFile, '/');
+                lastTitel = expectedFile.nextLine();
+                String realMap = readUntilChar(realFile, '-');
+                System.out.println();
+                System.out.println(actualTitle);
                 if (!realMap.equals(expectedMap)){
-                    System.out.println();
-                    System.out.println(actualTitle);
+                    System.out.println("Output:");
                     System.out.println(realMap);
                     System.out.println();
+                    System.out.println("Expected output:");
                     System.out.println(expectedMap);
+                } else {
+                    System.out.println("Passed :)");
                 }
             }
         } catch (IOException ex) {

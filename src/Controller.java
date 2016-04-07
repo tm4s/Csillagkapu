@@ -274,6 +274,11 @@ public class Controller {
                 jaffaAlreadyDead = true;
             }
             Scanner scan = new Scanner(System.in);
+            if (!scan.hasNextLine()) {
+                run = false;
+                break;
+            }
+
             String line = scan.nextLine().toLowerCase();
             if  (line.contains("quit")) {
                 run = false;
@@ -356,9 +361,8 @@ public class Controller {
                             break;
                     }
                 }
-                printMap();
             }
-
+            printMap();
         }
     }
 }
