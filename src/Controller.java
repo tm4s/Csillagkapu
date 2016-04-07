@@ -358,7 +358,8 @@ public class Controller {
                     }
                 }
             }
-            replicator.move();
+            if (!replicator.isDead())
+                replicator.move();
             printMap();
         }
     }
