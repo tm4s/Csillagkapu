@@ -64,7 +64,6 @@ public class Validator {
             goToLine(realFile, '-');
 
             while (realFile.hasNextLine() && expectedFile.hasNextLine()) {
-                //System.out.println("=====================================");
                 String actualTitle = lastTitle;
                 String expectedMap= readUntilChar(expectedFile, '/');
                 lastTitle = expectedFile.nextLine();
