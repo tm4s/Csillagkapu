@@ -9,6 +9,11 @@ public class RandomGenerator {
     private static int index = 0;
 
 
+    public static void setTest(boolean isTest) {
+        this.isTest = isTest;
+    }
+
+
     /**
      * Visszaadja, hogy milyen tavolsagban tortenjen a veletlenszeru generalas
      * @return

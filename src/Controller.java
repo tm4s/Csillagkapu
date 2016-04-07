@@ -279,6 +279,9 @@ public class Controller {
                 run = false;
                 break;
             }
+            if (line.contains("test")) {
+                RandomGenerator.setTest(true);
+            }
             for (int i = 0; i < line.length(); i++) {
                 if (!colonel.isDead()) {
                     switch (line.charAt(i)) {
