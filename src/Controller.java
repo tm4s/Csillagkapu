@@ -10,6 +10,8 @@ public class Controller {
     private Colonel jaffa;
     private Replicator replicator;
     private Field firstField; //top left corner on map
+    boolean colonelAlreadyDead;
+    boolean jaffaAlreadyDead;
 
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
@@ -19,6 +21,8 @@ public class Controller {
         replicator = new Replicator(new EmptyField());
         replicator.die();
         firstField = null;
+        colonelAlreadyDead = false;
+        jaffaAlreadyDead = false;
     }
 
     public Controller() {
@@ -197,8 +201,8 @@ public class Controller {
     }
 
     private void printMap() {
-        System.out.print("---------------------------------------\n");
-        System.out.println();
+        System.out.println("---------------------------------------");
+        //System.out.println();
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
         while (nextField != null) {
@@ -223,7 +227,19 @@ public class Controller {
         System.out.println("ZPMs left on the map: " + (Zpm.getAllZpms() - colonel.getCollectedZpms() - jaffa.getCollectedZpms()));
         System.out.println("ZPMs collected by the colonel: " + colonel.getCollectedZpms());
         System.out.println("ZPMs collected by Jaffa: " + jaffa.getCollectedZpms());
-        System.out.println();
+        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
+            System.out.println("NO MORE ZPMS!!!!!");
+        }
+        if (colonel.isDead() && !colonelAlreadyDead) {
+            System.out.println("RIP COLONEL :( ");
+            colonelAlreadyDead = true;
+        }
+        if (jaffa.isDead() && !jaffaAlreadyDead) {
+            System.out.println("RIP JAFFA :( ");
+            jaffaAlreadyDead = true;
+        }
+        System.out.println("---------------------------------------");
+        //System.out.println();
     }
 
     public void run() {
@@ -254,29 +270,19 @@ public class Controller {
         System.out.println("Ravine: R");
         System.out.println("ZPM: Z");
         System.out.println();
+        
 
+        if (jaffa.isDead())
+            jaffaAlreadyDead = true;
         printMap();
 
         boolean run = true;
-        boolean colonelAlreadyDead = false;
-        boolean jaffaAlreadyDead = false;
 
         Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine() && run) {
             if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-                System.out.println("NO MORE ZPMS!!!!!");
                 break;
             }
-            if (colonel.isDead() && !colonelAlreadyDead) {
-                System.out.println("RIP COLONEL :( ");
-                colonelAlreadyDead = true;
-            }
-            if (jaffa.isDead() && !jaffaAlreadyDead) {
-                System.out.println("RIP JAFFA :( ");
-                jaffaAlreadyDead = true;
-            }
-
-
 
             String line = scan.nextLine().toLowerCase();
             if  (line.contains("quit")) {
