@@ -5,12 +5,13 @@ import java.util.Random;
  */
 public class RandomGenerator {
     private static boolean isTest = false;
-    private static int testCases[] = {0, 1, 2, 3};
+    private static int testCases[];
     private static int index = 0;
 
 
-    public static void setTest(boolean isTest) {
-        this.isTest = isTest;
+
+    public static void setTest(boolean test) {
+        isTest = test;
     }
 
 
@@ -20,9 +21,7 @@ public class RandomGenerator {
      */
     public static int generateDistance() {
         if (isTest) {
-            if (index>testCases.length)
-                index = 0;
-            return testCases[index++]*10;
+            return 1;
         }
 
         Random rand = new Random();
