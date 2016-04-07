@@ -18,7 +18,6 @@ public class Controller {
     private String[] jaffaChars = {"\u2191", "\u2190", "\u2192", "\u2193"};
 
 
-
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
         colonel.die();

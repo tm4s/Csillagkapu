@@ -72,9 +72,9 @@ public class Teleporter extends Field {
 		if (type == Type.ORANGE)
 			c = 'O';
 		else if (type == Type.GREEN)
-			c = '◎';
+			c = 'X';
 		else if (type == Type.RED)
-			c = '◉';
+			c = 'Y';
 		return c;
 	}
 }
