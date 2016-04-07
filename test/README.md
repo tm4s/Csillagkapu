@@ -4,7 +4,7 @@
 
 ###Teszt futtatása adott bemeneti és kimeneti fájlal:
 **java -jar Csillagkapu.jar _[mapName.csv]_ <_[testInoutFile]_ >_[testOutoutFile]_**<br>
-pl.: **java -jar Csillagkapu.jar test00.csv <tes00.in >test00.out**
+pl.: **java -jar Csillagkapu.jar test00.csv \<tes00.in \>test00.out**
 
 ###Teszt kiértékelése:
 **java -jar Validator.jar _[expectedOutputFile]_ _[realOutputFile]_**<br>
