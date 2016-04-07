@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -5,13 +8,16 @@ import java.util.Random;
  */
 public class RandomGenerator {
     private static boolean isTest = false;
-    private static int testCases[];
-    private static int index = 0;
+    public static List<Integer> testCases = new ArrayList<Integer>();
 
 
 
     public static void setTest(boolean test) {
         isTest = test;
+    }
+
+    public static boolean getTest() {
+        return isTest;
     }
 
 
@@ -39,9 +45,10 @@ public class RandomGenerator {
         Random rand = new Random();
         int value = rand.nextInt(4);
         if (isTest) {
-            if (index>testCases.length)
-                index = 0;
-            return Orientation.Type.values()[testCases[index++]];
+            Orientation.Type t;
+            t = Orientation.Type.values()[testCases.get(0)];
+            testCases.remove(0);
+            return t;
         }
         return Orientation.Type.values()[value];
     }

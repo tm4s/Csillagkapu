@@ -281,9 +281,31 @@ public class Controller {
             }
             if (line.contains("test")) {
                 RandomGenerator.setTest(true);
+                for (int i = 0; i < line.length(); i++) {
+                    switch(line.charAt(i)) {
+                        case '0':
+                            RandomGenerator.testCases.add(0);
+                            replicator.move();
+                            break;
+                        case '1':
+                            RandomGenerator.testCases.add(1);
+                            replicator.move();
+                            break;
+                        case '2':
+                            RandomGenerator.testCases.add(2);
+                            replicator.move();
+                            break;
+                        case '3':
+                            RandomGenerator.testCases.add(3);
+                            replicator.move();
+                            break;
+                    }
+                }
+                printMap();
             }
+
             for (int i = 0; i < line.length(); i++) {
-                if (!colonel.isDead()) {
+                if (!colonel.isDead() && !RandomGenerator.getTest()) {
                     switch (line.charAt(i)) {
                         case 'w':
                             if (colonel.getOrientation() != Orientation.Type.NORTH) {
@@ -321,7 +343,7 @@ public class Controller {
                             break;
                     }
                 }
-                if (!jaffa.isDead()) {
+                if (!jaffa.isDead() && !RandomGenerator.getTest()) {
                     switch (line.charAt(i)) {
                         case 'i':
                             if (jaffa.getOrientation() != Orientation.Type.NORTH) {
@@ -360,7 +382,7 @@ public class Controller {
                     }
                 }
             }
-            if (!replicator.isDead())
+            if (!replicator.isDead() && !RandomGenerator.getTest())
                 replicator.move();
             printMap();
         }
