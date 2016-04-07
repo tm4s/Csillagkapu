@@ -59,6 +59,11 @@ public class Teleporter extends Field {
 		return orientation;
 	}
 
+	/**
+	 * Az ezredes belepve az egyik csillagkapun a masikon jon ki, amennyiben az nyitva van
+	 *
+	 * @param colonel
+	 */
     @Override
     public void collideWith(Colonel colonel) {
 		if (getOtherTeleporter() != null)

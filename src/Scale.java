@@ -26,6 +26,7 @@ public class Scale extends Field {
 			door.close();
 	}
 
+
 	public void addWeight(int plusWeight) {
 		updateWeight(plusWeight);
 	}
@@ -39,17 +40,30 @@ public class Scale extends Field {
 		updateWeight(box.getWeight());
 	}
 
+	/**
+	 * Az ezredes merleggel valo talalkozasakor az ezredes a merlegre lep
+	 *
+	 * @param colonel
+	 */
 	@Override
 	public void collideWith(Colonel colonel) {
 		if (!isThereAColonel && boxes.isEmpty())
 			colonel.moveTo(this);
 	}
 
+	/**
+	 * A lovedek merleggel valo talalkozasakor athalad a merleg felett
+	 */
 	@Override
 	public void collideWith(Bullet bullet) {
 		bulletMoveForward(bullet);
 	}
 
+	/**
+	 * Amennyiben az ezredes kezeben doboz van az rakerul a merlegre
+	 *
+	 * @param hand
+	 */
 	@Override
 	public void collideWith(ColonelsHand hand) {
 		if (hand.hasBox())

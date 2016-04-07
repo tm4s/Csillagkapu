@@ -5,7 +5,7 @@
 public class Bullet {
 
 	/**
-	 * aktualis pozocio, irany tipusa a teleporternek ami letrejohet belole
+	 * Aktualis pozocio, irany tipusa a teleporternek ami letrejohet belole
 	 */
 	private Field ownedField;
 	private Orientation.Type direction;
@@ -14,12 +14,9 @@ public class Bullet {
 	/**
 	 * konstruktor
 	 * 
-	 * @param type
-	 *            telepotrter tipusa
-	 * @param startField
-	 *            kezdo mezo
-	 * @param direction
-	 *            haladasi irany
+	 * @param type telepotrter tipusa
+	 * @param startField kezdo mezo
+	 * @param direction haladasi irany
 	 */
 	public Bullet(Teleporter.Type type, Field startField, Orientation.Type direction) {
 		this.type = type;

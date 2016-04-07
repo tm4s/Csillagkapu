@@ -4,7 +4,10 @@
 public class Zpm extends Field {
 	static int allZPMs = 0;
 
-	Zpm() {
+	/**
+	 * Konstruktor
+	 */
+	public Zpm() {
 		allZPMs++;
 	}
 
@@ -12,11 +15,22 @@ public class Zpm extends Field {
 		return allZPMs;
 	}
 
+	/**
+	 * Az ezredes a ZPM modullal talalkozva begyujti azt
+	 * A modul helyen egy ures mezo keletkezik
+	 *
+	 * @param colonel a ZPM modullal talalkozo ezredes
+	 */
 	@Override
 	public void collideWith(Colonel colonel) {
 		colonel.moveTo(this);
 	}
 
+	/**
+	 * Egy lovedek ZPM modullal valo talalkozasakor a lovedek athalad a modulon
+	 *
+	 * @param bullet a ZPM modullal tallakozo lovedek
+	 */
 	@Override
 	public void collideWith(Bullet bullet) {
 		bullet.moveForward();

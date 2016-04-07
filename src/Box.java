@@ -15,6 +15,11 @@ public class Box extends Field {
         return boxesWeight;
     }
 
+    /**
+     * A lovedek talalkzoasa a dobozzal
+     *
+     * @param bullet
+     */
     @Override
     public void collideWith(Bullet bullet) {
         bullet.moveForward();
@@ -25,6 +30,11 @@ public class Box extends Field {
         return 'B';
     }
 
+    /**
+     * Az ezeredes kezenek a dobozzal valo talalkozasa
+     *
+     * @param hand
+     */
     @Override
     public  void collideWith(ColonelsHand hand) {
         if (!hand.hasBox())
