@@ -202,9 +202,9 @@ public class Controller {
                     printPerson(colonelChars, colonel.getOrientation());
                 if (nextField.equals(jaffa.getOwnedField()))
                     printPerson(jaffaChars, jaffa.getOrientation());
-                if (nextField.replicator != null) {
-                    printPerson(replicatorChars, replicator.getOrientation());
-                }
+            }
+            else if (nextField.replicator != null) {
+                printPerson(replicatorChars, replicator.getOrientation());
             }
             else
                 System.out.print(nextField.print());
@@ -360,6 +360,7 @@ public class Controller {
                     }
                 }
             }
+            replicator.move();
             printMap();
         }
     }
