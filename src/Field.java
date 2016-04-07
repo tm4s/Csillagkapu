@@ -27,7 +27,9 @@ public abstract class Field {
     public void setReplicator(Replicator replicator) {
         this.replicator = replicator;
     }
-
+    public boolean isThereAReplicitaor() {
+        return replicator != null;
+    }
 
 
     protected void bulletMoveForward(Bullet bullet) {

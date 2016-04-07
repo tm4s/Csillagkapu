@@ -5,6 +5,7 @@ public class Replicator extends Colonel {
     public Replicator(Field field) {
         super(field, 0);
         field.setReplicator(this);
+        field.setThereAColonel(false);
     }
 
     public void move() {

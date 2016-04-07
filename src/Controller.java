@@ -202,9 +202,8 @@ public class Controller {
                     printPerson(colonelChars, colonel.getOrientation());
                 if (nextField.equals(jaffa.getOwnedField()))
                     printPerson(jaffaChars, jaffa.getOrientation());
-                if (nextField.equals(replicator.getOwnedField()))
-                    printPerson(replicatorChars, replicator.getOrientation());
-            }
+            } else if (nextField.isThereAReplicitaor())
+                printPerson(replicatorChars, replicator.getOrientation());
             else
                 System.out.print(nextField.print());
             if (nextField.getNextField(Orientation.Type.EAST) != null)
