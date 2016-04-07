@@ -254,7 +254,7 @@ public class Colonel{
      * @param teleporter erre a mezore teleportalunk
      */
     public void teleportTo(Teleporter teleporter) {
-        ownedField = teleporter;
+        setOwnedField(teleporter);
         tryMoveTo(teleporter.getOrientation());
     }
 
