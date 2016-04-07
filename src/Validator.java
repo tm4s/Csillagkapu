@@ -57,11 +57,14 @@ public class Validator {
                 System.out.println();
                 System.out.println(actualTitle);
                 if (!realMap.equals(expectedMap)){
+                    System.out.println("Failed :(");
+                    System.out.println();
                     System.out.println("Output:");
                     System.out.println(realMap);
-                    System.out.println();
+                    System.out.println("- - - - - - - - - - - - - - - - - - -");
                     System.out.println("Expected output:");
                     System.out.println(expectedMap);
+                    System.out.println("-------------------------------------");
                 } else {
                     System.out.println("Passed :)");
                 }
