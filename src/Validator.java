@@ -47,7 +47,7 @@ public class Validator {
 
     public static void main(String args[]) {
         if (args.length != 2) {
-            System.out.print("Error expected 2 arguments");
+            System.out.println("Error expected 2 arguments");
             return;
         }
         String expectedFileName = args[0];
