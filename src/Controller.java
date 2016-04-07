@@ -119,6 +119,10 @@ public class Controller {
                         case 'R':
                             mapDatas[j][i] = new Ravine();
                             break;
+                        case '?':
+                            mapDatas[j][i] = new EmptyField();
+                            replicator = new Replicator(mapDatas[j][i]);
+                            break;
                         default:
                             break;
                     }
@@ -202,7 +206,6 @@ public class Controller {
 
     private void printMap() {
         System.out.println("---------------------------------------");
-        //System.out.println();
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
         while (nextField != null) {
@@ -239,7 +242,6 @@ public class Controller {
             jaffaAlreadyDead = true;
         }
         System.out.println("---------------------------------------");
-        //System.out.println();
     }
 
     public void run() {
