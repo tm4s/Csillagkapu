@@ -47,12 +47,12 @@ public class Validator {
             Scanner expectedFile = new Scanner(new File(expectedFileName));
             Scanner realFile = new Scanner(new File(realFileName));
 
-            String lastTitel = goToLine(expectedFile, '/');
+            String lastTitle = goToLine(expectedFile, '/');
             goToLine(realFile, '-');
             while (realFile.hasNextLine() && expectedFile.hasNextLine()) {
-                String actualTitle = lastTitel;
+                String actualTitle = lastTitle;
                 String expectedMap= readUntilChar(expectedFile, '/');
-                lastTitel = expectedFile.nextLine();
+                lastTitle = expectedFile.nextLine();
                 String realMap = readUntilChar(realFile, '-');
                 System.out.println();
                 System.out.println(actualTitle);
