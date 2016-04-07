@@ -10,7 +10,7 @@ public abstract class Field {
      */
     private Field[] nextFields = new Field[4];
 
-    protected Replicator replicator;
+    private Replicator replicator;
     protected boolean isThereAColonel;
     private int id;
 
@@ -27,6 +27,8 @@ public abstract class Field {
     public void setReplicator(Replicator replicator) {
         this.replicator = replicator;
     }
+
+
 
     protected void bulletMoveForward(Bullet bullet) {
         if (replicator == null)
