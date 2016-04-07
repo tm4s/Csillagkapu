@@ -3,9 +3,8 @@
  */
 
 public abstract class Field {
-    // csak teszteleshez kell
-    private Coordinate position = new Coordinate(-1, -1);
-    private Map map = null;
+    private static int nextId = 0;
+
     /**
      * mezo szomszedai az iranyokat tarolo enumnak megfelelo az indexelese a tombnek
      */
@@ -13,15 +12,25 @@ public abstract class Field {
 
     private Replicator replicator;
     protected boolean isThereAColonel;
+    private int id;
 
     public Field() {
         replicator = null;
         isThereAColonel = false;
+        id = nextId++;
+    }
+
+    public boolean equals(Field otherField) {
+        return id == otherField.id;
     }
 
     public void setReplicator(Replicator replicator) {
         this.replicator = replicator;
     }
+    public boolean isThereAReplicitaor() {
+        return replicator != null;
+    }
+
 
     protected void bulletMoveForward(Bullet bullet) {
         if (replicator == null)
@@ -51,11 +60,6 @@ public abstract class Field {
      */
     public void setField(Field field) {
         field.setNextFields(nextFields);
-
-        // csak teszteleshez kell
-        field.position = new Coordinate(position);
-        field.map = map;
-        field.setOnMap();
     }
 
     /**
@@ -102,24 +106,6 @@ public abstract class Field {
         getNextRandomField().collideWith(zpm);
     }
 
-    //teszteleshez kell
     public abstract Character print();
-
-    //csak teszteleshez kell
-    public Coordinate getPosition() {
-        return position;
-    }
-    public void setPosition(Coordinate position) {
-        this.position = new Coordinate(position);
-    }
-    public void setOnMap(){
-        map.setFieldAt(position, this);
-
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
-    }
-	// csak teszteleshez kell
 
 }

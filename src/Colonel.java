@@ -19,7 +19,7 @@ public class Colonel{
     private ColonelsHand hand;
     private int collectedZpms = 0;
     private int colonelsWeight = 0;
-    protected boolean dead = false;       //lehet kesobb nem fog kelleni
+    protected boolean isDead = false;       //lehet kesobb nem fog kelleni
 
 
 
@@ -36,6 +36,7 @@ public class Colonel{
     public Colonel(Field field, int weight) {
         hand = new ColonelsHand(this);
         ownedField = field;
+        field.setThereAColonel(true);
         orientation = Orientation.Type.NORTH;
         colonelsWeight = weight;
     }
@@ -56,9 +57,13 @@ public class Colonel{
 
     //valamit meg ezzel lehet kell majd csinalni
     public boolean isDead() {
-        return dead;
+        return isDead;
     }
 
+    public void die() {
+        ownedField.setThereAColonel(false);
+        isDead = true;
+    }
 
     /**
      * az ezredes a megadott iranyba fordul
@@ -135,7 +140,7 @@ public class Colonel{
         ownedField.setThereAColonel(false);
         ownedField = ravine;
         notifyOwnedScale();
-        this.dead = true;
+        this.isDead = true;
     }
 
     /**
@@ -249,15 +254,17 @@ public class Colonel{
      * @param teleporter erre a mezore teleportalunk
      */
     public void teleportTo(Teleporter teleporter) {
-        ownedField = teleporter;
+        setOwnedField(teleporter);
         tryMoveTo(teleporter.getOrientation());
     }
 
 
-    //csak teszteleshez
+
     public Field getOwnedField(){
         return ownedField;
     }
+
+
     public Orientation.Type getOrientation(){
         return orientation;
     }

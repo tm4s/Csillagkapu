@@ -1,9 +1,11 @@
 /**
- * Created by danielkrausz on 03/04/16.
+ * Replikator
  */
 public class Replicator extends Colonel {
-    Replicator(Field field) {
+    public Replicator(Field field) {
         super(field, 0);
+        field.setReplicator(this);
+        field.setThereAColonel(false);
     }
 
     public void move() {
@@ -16,9 +18,10 @@ public class Replicator extends Colonel {
         ownedField.setReplicator(this);
     }
 
+    @Override
     public void die() {
         ownedField.setReplicator(null);
-        dead = true;
+        isDead = true;
     }
 
     @Override
@@ -38,9 +41,8 @@ public class Replicator extends Colonel {
 
     @Override
     public void moveTo(Ravine ravine) {
-        ownedField.setReplicator(null);
         ravine.setField(new EmptyField());
-        dead = true;
+        die();
     }
 
     @Override
