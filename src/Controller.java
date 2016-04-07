@@ -78,10 +78,10 @@ public class Controller {
                 String array[] = line.split(";");
                 for (int i = 0; i < width; i++) {
                     switch (array[i].charAt(0)) {
-                        case 'E':
+                        case ' ':
                             mapDatas[j][i] = new EmptyField();
                             break;
-                        case 'W':
+                        case '#':
                             mapDatas[j][i] = new Wall();
                             break;
                         case 'D':
