@@ -8,7 +8,7 @@ pl.: **java -jar Csillagkapu.jar test00.csv \<test00.in \>test00.out**
 
 ###Teszt kiértékelése:
 **java -jar Validator.jar _[expectedOutputFile]_ _[realOutputFile]_**<br>
-pl.: **java -jar Csillagkapu.jar test00.e test00.out**
+pl.: **java -jar Validator.jar test00.e test00.out**
 
 ##Teszt készítése
 Szükséges fileok:
