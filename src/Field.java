@@ -10,7 +10,7 @@ public abstract class Field {
      */
     private Field[] nextFields = new Field[4];
 
-    private Replicator replicator;
+    protected Replicator replicator;
     protected boolean isThereAColonel;
     private int id;
 

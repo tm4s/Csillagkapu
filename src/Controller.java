@@ -13,6 +13,12 @@ public class Controller {
     boolean colonelAlreadyDead;
     boolean jaffaAlreadyDead;
 
+    private char[] colonelChars = {'A', '<', '>', 'V'};
+    private char[] replicatorChars = {'A', '<', '>', 'V'};
+    private char[] jaffaChars = {'↑', '←', '→', '↓'};
+
+
+
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
         colonel.die();
@@ -162,40 +168,22 @@ public class Controller {
         }
     }
 
-    private void printColonel(Orientation.Type orientation) {
-        Character c = 'A';
+    private void printPerson(char[] person, Orientation.Type orientation) {
+        Character c = person[0];
         switch (orientation) {
             case NORTH:
-                c = 'A';
+                c = person[0];
                 break;
             case WEST:
-                c = '<';
-                break;
-            case SOUTH:
-                c = 'V';
+                c = person[1];
                 break;
             case EAST:
-                c = '>';
+                c = person[2];
                 break;
-        }
-        System.out.print(c);
-    }
+            case SOUTH:
+                c = person[3];
+                break;
 
-    private void printJaffa(Orientation.Type orientation) {
-        Character c = '↑';
-        switch (orientation) {
-            case NORTH:
-                c = '↑';
-                break;
-            case WEST:
-                c = '←';
-                break;
-            case SOUTH:
-                c = '↓';
-                break;
-            case EAST:
-                c = '→';
-                break;
         }
         System.out.print(c);
     }
@@ -208,9 +196,12 @@ public class Controller {
         while (nextField != null) {
             if (nextField.isThereAColonel) {
                 if (nextField.equals(colonel.getOwnedField()))
-                    printColonel(colonel.getOrientation());
+                    printPerson(colonelChars, colonel.getOrientation());
                 if (nextField.equals(jaffa.getOwnedField()))
-                    printJaffa(jaffa.getOrientation());
+                    printPerson(jaffaChars, jaffa.getOrientation());
+                if (nextField.replicator != null) {
+                    printPerson(replicatorChars, replicator.getOrientation());
+                }
             }
             else
                 System.out.print(nextField.print());
