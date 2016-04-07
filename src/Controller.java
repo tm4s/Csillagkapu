@@ -14,7 +14,7 @@ public class Controller {
     boolean jaffaAlreadyDead;
 
     private String[] colonelChars = {"A", "<", ">", "V"};
-    private String[] replicatorChars = {"A", "<", ">", "V"};
+    private String[] replicatorChars = {"\u21D1", "\u21D0", "\u21D2", "\u21D3"};
     private String[] jaffaChars = {"\u2191", "\u2190", "\u2192", "\u2193"};
 
 
