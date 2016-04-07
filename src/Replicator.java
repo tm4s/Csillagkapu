@@ -2,7 +2,7 @@
  * Replikator
  */
 public class Replicator extends Colonel {
-    Replicator(Field field) {
+    public Replicator(Field field) {
         super(field, 0);
         field.setReplicator(this);
     }

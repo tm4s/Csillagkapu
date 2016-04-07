@@ -13,9 +13,9 @@ public class Controller {
     boolean colonelAlreadyDead;
     boolean jaffaAlreadyDead;
 
-    private char[] colonelChars = {'A', '<', '>', 'V'};
-    private char[] replicatorChars = {'A', '<', '>', 'V'};
-    private char[] jaffaChars = {'↑', '←', '→', '↓'};
+    private String[] colonelChars = {"A", "<", ">", "V"};
+    private String[] replicatorChars = {"A", "<", ">", "V"};
+    private String[] jaffaChars = {"\u2191", "\u2190", "\u2192", "\u2193"};
 
 
 
@@ -172,24 +172,24 @@ public class Controller {
         }
     }
 
-    private void printPerson(char[] person, Orientation.Type orientation) {
-        Character c = person[0];
+    private void printPerson(String[] person, Orientation.Type orientation) {
+        String str = person[0];
         switch (orientation) {
             case NORTH:
-                c = person[0];
+                str = person[0];
                 break;
             case WEST:
-                c = person[1];
+                str = person[1];
                 break;
             case EAST:
-                c = person[2];
+                str = person[2];
                 break;
             case SOUTH:
-                c = person[3];
+                str = person[3];
                 break;
 
         }
-        System.out.print(c);
+        System.out.print(str);
     }
 
     private void printMap() {
