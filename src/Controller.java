@@ -270,7 +270,7 @@ public class Controller {
         System.out.println("Ravine: R");
         System.out.println("ZPM: Z");
         System.out.println();
-        
+
 
         if (jaffa.isDead())
             jaffaAlreadyDead = true;
