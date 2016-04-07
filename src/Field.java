@@ -27,7 +27,7 @@ public abstract class Field {
     public void setReplicator(Replicator replicator) {
         this.replicator = replicator;
     }
-    public boolean isThereAReplicitaor() {
+    public boolean isThereAReplicator() {
         return replicator != null;
     }
 
