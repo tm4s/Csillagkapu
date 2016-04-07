@@ -197,6 +197,7 @@ public class Controller {
     }
 
     private void printMap() {
+        System.out.print("---------------------------------------");
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
         while (nextField != null) {
