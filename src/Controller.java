@@ -261,7 +261,8 @@ public class Controller {
         boolean colonelAlreadyDead = false;
         boolean jaffaAlreadyDead = false;
 
-        while (run) {
+        Scanner scan = new Scanner(System.in);
+        while (scan.hasNextLine() && run) {
             if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
                 System.out.println("NO MORE ZPMS!!!!!");
                 break;
@@ -274,11 +275,8 @@ public class Controller {
                 System.out.println("RIP JAFFA :( ");
                 jaffaAlreadyDead = true;
             }
-            Scanner scan = new Scanner(System.in);
-            if (!scan.hasNextLine()) {
-                run = false;
-                break;
-            }
+
+
 
             String line = scan.nextLine().toLowerCase();
             if  (line.contains("quit")) {
