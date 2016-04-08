@@ -27,6 +27,7 @@ public class RandomGenerator {
      */
     public static int generateDistance() {
         if (isTest) {
+            testCases.add(3);
             return 1;
         }
 
