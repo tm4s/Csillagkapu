@@ -374,7 +374,7 @@ public class Controller {
                     }
 
                 }
-                if (testCasesSize > 0) {
+                if (!replicator.isDead() && testCasesSize > 0) {
                     replicator.move();
                     testCasesSize--;
                 }
