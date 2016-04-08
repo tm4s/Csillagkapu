@@ -293,11 +293,7 @@ public class Controller {
                 readIndex = input[0].length() + input[1].length();
             }
 
-            for (int i = 0; i < testCasesSize; i++) {
-                replicator.move();
-            }
-
-            for (int i = readIndex ; i < line.length(); i++) {
+            for (int i = readIndex+1 ; i < line.length(); i++) {
                 if (!colonel.isDead()) {
                     switch (line.charAt(i)) {
                         case 'w':
@@ -374,6 +370,10 @@ public class Controller {
                             break;
                     }
 
+                }
+                if (testCasesSize > 0) {
+                    replicator.move();
+                    testCasesSize--;
                 }
             }
             if (!replicator.isDead() && !RandomGenerator.getTest())
