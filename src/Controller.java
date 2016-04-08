@@ -287,10 +287,13 @@ public class Controller {
 
             if (input[0].equals("test")) {
                 RandomGenerator.setTest(true);
-                for (int i = 0; i < input[1].length(); i++)
-                    RandomGenerator.testCases.add(Character.getNumericValue( input[1].charAt(i)));
-                testCasesSize = input[1].length();
-                readIndex = input[0].length() + input[1].length();
+                if (input[1].contains("0") || input[1].contains("1") || input[1].contains("2") || input[1].contains("3")) {
+                    for (int i = 0; i < input[1].length(); i++)
+                        RandomGenerator.testCases.add(Character.getNumericValue(input[1].charAt(i)));
+                    testCasesSize = input[1].length();
+                    readIndex = input[0].length() + input[1].length();
+                }
+                else readIndex = input[0].length();
             }
 
             for (int i = readIndex+1 ; i < line.length(); i++) {
