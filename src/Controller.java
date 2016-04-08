@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Controller {
@@ -280,7 +281,23 @@ public class Controller {
                 break;
             }
 
-            for (int i = 0; i < line.length(); i++) {
+            String[] input = line.split(" ");
+            int readIndex = 0;
+            int testCasesSize = 0;
+
+            if (input[0].equals("test")) {
+                RandomGenerator.setTest(true);
+                for (int i = 0; i < input[1].length(); i++)
+                    RandomGenerator.testCases.add(Character.getNumericValue( input[1].charAt(i)));
+                testCasesSize = input[1].length();
+                readIndex = input[0].length() + input[1].length();
+            }
+
+            for (int i = 0; i < testCasesSize; i++) {
+                replicator.move();
+            }
+
+            for (int i = readIndex ; i < line.length(); i++) {
                 if (!colonel.isDead()) {
                     switch (line.charAt(i)) {
                         case 'w':
@@ -356,34 +373,9 @@ public class Controller {
                         default:
                             break;
                     }
+
                 }
             }
-
-            if (line.contains("t")) {
-                RandomGenerator.setTest(true);
-                for (int i = 0; i < line.length(); i++) {
-                    switch(line.charAt(i)) {
-                        case '0':
-                            RandomGenerator.testCases.add(0);
-                            replicator.move();
-                            break;
-                        case '1':
-                            RandomGenerator.testCases.add(1);
-                            replicator.move();
-                            break;
-                        case '2':
-                            RandomGenerator.testCases.add(2);
-                            replicator.move();
-                            break;
-                        case '3':
-                            RandomGenerator.testCases.add(3);
-                            replicator.move();
-                            break;
-                    }
-                }
-                printMap();
-            }
-
             if (!replicator.isDead() && !RandomGenerator.getTest())
                 replicator.move();
             printMap();
