@@ -282,7 +282,7 @@ public class Controller {
             }
 
             String[] input = line.split(" ");
-            int readIndex = 0;
+            int readIndex = -1;
             int testCasesSize = 0;
 
             if (input[0].equals("test")) {
