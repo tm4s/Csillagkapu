@@ -1,4 +1,4 @@
-/ Replikator mozgasa
+/ Replikator talalkozasa a merleggel, ZPM-mel, dobozzal, fallal, szakadekkal
 / 1. Kiindulasi allapot
 #######
 #TSZ B#
