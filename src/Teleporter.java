@@ -55,6 +55,10 @@ public class Teleporter extends Field {
 		}
 	}
 
+	public Teleporter.Type getType() {
+		return type;
+	}
+
 	public Orientation.Type getOrientation() {
 		return orientation;
 	}
@@ -70,16 +74,8 @@ public class Teleporter extends Field {
 			colonel.teleportTo(getOtherTeleporter());
 	}
 
-
 	@Override
-	public Character print() {
-		Character c = '0';
-		if (type == Type.ORANGE)
-			c = 'O';
-		else if (type == Type.GREEN)
-			c = 'X';
-		else if (type == Type.RED)
-			c = 'Y';
-		return c;
+	public void view(Controller controller) {
+		controller.showView(this);
 	}
 }

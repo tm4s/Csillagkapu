@@ -26,6 +26,9 @@ public class Scale extends Field {
 			door.close();
 	}
 
+	public int getWeight() {
+		return actualWeight;
+	}
 
 	public void addWeight(int plusWeight) {
 		updateWeight(plusWeight);
@@ -75,13 +78,8 @@ public class Scale extends Field {
 	}
 
 	@Override
-	public Character print() {
-		if (boxes.isEmpty())
-			return 'S';
-		else if (boxes.size()<=9)
-			return Integer.toString(boxes.size()).charAt(0);
-		else
-			return '*';
+	public void view(Controller controller) {
+		controller.showView(this);
 	}
 
 }

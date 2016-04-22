@@ -205,7 +205,8 @@ public class Controller {
             } else if (nextField.isThereAReplicator())
                 printPerson(replicatorChars, replicator.getOrientation());
             else
-                System.out.print(nextField.print());
+                //System.out.print(nextField.print());
+                nextField.view(this);
             if (nextField.getNextField(Orientation.Type.EAST) != null)
                 nextField = nextField.getNextField(Orientation.Type.EAST);
             else {
@@ -378,10 +379,61 @@ public class Controller {
                     replicator.move();
                     testCasesSize--;
                 }
+                if (!replicator.isDead() && !RandomGenerator.getTest())
+                    replicator.move();
             }
-            if (!replicator.isDead() && !RandomGenerator.getTest())
-                replicator.move();
             printMap();
         }
+    }
+
+    public void showView(Box box) {
+        System.out.print('B');
+    }
+
+    public void showView(Door door) {
+        char c = door.isOpened() ? ' ' : 'D';
+        System.out.print(c);
+    }
+
+    public void showView(EmptyField emptyField) {
+        System.out.print(' ');
+    }
+
+    public void showView(Ravine ravine) {
+        System.out.print('R');
+    }
+
+    public void showView(Scale scale) {
+        char c;
+        if (scale.getWeight() == 0)
+            c = 'S';
+        else if (scale.getWeight() <= 9)
+            c = Integer.toString(scale.getWeight()).charAt(0);
+        else
+            c = '*';
+        System.out.print(c);
+    }
+
+    public void showView(SpecialWall specialWall) {
+        System.out.print('+');
+    }
+
+    public void showView(Teleporter teleporter) {
+        char c = '0';
+        if (teleporter.getType() == Teleporter.Type.ORANGE)
+            c = 'O';
+        else if (teleporter.getType() == Teleporter.Type.GREEN)
+            c = 'X';
+        else if (teleporter.getType() == Teleporter.Type.RED)
+            c = 'Y';
+        System.out.print(c);
+    }
+
+    public void showView(Wall wall) {
+        System.out.print('#');
+    }
+
+    public void showView(Zpm zpm) {
+        System.out.print('Z');
     }
 }

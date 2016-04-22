@@ -3,9 +3,8 @@
  */
 public class Wall extends Field {
 
-
 	@Override
-	public Character print() {
-		return '#';
+	public void view(Controller controller) {
+		controller.showView(this);
 	}
 }

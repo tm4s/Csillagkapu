@@ -44,9 +44,8 @@ public class Zpm extends Field {
 		actualField.collideWith(this);
 	}
 
-
-    @Override
-    public Character print() {
-        return 'Z';
-    }
+	@Override
+	public void view(Controller controller) {
+		controller.showView(this);
+	}
 }

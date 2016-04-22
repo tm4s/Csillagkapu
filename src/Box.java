@@ -25,11 +25,6 @@ public class Box extends Field {
         bullet.moveForward();
     }
 
-    @Override
-    public Character print() {
-        return 'B';
-    }
-
     /**
      * Az ezeredes kezenek a dobozzal valo talalkozasa
      *
@@ -39,5 +34,10 @@ public class Box extends Field {
     public  void collideWith(ColonelsHand hand) {
         if (!hand.hasBox())
             hand.getColonel().boxPickUp(this);
+    }
+
+    @Override
+    public void view(Controller controller) {
+        controller.showView(this);
     }
 }

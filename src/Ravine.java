@@ -36,7 +36,7 @@ public class Ravine extends Field {
 	}
 
 	@Override
-	public Character print() {
-		return 'R';
+	public void view(Controller controller) {
+		controller.showView(this);
 	}
 }

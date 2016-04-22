@@ -14,7 +14,7 @@ public class SpecialWall extends Wall {
 	}
 
 	@Override
-	public Character print() {
-		return '+';
+	public void view(Controller controller) {
+		controller.showView(this);
 	}
 }

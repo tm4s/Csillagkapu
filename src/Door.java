@@ -6,6 +6,10 @@ public class Door extends Field {
 	//Ajto belso valtozoja, hogy nyitva van-e
 	private boolean isOpened = false;
 
+	public boolean isOpened() {
+		return isOpened;
+	}
+
 	/**
 	 * Az ajto kinyilik
 	 */
@@ -20,7 +24,6 @@ public class Door extends Field {
 		isOpened = false;
 	}
 
-
 	/**
 	 * Ha nyitva van az ajto, az ezredes athalad rajta
 	 *
@@ -31,7 +34,6 @@ public class Door extends Field {
 		if (isOpened && !isThereAColonel) {
 			colonel.moveTo(this);
 		}
-
 	}
 
 	/**
@@ -44,17 +46,11 @@ public class Door extends Field {
 		if (isOpened) {
 			bullet.moveForward();
 		}
-
 	}
 
-
-
 	@Override
-	public Character print() {
-		Character c = 'D';
-		if (isOpened)
-			c = ' ';
-		return c;
+	public void view(Controller controller) {
+		controller.showView(this);
 	}
 
 }

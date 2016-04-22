@@ -105,7 +105,6 @@ public abstract class Field {
     public void collideWith(Zpm zpm) {
         getNextRandomField().collideWith(zpm);
     }
-
-    public abstract Character print();
+    public abstract void view(Controller controller);
 
 }
