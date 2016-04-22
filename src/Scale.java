@@ -25,10 +25,7 @@ public class Scale extends Field {
 		else
 			door.close();
 	}
-
-	public int getWeight() {
-		return actualWeight;
-	}
+	
 
 	public void addWeight(int plusWeight) {
 		updateWeight(plusWeight);
@@ -37,6 +34,10 @@ public class Scale extends Field {
 	public void removeWeight(int minusWeight) {
 		updateWeight(-minusWeight);
 	}
+
+	public int getNumberOfBoxes() {
+		return boxes.size();
+	} 
 
 	public void addBox(Box box) {
 		boxes.add(box);

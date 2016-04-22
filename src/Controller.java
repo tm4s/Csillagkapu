@@ -405,10 +405,10 @@ public class Controller {
 
     public void showView(Scale scale) {
         char c;
-        if (scale.getWeight() == 0)
+        if (scale.getNumberOfBoxes() == 0)
             c = 'S';
-        else if (scale.getWeight() <= 9)
-            c = Integer.toString(scale.getWeight()).charAt(0);
+        else if (scale.getNumberOfBoxes() <= 9)
+            c = Integer.toString(scale.getNumberOfBoxes()).charAt(0);
         else
             c = '*';
         System.out.print(c);
