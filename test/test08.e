@@ -20,6 +20,6 @@ ZPMs collected by Jaffa: 0
 ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
-RIP COLONEL :(
+RIP COLONEL :( 
 /
 /
