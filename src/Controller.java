@@ -224,11 +224,11 @@ public class Controller {
             System.out.println("NO MORE ZPMS!!!!!");
         }
         if (colonel.isDead() && !colonelAlreadyDead) {
-            System.out.println("RIP COLONEL :( ");
+            System.out.println("RIP COLONEL :(");
             colonelAlreadyDead = true;
         }
         if (jaffa.isDead() && !jaffaAlreadyDead) {
-            System.out.println("RIP JAFFA :( ");
+            System.out.println("RIP JAFFA :(");
             jaffaAlreadyDead = true;
         }
         System.out.println("---------------------------------------");
