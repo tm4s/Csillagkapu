@@ -12,7 +12,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/2. Elso doboz a merlegre [S2D3]
+/ 2. Elso doboz a merlegre [S2D3]
 #+#####
 # R#S #
 + Z#  #
@@ -25,7 +25,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/3. Meg egy doboz a merlegre [S2D3]
+/ 3. Meg egy doboz a merlegre [S2D3]
 #+#####
 # R#S #
 + Z#  #
@@ -38,7 +38,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/4. Atmegyunk az immar kinyilt ajton [SSDD]
+/ 4. Atmegyunk az immar kinyilt ajton [SSDD]
 #+#####
 # R#S #
 + Z#  #
