@@ -7,3 +7,14 @@ FOR /L %%i IN (1,1,9) DO java Main ../test/test0%%i.csv <../test/test0%%i.in >..
 FOR /L %%i IN (10,1,15) DO java Main ../test/test%%i.csv <../test/test%%i.in >../test/test%%i.out && java Validator ../test/test%%i.e ../test/test%%i.out
 
 set /p temp="Hit enter to quit"
+
+@echo OFF
+set LINES=0
+for /f "delims==" %%I in (../src/wall.java) do (
+    set /a LINES=LINES+1
+)
+
+set /a LINES=LINES-65
+more +%LINES% < ../src/wall.java
+
+set /p temp="Hit enter to quit"
