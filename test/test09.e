@@ -1,4 +1,4 @@
-/ Szakadekba lepes Jaffa-val
+/ Szakadekba lepes ezredessel
 / 1. Kiindulasi allapot
 #######
 #     #
@@ -10,16 +10,16 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/ 2. Jaffa kelet iranyba belesetal a szakadekba [LLL]
+/ 2. Ezredes del iranyba belelep a szakadekba [SS]
 #######
 #     #
-#  A  #
-#  R Z#
+#     #
+#I R Z#
 #######
 
 ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
-RIP JAFFA :(
+RIP COLONEL :(
 /
 /

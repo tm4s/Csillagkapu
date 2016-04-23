@@ -1,25 +1,25 @@
-/ ZPM modulok osszegyujtese ezredessel
+/ Szakadekba lepes Jaffa-val
 / 1. Kiindulasi allapot
 #######
 #     #
 #  A  #
-#I Z  #
+#I R Z#
 #######
 
 ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/ 2. Ezredes del fele lep es osszegyujt egy ZPM modult [SS]
+/ 2. Jaffa kelet iranyba belesetal a szakadekba [LLL]
 #######
 #     #
-#     #
-#I V  #
+#  A  #
+#  R Z#
 #######
 
-ZPMs left on the map: 0
-ZPMs collected by the colonel: 1
+ZPMs left on the map: 1
+ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
-NO MORE ZPMS!!!!!
+RIP JAFFA :(
 /
 /
