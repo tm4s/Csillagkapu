@@ -1,4 +1,4 @@
-/ ZPM modulok osszegyujtese ezredessel
+/ ZPM modulok osszegyujtese Jaffa-val
 / 1. Kiindulasi allapot
 #######
 #     #
@@ -10,16 +10,16 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/ 2. Ezredes del fele lep es osszegyujt egy ZPM modult [SS]
+/ 2. Jaffa kelet iranyba menve osszeszedi a Zpm modult [LLL]
 #######
 #     #
-#     #
-#I V  #
+#  A  #
+#  L  #
 #######
 
 ZPMs left on the map: 0
-ZPMs collected by the colonel: 1
-ZPMs collected by Jaffa: 0
+ZPMs collected by the colonel: 0
+ZPMs collected by Jaffa: 1
 NO MORE ZPMS!!!!!
 /
 /
