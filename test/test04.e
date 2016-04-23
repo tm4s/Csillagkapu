@@ -21,7 +21,7 @@ ZPMs left on the map: 3
 ZPMs collected by the colonel: 1
 ZPMs collected by Jaffa: 0
 /
-/ 3. Amikor a Jaffa is begyujt egy ZPM-et, nem keletkezik uj ZPM, mivel a 2 ZPM-et kulön-kulön gyujtöttek be. [TEST LL]
+/ 3. Amikor a Jaffa is begyujt egy ZPM-et, nem keletkezik uj ZPM, mivel a 2 ZPM-et kulon-kulon gyujtottek be. [TEST LL]
 #######
 # >Z  #
 #     #
