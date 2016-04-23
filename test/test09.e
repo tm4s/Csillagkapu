@@ -1,4 +1,4 @@
-/ Szakadékba lépés Jaffa-val
+/ Szakadekba lepes Jaffa-val
 / 1. Kiindulasi allapot
 #######
 #     #

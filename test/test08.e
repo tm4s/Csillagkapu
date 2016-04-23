@@ -1,4 +1,4 @@
-/ Szakadékba lépés ezredessel
+/ Szakadekba lepes ezredessel
 / 1. Kiindulasi allapot
 #######
 #     #
@@ -20,6 +20,6 @@ ZPMs collected by Jaffa: 0
 ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
-RIP COLONEL :(
+RIP COLONEL :( 
 /
 /

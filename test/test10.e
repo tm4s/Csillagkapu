@@ -1,4 +1,4 @@
-/ ZPM modulok összegyűjtése ezredessel
+/ ZPM modulok osszegyujtese ezredessel
 / 1. Kiindulasi allapot
 #######
 #     #

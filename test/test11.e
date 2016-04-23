@@ -1,4 +1,4 @@
-/ ZPM modulok összegyűjtése Jaffa-val
+/ ZPM modulok osszegyujtese Jaffa-val
 / 1. Kiindulasi allapot
 #######
 #     #

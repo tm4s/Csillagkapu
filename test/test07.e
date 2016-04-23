@@ -1,4 +1,4 @@
-/ Jaffa töltényének ütközése speciális fallal
+/ Jaffa toltenyenek utkozese specialis fallal
 / 1. Kiindulasi allapot
 #######
 #     #
