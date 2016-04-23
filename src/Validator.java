@@ -58,6 +58,7 @@ public class Validator {
             Scanner realFile = new Scanner(new File(realFileName));
 
             String lastTitle = goToLine(expectedFile, '/');
+            System.out.println();
             printTitle(lastTitle);
             System.out.println();
             lastTitle = goToLine(expectedFile, '/');

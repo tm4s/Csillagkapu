@@ -1,5 +1,5 @@
-/test01: Mozgatas teszt
-/1. Kiindulasi allapot:
+/ test01: Mozgatas teszt
+/ 1. Kiindulasi allapot:
 ###+###
 # #   #
 # DA  #
@@ -10,7 +10,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/2. Ezredes kelet fele fordul [d]
+/ 2. Ezredes kelet fele fordul [d]
 ###+###
 # #   #
 # D>  #
@@ -21,7 +21,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/3. Ezredes kelet fele lep [d]
+/ 3. Ezredes kelet fele lep [d]
 ###+###
 # #   #
 # D > #
@@ -32,7 +32,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/4. Ezredes eszak fele fordul [w]
+/ 4. Ezredes eszak fele fordul [w]
 ###+###
 # #   #
 # D A #
@@ -43,7 +43,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/5. Ezredes eszak fele lep [w]
+/ 5. Ezredes eszak fele lep [w]
 ###+###
 # # A #
 # D   #
@@ -54,7 +54,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/6. Ezredes nyugat fele fordul [a]
+/ 6. Ezredes nyugat fele fordul [a]
 ###+###
 # # < #
 # D   #
@@ -65,7 +65,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/7. Ezredes nyugat fele lep [a]
+/ 7. Ezredes nyugat fele lep [a]
 ###+###
 # #<  #
 # D   #
@@ -76,7 +76,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/8. Ezredes del fele fordul [s]
+/ 8. Ezredes del fele fordul [s]
 ###+###
 # #V  #
 # D   #
@@ -87,7 +87,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/9. Ezredes del fele lep [s]
+/ 9. Ezredes del fele lep [s]
 ###+###
 # #   #
 # DV  #
@@ -98,7 +98,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/10. Ezredes zart ajtonak utkozik [aa]
+/ 10. Ezredes zart ajtonak utkozik [aa]
 ###+###
 # #   #
 # D<  #
@@ -109,7 +109,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/11. Ezredes doboznak utkozik [ssdd]
+/ 11. Ezredes doboznak utkozik [ssdd]
 ###+###
 # #   #
 # D   #
@@ -120,7 +120,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/12. Ezredes specialis falnak utkozik [aa]
+/ 12. Ezredes specialis falnak utkozik [aa]
 ###+###
 # #   #
 # D   #
@@ -131,7 +131,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/13. Ezrdes falnak utkozik
+/ 13. Ezrdes falnak utkozik
 ###+###
 # #   #
 # D   #
@@ -142,7 +142,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/14. Ezredes kilo egy toltenyt specialis falnak [ae]
+/ 14. Ezredes kilo egy toltenyt specialis falnak [ae]
 ###+###
 # #   #
 # D   #
@@ -153,7 +153,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/15. Ezrdes csillagkapunak utkozik, ugy hogy annak nincs masik parja [a]
+/ 15. Ezrdes csillagkapunak utkozik, ugy hogy annak nincs masik parja [a]
 ###+###
 # #   #
 # D   #
@@ -164,7 +164,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/16. Ezredes kilovi az elobb letrehozott csillagkapu parjat [wq]
+/ 16. Ezredes kilovi az elobb letrehozott csillagkapu parjat [wq]
 ###0###
 # #   #
 # D   #
@@ -175,7 +175,7 @@ ZPMs left on the map: 1
 ZPMs collected by the colonel: 0
 ZPMs collected by Jaffa: 0
 /
-/17. Ezredes csillagkapuval utkozik ugy, hogy annak mar van masik parja (teleportal) [aa]
+/ 17. Ezredes csillagkapuval utkozik ugy, hogy annak mar van masik parja (teleportal) [aa]
 ###0###
 # #V  #
 # D   #
