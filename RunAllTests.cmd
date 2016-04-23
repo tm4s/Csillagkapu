@@ -10,11 +10,11 @@ set /p temp="Hit enter to quit"
 
 @echo OFF
 set LINES=0
-for /f "delims==" %%I in (../src/wall.java) do (
+for /f "delims==" %%I in (wall.java) do (
     set /a LINES=LINES+1
 )
 
 set /a LINES=LINES-65
-more +%LINES% < ../src/wall.java
+more +%LINES% < wall.java
 
 set /p temp="Hit enter to quit"
