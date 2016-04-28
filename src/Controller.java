@@ -493,6 +493,9 @@ public class Controller extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        repaint();
+        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
+            // TODO
+        }
     }
 }
