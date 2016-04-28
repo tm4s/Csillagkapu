@@ -29,7 +29,16 @@ public class Controller extends JPanel implements ActionListener {
     private int actualX, actualY;
     private int width, height;
     private int pixelPerField;
-    
+
+
+    public int getWidth() {
+        return width*pixelPerField;
+    }
+
+    public int getHeight() {
+        return height*pixelPerField;
+    }
+
     private Graphics2D graphics;
 
     private BufferedImage emptyFieldImg = null;
