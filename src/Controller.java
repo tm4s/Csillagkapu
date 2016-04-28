@@ -1,5 +1,3 @@
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,7 +18,6 @@ public class Controller {
     private String[] replicatorChars = {"T", "F", "H", "G"};
     private String[] jaffaChars = {"I", "J", "L", "K"};
 
-    Graphics2D graphics;
 
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
@@ -388,44 +385,55 @@ public class Controller {
             printMap();
         }
     }
-    
-    private void drawObject(BufferedImage img){
-    	graphics.drawImage(img, actualX, actualY, null);
-    }
-    
+
     public void showView(Box box) {
-    	drawObject(boxImg);
+        System.out.print('B');
     }
 
     public void showView(Door door) {
-    	drawObject(doorImg);
+        char c = door.isOpened() ? ' ' : 'D';
+        System.out.print(c);
     }
 
     public void showView(EmptyField emptyField) {
-    	drawObject(emptyFieldImg);
+        System.out.print(' ');
     }
 
     public void showView(Ravine ravine) {
-    	drawObject(ravineImg);
+        System.out.print('R');
     }
 
     public void showView(Scale scale) {
-    	drawObject(scaleImg);
+        char c;
+        if (scale.getNumberOfBoxes() == 0)
+            c = 'S';
+        else if (scale.getNumberOfBoxes() <= 9)
+            c = Integer.toString(scale.getNumberOfBoxes()).charAt(0);
+        else
+            c = '*';
+        System.out.print(c);
     }
 
     public void showView(SpecialWall specialWall) {
-    	drawObject(specialWallImg);
+        System.out.print('+');
     }
 
     public void showView(Teleporter teleporter) {
-    	drawObject(teleporterImg);
+        char c = '0';
+        if (teleporter.getType() == Teleporter.Type.ORANGE)
+            c = 'O';
+        else if (teleporter.getType() == Teleporter.Type.GREEN)
+            c = 'X';
+        else if (teleporter.getType() == Teleporter.Type.RED)
+            c = 'Y';
+        System.out.print(c);
     }
 
     public void showView(Wall wall) {
-    	drawObject(wallImg);
+        System.out.print('#');
     }
 
     public void showView(Zpm zpm) {
-    	drawObject(zpmImg);
+        System.out.print('Z');
     }
 }
