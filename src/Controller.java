@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.awt.Graphics2D;
 
 public class Controller extends JPanel implements ActionListener {
     private Colonel colonel;
@@ -19,13 +20,15 @@ public class Controller extends JPanel implements ActionListener {
     boolean colonelAlreadyDead;
     boolean jaffaAlreadyDead;
 
-    private String[] colonelChars = {"A", "<", ">", "V"};
-    private String[] replicatorChars = {"T", "F", "H", "G"};
-    private String[] jaffaChars = {"I", "J", "L", "K"};
+    private BufferedImage[] colonelImgs = new BufferedImage[4];
+    private BufferedImage[] replicatorImgs = new BufferedImage[4];
+    private BufferedImage[] jaffaImgs = new BufferedImage[4];
 
     private int actualX, actualY;
     private int width, height;
     private int pixelPerField;
+    
+    private Graphics2D graphics;
 
     private BufferedImage fieldImg = null;
     private BufferedImage zpmImg = null;
@@ -39,12 +42,6 @@ public class Controller extends JPanel implements ActionListener {
     private BufferedImage bluePortalImg = null;
     private BufferedImage greenPortalImg = null;
     private BufferedImage redPortalImg = null;
-    private BufferedImage colonelImg = null;
-    private BufferedImage jaffaImg = null;
-    private BufferedImage replicatorImg = null;
-
-
-
 
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
@@ -69,18 +66,30 @@ public class Controller extends JPanel implements ActionListener {
             specialWallImg = ImageIO.read(new File("wall.png"));
             scaleImg = ImageIO.read(new File("scale.png"));
             boxImg = ImageIO.read(new File("box.png"));
-            replicatorImg = ImageIO.read(new File("replicator.png"));
             fieldImg = ImageIO.read(new File("field.png"));
             zpmImg = ImageIO.read(new File("zpm.png"));
-            colonelImg = ImageIO.read(new File("colonel.png"));
-            jaffaImg = ImageIO.read(new File("jaffa.png"));
             ravineImg = ImageIO.read(new File("ravine.png"));
             orangePortalImg = ImageIO.read(new File("orangePortal.png"));
             bluePortalImg = ImageIO.read(new File("bluePortal.png"));
             redPortalImg = ImageIO.read(new File("redPortal.png"));
             greenPortalImg = ImageIO.read(new File("greenPortal.png"));
             doorImg = ImageIO.read(new File("door.png"));
-
+            
+            colonelImgs[0] = ImageIO.read(new File("colonelNorth.png"));
+            colonelImgs[1] = ImageIO.read(new File("colonelWest.png"));
+            colonelImgs[2] = ImageIO.read(new File("colonelSouth.png"));
+            colonelImgs[3] = ImageIO.read(new File("colonelEast.png"));
+            
+            replicatorImgs[0] = ImageIO.read(new File("replicatorNorth.png"));
+            replicatorImgs[1] = ImageIO.read(new File("replicatorWest.png"));
+            replicatorImgs[2] = ImageIO.read(new File("replicatorSouth.png"));
+            replicatorImgs[3] = ImageIO.read(new File("replicatorEast.png"));
+            
+            jaffaImgs[0] = ImageIO.read(new File("jaffaNorth.png"));
+            jaffaImgs[1] = ImageIO.read(new File("jaffaWest.png"));
+            jaffaImgs[2] = ImageIO.read(new File("jaffaSouth.png"));
+            jaffaImgs[3] = ImageIO.read(new File("jaffaEast.png"));
+            
         } catch (IOException e) {
         };
         resetEverything();
@@ -223,24 +232,24 @@ public class Controller extends JPanel implements ActionListener {
         }
     }
 
-    private void printPerson(String[] person, Orientation.Type orientation) {
-        String str = person[0];
+    private void drawPerson(BufferedImage[] person, Orientation.Type orientation) {
+        BufferedImage image = person[0];
         switch (orientation) {
             case NORTH:
-                str = person[0];
+                image = person[0];
                 break;
             case WEST:
-                str = person[1];
+                image = person[1];
                 break;
             case EAST:
-                str = person[2];
+                image = person[2];
                 break;
             case SOUTH:
-                str = person[3];
+                image = person[3];
                 break;
 
         }
-        System.out.print(str);
+		drawObject(image);
     }
 
     private void printMap() {
@@ -255,11 +264,11 @@ public class Controller extends JPanel implements ActionListener {
             nextField.view(this);
             if (nextField.isThereAColonel) {
                 if (nextField.equals(colonel.getOwnedField()))
-                    printPerson(colonelChars, colonel.getOrientation());
+                    drawPerson(colonelImgs, colonel.getOrientation());
                 if (nextField.equals(jaffa.getOwnedField()))
-                    printPerson(jaffaChars, jaffa.getOrientation());
+                    drawPerson(jaffaImgs, jaffa.getOrientation());
             } else if (nextField.isThereAReplicator())
-                printPerson(replicatorChars, replicator.getOrientation());
+                drawPerson(replicatorImgs, replicator.getOrientation());
             if (nextField.getNextField(Orientation.Type.EAST) != null)
                 nextField = nextField.getNextField(Orientation.Type.EAST);
             else {
@@ -439,58 +448,61 @@ public class Controller extends JPanel implements ActionListener {
         }
     }
 
+    private void drawObject(BufferedImage image){
+    	graphics.drawImage(image, actualX, actualY, null);
+    }
+    
     public void showView(Box box) {
-        System.out.print('B');
+    	drawObject(boxImg);
     }
 
     public void showView(Door door) {
-        char c = door.isOpened() ? ' ' : 'D';
-        System.out.print(c);
+    	drawObject(doorImg);
     }
 
     public void showView(EmptyField emptyField) {
-        System.out.print(' ');
+    	drawObject(fieldImg);
     }
 
     public void showView(Ravine ravine) {
-        System.out.print('R');
+    	drawObject(ravineImg);
     }
 
     public void showView(Scale scale) {
-        char c;
-        if (scale.getNumberOfBoxes() == 0)
-            c = 'S';
-        else if (scale.getNumberOfBoxes() <= 9)
-            c = Integer.toString(scale.getNumberOfBoxes()).charAt(0);
-        else
-            c = '*';
-        System.out.print(c);
+    	drawObject(scaleImg);
     }
 
     public void showView(SpecialWall specialWall) {
-        System.out.print('+');
+    	drawObject(specialWallImg);
     }
 
     public void showView(Teleporter teleporter) {
-        char c = '0';
-        if (teleporter.getType() == Teleporter.Type.ORANGE)
-            c = 'O';
-        else if (teleporter.getType() == Teleporter.Type.GREEN)
-            c = 'X';
-        else if (teleporter.getType() == Teleporter.Type.RED)
-            c = 'Y';
-        System.out.print(c);
+    	switch(teleporter.getType()){
+    		case ORANGE:
+    			drawObject(orangePortalImg);
+    			break;
+    		case BLUE:
+    			drawObject(bluePortalImg);
+    			break;
+    		case RED:
+    			drawObject(redPortalImg);
+    			break;
+    		case GREEN:
+    			drawObject(greenPortalImg);
+    			break;
+    		default:
+    			break;
+    	}
     }
 
     public void showView(Wall wall) {
-        System.out.print('#');
-
+    	drawObject(wallImg);
     }
 
     public void showView(Zpm zpm) {
-        System.out.print('Z');
+    	drawObject(zpmImg);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
 
