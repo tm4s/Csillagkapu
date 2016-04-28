@@ -291,6 +291,19 @@ public class Controller extends JPanel implements ActionListener {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
+
+        graphics.setFont(new Font("Helvetica Neue Ultra Light", Font.PLAIN, 20));
+        graphics.setColor(Color.CYAN);
+
+        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
+            graphics.drawString("NO MORE ZPMS", getWidth()/2-50, getHeight()/2);
+        }
+
+        if (colonel.isDead() && jaffa.isDead()) {
+            graphics.drawString("Game Over", getWidth()/2-50, getHeight()/2);
+        }
+
+
     }
 
     public void paintComponent(Graphics g) {
@@ -378,6 +391,8 @@ public class Controller extends JPanel implements ActionListener {
                         break;
                 }
             }
+            if (!replicator.isDead())
+                replicator.move();
             repaint();
         }
 
@@ -415,7 +430,15 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public void showView(Scale scale) {
-    	drawObject(scaleImg);
+        graphics.setFont(new Font("Rosewood Std", Font.PLAIN, 30));
+        graphics.setColor(Color.CYAN);
+
+        drawObject(scaleImg);
+        if (scale.getNumberOfBoxes() < 9) {
+            graphics.drawString(Integer.toString(scale.getNumberOfBoxes()),actualX+pixelPerField/2+30,actualY+pixelPerField/2+30);
+        }
+        else
+            graphics.drawString("*", getWidth()/2-50, getHeight()/2);
     }
 
     public void showView(SpecialWall specialWall) {
