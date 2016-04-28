@@ -430,7 +430,7 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public void showView(Scale scale) {
-        graphics.setFont(new Font("Rosewood Std", Font.PLAIN, 30));
+        graphics.setFont(new Font("Arial", Font.PLAIN, 30));
         graphics.setColor(Color.CYAN);
 
         drawObject(scaleImg);
