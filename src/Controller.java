@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.awt.Graphics2D;
 
 public class Controller extends JPanel implements ActionListener {
     private Colonel colonel;
@@ -19,15 +22,17 @@ public class Controller extends JPanel implements ActionListener {
     boolean colonelAlreadyDead;
     boolean jaffaAlreadyDead;
 
-    private String[] colonelChars = {"A", "<", ">", "V"};
-    private String[] replicatorChars = {"T", "F", "H", "G"};
-    private String[] jaffaChars = {"I", "J", "L", "K"};
+    private BufferedImage[] colonelImgs = new BufferedImage[4];
+    private BufferedImage[] replicatorImgs = new BufferedImage[4];
+    private BufferedImage[] jaffaImgs = new BufferedImage[4];
 
     private int actualX, actualY;
     private int width, height;
     private int pixelPerField;
+    
+    private Graphics2D graphics;
 
-    private BufferedImage fieldImg = null;
+    private BufferedImage emptyFieldImg = null;
     private BufferedImage zpmImg = null;
     private BufferedImage scaleImg = null;
     private BufferedImage boxImg = null;
@@ -39,12 +44,6 @@ public class Controller extends JPanel implements ActionListener {
     private BufferedImage bluePortalImg = null;
     private BufferedImage greenPortalImg = null;
     private BufferedImage redPortalImg = null;
-    private BufferedImage colonelImg = null;
-    private BufferedImage jaffaImg = null;
-    private BufferedImage replicatorImg = null;
-
-
-
 
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
@@ -69,18 +68,30 @@ public class Controller extends JPanel implements ActionListener {
             specialWallImg = ImageIO.read(new File("wall.png"));
             scaleImg = ImageIO.read(new File("scale.png"));
             boxImg = ImageIO.read(new File("box.png"));
-            replicatorImg = ImageIO.read(new File("replicator.png"));
-            fieldImg = ImageIO.read(new File("field.png"));
+            emptyFieldImg = ImageIO.read(new File("emptyField.png"));
             zpmImg = ImageIO.read(new File("zpm.png"));
-            colonelImg = ImageIO.read(new File("colonel.png"));
-            jaffaImg = ImageIO.read(new File("jaffa.png"));
             ravineImg = ImageIO.read(new File("ravine.png"));
             orangePortalImg = ImageIO.read(new File("orangePortal.png"));
             bluePortalImg = ImageIO.read(new File("bluePortal.png"));
             redPortalImg = ImageIO.read(new File("redPortal.png"));
             greenPortalImg = ImageIO.read(new File("greenPortal.png"));
             doorImg = ImageIO.read(new File("door.png"));
-
+            
+            colonelImgs[0] = ImageIO.read(new File("colonelNorth.png"));
+            colonelImgs[1] = ImageIO.read(new File("colonelWest.png"));
+            colonelImgs[2] = ImageIO.read(new File("colonelSouth.png"));
+            colonelImgs[3] = ImageIO.read(new File("colonelEast.png"));
+            
+            replicatorImgs[0] = ImageIO.read(new File("replicatorNorth.png"));
+            replicatorImgs[1] = ImageIO.read(new File("replicatorWest.png"));
+            replicatorImgs[2] = ImageIO.read(new File("replicatorSouth.png"));
+            replicatorImgs[3] = ImageIO.read(new File("replicatorEast.png"));
+            
+            jaffaImgs[0] = ImageIO.read(new File("jaffaNorth.png"));
+            jaffaImgs[1] = ImageIO.read(new File("jaffaWest.png"));
+            jaffaImgs[2] = ImageIO.read(new File("jaffaSouth.png"));
+            jaffaImgs[3] = ImageIO.read(new File("jaffaEast.png"));
+            
         } catch (IOException e) {
         };
         resetEverything();
@@ -223,24 +234,24 @@ public class Controller extends JPanel implements ActionListener {
         }
     }
 
-    private void printPerson(String[] person, Orientation.Type orientation) {
-        String str = person[0];
+    private void drawPerson(BufferedImage[] person, Orientation.Type orientation) {
+        BufferedImage image = person[0];
         switch (orientation) {
             case NORTH:
-                str = person[0];
+                image = person[0];
                 break;
             case WEST:
-                str = person[1];
+                image = person[1];
                 break;
             case EAST:
-                str = person[2];
+                image = person[2];
                 break;
             case SOUTH:
-                str = person[3];
+                image = person[3];
                 break;
 
         }
-        System.out.print(str);
+		drawObject(image);
     }
 
     private void printMap() {
@@ -255,11 +266,11 @@ public class Controller extends JPanel implements ActionListener {
             nextField.view(this);
             if (nextField.isThereAColonel) {
                 if (nextField.equals(colonel.getOwnedField()))
-                    printPerson(colonelChars, colonel.getOrientation());
+                    drawPerson(colonelImgs, colonel.getOrientation());
                 if (nextField.equals(jaffa.getOwnedField()))
-                    printPerson(jaffaChars, jaffa.getOrientation());
+                    drawPerson(jaffaImgs, jaffa.getOrientation());
             } else if (nextField.isThereAReplicator())
-                printPerson(replicatorChars, replicator.getOrientation());
+                drawPerson(replicatorImgs, replicator.getOrientation());
             if (nextField.getNextField(Orientation.Type.EAST) != null)
                 nextField = nextField.getNextField(Orientation.Type.EAST);
             else {
@@ -269,228 +280,155 @@ public class Controller extends JPanel implements ActionListener {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
-        System.out.println();
-        System.out.println("ZPMs left on the map: " + (Zpm.getAllZpms() - colonel.getCollectedZpms() - jaffa.getCollectedZpms()));
-        System.out.println("ZPMs collected by the colonel: " + colonel.getCollectedZpms());
-        System.out.println("ZPMs collected by Jaffa: " + jaffa.getCollectedZpms());
-        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-            System.out.println("NO MORE ZPMS!!!!!");
-        }
-        if (colonel.isDead() && !colonelAlreadyDead) {
-            System.out.println("RIP COLONEL :(");
-            colonelAlreadyDead = true;
-        }
-        if (jaffa.isDead() && !jaffaAlreadyDead) {
-            System.out.println("RIP JAFFA :(");
-            jaffaAlreadyDead = true;
-        }
-        System.out.println("---------------------------------------");
     }
 
-    public void run() {
-        System.out.println("Colonel controls: ");
-        System.out.println("move/rotate: wasd");
-        System.out.println("shoot: qe");
-        System.out.println("boxPickUp: 2");
-        System.out.println("boxPutDown: 3");
-        System.out.println("quit: quit");
-        System.out.println("after commands hit ENTER");
-        System.out.println();
-        System.out.println("Jaffa controls: ");
-        System.out.println("move/rotate: ijkl");
-        System.out.println("shoot: uo");
-        System.out.println("boxPickUp: 8");
-        System.out.println("boxPutDown: 9");
-        System.out.println("quit: quit");
-        System.out.println("after commands hit ENTER");
-        System.out.println();
-        System.out.println("Map: ");
-        System.out.println("Wall: #");
-        System.out.println("SpecialWall: +");
-        System.out.println("Colonel: AV<>");
-        System.out.println("Box: B");
-        System.out.println("Scale: S");
-        System.out.println("Door: D");
-        System.out.println("Portal: 0O");
-        System.out.println("Ravine: R");
-        System.out.println("ZPM: Z");
-        System.out.println();
-
-
-        if (jaffa.isDead())
-            jaffaAlreadyDead = true;
-        printMap();
-
-        boolean run = true;
-
-        Scanner scan = new Scanner(System.in);
-        while (scan.hasNextLine() && run) {
-            if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-                break;
-            }
-
-            String line = scan.nextLine().toLowerCase();
-            if  (line.contains("quit")) {
-                run = false;
-                break;
-            }
-
-            String[] input = line.split(" ");
-            int readIndex = -1;
-            int testCasesSize = 0;
-
-            if (input[0].equals("test")) {
-                RandomGenerator.setTest(true);
-                if (input[1].contains("0") || input[1].contains("1") || input[1].contains("2") || input[1].contains("3")) {
-                    for (int i = 0; i < input[1].length(); i++)
-                        RandomGenerator.testCases.add(Character.getNumericValue(input[1].charAt(i)));
-                    testCasesSize = input[1].length();
-                    readIndex = input[0].length() + input[1].length();
-                }
-                else readIndex = input[0].length();
-            }
-
-            for (int i = readIndex+1 ; i < line.length(); i++) {
-                if (!colonel.isDead()) {
-                    switch (line.charAt(i)) {
-                        case 'w':
-                            if (colonel.getOrientation() != Orientation.Type.NORTH) {
-                                colonel.rotateTo(Orientation.Type.NORTH);
-                            } else colonel.tryMoveTo(Orientation.Type.NORTH);
-                            break;
-                        case 's':
-                            if (colonel.getOrientation() != Orientation.Type.SOUTH) {
-                                colonel.rotateTo(Orientation.Type.SOUTH);
-                            } else colonel.tryMoveTo(Orientation.Type.SOUTH);
-                            break;
-                        case 'a':
-                            if (colonel.getOrientation() != Orientation.Type.WEST) {
-                                colonel.rotateTo(Orientation.Type.WEST);
-                            } else colonel.tryMoveTo(Orientation.Type.WEST);
-                            break;
-                        case 'd':
-                            if (colonel.getOrientation() != Orientation.Type.EAST) {
-                                colonel.rotateTo(Orientation.Type.EAST);
-                            } else colonel.tryMoveTo(Orientation.Type.EAST);
-                            break;
-                        case '2':
-                            colonel.tryBoxPickUp();
-                            break;
-                        case '3':
-                            colonel.tryBoxPutDown();
-                            break;
-                        case 'q':
-                            colonel.shootTeleporter(Teleporter.Type.BLUE);
-                            break;
-                        case 'e':
-                            colonel.shootTeleporter(Teleporter.Type.ORANGE);
-                            break;
-                        default:
-                            break;
-                    }
-                }
+    public class KeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            int keyCode = e.getKeyCode();
                 if (!jaffa.isDead()) {
-                    switch (line.charAt(i)) {
-                        case 'i':
+                    switch(keyCode) {
+                        case KeyEvent.VK_I:
                             if (jaffa.getOrientation() != Orientation.Type.NORTH) {
                                 jaffa.rotateTo(Orientation.Type.NORTH);
                             } else jaffa.tryMoveTo(Orientation.Type.NORTH);
                             break;
-                        case 'k':
+                        case KeyEvent.VK_K:
                             if (jaffa.getOrientation() != Orientation.Type.SOUTH) {
                                 jaffa.rotateTo(Orientation.Type.SOUTH);
                             } else jaffa.tryMoveTo(Orientation.Type.SOUTH);
                             break;
-                        case 'j':
+                        case KeyEvent.VK_J:
                             if (jaffa.getOrientation() != Orientation.Type.WEST) {
                                 jaffa.rotateTo(Orientation.Type.WEST);
                             } else jaffa.tryMoveTo(Orientation.Type.WEST);
                             break;
-                        case 'l':
+                        case KeyEvent.VK_L:
                             if (jaffa.getOrientation() != Orientation.Type.EAST) {
                                 jaffa.rotateTo(Orientation.Type.EAST);
                             } else jaffa.tryMoveTo(Orientation.Type.EAST);
                             break;
-                        case '8':
+                        case KeyEvent.VK_8:
                             jaffa.tryBoxPickUp();
                             break;
-                        case '9':
+                        case KeyEvent.VK_9:
                             jaffa.tryBoxPutDown();
                             break;
-                        case 'u':
+                        case KeyEvent.VK_U:
                             jaffa.shootTeleporter(Teleporter.Type.GREEN);
                             break;
-                        case 'o':
+                        case KeyEvent.VK_O:
                             jaffa.shootTeleporter(Teleporter.Type.RED);
                             break;
                         default:
                             break;
-                    }
-
                 }
-                if (!replicator.isDead() && testCasesSize > 0) {
-                    replicator.move();
-                    testCasesSize--;
-                }
-                if (!replicator.isDead() && !RandomGenerator.getTest())
-                    replicator.move();
             }
-            printMap();
+            if (colonel.isDead()) {
+                switch(keyCode) {
+                    case KeyEvent.VK_W:
+                        if (colonel.getOrientation() != Orientation.Type.NORTH) {
+                            colonel.rotateTo(Orientation.Type.NORTH);
+                        } else colonel.tryMoveTo(Orientation.Type.NORTH);
+                        break;
+                    case KeyEvent.VK_S:
+                        if (colonel.getOrientation() != Orientation.Type.SOUTH) {
+                            colonel.rotateTo(Orientation.Type.SOUTH);
+                        } else colonel.tryMoveTo(Orientation.Type.SOUTH);
+                        break;
+                    case KeyEvent.VK_A:
+                        if (colonel.getOrientation() != Orientation.Type.WEST) {
+                            colonel.rotateTo(Orientation.Type.WEST);
+                        } else colonel.tryMoveTo(Orientation.Type.WEST);
+                        break;
+                    case KeyEvent.VK_D:
+                        if (colonel.getOrientation() != Orientation.Type.EAST) {
+                            colonel.rotateTo(Orientation.Type.EAST);
+                        } else colonel.tryMoveTo(Orientation.Type.EAST);
+                        break;
+                    case KeyEvent.VK_2:
+                        colonel.tryBoxPickUp();
+                        break;
+                    case KeyEvent.VK_3:
+                        colonel.tryBoxPutDown();
+                        break;
+                    case KeyEvent.VK_Q:
+                        colonel.shootTeleporter(Teleporter.Type.BLUE);
+                        break;
+                    case KeyEvent.VK_E:
+                        colonel.shootTeleporter(Teleporter.Type.ORANGE);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+        }
+
     }
 
+    public void run() {
+
+    }
+
+    private void drawObject(BufferedImage image){
+    	graphics.drawImage(image, actualX, actualY, null);
+    }
+    
     public void showView(Box box) {
-        System.out.print('B');
+    	drawObject(boxImg);
     }
 
     public void showView(Door door) {
-        char c = door.isOpened() ? ' ' : 'D';
-        System.out.print(c);
+    	drawObject(doorImg);
     }
 
     public void showView(EmptyField emptyField) {
-        System.out.print(' ');
+    	drawObject(emptyFieldImg);
     }
 
     public void showView(Ravine ravine) {
-        System.out.print('R');
+    	drawObject(ravineImg);
     }
 
     public void showView(Scale scale) {
-        char c;
-        if (scale.getNumberOfBoxes() == 0)
-            c = 'S';
-        else if (scale.getNumberOfBoxes() <= 9)
-            c = Integer.toString(scale.getNumberOfBoxes()).charAt(0);
-        else
-            c = '*';
-        System.out.print(c);
+    	drawObject(scaleImg);
     }
 
     public void showView(SpecialWall specialWall) {
-        System.out.print('+');
+    	drawObject(specialWallImg);
     }
 
     public void showView(Teleporter teleporter) {
-        char c = '0';
-        if (teleporter.getType() == Teleporter.Type.ORANGE)
-            c = 'O';
-        else if (teleporter.getType() == Teleporter.Type.GREEN)
-            c = 'X';
-        else if (teleporter.getType() == Teleporter.Type.RED)
-            c = 'Y';
-        System.out.print(c);
+    	switch(teleporter.getType()){
+    		case ORANGE:
+    			drawObject(orangePortalImg);
+    			break;
+    		case BLUE:
+    			drawObject(bluePortalImg);
+    			break;
+    		case RED:
+    			drawObject(redPortalImg);
+    			break;
+    		case GREEN:
+    			drawObject(greenPortalImg);
+    			break;
+    		default:
+    			break;
+    	}
     }
 
     public void showView(Wall wall) {
-        System.out.print('#');
-
+    	drawObject(wallImg);
     }
 
     public void showView(Zpm zpm) {
-        System.out.print('Z');
+    	drawObject(zpmImg);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
