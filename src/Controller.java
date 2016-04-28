@@ -293,14 +293,33 @@ public class Controller extends JPanel implements ActionListener {
             }
         }
 
-        graphics.setFont(new Font("Helvetica Neue Ultra Light", Font.PLAIN, 20));
-        graphics.setColor(Color.CYAN);
+        Color transparentBg = new Color(87, 87, 87, 240);
+
+        graphics.setFont(new Font("Arial", Font.PLAIN, 15));
+        graphics.setColor(Color.white);
+
+        graphics.drawString("Colonel's ZPMs:", getWidth()-200, getHeight()-60);
+        if (colonel.isDead()) {
+            graphics.drawString("✝", getWidth()-215, getHeight()-60);
+
+        }
+        graphics.drawString(Integer.toString(colonel.getCollectedZpms()), getWidth()-30, getHeight()-60);
+        graphics.drawString("Jaffa's ZPMs:", getWidth()-200, getHeight()-40);
+        if (jaffa.isDead()) {
+            graphics.drawString("✝", getWidth()-215, getHeight()-40);
+
+        }
+        graphics.drawString(Integer.toString(jaffa.getCollectedZpms()), getWidth()-30, getHeight()-40);
 
         if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
+            graphics.setColor(transparentBg);
+            graphics.fillRect(0, 0, getWidth(), getHeight());
             graphics.drawString("NO MORE ZPMS", getWidth()/2-50, getHeight()/2);
         }
 
         if (colonel.isDead() && jaffa.isDead()) {
+            graphics.setColor(transparentBg);
+            graphics.fillRect(0, 0, getWidth(), getHeight());
             graphics.drawString("Game Over", getWidth()/2-50, getHeight()/2);
         }
 
