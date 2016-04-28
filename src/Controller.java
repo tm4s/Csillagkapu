@@ -367,7 +367,7 @@ public class Controller extends JPanel implements ActionListener {
                         break;
                     case KeyEvent.VK_3:
                         colonel.tryBoxPutDown();
-                        break;w
+                        break;
                     case KeyEvent.VK_Q:
                         colonel.shootTeleporter(Teleporter.Type.BLUE);
                         break;
