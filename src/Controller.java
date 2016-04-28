@@ -85,24 +85,25 @@ public class Controller extends JPanel implements ActionListener {
             redPortalImg = ImageIO.read(new File("redPortal.png"));
             greenPortalImg = ImageIO.read(new File("greenPortal.png"));
             doorImg = ImageIO.read(new File("door.png"));
-            
             colonelImgs[0] = ImageIO.read(new File("colonelNorth.png"));
             colonelImgs[1] = ImageIO.read(new File("colonelWest.png"));
             colonelImgs[2] = ImageIO.read(new File("colonelSouth.png"));
             colonelImgs[3] = ImageIO.read(new File("colonelEast.png"));
-            
+
             replicatorImgs[0] = ImageIO.read(new File("replicatorNorth.png"));
             replicatorImgs[1] = ImageIO.read(new File("replicatorWest.png"));
             replicatorImgs[2] = ImageIO.read(new File("replicatorSouth.png"));
             replicatorImgs[3] = ImageIO.read(new File("replicatorEast.png"));
-            
+
             jaffaImgs[0] = ImageIO.read(new File("jaffaNorth.png"));
             jaffaImgs[1] = ImageIO.read(new File("jaffaWest.png"));
             jaffaImgs[2] = ImageIO.read(new File("jaffaSouth.png"));
             jaffaImgs[3] = ImageIO.read(new File("jaffaEast.png"));
-            
-        } catch (IOException e) {
-        };
+        }
+        catch (IOException e) {
+        }
+
+
         resetEverything();
         addKeyListener(new Controller.KeyListener());
         setFocusable(true);
@@ -402,10 +403,6 @@ public class Controller extends JPanel implements ActionListener {
 
     }
 
-    public void run() {
-
-    }
-
     private void drawObject(BufferedImage image){
     	graphics.drawImage(image, actualX, actualY, null);
     }
@@ -430,15 +427,20 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public void showView(Scale scale) {
-        graphics.setFont(new Font("Rosewood Std", Font.PLAIN, 30));
-        graphics.setColor(Color.CYAN);
+        int fontSize = 30;
+        graphics.setFont(new Font("Arial", Font.PLAIN, fontSize));
+        graphics.setColor(Color.WHITE);
 
         drawObject(scaleImg);
-        if (scale.getNumberOfBoxes() < 9) {
-            graphics.drawString(Integer.toString(scale.getNumberOfBoxes()),actualX+pixelPerField/2+30,actualY+pixelPerField/2+30);
+
+        if (scale.getNumberOfBoxes() > 0) {
+            drawObject(boxImg);
+            graphics.drawString(Integer.toString(scale.getNumberOfBoxes()), actualX+15, actualY+fontSize+5);
         }
-        else
-            graphics.drawString("*", getWidth()/2-50, getHeight()/2);
+        else if (scale.getNumberOfBoxes() > 9) {
+            drawObject(boxImg);
+            graphics.drawString("*", actualX+15, actualY+fontSize+5);
+        }
     }
 
     public void showView(SpecialWall specialWall) {
@@ -448,15 +450,19 @@ public class Controller extends JPanel implements ActionListener {
     public void showView(Teleporter teleporter) {
     	switch(teleporter.getType()){
     		case ORANGE:
+                drawObject(emptyFieldImg);
     			drawObject(orangePortalImg);
     			break;
     		case BLUE:
+                drawObject(emptyFieldImg);
     			drawObject(bluePortalImg);
     			break;
     		case RED:
+                drawObject(emptyFieldImg);
     			drawObject(redPortalImg);
     			break;
     		case GREEN:
+                drawObject(emptyFieldImg);
     			drawObject(greenPortalImg);
     			break;
     		default:
@@ -475,8 +481,5 @@ public class Controller extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-            // TODO
-        }
     }
 }
