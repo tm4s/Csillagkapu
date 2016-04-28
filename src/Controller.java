@@ -295,8 +295,8 @@ public class Controller extends JPanel implements ActionListener {
 
         Color transparentBg = new Color(87, 87, 87, 240);
 
-        graphics.setFont(new Font("Arial", Font.PLAIN, 15));
-        graphics.setColor(Color.white);
+        graphics.setFont(new Font("Arial", Font.BOLD, 15));
+        graphics.setColor(Color.WHITE);
 
         graphics.drawString("Colonel's ZPMs:", getWidth()-200, getHeight()-60);
         if (colonel.isDead()) {
@@ -314,12 +314,14 @@ public class Controller extends JPanel implements ActionListener {
         if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
             graphics.setColor(transparentBg);
             graphics.fillRect(0, 0, getWidth(), getHeight());
+            graphics.setColor(Color.WHITE);
             graphics.drawString("NO MORE ZPMS", getWidth()/2-50, getHeight()/2);
         }
 
         if (colonel.isDead() && jaffa.isDead()) {
             graphics.setColor(transparentBg);
             graphics.fillRect(0, 0, getWidth(), getHeight());
+            graphics.setColor(Color.WHITE);
             graphics.drawString("Game Over", getWidth()/2-50, getHeight()/2);
         }
 
