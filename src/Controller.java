@@ -254,10 +254,10 @@ public class Controller extends JPanel implements ActionListener {
             case WEST:
                 image = person[1];
                 break;
-            case EAST:
+            case SOUTH:
                 image = person[2];
                 break;
-            case SOUTH:
+            case EAST:
                 image = person[3];
                 break;
 
