@@ -10,10 +10,14 @@ public class GameFrame extends JFrame {
     }
 
     private void setUp(String fileName) {
-        Controller controller = new Controller();
+        Controller controller = Controller.getInstance();
+        GameView gameView = GameView.getInstance();
+        controller.setGameView(gameView);
+        gameView.setController(controller);
         controller.loadMap(fileName);
-        add(controller);
-        setSize(controller.getWidth(),controller.getHeight());
+        gameView.setSize(controller.getWidth(), controller.getHeight());
+        add(gameView);
+        setSize(gameView.getWidth(),gameView.getHeight());
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }

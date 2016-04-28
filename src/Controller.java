@@ -14,7 +14,38 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Controller extends JPanel implements ActionListener {
+public class Controller {
+    public enum PersonType {
+        COLONEL,
+        JAFFA,
+        REPLICATOR
+    }
+
+    public enum FieldType {
+        EMPTY_FIELD,
+        ZPM,
+        SCALE,
+        BOX,
+        DOOR,
+        WALL,
+        SPECIAL_WALL,
+        RAVINE,
+        PORTAL_ORANGE,
+        PORTAL_BLUE,
+        PORTAL_GREEN,
+        PORTAL_RED,
+    }
+
+    private static Controller instance = null;
+
+    public static Controller getInstance() {
+        if (instance == null)
+            instance = new Controller();
+        return instance;
+    }
+
+    private GameView gameView;
+
     private Colonel colonel;
     private Colonel jaffa;
     private Replicator replicator;
@@ -22,37 +53,15 @@ public class Controller extends JPanel implements ActionListener {
     boolean colonelAlreadyDead;
     boolean jaffaAlreadyDead;
 
-    private BufferedImage[] colonelImgs = new BufferedImage[4];
-    private BufferedImage[] replicatorImgs = new BufferedImage[4];
-    private BufferedImage[] jaffaImgs = new BufferedImage[4];
-
-    private int actualX, actualY;
     private int width, height;
-    private int pixelPerField;
-
 
     public int getWidth() {
-        return width*pixelPerField;
+        return width;
     }
 
     public int getHeight() {
-        return height*pixelPerField;
+        return height;
     }
-
-    private Graphics2D graphics;
-
-    private BufferedImage emptyFieldImg = null;
-    private BufferedImage zpmImg = null;
-    private BufferedImage scaleImg = null;
-    private BufferedImage boxImg = null;
-    private BufferedImage doorImg = null;
-    private BufferedImage wallImg = null;
-    private BufferedImage specialWallImg = null;
-    private BufferedImage ravineImg = null;
-    private BufferedImage orangePortalImg = null;
-    private BufferedImage bluePortalImg = null;
-    private BufferedImage greenPortalImg = null;
-    private BufferedImage redPortalImg = null;
 
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
@@ -64,49 +73,16 @@ public class Controller extends JPanel implements ActionListener {
         firstField = null;
         colonelAlreadyDead = false;
         jaffaAlreadyDead = false;
-        actualX = 0;
-        actualY = 0;
         width = 0;
         height = 0;
-        pixelPerField = 50;
     }
 
-    public Controller() {
-        try {
-            wallImg = ImageIO.read(new File("wall.png"));
-            specialWallImg = ImageIO.read(new File("specialWall.png"));
-            scaleImg = ImageIO.read(new File("scale.png"));
-            boxImg = ImageIO.read(new File("box.png"));
-            emptyFieldImg = ImageIO.read(new File("emptyField.png"));
-            zpmImg = ImageIO.read(new File("zpm.png"));
-            ravineImg = ImageIO.read(new File("ravine.png"));
-            orangePortalImg = ImageIO.read(new File("orangePortal.png"));
-            bluePortalImg = ImageIO.read(new File("bluePortal.png"));
-            redPortalImg = ImageIO.read(new File("redPortal.png"));
-            greenPortalImg = ImageIO.read(new File("greenPortal.png"));
-            doorImg = ImageIO.read(new File("door.png"));
-            colonelImgs[0] = ImageIO.read(new File("colonelNorth.png"));
-            colonelImgs[1] = ImageIO.read(new File("colonelWest.png"));
-            colonelImgs[2] = ImageIO.read(new File("colonelSouth.png"));
-            colonelImgs[3] = ImageIO.read(new File("colonelEast.png"));
-
-            replicatorImgs[0] = ImageIO.read(new File("replicatorNorth.png"));
-            replicatorImgs[1] = ImageIO.read(new File("replicatorWest.png"));
-            replicatorImgs[2] = ImageIO.read(new File("replicatorSouth.png"));
-            replicatorImgs[3] = ImageIO.read(new File("replicatorEast.png"));
-
-            jaffaImgs[0] = ImageIO.read(new File("jaffaNorth.png"));
-            jaffaImgs[1] = ImageIO.read(new File("jaffaWest.png"));
-            jaffaImgs[2] = ImageIO.read(new File("jaffaSouth.png"));
-            jaffaImgs[3] = ImageIO.read(new File("jaffaEast.png"));
-        }
-        catch (IOException e) {
-        }
-
-
+    private Controller() {
         resetEverything();
-        addKeyListener(new Controller.KeyListener());
-        setFocusable(true);
+    }
+
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
     }
 
     public void loadMap(String mapName) {
@@ -246,43 +222,19 @@ public class Controller extends JPanel implements ActionListener {
         }
     }
 
-    private void drawPerson(BufferedImage[] person, Orientation.Type orientation) {
-        BufferedImage image = person[0];
-        switch (orientation) {
-            case NORTH:
-                image = person[0];
-                break;
-            case WEST:
-                image = person[1];
-                break;
-            case SOUTH:
-                image = person[2];
-                break;
-            case EAST:
-                image = person[3];
-                break;
-
-        }
-		drawObject(image);
-    }
-
-    private void printMap(Graphics g) {
-        graphics = (Graphics2D) g;
+    public void printMap() {
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
         int actualFieldNumber = 0;
         while (nextField != null) {
-            actualX = (actualFieldNumber % width) * pixelPerField;
-            actualY = (actualFieldNumber / width) * pixelPerField;
-            ++actualFieldNumber;
             nextField.view(this);
             if (nextField.isThereAColonel) {
                 if (nextField.equals(colonel.getOwnedField()))
-                    drawPerson(colonelImgs, colonel.getOrientation());
+                    gameView.drawPerson(PersonType.COLONEL, colonel.getOrientation());
                 if (nextField.equals(jaffa.getOwnedField()))
-                    drawPerson(jaffaImgs, jaffa.getOrientation());
+                    gameView.drawPerson(PersonType.JAFFA, jaffa.getOrientation());
             } else if (nextField.isThereAReplicator())
-                drawPerson(replicatorImgs, replicator.getOrientation());
+                gameView.drawPerson(PersonType.REPLICATOR, replicator.getOrientation());
             if (nextField.getNextField(Orientation.Type.EAST) != null)
                 nextField = nextField.getNextField(Orientation.Type.EAST);
             else {
@@ -292,199 +244,109 @@ public class Controller extends JPanel implements ActionListener {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
+    }
 
-        Color transparentBg = new Color(87, 87, 87, 240);
-
-        graphics.setFont(new Font("Arial", Font.BOLD, 15));
-        graphics.setColor(Color.WHITE);
-
-        graphics.drawString("Colonel's ZPMs:", getWidth()-200, getHeight()-60);
-        if (colonel.isDead()) {
-            graphics.drawString("✝", getWidth()-215, getHeight()-60);
-
-        }
-        graphics.drawString(Integer.toString(colonel.getCollectedZpms()), getWidth()-30, getHeight()-60);
-        graphics.drawString("Jaffa's ZPMs:", getWidth()-200, getHeight()-40);
-        if (jaffa.isDead()) {
-            graphics.drawString("✝", getWidth()-215, getHeight()-40);
-
-        }
-        graphics.drawString(Integer.toString(jaffa.getCollectedZpms()), getWidth()-30, getHeight()-40);
-
-        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-            graphics.setColor(transparentBg);
-            graphics.fillRect(0, 0, getWidth(), getHeight());
-            graphics.setColor(Color.WHITE);
-            graphics.drawString("NO MORE ZPMS", getWidth()/2-50, getHeight()/2);
-        }
-
-        if (colonel.isDead() && jaffa.isDead()) {
-            graphics.setColor(transparentBg);
-            graphics.fillRect(0, 0, getWidth(), getHeight());
-            graphics.setColor(Color.WHITE);
-            graphics.drawString("Game Over", getWidth()/2-50, getHeight()/2);
-        }
-
+    private Colonel choosePerson(PersonType personType) {
+        if (personType == PersonType.JAFFA)
+            return jaffa;
+        else
+            return colonel;
 
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        printMap(g);
+    public boolean personIsDead(PersonType personType) {
+        Colonel person = choosePerson(personType);
+        return person.isDead();
     }
 
-    public class KeyListener extends KeyAdapter {
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int keyCode = e.getKeyCode();
-                if (!jaffa.isDead()) {
-                    switch(keyCode) {
-                        case KeyEvent.VK_I:
-                            if (jaffa.getOrientation() != Orientation.Type.NORTH) {
-                                jaffa.rotateTo(Orientation.Type.NORTH);
-                            } else jaffa.tryMoveTo(Orientation.Type.NORTH);
-                            break;
-                        case KeyEvent.VK_K:
-                            if (jaffa.getOrientation() != Orientation.Type.SOUTH) {
-                                jaffa.rotateTo(Orientation.Type.SOUTH);
-                            } else jaffa.tryMoveTo(Orientation.Type.SOUTH);
-                            break;
-                        case KeyEvent.VK_J:
-                            if (jaffa.getOrientation() != Orientation.Type.WEST) {
-                                jaffa.rotateTo(Orientation.Type.WEST);
-                            } else jaffa.tryMoveTo(Orientation.Type.WEST);
-                            break;
-                        case KeyEvent.VK_L:
-                            if (jaffa.getOrientation() != Orientation.Type.EAST) {
-                                jaffa.rotateTo(Orientation.Type.EAST);
-                            } else jaffa.tryMoveTo(Orientation.Type.EAST);
-                            break;
-                        case KeyEvent.VK_8:
-                            jaffa.tryBoxPickUp();
-                            break;
-                        case KeyEvent.VK_9:
-                            jaffa.tryBoxPutDown();
-                            break;
-                        case KeyEvent.VK_U:
-                            jaffa.shootTeleporter(Teleporter.Type.GREEN);
-                            break;
-                        case KeyEvent.VK_O:
-                            jaffa.shootTeleporter(Teleporter.Type.RED);
-                            break;
-                        default:
-                            break;
-                }
-            }
-            if (!colonel.isDead()) {
-                switch(keyCode) {
-                    case KeyEvent.VK_W:
-                        if (colonel.getOrientation() != Orientation.Type.NORTH) {
-                            colonel.rotateTo(Orientation.Type.NORTH);
-                        } else colonel.tryMoveTo(Orientation.Type.NORTH);
-                        break;
-                    case KeyEvent.VK_S:
-                        if (colonel.getOrientation() != Orientation.Type.SOUTH) {
-                            colonel.rotateTo(Orientation.Type.SOUTH);
-                        } else colonel.tryMoveTo(Orientation.Type.SOUTH);
-                        break;
-                    case KeyEvent.VK_A:
-                        if (colonel.getOrientation() != Orientation.Type.WEST) {
-                            colonel.rotateTo(Orientation.Type.WEST);
-                        } else colonel.tryMoveTo(Orientation.Type.WEST);
-                        break;
-                    case KeyEvent.VK_D:
-                        if (colonel.getOrientation() != Orientation.Type.EAST) {
-                            colonel.rotateTo(Orientation.Type.EAST);
-                        } else colonel.tryMoveTo(Orientation.Type.EAST);
-                        break;
-                    case KeyEvent.VK_2:
-                        colonel.tryBoxPickUp();
-                        break;
-                    case KeyEvent.VK_3:
-                        colonel.tryBoxPutDown();
-                        break;
-                    case KeyEvent.VK_Q:
-                        colonel.shootTeleporter(Teleporter.Type.BLUE);
-                        break;
-                    case KeyEvent.VK_E:
-                        colonel.shootTeleporter(Teleporter.Type.ORANGE);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            if (!replicator.isDead())
-                replicator.move();
-            repaint();
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-        }
-
+    public int personGetCollectedZpms(PersonType personType) {
+        Colonel person = choosePerson(personType);
+        return person.getCollectedZpms();
     }
 
-    private void drawObject(BufferedImage image){
-    	graphics.drawImage(image, actualX, actualY, null);
+    public void personMove(PersonType personType, Orientation.Type direction) {
+        Colonel person = choosePerson(personType);
+
+        if (!person.isDead()) {
+            if (person.getOrientation() != direction) {
+                person.rotateTo(direction);
+            } else person.tryMoveTo(direction);
+        }
+    }
+
+    public void personTryBoxPickUp(PersonType personType) {
+        Colonel person = choosePerson(personType);
+
+        if (!person.isDead()) {
+            person.tryBoxPickUp();
+        }
+    }
+
+    public void personTryBoxPutDown(PersonType personType) {
+        Colonel person = choosePerson(personType);
+
+        if (!person.isDead()) {
+            person.tryBoxPutDown();
+        }
+    }
+
+    public void personShootTeleporter(PersonType personType, Teleporter.Type teleporterType) {
+        Colonel person = choosePerson(personType);
+
+        if (!person.isDead()) {
+            person.shootTeleporter(teleporterType);
+        }
+    }
+
+    public void replicatorMove() {
+        if (!replicator.isDead())
+            replicator.move();
+    }
+
+    public int getAllZpms() {
+        return Zpm.getAllZpms();
     }
     
     public void showView(Box box) {
-    	drawObject(boxImg);
+    	gameView.drawField(FieldType.BOX);
     }
 
     public void showView(Door door) {
         if (door.isOpened())
-            drawObject(emptyFieldImg);
+            gameView.drawField(FieldType.EMPTY_FIELD);
         else
-    	    drawObject(doorImg);
+            gameView.drawField(FieldType.DOOR);
     }
 
     public void showView(EmptyField emptyField) {
-    	drawObject(emptyFieldImg);
+        gameView.drawField(FieldType.EMPTY_FIELD);
     }
 
     public void showView(Ravine ravine) {
-    	drawObject(ravineImg);
+        gameView.drawField(FieldType.RAVINE);
     }
 
     public void showView(Scale scale) {
-        int fontSize = 30;
-        graphics.setFont(new Font("Arial", Font.PLAIN, fontSize));
-        graphics.setColor(Color.WHITE);
-
-        drawObject(scaleImg);
-
-        if (scale.getNumberOfBoxes() > 0) {
-            drawObject(boxImg);
-            graphics.drawString(Integer.toString(scale.getNumberOfBoxes()), actualX+15, actualY+fontSize+5);
-        }
-        else if (scale.getNumberOfBoxes() > 9) {
-            drawObject(boxImg);
-            graphics.drawString("*", actualX+15, actualY+fontSize+5);
-        }
+        gameView.drawScale(scale.getNumberOfBoxes());
     }
 
     public void showView(SpecialWall specialWall) {
-    	drawObject(specialWallImg);
+        gameView.drawField(FieldType.SPECIAL_WALL);
     }
 
     public void showView(Teleporter teleporter) {
     	switch(teleporter.getType()){
     		case ORANGE:
-                drawObject(emptyFieldImg);
-    			drawObject(orangePortalImg);
+                gameView.drawField(FieldType.PORTAL_ORANGE);
     			break;
     		case BLUE:
-                drawObject(emptyFieldImg);
-    			drawObject(bluePortalImg);
+                gameView.drawField(FieldType.PORTAL_BLUE);
     			break;
     		case RED:
-                drawObject(emptyFieldImg);
-    			drawObject(redPortalImg);
+                gameView.drawField(FieldType.PORTAL_RED);
     			break;
     		case GREEN:
-                drawObject(emptyFieldImg);
-    			drawObject(greenPortalImg);
+                gameView.drawField(FieldType.PORTAL_GREEN);
     			break;
     		default:
     			break;
@@ -492,15 +354,10 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public void showView(Wall wall) {
-    	drawObject(wallImg);
+        gameView.drawField(FieldType.WALL);
     }
 
     public void showView(Zpm zpm) {
-    	drawObject(zpmImg);
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
+        gameView.drawField(FieldType.ZPM);
     }
 }
