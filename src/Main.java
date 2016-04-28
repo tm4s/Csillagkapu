@@ -1,7 +1,7 @@
 public class Main {
 
 	public static void main(String args[]) {
-		String fileName = "map01.csv";
+		String fileName = "test\test01.csv";
 		if (args.length == 1)
 			fileName = args[0];
 		Controller controller = new Controller();

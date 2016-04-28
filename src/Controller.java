@@ -18,6 +18,9 @@ public class Controller {
     private String[] replicatorChars = {"T", "F", "H", "G"};
     private String[] jaffaChars = {"I", "J", "L", "K"};
 
+    private int actualX, actualY;
+    private int width, height;
+    private int pixelPerField;
 
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
@@ -29,6 +32,11 @@ public class Controller {
         firstField = null;
         colonelAlreadyDead = false;
         jaffaAlreadyDead = false;
+        actualX = 0;
+        actualY = 0;
+        width = 0;
+        height = 0;
+        pixelPerField = 50;
     }
 
     public Controller() {
@@ -45,8 +53,8 @@ public class Controller {
             // A palya meretenek beolvasasa
             line = br.readLine();
             String mapSize[] = line.split(";");
-            int width = Integer.parseInt(mapSize[0]);
-            int height = Integer.parseInt(mapSize[1]);
+            width = Integer.parseInt(mapSize[0]);
+            height = Integer.parseInt(mapSize[1]);
 
             // Uj ideiglenes palya letrehozasa
             Field[][] mapDatas = new Field[height][width];
@@ -196,7 +204,12 @@ public class Controller {
         System.out.println("---------------------------------------");
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
+        int actualFieldNumber = 0;
         while (nextField != null) {
+            actualX = (actualFieldNumber % width) * pixelPerField;
+            actualY = (actualFieldNumber / width) * pixelPerField;
+            ++actualFieldNumber;
+            nextField.view(this);
             if (nextField.isThereAColonel) {
                 if (nextField.equals(colonel.getOwnedField()))
                     printPerson(colonelChars, colonel.getOrientation());
@@ -204,9 +217,6 @@ public class Controller {
                     printPerson(jaffaChars, jaffa.getOrientation());
             } else if (nextField.isThereAReplicator())
                 printPerson(replicatorChars, replicator.getOrientation());
-            else
-                //System.out.print(nextField.print());
-                nextField.view(this);
             if (nextField.getNextField(Orientation.Type.EAST) != null)
                 nextField = nextField.getNextField(Orientation.Type.EAST);
             else {
