@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -12,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import java.awt.Graphics2D;
 
 public class Controller extends JPanel implements ActionListener {
     private Colonel colonel;
@@ -104,6 +104,8 @@ public class Controller extends JPanel implements ActionListener {
         } catch (IOException e) {
         };
         resetEverything();
+        addKeyListener(new Controller.KeyListener());
+        setFocusable(true);
     }
 
     public void loadMap(String mapName) {
@@ -263,8 +265,8 @@ public class Controller extends JPanel implements ActionListener {
 		drawObject(image);
     }
 
-    private void printMap() {
-        System.out.println("---------------------------------------");
+    private void printMap(Graphics g) {
+        graphics = (Graphics2D) g;
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
         int actualFieldNumber = 0;
@@ -289,6 +291,11 @@ public class Controller extends JPanel implements ActionListener {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        printMap(g);
     }
 
     public class KeyListener extends KeyAdapter {
@@ -333,7 +340,7 @@ public class Controller extends JPanel implements ActionListener {
                             break;
                 }
             }
-            if (colonel.isDead()) {
+            if (!colonel.isDead()) {
                 switch(keyCode) {
                     case KeyEvent.VK_W:
                         if (colonel.getOrientation() != Orientation.Type.NORTH) {
@@ -360,7 +367,7 @@ public class Controller extends JPanel implements ActionListener {
                         break;
                     case KeyEvent.VK_3:
                         colonel.tryBoxPutDown();
-                        break;
+                        break;w
                     case KeyEvent.VK_Q:
                         colonel.shootTeleporter(Teleporter.Type.BLUE);
                         break;
@@ -371,6 +378,7 @@ public class Controller extends JPanel implements ActionListener {
                         break;
                 }
             }
+            repaint();
         }
 
         @Override

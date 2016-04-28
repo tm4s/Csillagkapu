@@ -1,23 +1,37 @@
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 public class Main extends JFrame {
 
-	public static void main(String args[]) {
-		Game game = new Game();
-		add(game);
-		game.start();
-		setSize(ScreenWidth, ScreenHeight);
-		setTitle("BREAKOUT");
-		setResizable(false);
+	public Main() {
+		setUp();
+	}
+
+	private void setUp() {
+		String fileName = "map01.csv";
+		Controller controller = new Controller();
+		controller.loadMap(fileName);
+		add(controller);
+		setSize(controller.getWidth(),controller.getHeight());
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
 
-		String fileName = "test\test01.csv";
-		if (args.length == 1)
-			fileName = args[0];
-		Controller controller = new Controller();
-        controller.loadMap(fileName);
-        controller.run();
+	public static void main(String args[]) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				Main game;
+				try {
+					game = new Main();
+					game.setVisible(true);
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }
