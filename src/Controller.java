@@ -1,3 +1,8 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -6,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Controller {
+public class Controller extends JPanel implements ActionListener {
     private Colonel colonel;
     private Colonel jaffa;
     private Replicator replicator;
@@ -17,6 +22,25 @@ public class Controller {
     private String[] colonelChars = {"A", "<", ">", "V"};
     private String[] replicatorChars = {"T", "F", "H", "G"};
     private String[] jaffaChars = {"I", "J", "L", "K"};
+
+
+    private BufferedImage fieldImg = null;
+    private BufferedImage zpmImg = null;
+    private BufferedImage scaleImg = null;
+    private BufferedImage boxImg = null;
+    private BufferedImage doorImg = null;
+    private BufferedImage wallImg = null;
+    private BufferedImage specialWallImg = null;
+    private BufferedImage ravineImg = null;
+    private BufferedImage orangePortalImg = null;
+    private BufferedImage bluePortalImg = null;
+    private BufferedImage greenPortalImg = null;
+    private BufferedImage redPortalImg = null;
+    private BufferedImage colonelImg = null;
+    private BufferedImage jaffaImg = null;
+    private BufferedImage replicatorImg = null;
+
+
 
 
     private void resetEverything() {
@@ -32,6 +56,25 @@ public class Controller {
     }
 
     public Controller() {
+        try {
+            wallImg = ImageIO.read(new File("wall.png"));
+            specialWallImg = ImageIO.read(new File("wall.png"));
+            scaleImg = ImageIO.read(new File("scale.png"));
+            boxImg = ImageIO.read(new File("box.png"));
+            replicatorImg = ImageIO.read(new File("replicator.png"));
+            fieldImg = ImageIO.read(new File("field.png"));
+            zpmImg = ImageIO.read(new File("zpm.png"));
+            colonelImg = ImageIO.read(new File("colonel.png"));
+            jaffaImg = ImageIO.read(new File("jaffa.png"));
+            ravineImg = ImageIO.read(new File("ravine.png"));
+            orangePortalImg = ImageIO.read(new File("orangePortal.png"));
+            bluePortalImg = ImageIO.read(new File("bluePortal.png"));
+            redPortalImg = ImageIO.read(new File("redPortal.png"));
+            greenPortalImg = ImageIO.read(new File("greenPortal.png"));
+            doorImg = ImageIO.read(new File("door.png"));
+
+        } catch (IOException e) {
+        };
         resetEverything();
     }
 
@@ -126,7 +169,7 @@ public class Controller {
                             mapDatas[j][i] = new Ravine();
                             break;
                         case '?':
-                            mapDatas[j][i] = new EmptyField();
+                            mapDatas[j][i] = new EmptyField();  
                             replicator = new Replicator(mapDatas[j][i]);
                             break;
                         default:
@@ -431,9 +474,15 @@ public class Controller {
 
     public void showView(Wall wall) {
         System.out.print('#');
+
     }
 
     public void showView(Zpm zpm) {
         System.out.print('Z');
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
