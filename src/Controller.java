@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,7 +29,7 @@ public class Controller extends JPanel implements ActionListener {
     private int width, height;
     private int pixelPerField;
 
-    private BufferedImage fieldImg = null;
+    private BufferedImage emptyFieldImg = null;
     private BufferedImage zpmImg = null;
     private BufferedImage scaleImg = null;
     private BufferedImage boxImg = null;
@@ -70,7 +72,7 @@ public class Controller extends JPanel implements ActionListener {
             scaleImg = ImageIO.read(new File("scale.png"));
             boxImg = ImageIO.read(new File("box.png"));
             replicatorImg = ImageIO.read(new File("replicator.png"));
-            fieldImg = ImageIO.read(new File("field.png"));
+            emptyFieldImg = ImageIO.read(new File("emptyField.png"));
             zpmImg = ImageIO.read(new File("zpm.png"));
             colonelImg = ImageIO.read(new File("colonel.png"));
             jaffaImg = ImageIO.read(new File("jaffa.png"));
@@ -269,174 +271,98 @@ public class Controller extends JPanel implements ActionListener {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
-        System.out.println();
-        System.out.println("ZPMs left on the map: " + (Zpm.getAllZpms() - colonel.getCollectedZpms() - jaffa.getCollectedZpms()));
-        System.out.println("ZPMs collected by the colonel: " + colonel.getCollectedZpms());
-        System.out.println("ZPMs collected by Jaffa: " + jaffa.getCollectedZpms());
-        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-            System.out.println("NO MORE ZPMS!!!!!");
-        }
-        if (colonel.isDead() && !colonelAlreadyDead) {
-            System.out.println("RIP COLONEL :(");
-            colonelAlreadyDead = true;
-        }
-        if (jaffa.isDead() && !jaffaAlreadyDead) {
-            System.out.println("RIP JAFFA :(");
-            jaffaAlreadyDead = true;
-        }
-        System.out.println("---------------------------------------");
     }
 
-    public void run() {
-        System.out.println("Colonel controls: ");
-        System.out.println("move/rotate: wasd");
-        System.out.println("shoot: qe");
-        System.out.println("boxPickUp: 2");
-        System.out.println("boxPutDown: 3");
-        System.out.println("quit: quit");
-        System.out.println("after commands hit ENTER");
-        System.out.println();
-        System.out.println("Jaffa controls: ");
-        System.out.println("move/rotate: ijkl");
-        System.out.println("shoot: uo");
-        System.out.println("boxPickUp: 8");
-        System.out.println("boxPutDown: 9");
-        System.out.println("quit: quit");
-        System.out.println("after commands hit ENTER");
-        System.out.println();
-        System.out.println("Map: ");
-        System.out.println("Wall: #");
-        System.out.println("SpecialWall: +");
-        System.out.println("Colonel: AV<>");
-        System.out.println("Box: B");
-        System.out.println("Scale: S");
-        System.out.println("Door: D");
-        System.out.println("Portal: 0O");
-        System.out.println("Ravine: R");
-        System.out.println("ZPM: Z");
-        System.out.println();
-
-
-        if (jaffa.isDead())
-            jaffaAlreadyDead = true;
-        printMap();
-
-        boolean run = true;
-
-        Scanner scan = new Scanner(System.in);
-        while (scan.hasNextLine() && run) {
-            if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-                break;
-            }
-
-            String line = scan.nextLine().toLowerCase();
-            if  (line.contains("quit")) {
-                run = false;
-                break;
-            }
-
-            String[] input = line.split(" ");
-            int readIndex = -1;
-            int testCasesSize = 0;
-
-            if (input[0].equals("test")) {
-                RandomGenerator.setTest(true);
-                if (input[1].contains("0") || input[1].contains("1") || input[1].contains("2") || input[1].contains("3")) {
-                    for (int i = 0; i < input[1].length(); i++)
-                        RandomGenerator.testCases.add(Character.getNumericValue(input[1].charAt(i)));
-                    testCasesSize = input[1].length();
-                    readIndex = input[0].length() + input[1].length();
-                }
-                else readIndex = input[0].length();
-            }
-
-            for (int i = readIndex+1 ; i < line.length(); i++) {
-                if (!colonel.isDead()) {
-                    switch (line.charAt(i)) {
-                        case 'w':
-                            if (colonel.getOrientation() != Orientation.Type.NORTH) {
-                                colonel.rotateTo(Orientation.Type.NORTH);
-                            } else colonel.tryMoveTo(Orientation.Type.NORTH);
-                            break;
-                        case 's':
-                            if (colonel.getOrientation() != Orientation.Type.SOUTH) {
-                                colonel.rotateTo(Orientation.Type.SOUTH);
-                            } else colonel.tryMoveTo(Orientation.Type.SOUTH);
-                            break;
-                        case 'a':
-                            if (colonel.getOrientation() != Orientation.Type.WEST) {
-                                colonel.rotateTo(Orientation.Type.WEST);
-                            } else colonel.tryMoveTo(Orientation.Type.WEST);
-                            break;
-                        case 'd':
-                            if (colonel.getOrientation() != Orientation.Type.EAST) {
-                                colonel.rotateTo(Orientation.Type.EAST);
-                            } else colonel.tryMoveTo(Orientation.Type.EAST);
-                            break;
-                        case '2':
-                            colonel.tryBoxPickUp();
-                            break;
-                        case '3':
-                            colonel.tryBoxPutDown();
-                            break;
-                        case 'q':
-                            colonel.shootTeleporter(Teleporter.Type.BLUE);
-                            break;
-                        case 'e':
-                            colonel.shootTeleporter(Teleporter.Type.ORANGE);
-                            break;
-                        default:
-                            break;
-                    }
-                }
+    public class KeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            int keyCode = e.getKeyCode();
                 if (!jaffa.isDead()) {
-                    switch (line.charAt(i)) {
-                        case 'i':
+                    switch(keyCode) {
+                        case KeyEvent.VK_I:
                             if (jaffa.getOrientation() != Orientation.Type.NORTH) {
                                 jaffa.rotateTo(Orientation.Type.NORTH);
                             } else jaffa.tryMoveTo(Orientation.Type.NORTH);
                             break;
-                        case 'k':
+                        case KeyEvent.VK_K:
                             if (jaffa.getOrientation() != Orientation.Type.SOUTH) {
                                 jaffa.rotateTo(Orientation.Type.SOUTH);
                             } else jaffa.tryMoveTo(Orientation.Type.SOUTH);
                             break;
-                        case 'j':
+                        case KeyEvent.VK_J:
                             if (jaffa.getOrientation() != Orientation.Type.WEST) {
                                 jaffa.rotateTo(Orientation.Type.WEST);
                             } else jaffa.tryMoveTo(Orientation.Type.WEST);
                             break;
-                        case 'l':
+                        case KeyEvent.VK_L:
                             if (jaffa.getOrientation() != Orientation.Type.EAST) {
                                 jaffa.rotateTo(Orientation.Type.EAST);
                             } else jaffa.tryMoveTo(Orientation.Type.EAST);
                             break;
-                        case '8':
+                        case KeyEvent.VK_8:
                             jaffa.tryBoxPickUp();
                             break;
-                        case '9':
+                        case KeyEvent.VK_9:
                             jaffa.tryBoxPutDown();
                             break;
-                        case 'u':
+                        case KeyEvent.VK_U:
                             jaffa.shootTeleporter(Teleporter.Type.GREEN);
                             break;
-                        case 'o':
+                        case KeyEvent.VK_O:
                             jaffa.shootTeleporter(Teleporter.Type.RED);
                             break;
                         default:
                             break;
-                    }
-
                 }
-                if (!replicator.isDead() && testCasesSize > 0) {
-                    replicator.move();
-                    testCasesSize--;
-                }
-                if (!replicator.isDead() && !RandomGenerator.getTest())
-                    replicator.move();
             }
-            printMap();
+            if (colonel.isDead()) {
+                switch(keyCode) {
+                    case KeyEvent.VK_W:
+                        if (colonel.getOrientation() != Orientation.Type.NORTH) {
+                            colonel.rotateTo(Orientation.Type.NORTH);
+                        } else colonel.tryMoveTo(Orientation.Type.NORTH);
+                        break;
+                    case KeyEvent.VK_S:
+                        if (colonel.getOrientation() != Orientation.Type.SOUTH) {
+                            colonel.rotateTo(Orientation.Type.SOUTH);
+                        } else colonel.tryMoveTo(Orientation.Type.SOUTH);
+                        break;
+                    case KeyEvent.VK_A:
+                        if (colonel.getOrientation() != Orientation.Type.WEST) {
+                            colonel.rotateTo(Orientation.Type.WEST);
+                        } else colonel.tryMoveTo(Orientation.Type.WEST);
+                        break;
+                    case KeyEvent.VK_D:
+                        if (colonel.getOrientation() != Orientation.Type.EAST) {
+                            colonel.rotateTo(Orientation.Type.EAST);
+                        } else colonel.tryMoveTo(Orientation.Type.EAST);
+                        break;
+                    case KeyEvent.VK_2:
+                        colonel.tryBoxPickUp();
+                        break;
+                    case KeyEvent.VK_3:
+                        colonel.tryBoxPutDown();
+                        break;
+                    case KeyEvent.VK_Q:
+                        colonel.shootTeleporter(Teleporter.Type.BLUE);
+                        break;
+                    case KeyEvent.VK_E:
+                        colonel.shootTeleporter(Teleporter.Type.ORANGE);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+        }
+
+    }
+
+    public void run() {
+
     }
 
     public void showView(Box box) {
