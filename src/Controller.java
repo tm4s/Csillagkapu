@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Controller extends JPanel implements ActionListener {
     private Colonel colonel;
@@ -258,6 +260,7 @@ public class Controller extends JPanel implements ActionListener {
             case EAST:
                 image = person[3];
                 break;
+
         }
 		drawObject(image);
     }
@@ -288,24 +291,11 @@ public class Controller extends JPanel implements ActionListener {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
-
-        graphics.setFont(new Font("Helvetica Neue Ultra Light", Font.PLAIN, 20));
-        graphics.setColor(Color.CYAN);
-
-        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-            graphics.drawString("NO MORE ZPMS", getWidth()/2-50, getHeight()/2);
-        }
-
-        if (colonel.isDead() && jaffa.isDead()) {
-            graphics.drawString("Game Over", getWidth()/2-50, getHeight()/2);
-        }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         printMap(g);
-
     }
 
     public class KeyListener extends KeyAdapter {
@@ -388,16 +378,18 @@ public class Controller extends JPanel implements ActionListener {
                         break;
                 }
             }
-
-            if (!replicator.isDead())
-                replicator.move();
-
-
             repaint();
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
         }
 
     }
 
+    public void run() {
+
+    }
 
     private void drawObject(BufferedImage image){
     	graphics.drawImage(image, actualX, actualY, null);
@@ -423,16 +415,7 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public void showView(Scale scale) {
-        graphics.setFont(new Font("Rosewood Std", Font.PLAIN, 30));
-        graphics.setColor(Color.CYAN);
-
-    	if (scale.getNumberOfBoxes() == 0)
-            drawObject(scaleImg);
-        else if (scale.getNumberOfBoxes() < 9) {
-            graphics.drawString(Integer.toString(scale.getNumberOfBoxes()),actualX+pixelPerField/2+30,actualY+pixelPerField/2+30);
-        }
-        else
-            graphics.drawString("*", getWidth()/2-50, getHeight()/2);
+    	drawObject(scaleImg);
     }
 
     public void showView(SpecialWall specialWall) {
@@ -469,5 +452,8 @@ public class Controller extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
+        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
+            // TODO
+        }
     }
 }
