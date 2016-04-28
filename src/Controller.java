@@ -74,7 +74,7 @@ public class Controller extends JPanel implements ActionListener {
     public Controller() {
         try {
             wallImg = ImageIO.read(new File("wall.png"));
-            specialWallImg = ImageIO.read(new File("wall.png"));
+            specialWallImg = ImageIO.read(new File("specialWall.png"));
             scaleImg = ImageIO.read(new File("scale.png"));
             boxImg = ImageIO.read(new File("box.png"));
             emptyFieldImg = ImageIO.read(new File("emptyField.png"));
@@ -400,7 +400,10 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public void showView(Door door) {
-    	drawObject(doorImg);
+        if (door.isOpened())
+            drawObject(emptyFieldImg);
+        else
+    	    drawObject(doorImg);
     }
 
     public void showView(EmptyField emptyField) {
