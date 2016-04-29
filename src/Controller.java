@@ -36,6 +36,11 @@ public class Controller {
         PORTAL_RED,
     }
 
+    public enum GameState {
+        GAME,
+        MENU
+    }
+
     private static Controller instance = null;
 
     public static Controller getInstance() {
@@ -50,9 +55,11 @@ public class Controller {
     private Colonel jaffa;
     private Replicator replicator;
     private Field firstField; //top left corner on map
-    boolean colonelAlreadyDead;
-    boolean jaffaAlreadyDead;
+    private boolean colonelAlreadyDead;
+    private boolean jaffaAlreadyDead;
+    private GameState gameState;
 
+    private String actaulMap;
     private int width, height;
 
     public int getWidth() {
@@ -71,6 +78,7 @@ public class Controller {
         replicator = new Replicator(new EmptyField());
         replicator.die();
         firstField = null;
+        gameState = GameState.MENU;
         colonelAlreadyDead = false;
         jaffaAlreadyDead = false;
         width = 0;
@@ -86,6 +94,7 @@ public class Controller {
     }
 
     public void loadMap(String mapName) {
+        actaulMap = mapName;
         resetEverything();
         try {
             BufferedReader br = null;
@@ -222,10 +231,16 @@ public class Controller {
         }
     }
 
+    public void relodMap() {
+        if (gameState == GameState.MENU) {
+            loadMap(actaulMap);
+            gameState = GameState.GAME;
+        }
+    }
+
     public void printMap() {
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
-        int actualFieldNumber = 0;
         while (nextField != null) {
             nextField.view(this);
             if (nextField.isThereAColonel) {
@@ -244,6 +259,12 @@ public class Controller {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
+        if ((colonel.isDead() && jaffa.isDead()) || (Zpm.getAllZpms() == colonel.getCollectedZpms() + jaffa.getCollectedZpms()))
+            gameState = GameState.MENU;
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 
     private Colonel choosePerson(PersonType personType) {
@@ -267,7 +288,7 @@ public class Controller {
     public void personMove(PersonType personType, Orientation.Type direction) {
         Colonel person = choosePerson(personType);
 
-        if (!person.isDead()) {
+        if (!person.isDead() && gameState == GameState.GAME) {
             if (person.getOrientation() != direction) {
                 person.rotateTo(direction);
             } else person.tryMoveTo(direction);
@@ -277,7 +298,7 @@ public class Controller {
     public void personTryBoxPickUp(PersonType personType) {
         Colonel person = choosePerson(personType);
 
-        if (!person.isDead()) {
+        if (!person.isDead() && gameState == GameState.GAME) {
             person.tryBoxPickUp();
         }
     }
@@ -285,7 +306,7 @@ public class Controller {
     public void personTryBoxPutDown(PersonType personType) {
         Colonel person = choosePerson(personType);
 
-        if (!person.isDead()) {
+        if (!person.isDead() && gameState == GameState.GAME) {
             person.tryBoxPutDown();
         }
     }
@@ -293,7 +314,7 @@ public class Controller {
     public void personShootTeleporter(PersonType personType, Teleporter.Type teleporterType) {
         Colonel person = choosePerson(personType);
 
-        if (!person.isDead()) {
+        if (!person.isDead() && gameState == GameState.GAME) {
             person.shootTeleporter(teleporterType);
         }
     }
@@ -303,10 +324,6 @@ public class Controller {
             replicator.move();
     }
 
-    public int getAllZpms() {
-        return Zpm.getAllZpms();
-    }
-    
     public void showView(Box box) {
     	gameView.drawField(FieldType.BOX);
     }

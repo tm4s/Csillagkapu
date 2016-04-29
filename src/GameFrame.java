@@ -5,11 +5,8 @@ import javax.swing.*;
  */
 
 public class GameFrame extends JFrame {
-    public GameFrame(String fileName) {
-        setUp(fileName);
-    }
 
-    private void setUp(String fileName) {
+    public void setUp(String fileName) {
         Controller controller = Controller.getInstance();
         GameView gameView = GameView.getInstance();
         controller.setGameView(gameView);

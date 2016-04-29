@@ -1,8 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -12,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by Thomas on 29/04/16.
  */
-public class GameView extends JPanel implements ActionListener {
+public class GameView extends JPanel {
     private static GameView instance = null;
 
     private Controller controller;
@@ -216,31 +214,24 @@ public class GameView extends JPanel implements ActionListener {
         graphics.setFont(new Font("Arial", Font.BOLD, 15));
         graphics.setColor(Color.WHITE);
 
-        graphics.drawString("Colonel's ZPMs:", getWidth()-200, getHeight()-60);
+        graphics.drawString("Colonel's ZPMs:", getWidth() - 200, getHeight() - 60);
         if (controller.personIsDead(Controller.PersonType.COLONEL)) {
-            graphics.drawString("✝", getWidth()-215, getHeight()-60);
+            graphics.drawString("✝", getWidth() - 215, getHeight() - 60);
 
         }
-        graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.COLONEL)), getWidth()-30, getHeight()-60);
-        graphics.drawString("Jaffa's ZPMs:", getWidth()-200, getHeight()-40);
+        graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.COLONEL)), getWidth() - 30, getHeight() - 60);
+        graphics.drawString("Jaffa's ZPMs:", getWidth() - 200, getHeight() - 40);
         if (controller.personIsDead(Controller.PersonType.JAFFA)) {
-            graphics.drawString("✝", getWidth()-215, getHeight()-40);
+            graphics.drawString("✝", getWidth() - 215, getHeight() - 40);
 
         }
-        graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.JAFFA)), getWidth()-30, getHeight()-40);
+        graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.JAFFA)), getWidth() - 30, getHeight() - 40);
 
-        if (Zpm.getAllZpms() == (controller.personGetCollectedZpms(Controller.PersonType.COLONEL) + controller.personGetCollectedZpms(Controller.PersonType.JAFFA))) {
+        if (controller.getGameState() == Controller.GameState.MENU) {
             graphics.setColor(transparentBg);
             graphics.fillRect(0, 0, getWidth(), getHeight());
             graphics.setColor(Color.WHITE);
-            graphics.drawString("NO MORE ZPMS", getWidth()/2-50, getHeight()/2);
-        }
-
-        if (controller.personIsDead(Controller.PersonType.COLONEL) && controller.personIsDead(Controller.PersonType.JAFFA)) {
-            graphics.setColor(transparentBg);
-            graphics.fillRect(0, 0, getWidth(), getHeight());
-            graphics.setColor(Color.WHITE);
-            graphics.drawString("Game Over", getWidth()/2-50, getHeight()/2);
+            graphics.drawString("HIT SPACE TO START", getWidth() / 2 - 50, getHeight() / 2);
         }
     }
 
@@ -273,10 +264,6 @@ public class GameView extends JPanel implements ActionListener {
                 case KeyEvent.VK_O:
                     controller.personShootTeleporter(Controller.PersonType.JAFFA, Teleporter.Type.RED);
                     break;
-                default:
-                    break;
-            }
-            switch(keyCode) {
                 case KeyEvent.VK_W:
                     controller.personMove(Controller.PersonType.COLONEL, Orientation.Type.NORTH);
                     break;
@@ -301,6 +288,9 @@ public class GameView extends JPanel implements ActionListener {
                 case KeyEvent.VK_E:
                     controller.personShootTeleporter(Controller.PersonType.COLONEL, Teleporter.Type.ORANGE);
                     break;
+                case KeyEvent.VK_SPACE:
+                    controller.relodMap();
+                    break;
                 default:
                     break;
             }
@@ -312,10 +302,5 @@ public class GameView extends JPanel implements ActionListener {
         public void keyReleased(KeyEvent e) {
         }
 
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
     }
 }
