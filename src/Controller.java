@@ -1,24 +1,117 @@
+/**
+ * Az osztaay felelossege egy adott palyan a jatek vezerlese.
+ */
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+
 
 public class Controller {
+    /**
+     * A jatek szereploinek tipusai.
+     * A megjelenitest vegzo osztalynak ilyen formaban van atadva az informacio.
+     */
+    public enum PersonType {
+        COLONEL,
+        JAFFA,
+        REPLICATOR
+    }
+
+    /**
+     * A palya mezoinek tipusai.
+     * A megjelenitest vegzo osztalynak ilyen formaban van atadva az informacio.
+     */
+    public enum FieldType {
+        EMPTY_FIELD,
+        ZPM,
+        SCALE,
+        BOX,
+        DOOR,
+        WALL,
+        SPECIAL_WALL,
+        RAVINE,
+        PORTAL_ORANGE,
+        PORTAL_BLUE,
+        PORTAL_GREEN,
+        PORTAL_RED,
+    }
+
+    /**
+     * A jatek lehetseges allapotai.
+     */
+    public enum GameState {
+        GAME,
+        MENU
+    }
+
+    /**
+     * Referencia az egyetlen letezo peldanyra.
+     */
+    private static Controller instance = null;
+
+    /**
+     * Ennek a fugveny segitsegevel hozhato letre referencia az osztaly egyetlen peldanyara.
+     * @return refencia az egyetlen peldanyra
+     */
+    public static Controller getInstance() {
+        if (instance == null)
+            instance = new Controller();
+        return instance;
+    }
+
+    /**
+     * Referencia a megjelenitest vegzo osztalyra.
+     * A tobbi class csak a controlleren keresztul ferhet hozza a megjelenitest vegzo osztalyhoz.
+     */
+    private GameView gameView;
+
+    /**
+     * Aktiv szereplok a palyan.
+     */
     private Colonel colonel;
     private Colonel jaffa;
     private Replicator replicator;
-    private Field firstField; //top left corner on map
-    boolean colonelAlreadyDead;
-    boolean jaffaAlreadyDead;
 
-    private String[] colonelChars = {"A", "<", ">", "V"};
-    private String[] replicatorChars = {"T", "F", "H", "G"};
-    private String[] jaffaChars = {"I", "J", "L", "K"};
+    /**
+     * A palya bal felso sarkaban levo mezo.
+     */
+    private Field firstField;
 
+    /**
+     * A jatek aktualis allapota.
+     */
+    private GameState gameState;
 
+    /**
+     * Betoltve levo palyat tartalamzo fajl neve.
+     */
+    private String actualMap;
+
+    /**
+     * Palya merete mezokben merve.
+     */
+    private int width, height;
+
+    /**
+     * @return palya szelessege mezokben merve
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * @return palya magassaga mezokben merve
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * Kiindulo allapotba allitja a palya parametereit.
+     */
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
         colonel.die();
@@ -27,15 +120,31 @@ public class Controller {
         replicator = new Replicator(new EmptyField());
         replicator.die();
         firstField = null;
-        colonelAlreadyDead = false;
-        jaffaAlreadyDead = false;
+        gameState = GameState.MENU;
+        width = 0;
+        height = 0;
     }
 
-    public Controller() {
+    /**
+     * Konstruktor, kivulrol nem lathoato, hogy ne lehessen tobbszor peldanyositani.
+     */
+    private Controller() {
         resetEverything();
     }
 
+    /**
+     * @param gameView refencia a megvalositast vegzo osztaly peldanyara
+     */
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
+    }
+
+    /**
+     * Palya betoltese.
+     * @param mapName palyat tartalmazo fajl neve
+     */
     public void loadMap(String mapName) {
+        actualMap = mapName;
         resetEverything();
         try {
             BufferedReader br = null;
@@ -45,13 +154,13 @@ public class Controller {
             // A palya meretenek beolvasasa
             line = br.readLine();
             String mapSize[] = line.split(";");
-            int width = Integer.parseInt(mapSize[0]);
-            int height = Integer.parseInt(mapSize[1]);
+            width = Integer.parseInt(mapSize[0]);
+            height = Integer.parseInt(mapSize[1]);
 
             // Uj ideiglenes palya letrehozasa
             Field[][] mapDatas = new Field[height][width];
 
-            // merlegek es ajtok osszekapcsolasahoz szukseges ideiglenes adatok tarolasa
+            // osztaly a merlegek es ajtok osszekapcsolasahoz szukseges ideiglenes adatok tarolasara
             class scaleAndDoorData {
                 public String id;
                 private int x;
@@ -79,8 +188,9 @@ public class Controller {
 
             }
 
-            ArrayList<scaleAndDoorData> scaleDatas = new ArrayList<scaleAndDoorData>();
-            ArrayList<scaleAndDoorData> doorDatas = new ArrayList<scaleAndDoorData>();
+            // Merlegek es ajtok tarolasa, csak a beolvasas soran
+            ArrayList<scaleAndDoorData> scaleDatas = new ArrayList<>();
+            ArrayList<scaleAndDoorData> doorDatas = new ArrayList<>();
 
             // Mezok beolvasasa
             int j = 0;
@@ -126,7 +236,7 @@ public class Controller {
                             mapDatas[j][i] = new Ravine();
                             break;
                         case '?':
-                            mapDatas[j][i] = new EmptyField();
+                            mapDatas[j][i] = new EmptyField();  
                             replicator = new Replicator(mapDatas[j][i]);
                             break;
                         default:
@@ -137,7 +247,7 @@ public class Controller {
             }
             br.close();
 
-            // merlegek letrehozasa
+            // Merlegek letrehozasa
             for (scaleAndDoorData scale : scaleDatas) {
                 int i = 0;
                 while (!doorDatas.get(i).id.equals(scale.id))
@@ -146,7 +256,7 @@ public class Controller {
                 mapDatas[scale.getX()][scale.getY()] = new Scale((Door) mapDatas[door.getX()][door.getY()], scale.getWeight());
             }
 
-            // mezok szomszedainak beallitasa
+            // Mezok szomszedainak beallitasa
             for (int k = 0; k < height; ++k) {
                 for (int i = 1; i < width - 1; ++i) {
                     mapDatas[k][i].setNextField(Orientation.Type.WEST, mapDatas[k][i - 1]);
@@ -172,41 +282,32 @@ public class Controller {
         }
     }
 
-    private void printPerson(String[] person, Orientation.Type orientation) {
-        String str = person[0];
-        switch (orientation) {
-            case NORTH:
-                str = person[0];
-                break;
-            case WEST:
-                str = person[1];
-                break;
-            case EAST:
-                str = person[2];
-                break;
-            case SOUTH:
-                str = person[3];
-                break;
-
+    /**
+     * Aktualis palya ujratoltese.
+     */
+    public void relodMap() {
+        if (gameState == GameState.MENU) {
+            loadMap(actualMap);
+            gameState = GameState.GAME;
         }
-        System.out.print(str);
     }
 
-    private void printMap() {
-        System.out.println("---------------------------------------");
+    /**
+     * Palya aktualis allasanak megjelenitese.
+     */
+    public void printMap() {
+        // Vegighaladas a mezokon es azok megjelenitese
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
         while (nextField != null) {
+            nextField.view(this);
             if (nextField.isThereAColonel) {
                 if (nextField.equals(colonel.getOwnedField()))
-                    printPerson(colonelChars, colonel.getOrientation());
+                    gameView.drawPerson(PersonType.COLONEL, colonel.getOrientation());
                 if (nextField.equals(jaffa.getOwnedField()))
-                    printPerson(jaffaChars, jaffa.getOrientation());
+                    gameView.drawPerson(PersonType.JAFFA, jaffa.getOrientation());
             } else if (nextField.isThereAReplicator())
-                printPerson(replicatorChars, replicator.getOrientation());
-            else
-                //System.out.print(nextField.print());
-                nextField.view(this);
+                gameView.drawPerson(PersonType.REPLICATOR, replicator.getOrientation());
             if (nextField.getNextField(Orientation.Type.EAST) != null)
                 nextField = nextField.getNextField(Orientation.Type.EAST);
             else {
@@ -216,224 +317,152 @@ public class Controller {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
-        System.out.println();
-        System.out.println("ZPMs left on the map: " + (Zpm.getAllZpms() - colonel.getCollectedZpms() - jaffa.getCollectedZpms()));
-        System.out.println("ZPMs collected by the colonel: " + colonel.getCollectedZpms());
-        System.out.println("ZPMs collected by Jaffa: " + jaffa.getCollectedZpms());
-        if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-            System.out.println("NO MORE ZPMS!!!!!");
-        }
-        if (colonel.isDead() && !colonelAlreadyDead) {
-            System.out.println("RIP COLONEL :(");
-            colonelAlreadyDead = true;
-        }
-        if (jaffa.isDead() && !jaffaAlreadyDead) {
-            System.out.println("RIP JAFFA :(");
-            jaffaAlreadyDead = true;
-        }
-        System.out.println("---------------------------------------");
+        // Jatek allapotanak beallitasa
+        if ((colonel.isDead() && jaffa.isDead()) || (Zpm.getAllZpms() == colonel.getCollectedZpms() + jaffa.getCollectedZpms()))
+            gameState = GameState.MENU;
     }
 
-    public void run() {
-        System.out.println("Colonel controls: ");
-        System.out.println("move/rotate: wasd");
-        System.out.println("shoot: qe");
-        System.out.println("boxPickUp: 2");
-        System.out.println("boxPutDown: 3");
-        System.out.println("quit: quit");
-        System.out.println("after commands hit ENTER");
-        System.out.println();
-        System.out.println("Jaffa controls: ");
-        System.out.println("move/rotate: ijkl");
-        System.out.println("shoot: uo");
-        System.out.println("boxPickUp: 8");
-        System.out.println("boxPutDown: 9");
-        System.out.println("quit: quit");
-        System.out.println("after commands hit ENTER");
-        System.out.println();
-        System.out.println("Map: ");
-        System.out.println("Wall: #");
-        System.out.println("SpecialWall: +");
-        System.out.println("Colonel: AV<>");
-        System.out.println("Box: B");
-        System.out.println("Scale: S");
-        System.out.println("Door: D");
-        System.out.println("Portal: 0O");
-        System.out.println("Ravine: R");
-        System.out.println("ZPM: Z");
-        System.out.println();
+    /**
+     * @return a jatek aktualis allapota
+     */
+    public GameState getGameState() {
+        return gameState;
+    }
 
+    /**
+     * Szereplo tipus konkret szereplohoz rendeleset vegzi el a fuggveny.
+     * Helyben a a szereplore van szukseg,
+     * de a megjelenitest vegzo osztaly csak a szereplo tipusat ismeri.
+     * @param personType szereplo tipusa
+     * @return referencia a szereplore
+     */
+    private Colonel choosePerson(PersonType personType) {
+        if (personType == PersonType.JAFFA)
+            return jaffa;
+        else
+            return colonel;
 
-        if (jaffa.isDead())
-            jaffaAlreadyDead = true;
-        printMap();
+    }
 
-        boolean run = true;
+    /**
+     * @param personType szereplo tipusa
+     * @return meghalt-e mar a szereplo (true igen)
+     */
+    public boolean personIsDead(PersonType personType) {
+        Colonel person = choosePerson(personType);
+        return person.isDead();
+    }
 
-        Scanner scan = new Scanner(System.in);
-        while (scan.hasNextLine() && run) {
-            if (Zpm.getAllZpms() == (colonel.getCollectedZpms() + jaffa.getCollectedZpms())) {
-                break;
-            }
+    /**
+     * @param personType szereplo tipsa
+     * @return szereplo altal osszegyujtott ZPM modulok szama
+     */
+    public int personGetCollectedZpms(PersonType personType) {
+        Colonel person = choosePerson(personType);
+        return person.getCollectedZpms();
+    }
 
-            String line = scan.nextLine().toLowerCase();
-            if  (line.contains("quit")) {
-                run = false;
-                break;
-            }
+    /**
+     * Szereplo mozgatasa.
+     * @param personType szereplo tipusa
+     * @param direction mozgas iranya
+     */
+    public void personMove(PersonType personType, Orientation.Type direction) {
+        Colonel person = choosePerson(personType);
 
-            String[] input = line.split(" ");
-            int readIndex = -1;
-            int testCasesSize = 0;
-
-            if (input[0].equals("test")) {
-                RandomGenerator.setTest(true);
-                if (input[1].contains("0") || input[1].contains("1") || input[1].contains("2") || input[1].contains("3")) {
-                    for (int i = 0; i < input[1].length(); i++)
-                        RandomGenerator.testCases.add(Character.getNumericValue(input[1].charAt(i)));
-                    testCasesSize = input[1].length();
-                    readIndex = input[0].length() + input[1].length();
-                }
-                else readIndex = input[0].length();
-            }
-
-            for (int i = readIndex+1 ; i < line.length(); i++) {
-                if (!colonel.isDead()) {
-                    switch (line.charAt(i)) {
-                        case 'w':
-                            if (colonel.getOrientation() != Orientation.Type.NORTH) {
-                                colonel.rotateTo(Orientation.Type.NORTH);
-                            } else colonel.tryMoveTo(Orientation.Type.NORTH);
-                            break;
-                        case 's':
-                            if (colonel.getOrientation() != Orientation.Type.SOUTH) {
-                                colonel.rotateTo(Orientation.Type.SOUTH);
-                            } else colonel.tryMoveTo(Orientation.Type.SOUTH);
-                            break;
-                        case 'a':
-                            if (colonel.getOrientation() != Orientation.Type.WEST) {
-                                colonel.rotateTo(Orientation.Type.WEST);
-                            } else colonel.tryMoveTo(Orientation.Type.WEST);
-                            break;
-                        case 'd':
-                            if (colonel.getOrientation() != Orientation.Type.EAST) {
-                                colonel.rotateTo(Orientation.Type.EAST);
-                            } else colonel.tryMoveTo(Orientation.Type.EAST);
-                            break;
-                        case '2':
-                            colonel.tryBoxPickUp();
-                            break;
-                        case '3':
-                            colonel.tryBoxPutDown();
-                            break;
-                        case 'q':
-                            colonel.shootTeleporter(Teleporter.Type.BLUE);
-                            break;
-                        case 'e':
-                            colonel.shootTeleporter(Teleporter.Type.ORANGE);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                if (!jaffa.isDead()) {
-                    switch (line.charAt(i)) {
-                        case 'i':
-                            if (jaffa.getOrientation() != Orientation.Type.NORTH) {
-                                jaffa.rotateTo(Orientation.Type.NORTH);
-                            } else jaffa.tryMoveTo(Orientation.Type.NORTH);
-                            break;
-                        case 'k':
-                            if (jaffa.getOrientation() != Orientation.Type.SOUTH) {
-                                jaffa.rotateTo(Orientation.Type.SOUTH);
-                            } else jaffa.tryMoveTo(Orientation.Type.SOUTH);
-                            break;
-                        case 'j':
-                            if (jaffa.getOrientation() != Orientation.Type.WEST) {
-                                jaffa.rotateTo(Orientation.Type.WEST);
-                            } else jaffa.tryMoveTo(Orientation.Type.WEST);
-                            break;
-                        case 'l':
-                            if (jaffa.getOrientation() != Orientation.Type.EAST) {
-                                jaffa.rotateTo(Orientation.Type.EAST);
-                            } else jaffa.tryMoveTo(Orientation.Type.EAST);
-                            break;
-                        case '8':
-                            jaffa.tryBoxPickUp();
-                            break;
-                        case '9':
-                            jaffa.tryBoxPutDown();
-                            break;
-                        case 'u':
-                            jaffa.shootTeleporter(Teleporter.Type.GREEN);
-                            break;
-                        case 'o':
-                            jaffa.shootTeleporter(Teleporter.Type.RED);
-                            break;
-                        default:
-                            break;
-                    }
-
-                }
-                if (!replicator.isDead() && testCasesSize > 0) {
-                    replicator.move();
-                    testCasesSize--;
-                }
-                if (!replicator.isDead() && !RandomGenerator.getTest())
-                    replicator.move();
-            }
-            printMap();
+        if (!person.isDead() && gameState == GameState.GAME) {
+            if (person.getOrientation() != direction) {
+                person.rotateTo(direction);
+            } else person.tryMoveTo(direction);
         }
     }
 
+    public void personTryBoxPickUp(PersonType personType) {
+        Colonel person = choosePerson(personType);
+
+        if (!person.isDead() && gameState == GameState.GAME) {
+            person.tryBoxPickUp();
+        }
+    }
+
+    public void personTryBoxPutDown(PersonType personType) {
+        Colonel person = choosePerson(personType);
+
+        if (!person.isDead() && gameState == GameState.GAME) {
+            person.tryBoxPutDown();
+        }
+    }
+
+    public void personShootTeleporter(PersonType personType, Teleporter.Type teleporterType) {
+        Colonel person = choosePerson(personType);
+
+        if (!person.isDead() && gameState == GameState.GAME) {
+            person.shootTeleporter(teleporterType);
+        }
+    }
+
+    public void replicatorMove() {
+        if (!replicator.isDead())
+            replicator.move();
+    }
+
+    /**
+     * Doboz kirajzolasa,
+     * ezen az osztalyon keresztul tortenik a megjelenitest kezelo osztaly eleres.
+     * Mar csak a mezo tipusa van tovabb adva mert ezt ismeri a megjelenitest vegzo osztaly.
+     * @param box
+     */
     public void showView(Box box) {
-        System.out.print('B');
+    	gameView.drawField(FieldType.BOX);
     }
 
     public void showView(Door door) {
-        char c = door.isOpened() ? ' ' : 'D';
-        System.out.print(c);
+        if (door.isOpened())
+            gameView.drawField(FieldType.EMPTY_FIELD);
+        else
+            gameView.drawField(FieldType.DOOR);
     }
 
     public void showView(EmptyField emptyField) {
-        System.out.print(' ');
+        gameView.drawField(FieldType.EMPTY_FIELD);
     }
 
     public void showView(Ravine ravine) {
-        System.out.print('R');
+        gameView.drawField(FieldType.RAVINE);
     }
 
     public void showView(Scale scale) {
-        char c;
-        if (scale.getNumberOfBoxes() == 0)
-            c = 'S';
-        else if (scale.getNumberOfBoxes() <= 9)
-            c = Integer.toString(scale.getNumberOfBoxes()).charAt(0);
-        else
-            c = '*';
-        System.out.print(c);
+        gameView.drawScale(scale.getNumberOfBoxes());
     }
 
     public void showView(SpecialWall specialWall) {
-        System.out.print('+');
+        gameView.drawField(FieldType.SPECIAL_WALL);
     }
 
     public void showView(Teleporter teleporter) {
-        char c = '0';
-        if (teleporter.getType() == Teleporter.Type.ORANGE)
-            c = 'O';
-        else if (teleporter.getType() == Teleporter.Type.GREEN)
-            c = 'X';
-        else if (teleporter.getType() == Teleporter.Type.RED)
-            c = 'Y';
-        System.out.print(c);
+    	switch(teleporter.getType()){
+    		case ORANGE:
+                gameView.drawField(FieldType.PORTAL_ORANGE);
+    			break;
+    		case BLUE:
+                gameView.drawField(FieldType.PORTAL_BLUE);
+    			break;
+    		case RED:
+                gameView.drawField(FieldType.PORTAL_RED);
+    			break;
+    		case GREEN:
+                gameView.drawField(FieldType.PORTAL_GREEN);
+    			break;
+    		default:
+    			break;
+    	}
     }
 
     public void showView(Wall wall) {
-        System.out.print('#');
+        gameView.drawField(FieldType.WALL);
     }
 
     public void showView(Zpm zpm) {
-        System.out.print('Z');
+        gameView.drawField(FieldType.ZPM);
     }
 }

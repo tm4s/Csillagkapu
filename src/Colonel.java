@@ -180,10 +180,17 @@ public class Colonel{
      * ha tartozott akkor felengedjuk amerleget es azt tesszuk a helyere
      * @param box ezt a dobozt vesszük fel
      */
-    public void boxPickUp(Box box) {
+    public void boxPickUpFromEmptyField(Box box) {
         ownedBox = box;
         box.setField(new EmptyField());
         hand.setHasBox(true);
+    }
+
+    public void boxPickUpFromScale(Box box) {
+        ownedBox = box;
+        hand.setHasBox(true);
+        if (ownedScale != null)
+            ownedScale.addWeight(ownedBox.getWeight());
     }
 
     /**

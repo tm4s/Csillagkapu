@@ -73,8 +73,8 @@ public class Scale extends Field {
 		if (hand.hasBox())
 			hand.getColonel().boxPutDownToScale(this);
 		else if (!boxes.isEmpty()){
-			updateWeight(boxes.get(boxes.size()-1).getWeight());
-			hand.getColonel().boxPickUp(boxes.remove(boxes.size()-1));
+			removeWeight(boxes.get(boxes.size()-1).getWeight());
+			hand.getColonel().boxPickUpFromScale(boxes.remove(boxes.size()-1));
 		}
 	}
 

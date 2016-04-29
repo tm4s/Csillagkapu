@@ -33,7 +33,7 @@ public class Box extends Field {
     @Override
     public  void collideWith(ColonelsHand hand) {
         if (!hand.hasBox())
-            hand.getColonel().boxPickUp(this);
+            hand.getColonel().boxPickUpFromEmptyField(this);
     }
 
     @Override
