@@ -1,26 +1,29 @@
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
+/**
+ * Az osztaay felelossege egy adott palyan a jatek vezerlese.
+ */
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+
 
 public class Controller {
+    /**
+     * A jatek szereploinek tipusai.
+     * A megjelenitest vegzo osztalynak ilyen formaban van atadva az informacio.
+     */
     public enum PersonType {
         COLONEL,
         JAFFA,
         REPLICATOR
     }
 
+    /**
+     * A palya mezoinek tipusai.
+     * A megjelenitest vegzo osztalynak ilyen formaban van atadva az informacio.
+     */
     public enum FieldType {
         EMPTY_FIELD,
         ZPM,
@@ -36,40 +39,79 @@ public class Controller {
         PORTAL_RED,
     }
 
+    /**
+     * A jatek lehetseges allapotai.
+     */
     public enum GameState {
         GAME,
         MENU
     }
 
+    /**
+     * Referencia az egyetlen letezo peldanyra.
+     */
     private static Controller instance = null;
 
+    /**
+     * Ennek a fugveny segitsegevel hozhato letre referencia az osztaly egyetlen peldanyara.
+     * @return refencia az egyetlen peldanyra
+     */
     public static Controller getInstance() {
         if (instance == null)
             instance = new Controller();
         return instance;
     }
 
+    /**
+     * Referencia a megjelenitest vegzo osztalyra.
+     * A tobbi class csak a controlleren keresztul ferhet hozza a megjelenitest vegzo osztalyhoz.
+     */
     private GameView gameView;
 
+    /**
+     * Aktiv szereplok a palyan.
+     */
     private Colonel colonel;
     private Colonel jaffa;
     private Replicator replicator;
-    private Field firstField; //top left corner on map
-    private boolean colonelAlreadyDead;
-    private boolean jaffaAlreadyDead;
+
+    /**
+     * A palya bal felso sarkaban levo mezo.
+     */
+    private Field firstField;
+
+    /**
+     * A jatek aktualis allapota.
+     */
     private GameState gameState;
 
-    private String actaulMap;
+    /**
+     * Betoltve levo palyat tartalamzo fajl neve.
+     */
+    private String actualMap;
+
+    /**
+     * Palya merete mezokben merve.
+     */
     private int width, height;
 
+    /**
+     * @return palya szelessege mezokben merve
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * @return palya magassaga mezokben merve
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Kiindulo allapotba allitja a palya parametereit.
+     */
     private void resetEverything() {
         colonel = new Colonel(new EmptyField(), 0);
         colonel.die();
@@ -79,22 +121,30 @@ public class Controller {
         replicator.die();
         firstField = null;
         gameState = GameState.MENU;
-        colonelAlreadyDead = false;
-        jaffaAlreadyDead = false;
         width = 0;
         height = 0;
     }
 
+    /**
+     * Konstruktor, kivulrol nem lathoato, hogy ne lehessen tobbszor peldanyositani.
+     */
     private Controller() {
         resetEverything();
     }
 
+    /**
+     * @param gameView refencia a megvalositast vegzo osztaly peldanyara
+     */
     public void setGameView(GameView gameView) {
         this.gameView = gameView;
     }
 
+    /**
+     * Palya betoltese.
+     * @param mapName palyat tartalmazo fajl neve
+     */
     public void loadMap(String mapName) {
-        actaulMap = mapName;
+        actualMap = mapName;
         resetEverything();
         try {
             BufferedReader br = null;
@@ -110,7 +160,7 @@ public class Controller {
             // Uj ideiglenes palya letrehozasa
             Field[][] mapDatas = new Field[height][width];
 
-            // merlegek es ajtok osszekapcsolasahoz szukseges ideiglenes adatok tarolasa
+            // osztaly a merlegek es ajtok osszekapcsolasahoz szukseges ideiglenes adatok tarolasara
             class scaleAndDoorData {
                 public String id;
                 private int x;
@@ -138,8 +188,9 @@ public class Controller {
 
             }
 
-            ArrayList<scaleAndDoorData> scaleDatas = new ArrayList<scaleAndDoorData>();
-            ArrayList<scaleAndDoorData> doorDatas = new ArrayList<scaleAndDoorData>();
+            // Merlegek es ajtok tarolasa, csak a beolvasas soran
+            ArrayList<scaleAndDoorData> scaleDatas = new ArrayList<>();
+            ArrayList<scaleAndDoorData> doorDatas = new ArrayList<>();
 
             // Mezok beolvasasa
             int j = 0;
@@ -196,7 +247,7 @@ public class Controller {
             }
             br.close();
 
-            // merlegek letrehozasa
+            // Merlegek letrehozasa
             for (scaleAndDoorData scale : scaleDatas) {
                 int i = 0;
                 while (!doorDatas.get(i).id.equals(scale.id))
@@ -205,7 +256,7 @@ public class Controller {
                 mapDatas[scale.getX()][scale.getY()] = new Scale((Door) mapDatas[door.getX()][door.getY()], scale.getWeight());
             }
 
-            // mezok szomszedainak beallitasa
+            // Mezok szomszedainak beallitasa
             for (int k = 0; k < height; ++k) {
                 for (int i = 1; i < width - 1; ++i) {
                     mapDatas[k][i].setNextField(Orientation.Type.WEST, mapDatas[k][i - 1]);
@@ -231,14 +282,21 @@ public class Controller {
         }
     }
 
+    /**
+     * Aktualis palya ujratoltese.
+     */
     public void relodMap() {
         if (gameState == GameState.MENU) {
-            loadMap(actaulMap);
+            loadMap(actualMap);
             gameState = GameState.GAME;
         }
     }
 
+    /**
+     * Palya aktualis allasanak megjelenitese.
+     */
     public void printMap() {
+        // Vegighaladas a mezokon es azok megjelenitese
         Field nextField = firstField;
         Field nextRowFirstField = firstField.getNextField(Orientation.Type.SOUTH);
         while (nextField != null) {
@@ -259,14 +317,25 @@ public class Controller {
                     nextRowFirstField = nextField.getNextField(Orientation.Type.SOUTH);
             }
         }
+        // Jatek allapotanak beallitasa
         if ((colonel.isDead() && jaffa.isDead()) || (Zpm.getAllZpms() == colonel.getCollectedZpms() + jaffa.getCollectedZpms()))
             gameState = GameState.MENU;
     }
 
+    /**
+     * @return a jatek aktualis allapota
+     */
     public GameState getGameState() {
         return gameState;
     }
 
+    /**
+     * Szereplo tipus konkret szereplohoz rendeleset vegzi el a fuggveny.
+     * Helyben a a szereplore van szukseg,
+     * de a megjelenitest vegzo osztaly csak a szereplo tipusat ismeri.
+     * @param personType szereplo tipusa
+     * @return referencia a szereplore
+     */
     private Colonel choosePerson(PersonType personType) {
         if (personType == PersonType.JAFFA)
             return jaffa;
@@ -275,16 +344,29 @@ public class Controller {
 
     }
 
+    /**
+     * @param personType szereplo tipusa
+     * @return meghalt-e mar a szereplo (true igen)
+     */
     public boolean personIsDead(PersonType personType) {
         Colonel person = choosePerson(personType);
         return person.isDead();
     }
 
+    /**
+     * @param personType szereplo tipsa
+     * @return szereplo altal osszegyujtott ZPM modulok szama
+     */
     public int personGetCollectedZpms(PersonType personType) {
         Colonel person = choosePerson(personType);
         return person.getCollectedZpms();
     }
 
+    /**
+     * Szereplo mozgatasa.
+     * @param personType szereplo tipusa
+     * @param direction mozgas iranya
+     */
     public void personMove(PersonType personType, Orientation.Type direction) {
         Colonel person = choosePerson(personType);
 
@@ -324,6 +406,12 @@ public class Controller {
             replicator.move();
     }
 
+    /**
+     * Doboz kirajzolasa,
+     * ezen az osztalyon keresztul tortenik a megjelenitest kezelo osztaly eleres.
+     * Mar csak a mezo tipusa van tovabb adva mert ezt ismeri a megjelenitest vegzo osztaly.
+     * @param box
+     */
     public void showView(Box box) {
     	gameView.drawField(FieldType.BOX);
     }

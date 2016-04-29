@@ -1,11 +1,15 @@
 import javax.swing.*;
 
 /**
- * Megjelenitett ablak, egesz kerete
+ * Megjelenitett ablak, egesz jatek kerete.
  */
 
 public class GameFrame extends JFrame {
 
+    /**
+     * Jatekot mukodteto objektumok beallitasa.
+     * @param fileName betoltendo palya neve
+     */
     public void setUp(String fileName) {
         Controller controller = Controller.getInstance();
         GameView gameView = GameView.getInstance();

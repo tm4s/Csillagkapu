@@ -1,6 +1,6 @@
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
+/**
+ * Jatek elinditasaert felelos osztaly.
+ */
 
 public class Main {
 

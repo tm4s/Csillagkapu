@@ -1,3 +1,7 @@
+/**
+ * Megjelenitesert felelols osztaly.
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -7,21 +11,44 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by Thomas on 29/04/16.
- */
+
 public class GameView extends JPanel {
+    /**
+     * Referencia az egyetlen letezo peldanyra.
+     */
     private static GameView instance = null;
 
+    /**
+     * Ennek a fugveny segitsegevel hozhato letre referencia az osztaly egyetlen peldanyara.
+     * @return refencia az egyetlen peldanyra
+     */
+    public static GameView getInstance() {
+        if (instance == null)
+            instance = new GameView();
+        return instance;
+    }
+
+    /**
+     * Referencia a vezerlest vegzo objektumra.
+     */
     private Controller controller;
 
+    /**
+     * Elem megjelenitesehez szukseges valtozok.
+     */
     private Graphics2D graphics;
-
     private int actualX, actualY;
-    private int width, height;
-    private int pixelPerField;
     private int actualFieldNumber;
 
+    /**
+     * Palya adatai, a szelesseg es magassag mezoben van megadva.
+     */
+    private int width, height;
+    private int pixelPerField;
+
+    /**
+     * Elemek megjelenitesehez hasznalt kepek.
+     */
     private BufferedImage[] colonelImgs = new BufferedImage[4];
     private BufferedImage[] replicatorImgs = new BufferedImage[4];
     private BufferedImage[] jaffaImgs = new BufferedImage[4];
@@ -39,16 +66,12 @@ public class GameView extends JPanel {
     private BufferedImage greenPortalImg;
     private BufferedImage redPortalImg;
 
-    public static GameView getInstance() {
-        if (instance == null)
-            instance = new GameView();
-        return instance;
-    }
-
+    /**
+     * Konstruktor, kivulrol nem lathoato, hogy ne lehessen tobbszor peldanyositani.
+     * Itt kerulnek betoltesre a hasznalt kepek.
+     */
     private GameView() {
-        width = 0;
-        height = 0;
-        pixelPerField = 50;
+        // Kepek betoltese
         try {
             colonelImgs[0] = ImageIO.read(new File("colonelNorth.png"));
             colonelImgs[1] = ImageIO.read(new File("colonelWest.png"));
@@ -80,27 +103,49 @@ public class GameView extends JPanel {
         }
         catch (IOException e) {
         }
+        // Valtozok alaphelyzetbe allitasa
+        width = 0;
+        height = 0;
+        pixelPerField = 50;
         addKeyListener(new GameView.KeyListener());
         setFocusable(true);
     }
 
+    /**
+     * @param controller jatek vezerleset vegzo objektum
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     * @param x palya szelessege (mezoben)
+     * @param y palya magassaga (mezokben)
+     */
     public void setSize(int x, int y) {
         width = x;
         height = y;
     }
 
+    /**
+     * @return palya szelessege peixelekben merve
+     */
     public int getWidth() {
         return pixelPerField*width;
     }
 
+    /**
+     * @return palya magassaga pixelekben merve
+     */
     public int getHeight() {
         return pixelPerField*height;
     }
 
+    /**
+     * Szereplo kirajzolasa.
+     * @param personType szereplo tipusa
+     * @param orientation irany amerre a szereplo nez
+     */
     public void drawPerson(Controller.PersonType personType, Orientation.Type orientation) {
         BufferedImage[] person;
         if (personType == Controller.PersonType.COLONEL)
@@ -128,14 +173,24 @@ public class GameView extends JPanel {
         drawObject(image);
     }
 
+    /**
+     * @param image kirajzolando kepet tartalmazo valotozo
+     */
     private void drawObject(BufferedImage image){
         graphics.drawImage(image, actualX, actualY, null);
     }
 
+    /**
+     * Mezo kirajzolasa, feltetelezi hogy a bal felso saroktol soronkent lefele haladva
+     * amezokon hivodik meg.
+     * @param fieldType mezo tipusa
+     */
     public void drawField(Controller.FieldType fieldType) {
+        // pozicio kiszamitasa
         actualX = (actualFieldNumber % width) * pixelPerField;
         actualY = (actualFieldNumber / width) * pixelPerField;
         ++actualFieldNumber;
+        // megfelelo kep kirajzolasa
         switch (fieldType) {
             case EMPTY_FIELD:
                 drawObject(emptyFieldImg);
@@ -182,17 +237,22 @@ public class GameView extends JPanel {
         }
     }
 
+    /**
+     * Merleg kirajzolasara alkalmas specialis fuggveny, kepes megjeleniteni a merlegen levo dobozok szamat.
+     * @param numberOfBoxes merlegen levo dobozok szama
+     */
     public void drawScale(int numberOfBoxes) {
+        //pozicio kiszamitasa
         actualX = (actualFieldNumber % width) * pixelPerField;
         actualY = (actualFieldNumber / width) * pixelPerField;
         ++actualFieldNumber;
-
+        // betutipus beallitas
         int fontSize = 30;
         graphics.setFont(new Font("Arial", Font.PLAIN, fontSize));
         graphics.setColor(Color.WHITE);
-
+        // merleg kirajzolasa
         drawObject(scaleImg);
-
+        // dobozk szamanak kiiras (doboz esetleges kirajzolasa (0 nem jelenik meg)
         if (numberOfBoxes > 0) {
             drawObject(boxImg);
             graphics.drawString(Integer.toString(numberOfBoxes), actualX+15, actualY+fontSize+5);
@@ -203,12 +263,18 @@ public class GameView extends JPanel {
         }
     }
 
+    /**
+     * palya aktualis allapotank kirajzolasa
+     * @param g
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         graphics = (Graphics2D) g;
+        // Vegig haladas a palya osszes mezojen
         actualFieldNumber = 0;
         controller.printMap();
 
+        // Jatek allasahoz tartozo informaciok megjelenitese
         Color transparentBg = new Color(87, 87, 87, 240);
 
         graphics.setFont(new Font("Arial", Font.BOLD, 15));
@@ -227,6 +293,7 @@ public class GameView extends JPanel {
         }
         graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.JAFFA)), getWidth() - 30, getHeight() - 40);
 
+        // Menu layer megjelenitese ha a menu allapotban van a jatek
         if (controller.getGameState() == Controller.GameState.MENU) {
             graphics.setColor(transparentBg);
             graphics.fillRect(0, 0, getWidth(), getHeight());
@@ -235,6 +302,10 @@ public class GameView extends JPanel {
         }
     }
 
+    /**
+     * Billentyuzet kezeleseert felelos osztaly.
+     * Meghivja a vezerlesert felelos objektum megfelelo fuggvenyeit.
+     */
     public class KeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
