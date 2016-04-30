@@ -367,7 +367,7 @@ public class GameView extends JPanel {
                     controller.personShootTeleporter(Controller.PersonType.COLONEL, Teleporter.Type.ORANGE);
                     break;
                 case KeyEvent.VK_SPACE:
-                    controller.relodMap();
+                    controller.reloadMap();
                     break;
                 default:
                     break;

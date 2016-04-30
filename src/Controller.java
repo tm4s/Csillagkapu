@@ -285,7 +285,7 @@ public class Controller {
     /**
      * Aktualis palya ujratoltese.
      */
-    public void relodMap() {
+    public void reloadMap() {
         if (gameState == GameState.MENU) {
             loadMap(actualMap);
             gameState = GameState.GAME;
