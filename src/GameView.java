@@ -375,10 +375,5 @@ public class GameView extends JPanel {
             controller.replicatorMove();
             repaint();
         }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-        }
-
     }
 }

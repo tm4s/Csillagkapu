@@ -402,7 +402,7 @@ public class Controller {
     }
 
     public void replicatorMove() {
-        if (!replicator.isDead())
+        if (!replicator.isDead() && gameState == GameState.GAME)
             replicator.move();
     }
 
