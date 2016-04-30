@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Megjelenitett ablak, egesz jatek kerete.
@@ -18,7 +19,11 @@ public class GameFrame extends JFrame {
         controller.loadMap(fileName);
         gameView.setSize(controller.getWidth(), controller.getHeight());
         add(gameView);
-        setSize(gameView.getWidth(),gameView.getHeight());
+        setTitle("Csillagkapu");
+        setPreferredSize(new Dimension(gameView.getWidth(),gameView.getHeight()));
+        pack();
+        setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
