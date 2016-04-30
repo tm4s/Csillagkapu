@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -280,25 +281,32 @@ public class GameView extends JPanel {
         graphics.setFont(new Font("Arial", Font.BOLD, 15));
         graphics.setColor(Color.WHITE);
 
-        graphics.drawString("Colonel's ZPMs:", getWidth() - 200, getHeight() - 60);
-        if (controller.personIsDead(Controller.PersonType.COLONEL)) {
-            graphics.drawString("✝", getWidth() - 215, getHeight() - 60);
-
+        if (!controller.personIsDead(Controller.PersonType.COLONEL)) {
+            graphics.setColor(Color.WHITE);
+            graphics.drawString("Colonel's ZPMs:", getWidth() - 200, getHeight() - 60);
+            graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.COLONEL)), getWidth() - 30, getHeight() - 60);
+        } else {
+                graphics.setColor(Color.BLACK);
+                graphics.drawString("Colonel's ZPMs:", getWidth() - 200, getHeight() - 60);
+                graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.COLONEL)), getWidth() - 30, getHeight() - 60);
         }
-        graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.COLONEL)), getWidth() - 30, getHeight() - 60);
-        graphics.drawString("Jaffa's ZPMs:", getWidth() - 200, getHeight() - 40);
-        if (controller.personIsDead(Controller.PersonType.JAFFA)) {
-            graphics.drawString("✝", getWidth() - 215, getHeight() - 40);
 
+        if (!controller.personIsDead(Controller.PersonType.JAFFA)) {
+            graphics.setColor(Color.WHITE);
+            graphics.drawString("Jaffa's ZPMs:", getWidth() - 200, getHeight() - 40);
+            graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.JAFFA)), getWidth() - 30, getHeight() - 40);
+        } else {
+            graphics.setColor(Color.BLACK);
+            graphics.drawString("Jaffa's ZPMs:", getWidth() - 200, getHeight() - 40);
+            graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.JAFFA)), getWidth() - 30, getHeight() - 40);
         }
-        graphics.drawString(Integer.toString(controller.personGetCollectedZpms(Controller.PersonType.JAFFA)), getWidth() - 30, getHeight() - 40);
 
         // Menu layer megjelenitese ha a menu allapotban van a jatek
         if (controller.getGameState() == Controller.GameState.MENU) {
             graphics.setColor(transparentBg);
             graphics.fillRect(0, 0, getWidth(), getHeight());
             graphics.setColor(Color.WHITE);
-            graphics.drawString("HIT SPACE TO START", getWidth() / 2 - 50, getHeight() / 2);
+            graphics.drawString("HIT SPACE TO START", getWidth() / 2 - 80, getHeight() / 2);
         }
     }
 
