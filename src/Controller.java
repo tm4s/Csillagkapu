@@ -119,6 +119,7 @@ public class Controller {
         jaffa.die();
         replicator = new Replicator(new EmptyField());
         replicator.die();
+        Zpm.allZPMs = 0;
         firstField = null;
         gameState = GameState.MENU;
         width = 0;
