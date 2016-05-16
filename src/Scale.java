@@ -11,6 +11,11 @@ public class Scale extends Field {
 	private int actualWeight;
 	private List<Box> boxes;
 
+	/**
+	 * A merleg konstruktora
+	 * @param door A merleghez tartozo ajto
+	 * @param requiredWeight A kinyitashoz szukseges suly
+     */
 	public Scale(Door door, int requiredWeight) {
 		this.door = door;
 		this.requiredWeight = requiredWeight;
@@ -18,6 +23,11 @@ public class Scale extends Field {
 		boxes = new ArrayList<>();
 	}
 
+	/**
+	 * Hozzaadja a parameterben atadott sulyt a merleghez es vizsgalja,
+	 * hogy az ajto ennek kovetkezteben milyen allapotba keruljon
+	 * @param weight hozzadaott, illetve elvett suly
+     */
 	private void updateWeight(int weight) {
 		actualWeight += weight;
 		if (actualWeight >= requiredWeight)
@@ -26,19 +36,30 @@ public class Scale extends Field {
 			door.close();
 	}
 	
-
+	/**
+	 * Suly hozzadasa
+	 */
 	public void addWeight(int plusWeight) {
 		updateWeight(plusWeight);
 	}
 
+
+	/**
+	 * Suly levetele
+	 * @param minusWeight
+     */
 	public void removeWeight(int minusWeight) {
 		updateWeight(-minusWeight);
 	}
 
 	public int getNumberOfBoxes() {
 		return boxes.size();
-	} 
+	}
 
+	/**
+	 * Doboz rarakasa a merlegre
+	 * @param box
+     */
 	public void addBox(Box box) {
 		boxes.add(box);
 		updateWeight(box.getWeight());

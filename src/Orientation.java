@@ -2,16 +2,20 @@
  * Irány tárolására alkalmas osztály
  */
 
-// Debugnal itt a hiba!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// KURVABUGOS
-// elm most csak a Type kell belole mas nem de nembiztos :DD
-
 public class Orientation {
+	/**
+	 * Az iranyok tipusai
+	 */
 	public enum Type {
 		NORTH, WEST, SOUTH, EAST
 	}
 
-	public static Type getOpposite(int i) {
+	/**
+	 * Visszaadja az ellenkezo iranyt
+ 	 * @param i
+	 * @return
+     */
+    public static Type getOpposite(int i) {
 		Type direction = Type.NORTH;
 		switch (i) {
 		case 0:

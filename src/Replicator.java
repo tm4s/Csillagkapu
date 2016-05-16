@@ -8,22 +8,36 @@ public class Replicator extends Colonel {
         field.setThereAColonel(false);
     }
 
+    /**
+     * Replikator mozgatasa egy veletlenszruen generalt iranyba
+     */
     public void move() {
         tryMoveTo(RandomGenerator.generateOrientation());
     }
 
+    /**
+     * A replikator a megadott mezore lep
+     * @param field
+     */
     private void replicatorMoveTo(Field field) {
         ownedField.setReplicator(null);
         ownedField = field;
         ownedField.setReplicator(this);
     }
 
+    /**
+     * A replikator
+     */
     @Override
     public void die() {
         ownedField.setReplicator(null);
         isDead = true;
     }
 
+    /**
+     * Az ezredesbol orokolt mozgato fuggvenyek overrideolasa minden mezore
+     * @param
+     */
     @Override
     public void moveTo(Field field) {
         replicatorMoveTo(field);
@@ -45,6 +59,10 @@ public class Replicator extends Colonel {
         die();
     }
 
+    /**
+     * Az ezredesbol orokolt teleportalo fuggveny overrideolasa
+     * @param teleporter erre a mezore teleportalunk
+     */
     @Override
     public void teleportTo(Teleporter teleporter) {
         replicatorMoveTo(teleporter);
